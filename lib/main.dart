@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: LayoutBuilder(
             builder: (context, constraints) {
               double size =
@@ -109,7 +109,6 @@ class CirclePainter extends CustomPainter {
   ];
 
   CirclePainter(this.tappedSection);
-
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()..style = PaintingStyle.fill;
@@ -118,29 +117,18 @@ class CirclePainter extends CustomPainter {
     List<double> radii = List.filled(5, size.width / 2);
 
     // Calculate the angles for each section
-    double anglePerSection = (2 * math.pi / 5);
-    double angleForFirstSection = anglePerSection * 1.2;
-    double angleForOtherSections =
-        (2 * math.pi - angleForFirstSection) / (radii.length - 1);
+    double anglePerSection = (2 * math.pi / radii.length);
 
     for (int i = 0; i < radii.length; i++) {
-      double startAngle;
-      double endAngle;
-
-      if (i == 0) {
-        startAngle = 0;
-        endAngle = startAngle + angleForFirstSection;
-      } else {
-        startAngle = angleForFirstSection + (i - 1) * angleForOtherSections;
-        endAngle = startAngle + angleForOtherSections;
-      }
+      double startAngle = i * anglePerSection;
+      double endAngle = startAngle + anglePerSection;
 
       paint.color =
           (i == tappedSection) ? sectionPressedColors[i] : sectionColors[i];
 
       // Aumentar el radio para la sección que se ha hecho clic
       if (i == tappedSection) {
-        radii[i] *= 1.05; // Aumentar el radio en un 10%
+        radii[i] *= 1.05; // Aumentar el radio en un 5%
       }
 
       canvas.drawArc(
@@ -155,7 +143,7 @@ class CirclePainter extends CustomPainter {
       // Agregar texto con el número de la división
       final textSpan = TextSpan(
         text: '$i',
-        style: TextStyle(color: Colors.white, fontSize: 24),
+        style: const TextStyle(color: Colors.white, fontSize: 24),
       );
       final textPainter = TextPainter(
         text: textSpan,
