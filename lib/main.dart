@@ -37,74 +37,135 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> labels = [
+      "Leguminosas",
+      "Origen animal",
+      "Cereales",
+      "Frutas",
+      "Verduras",
+    ];
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(50.0),
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                double size =
-                    math.min(constraints.maxWidth, constraints.maxHeight);
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    GestureDetector(
-                      onPanStart: (details) {
-                        lastDragPosition = null;
-                      },
-                      onTapDown: (details) {
-                        RenderBox box = context.findRenderObject() as RenderBox;
-                        Offset localPosition =
-                            box.globalToLocal(details.globalPosition);
-                        setState(() {
-                          tappedSection = getTappedSection(localPosition, size);
-                        });
-                      },
-                      onPanUpdate: (details) {
-                        RenderBox box = context.findRenderObject() as RenderBox;
-                        Offset localPosition =
-                            box.globalToLocal(details.globalPosition);
-                        if (lastDragPosition != null) {
-                          double angleDelta = math.atan2(
-                                  localPosition.dy - context.size!.height / 2,
-                                  localPosition.dx - context.size!.width / 2) -
-                              math.atan2(
-                                  lastDragPosition!.dy -
-                                      context.size!.height / 2,
-                                  lastDragPosition!.dx -
-                                      context.size!.width / 2);
-                          setState(() {
-                            outerCircleRotation += angleDelta;
-                            // Normaliza el ángulo de rotación para mantenerlo dentro del rango de 0 a 2π
-                            while (outerCircleRotation < 0) {
-                              outerCircleRotation += 2 * math.pi;
-                            }
-                            while (outerCircleRotation >= 2 * math.pi) {
-                              outerCircleRotation -= 2 * math.pi;
-                            }
-                          });
-                        }
-                        lastDragPosition = localPosition;
-                      },
-                      onPanEnd: (details) {
-                        setState(() {
-                          tappedSection = -1;
-                          lastDragPosition = null;
-                        });
-                      },
-                      child: CustomPaint(
-                        size: Size(size, size),
-                        painter:
-                            CirclePainter(tappedSection, outerCircleRotation),
-                      ),
-                    ),
-                  ],
-                );
-              },
+        body: Row(
+          children: [
+            Expanded(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(50.0),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      double size =
+                          math.min(constraints.maxWidth, constraints.maxHeight);
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          GestureDetector(
+                            onPanStart: (details) {
+                              lastDragPosition = null;
+                            },
+                            onTapDown: (details) {
+                              RenderBox box =
+                                  context.findRenderObject() as RenderBox;
+                              Offset localPosition =
+                                  box.globalToLocal(details.globalPosition);
+                              setState(() {
+                                tappedSection =
+                                    getTappedSection(localPosition, size);
+                              });
+                            },
+                            onPanUpdate: (details) {
+                              RenderBox box =
+                                  context.findRenderObject() as RenderBox;
+                              Offset localPosition =
+                                  box.globalToLocal(details.globalPosition);
+                              if (lastDragPosition != null) {
+                                double angleDelta = math.atan2(
+                                        localPosition.dy -
+                                            context.size!.height / 2,
+                                        localPosition.dx -
+                                            context.size!.width / 2) -
+                                    math.atan2(
+                                        lastDragPosition!.dy -
+                                            context.size!.height / 2,
+                                        lastDragPosition!.dx -
+                                            context.size!.width / 2);
+                                setState(() {
+                                  outerCircleRotation += angleDelta;
+                                  // Normaliza el ángulo de rotación para mantenerlo dentro del rango de 0 a 2π
+                                  while (outerCircleRotation < 0) {
+                                    outerCircleRotation += 2 * math.pi;
+                                  }
+                                  while (outerCircleRotation >= 2 * math.pi) {
+                                    outerCircleRotation -= 2 * math.pi;
+                                  }
+                                });
+                              }
+                              lastDragPosition = localPosition;
+                            },
+                            onPanEnd: (details) {
+                              setState(() {
+                                tappedSection = -1;
+                                lastDragPosition = null;
+                              });
+                            },
+                            child: CustomPaint(
+                              size: Size(size, size),
+                              painter: CirclePainter(
+                                  tappedSection, outerCircleRotation),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
             ),
-          ),
+            if (tappedSection != -1)
+              Expanded(
+                child: Card(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(labels[tappedSection]),
+                          InkWell(
+                            customBorder: CircleBorder(),
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Icon(Icons.close, size: 18.0),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                tappedSection = -1;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                          ),
+                          itemCount: 5,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              child: ListTile(
+                                title: Text('Item $index'),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );
@@ -187,7 +248,7 @@ class CirclePainter extends CustomPainter {
       // Decrease the radius of the outer circle to increase the distance between the circles
       double outerCircleRadius = math.min(size.width, size.height) / 2 -
           outerCirclePaint.strokeWidth / 2 +
-          60; // Decrease by 20 pixels
+          50; // Decrease by 20 pixels
 
       // Draw an arc on the outer circle with the same color as the inner circle arc
       canvas.drawArc(
@@ -199,31 +260,6 @@ class CirclePainter extends CustomPainter {
             ..style = PaintingStyle.stroke
             ..color = paint.color
             ..strokeWidth = outerCirclePaint.strokeWidth);
-
-      // Agregar texto con el número de la división
-      double fontSize =
-          size.width * 0.04; // Ajusta el factor de escala según sea necesario
-      final textSpan = TextSpan(
-        text: labels[i],
-        style: TextStyle(color: Colors.black, fontSize: fontSize),
-      );
-
-      final textPainter = TextPainter(
-        text: textSpan,
-        textDirection: TextDirection.ltr,
-      );
-      textPainter.layout();
-      double textAngle = startAngle + (endAngle - startAngle) / 2;
-      double radius = radii[i] + textPainter.height;
-      double x = math.cos(textAngle) * radius;
-      double y = math.sin(textAngle) * radius;
-
-      canvas.save();
-      canvas.translate(x, y);
-      canvas.rotate(textAngle + math.pi / 2);
-      textPainter.paint(
-          canvas, Offset(-textPainter.width / 2, -textPainter.height / 2));
-      canvas.restore();
     }
 
     // Restaura el canvas para eliminar la transformación de rotación
