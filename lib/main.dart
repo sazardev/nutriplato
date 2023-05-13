@@ -9,11 +9,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'NutriPlato',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'NutriPlato'),
     );
   }
 }
@@ -24,7 +24,7 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -33,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -48,12 +49,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   GestureDetector(
                     onTapDown: (details) {
+                      RenderBox box = context.findRenderObject() as RenderBox;
+                      Offset localPosition =
+                          box.globalToLocal(details.globalPosition);
                       setState(() {
-                        tappedSection =
-                            getTappedSection(details.localPosition, size);
+                        tappedSection = getTappedSection(localPosition, size);
                       });
                     },
-                    onTapUp: (details) {
+                    onPanUpdate: (details) {
+                      RenderBox box = context.findRenderObject() as RenderBox;
+                      Offset localPosition =
+                          box.globalToLocal(details.globalPosition);
+                      setState(() {
+                        tappedSection = getTappedSection(localPosition, size);
+                      });
+                    },
+                    onPanEnd: (details) {
                       setState(() {
                         tappedSection = -1;
                       });
@@ -103,38 +114,62 @@ class CirclePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()..style = PaintingStyle.fill;
 
-    for (int i = 0; i < 5; i++) {
-      double startAngle = i * (2 * math.pi / 5);
-      double endAngle = startAngle + (2 * math.pi / 5);
+    // Lista para almacenar los radios de cada sección
+    List<double> radii = List.filled(5, size.width / 2);
+
+    // Calculate the angles for each section
+    double anglePerSection = (2 * math.pi / 5);
+    double angleForFirstSection = anglePerSection * 1.2;
+    double angleForOtherSections =
+        (2 * math.pi - angleForFirstSection) / (radii.length - 1);
+
+    for (int i = 0; i < radii.length; i++) {
+      double startAngle;
+      double endAngle;
+
+      if (i == 0) {
+        startAngle = 0;
+        endAngle = startAngle + angleForFirstSection;
+      } else {
+        startAngle = angleForFirstSection + (i - 1) * angleForOtherSections;
+        endAngle = startAngle + angleForOtherSections;
+      }
+
       paint.color =
           (i == tappedSection) ? sectionPressedColors[i] : sectionColors[i];
+
+      // Aumentar el radio para la sección que se ha hecho clic
+      if (i == tappedSection) {
+        radii[i] *= 1.05; // Aumentar el radio en un 10%
+      }
+
       canvas.drawArc(
           Rect.fromCircle(
               center: Offset(size.width / 2, size.height / 2),
-              radius: size.width / 2),
+              radius: radii[i]),
           startAngle,
           endAngle - startAngle,
           true,
           paint);
+
+      // Agregar texto con el número de la división
+      final textSpan = TextSpan(
+        text: '$i',
+        style: TextStyle(color: Colors.white, fontSize: 24),
+      );
+      final textPainter = TextPainter(
+        text: textSpan,
+        textDirection: TextDirection.ltr,
+      );
+      textPainter.layout();
+      double textAngle = startAngle + (endAngle - startAngle) / 2;
+      double x = size.width / 2 + math.cos(textAngle) * (radii[i] / 2);
+      double y = size.height / 2 + math.sin(textAngle) * (radii[i] / 2);
+      textPainter.paint(canvas,
+          Offset(x - textPainter.width / 2, y - textPainter.height / 2));
     }
 
-    paint
-      ..color = Colors.white
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 10;
-
-    for (int i = 0; i < 5; i++) {
-      double startAngle = i * (2 * math.pi / 5);
-
-      // Dibujar línea desde el centro hasta el borde del círculo
-      double lineAngle = startAngle;
-      double x = size.width / 2 +
-          math.cos(lineAngle) * (size.width / 2 + paint.strokeWidth / 2);
-      double y = size.height / 2 +
-          math.sin(lineAngle) * (size.width / 2 + paint.strokeWidth / 2);
-      canvas.drawLine(
-          Offset(size.width / 2, size.height / 2), Offset(x, y), paint);
-    }
+    // Remove the code that draws the white divider lines
   }
 
   @override
