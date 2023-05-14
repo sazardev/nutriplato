@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
+import 'data.dart';
 import 'foods.dart';
 
 void main() => runApp(const MyApp());
@@ -38,209 +39,97 @@ int getTappedSection(Offset tapPosition, double size) {
   double angle =
       math.atan2(tapPosition.dy - size / 2, tapPosition.dx - size / 2);
   if (angle < 0) angle += 2 * math.pi;
-  return (angle / (2 * math.pi / 5)).floor();
+  int section = (angle / (2 * math.pi / 5)).floor();
+  return section;
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int tappedSection = -1;
-  bool cardVisible = false;
-  Color cardColor = Colors.white;
-  final List<Color> sectionColors = [
-    Colors.red,
-    Colors.orange,
-    Colors.yellow,
-    Colors.green,
-    Colors.blue
-  ];
 
   @override
   Widget build(BuildContext context) {
-    bool isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
-
-    Widget card = Visibility(
-      visible: cardVisible,
-      child: Expanded(
-        child: Card(
-          color: cardColor,
-          child: Center(
-            child: Foods(
-              position: tappedSection,
-            ),
-          ),
-        ),
-      ),
-    );
-
     return Scaffold(
-      appBar: tappedSection > -1
-          ? null
-          : AppBar(
-              title: const Text('NutriPlate'),
-            ),
-      backgroundColor: Colors.white,
-      body: isLandscape
-          ? Row(
-              children: [
-                Expanded(
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          double size = math.min(
-                              constraints.maxWidth, constraints.maxHeight);
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              GestureDetector(
-                                onTapDown: (details) {
-                                  RenderBox box =
-                                      context.findRenderObject() as RenderBox;
-                                  Offset localPosition =
-                                      box.globalToLocal(details.globalPosition);
-                                  setState(() {
-                                    tappedSection =
-                                        getTappedSection(localPosition, size);
-                                    cardVisible = true;
-                                    cardColor = sectionColors[tappedSection];
-                                  });
-                                },
-                                onPanUpdate: (details) {
-                                  RenderBox box =
-                                      context.findRenderObject() as RenderBox;
-                                  Offset localPosition =
-                                      box.globalToLocal(details.globalPosition);
-                                  setState(() {
-                                    tappedSection =
-                                        getTappedSection(localPosition, size);
-                                    cardVisible = true;
-                                    cardColor = sectionColors[tappedSection];
-                                  });
-                                },
-                                onPanEnd: (details) {
-                                  setState(() {
-                                    tappedSection = -1;
-                                    cardVisible = false;
-                                  });
-                                },
-                                child: Material(
-                                  elevation: 4.0,
-                                  shape: CircleBorder(),
-                                  child: Container(
-                                    width: size,
-                                    height: size,
-                                    child: CustomPaint(
-                                      painter: CirclePainter(tappedSection),
-                                    ),
-                                  ),
+        appBar: AppBar(
+          title: const Text('NutriPlate'),
+        ),
+        backgroundColor: Colors.white,
+        body: Row(
+          children: [
+            Expanded(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      double size =
+                          math.min(constraints.maxWidth, constraints.maxHeight);
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          GestureDetector(
+                            onTapDown: (details) {
+                              RenderBox box =
+                                  context.findRenderObject() as RenderBox;
+                              Offset localPosition =
+                                  box.globalToLocal(details.globalPosition);
+                              tappedSection =
+                                  getTappedSection(localPosition, size);
+                              Color color = sectionColors[tappedSection];
+
+                              displayDialog(color);
+                            },
+                            onPanEnd: (details) {
+                              setState(() {
+                                tappedSection = -1;
+                              });
+                            },
+                            child: Material(
+                              elevation: 4.0,
+                              shape: const CircleBorder(),
+                              child: SizedBox(
+                                width: size,
+                                height: size,
+                                child: CustomPaint(
+                                  painter: CirclePainter(),
                                 ),
                               ),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
-                card,
-              ],
-            )
-          : Column(
-              children: [
-                Expanded(
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          double size = math.min(
-                              constraints.maxWidth, constraints.maxHeight);
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              GestureDetector(
-                                onTapDown: (details) {
-                                  RenderBox box =
-                                      context.findRenderObject() as RenderBox;
-                                  Offset localPosition =
-                                      box.globalToLocal(details.globalPosition);
-                                  setState(() {
-                                    tappedSection =
-                                        getTappedSection(localPosition, size);
-                                    cardVisible = true;
-                                    cardColor = sectionColors[tappedSection];
-                                  });
-                                },
-                                onPanUpdate: (details) {
-                                  RenderBox box =
-                                      context.findRenderObject() as RenderBox;
-                                  Offset localPosition =
-                                      box.globalToLocal(details.globalPosition);
-                                  setState(() {
-                                    tappedSection =
-                                        getTappedSection(localPosition, size);
-                                    cardVisible = true;
-                                    cardColor = sectionColors[tappedSection];
-                                  });
-                                },
-                                onPanEnd: (details) {
-                                  setState(() {
-                                    tappedSection = -1;
-                                    cardVisible = false;
-                                  });
-                                },
-                                child: Material(
-                                  elevation: 4.0,
-                                  shape: CircleBorder(),
-                                  child: Container(
-                                    width: size,
-                                    height: size,
-                                    child: CustomPaint(
-                                      painter: CirclePainter(tappedSection),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-                card,
-              ],
+              ),
             ),
+          ],
+        ));
+  }
+
+  void displayDialog(Color color) {
+    showGeneralDialog(
+      context: context,
+      pageBuilder: (context, animation1, animation2) {
+        return Foods(
+          color: color,
+          tappedSection: tappedSection,
+        );
+      },
+      barrierDismissible: true,
+      barrierLabel: '',
+      transitionDuration: const Duration(milliseconds: 300),
+      transitionBuilder: (context, animation1, animation2, widget) {
+        final curvedValue = Curves.easeInOut.transform(animation1.value);
+        return Transform.translate(
+          offset: Offset(300 * (1 - curvedValue), 0),
+          child: widget,
+        );
+      },
     );
   }
 }
 
 class CirclePainter extends CustomPainter {
-  final int tappedSection;
-  final List<Color> sectionColors = [
-    Colors.red,
-    Colors.orange,
-    Colors.yellow,
-    Colors.green,
-    Colors.blue
-  ];
-  final List<Color> sectionPressedColors = [
-    Colors.pink,
-    Colors.deepOrange,
-    Colors.amber,
-    Colors.lightGreen,
-    Colors.lightBlue
-  ];
-  final List<IconData> sectionIcons = [
-    Icons.fastfood,
-    Icons.local_drink,
-    Icons.directions_run,
-    Icons.local_hospital,
-    Icons.sentiment_satisfied_alt
-  ];
-
-  CirclePainter(this.tappedSection);
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()..style = PaintingStyle.fill;
@@ -253,17 +142,23 @@ class CirclePainter extends CustomPainter {
       double startAngle = i * anglePerSection;
       double endAngle = startAngle + anglePerSection;
 
-      paint.color =
-          (i == tappedSection) ? sectionPressedColors[i] : sectionColors[i];
+      final path = Path()
+        ..addArc(
+          Rect.fromCircle(
+            center: Offset(size.width / 2, size.height / 2.1),
+            radius: radii[i],
+          ),
+          startAngle,
+          endAngle - startAngle,
+        );
+      canvas.drawShadow(path, sectionColors[i], 20, true);
 
-      if (i == tappedSection) {
-        radii[i] *= 1.05; // Aumentar el radio en un 5%
-      }
-
+      paint.color = sectionColors[i];
       canvas.drawArc(
           Rect.fromCircle(
-              center: Offset(size.width / 2, size.height / 2),
-              radius: radii[i]),
+            center: Offset(size.width / 2, size.height / 2),
+            radius: radii[i],
+          ),
           startAngle,
           endAngle - startAngle,
           true,
@@ -277,8 +172,8 @@ class CirclePainter extends CustomPainter {
 
       final icon = IconsPainter(
         icon: sectionIcons[i],
-        color: Colors.white,
-        size: 24.0,
+        color: Colors.white.withAlpha(220),
+        size: 35.0,
       );
 
       icon.paint(canvas, Size(icon.size, icon.size));
@@ -300,10 +195,12 @@ class IconsPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paragraphBuilder = ui.ParagraphBuilder(ui.ParagraphStyle(
-      fontFamily: icon.fontFamily,
-      fontSize: this.size,
-    ))
+    final paragraphBuilder = ui.ParagraphBuilder(
+      ui.ParagraphStyle(
+        fontFamily: icon.fontFamily,
+        fontSize: this.size,
+      ),
+    )
       ..pushStyle(ui.TextStyle(color: color))
       ..addText(String.fromCharCode(icon.codePoint));
     final paragraph = paragraphBuilder.build()
