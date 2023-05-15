@@ -12,9 +12,9 @@ final List<Color> sectionColors = [
 ];
 
 List<String> categories = [
-  'Animal',
+  'Leguminosas',
+  'Alimentos de Origen Animal',
   'Cereales',
-  'Legumbres',
   'Verduras',
   'Frutas',
 ];

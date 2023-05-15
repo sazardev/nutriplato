@@ -35,20 +35,42 @@ class ProportionFood extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Calories: ${food.portions}'),
-            Icon(
-              Icons.apple,
-              size: 100,
-              color: Colors.white.withAlpha(150),
+            Text(
+              '${food.description}',
+              style: const TextStyle(
+                color: Colors.white,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: SizedBox(
-                height: 45,
+                height: 50,
                 child: Card(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('1 porción = ${food.portions} ${food.name}'),
+                    child: Text(
+                      '${food.calories} kCal por porción',
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: SizedBox(
+                height: 50,
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      '1 porción = ${food.portions} ${food.name}',
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ),
               ),
