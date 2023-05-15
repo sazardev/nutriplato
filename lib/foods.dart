@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:nutriplato/data/vegetables.dart';
 import 'package:nutriplato/proportion_food.dart';
 
 import 'data.dart';
+import 'data/animal.dart';
 import 'food.dart';
 
 class Foods extends StatefulWidget {
@@ -23,6 +25,12 @@ class _FoodsState extends State<Foods> {
   Widget build(BuildContext context) {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
+
+    List<Food> foods = [];
+    if (widget.color == Colors.green) {
+      foods = vegetables;
+    }
+
     return Align(
       alignment: Alignment.centerRight,
       child: FractionallySizedBox(
@@ -39,7 +47,7 @@ class _FoodsState extends State<Foods> {
           ),
           body: GridView.count(
             crossAxisCount: 2,
-            children: List.generate(10, (index) {
+            children: List.generate(foods.length, (index) {
               return LayoutBuilder(
                 builder: (context, constraints) {
                   return Card(
@@ -51,7 +59,7 @@ class _FoodsState extends State<Foods> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            'Title $index',
+                            foods[index].name,
                             style: const TextStyle(
                               fontSize: 16,
                             ),
@@ -69,11 +77,7 @@ class _FoodsState extends State<Foods> {
                                       builder: (builder) {
                                         return ProportionFood(
                                           color: widget.color,
-                                          food: Food(
-                                            name: 'Manzana',
-                                            portions: 0.5,
-                                            calories: 100,
-                                          ),
+                                          food: foods[index],
                                         );
                                       });
                                 },

@@ -35,6 +35,7 @@ class ProportionFood extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Text('Calories: ${food.portions}'),
             Icon(
               Icons.apple,
               size: 100,
