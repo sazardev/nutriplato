@@ -47,7 +47,7 @@ class ProportionFood extends StatelessWidget {
                 child: Card(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('1 porción = ${food.equivalent} ${food.name}'),
+                    child: Text('1 porción = ${food.portions} ${food.name}'),
                   ),
                 ),
               ),

@@ -71,7 +71,7 @@ class _FoodsState extends State<Foods> {
                                           color: widget.color,
                                           food: Food(
                                             name: 'Manzana',
-                                            equivalent: 0.5,
+                                            portions: 0.5,
                                             calories: 100,
                                           ),
                                         );

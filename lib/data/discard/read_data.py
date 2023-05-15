@@ -5,7 +5,7 @@ conn = sqlite3.connect("foods.db")
 c = conn.cursor()
 
 # Query the data
-c.execute("SELECT * FROM foods")
+c.execute("SELECT * FROM fruits")
 rows = c.fetchall()
 
 # Print the data

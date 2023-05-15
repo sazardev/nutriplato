@@ -5,13 +5,13 @@ class Food {
   Image? image;
   String? description;
   double calories;
-  double equivalent;
+  double portions;
 
   Food({
     required this.name,
     this.image,
     this.description,
     required this.calories,
-    required this.equivalent,
+    required this.portions,
   });
 }
