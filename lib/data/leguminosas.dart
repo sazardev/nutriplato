@@ -38,12 +38,6 @@ List<Food> leguminosas = [
     portions: 0.5,
   ),
   Food(
-    name: 'Guisantes partidos',
-    description: 'Guisantes partidos cocidos',
-    calories: 116,
-    portions: 0.5,
-  ),
-  Food(
     name: 'Alubias',
     description: 'Alubias cocidas',
     calories: 112,
@@ -77,12 +71,6 @@ List<Food> leguminosas = [
     name: 'Frijol rojo',
     description: 'Frijol rojo cocido ',
     calories: 112,
-    portions: 0.5,
-  ),
-  Food(
-    name: 'Frijol lima',
-    description: 'Frijol lima cocido ',
-    calories: 108,
     portions: 0.5,
   ),
   Food(

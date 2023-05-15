@@ -225,13 +225,6 @@ List<Food> fruits = [
     portions: 10,
   ),
   Food(
-    name: 'Cranberry seco',
-    description:
-        ' Fruta seca y arrugada de color rojo oscuro con una pulpa dulce y ligeramente ácida ',
-    calories: 308,
-    portions: 10,
-  ),
-  Food(
     name: 'Grosella negra seca',
     description:
         ' Fruta seca y arrugada de color negro o morado oscuro con una pulpa dulce y ligeramente ácida ',

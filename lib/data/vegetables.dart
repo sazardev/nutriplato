@@ -150,13 +150,6 @@ List<Food> vegetables = [
     portions: 5,
   ),
   Food(
-    name: 'Coliflor',
-    description:
-        ' Verdura de tallos blancos y flores comestibles en forma de árbol pequeño ',
-    calories: 25,
-    portions: 1,
-  ),
-  Food(
     name: 'Encurtidos',
     description:
         ' Verdura pequeña y redonda con piel verde y pulpa blanca y jugosa ',
@@ -171,20 +164,7 @@ List<Food> vegetables = [
     portions: 5,
   ),
   Food(
-    name: 'Espinaca',
-    description: ' Verdura de hojas verdes y suaves ',
-    calories: 23,
-    portions: 1,
-  ),
-  Food(
     name: 'Guisantes',
-    description:
-        ' Verdura pequeña y redonda de color verde con una pulpa dulce y jugosa ',
-    calories: 81,
-    portions: 0.5,
-  ),
-  Food(
-    name: 'Guisantes Verdes',
     description:
         ' Verdura pequeña y redonda de color verde con una pulpa dulce y jugosa ',
     calories: 81,
@@ -220,27 +200,6 @@ List<Food> vegetables = [
     description:
         ' Verdura alargada y delgada con piel verde y pulpa blanca y jugosa ',
     calories: 33,
-    portions: 1,
-  ),
-  Food(
-    name: 'Pepinos',
-    description:
-        ' Verdura alargada y delgada con piel verde y pulpa blanca y jugosa ',
-    calories: 15,
-    portions: 0.5,
-  ),
-  Food(
-    name: 'Pimientos verdes',
-    description:
-        ' Verdura redonda y jugosa con piel verde y pulpa dividida en gajos ',
-    calories: 20,
-    portions: 1,
-  ),
-  Food(
-    name: 'Pimientos rojos',
-    description:
-        ' Verdura redonda y jugosa con piel roja y pulpa dividida en gajos ',
-    calories: 31,
     portions: 1,
   ),
   Food(

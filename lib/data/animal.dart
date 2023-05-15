@@ -62,12 +62,6 @@ List<Food> animals = [
     portions: 85,
   ),
   Food(
-    name: 'Cangrejo',
-    description: 'Crustáceo con caparazón y pinzas',
-    calories: 87,
-    portions: 85,
-  ),
-  Food(
     name: 'Almeja',
     description: 'Molusco con concha y cuerpo blando',
     calories: 126,

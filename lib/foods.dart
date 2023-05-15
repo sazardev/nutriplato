@@ -49,6 +49,7 @@ class _FoodsState extends State<Foods> {
         allFoods = fruits;
         break;
     }
+    allFoods.sort((a, b) => a.name.compareTo(b.name));
     filteredFoods = allFoods;
 
     searchController.addListener(() {
