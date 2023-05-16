@@ -11,6 +11,14 @@ final List<Color> sectionColors = [
   Colors.indigo
 ];
 
+List<String> shortCategories = [
+  'Leguminosas',
+  'Animal',
+  'Cereales',
+  'Verduras',
+  'Frutas',
+];
+
 List<String> categories = [
   'Leguminosas',
   'Alimentos de Origen Animal',

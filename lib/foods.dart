@@ -13,11 +13,13 @@ import 'food.dart';
 class Foods extends StatefulWidget {
   final Color color;
   final int tappedSection;
+  final bool isPhone;
 
   const Foods({
     Key? key,
     required this.color,
     required this.tappedSection,
+    required this.isPhone,
   }) : super(key: key);
 
   @override
@@ -66,7 +68,7 @@ class _FoodsState extends State<Foods> {
     return Align(
       alignment: Alignment.centerRight,
       child: FractionallySizedBox(
-        widthFactor: 0.5,
+        widthFactor: widget.isPhone ? 1 : 0.5,
         child: LayoutBuilder(builder: (context, constraints) {
           return Scaffold(
             backgroundColor: widget.color,
