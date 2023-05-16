@@ -35,6 +35,17 @@ class ProportionFood extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Card(
+              elevation: 10,
+              child: SizedBox(
+                width: 200,
+                height: 200,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: food.image,
+                ),
+              ),
+            ),
             Text(
               '${food.description}',
               style: const TextStyle(
