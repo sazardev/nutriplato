@@ -67,197 +67,206 @@ class _FoodsState extends State<Foods> {
       alignment: Alignment.centerRight,
       child: FractionallySizedBox(
         widthFactor: 0.5,
-        child: Scaffold(
-          backgroundColor: widget.color,
-          appBar: AppBar(
-            foregroundColor: Colors.white,
+        child: LayoutBuilder(builder: (context, constraints) {
+          return Scaffold(
             backgroundColor: widget.color,
-            title: Text(
-              categories[widget.tappedSection],
-              style: const TextStyle(color: Colors.white),
+            appBar: AppBar(
+              foregroundColor: Colors.white,
+              backgroundColor: widget.color,
+              title: Text(
+                categories[widget.tappedSection],
+                style: const TextStyle(color: Colors.white),
+              ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: IconButton(
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (builder) {
+                            return AboutCategory(
+                              category: widget.tappedSection,
+                              color: widget.color,
+                            );
+                          });
+                    },
+                    icon: const Icon(
+                      Icons.info_outline,
+                    ),
+                  ),
+                )
+              ],
             ),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (builder) {
-                        return AboutCategory(
-                          category: widget.tappedSection,
-                          color: widget.color,
-                        );
-                      });
-                },
-                icon: const Icon(
-                  Icons.info_outline,
-                ),
-              )
-            ],
-          ),
-          body: Column(
-            children: [
-              AppBar(
-                automaticallyImplyLeading: false,
-                toolbarHeight: 60,
-                backgroundColor: widget.color,
-                title: Center(
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(
-                            height: 20,
-                            width: 300,
-                            child: Autocomplete<Food>(
-                              optionsBuilder:
-                                  (TextEditingValue textEditingValue) {
-                                if (textEditingValue.text == '') {
-                                  return const Iterable<Food>.empty();
-                                }
-                                return allFoods.where((Food food) {
-                                  return food.name.toLowerCase().contains(
-                                      textEditingValue.text.toLowerCase());
-                                });
-                              },
-                              displayStringForOption: (Food food) => food.name,
-                              onSelected: (Food food) {
-                                // Filtrar la lista de alimentos para mostrar solo el elemento seleccionado
-                                setState(() {
-                                  filteredFoods = [food];
-                                });
-                              },
-                              fieldViewBuilder: (BuildContext context,
-                                  TextEditingController
-                                      fieldTextEditingController,
-                                  FocusNode fieldFocusNode,
-                                  VoidCallback onFieldSubmitted) {
-                                fieldTextEditingController.text =
-                                    searchController.text;
-                                return TextField(
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                  ),
-                                  cursorColor: widget.color,
-                                  controller: fieldTextEditingController,
-                                  focusNode: fieldFocusNode,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    focusColor: Colors.white,
-                                    fillColor: Colors.white,
-                                    iconColor: Colors.white,
-                                    hoverColor: Colors.white,
-                                    prefixIconColor: Colors.white,
-                                    icon: Icon(
-                                      Icons.search,
-                                      color: widget.color,
+            body: Column(
+              children: [
+                AppBar(
+                  automaticallyImplyLeading: false,
+                  toolbarHeight: 60,
+                  backgroundColor: widget.color,
+                  title: Center(
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(
+                              height: 20,
+                              width: constraints.maxWidth / 2,
+                              child: Autocomplete<Food>(
+                                optionsBuilder:
+                                    (TextEditingValue textEditingValue) {
+                                  if (textEditingValue.text == '') {
+                                    return const Iterable<Food>.empty();
+                                  }
+                                  return allFoods.where((Food food) {
+                                    return food.name.toLowerCase().contains(
+                                        textEditingValue.text.toLowerCase());
+                                  });
+                                },
+                                displayStringForOption: (Food food) =>
+                                    food.name,
+                                onSelected: (Food food) {
+                                  // Filtrar la lista de alimentos para mostrar solo el elemento seleccionado
+                                  setState(() {
+                                    filteredFoods = [food];
+                                  });
+                                },
+                                fieldViewBuilder: (BuildContext context,
+                                    TextEditingController
+                                        fieldTextEditingController,
+                                    FocusNode fieldFocusNode,
+                                    VoidCallback onFieldSubmitted) {
+                                  fieldTextEditingController.text =
+                                      searchController.text;
+
+                                  return TextField(
+                                    style: const TextStyle(
+                                      color: Colors.black,
                                     ),
-                                  ),
-                                  onChanged: (String value) {
-                                    searchController.text = value;
-                                  },
-                                  onSubmitted: (String value) {
-                                    // Obtener la primera sugerencia
-                                    final suggestions =
-                                        allFoods.where((Food food) {
-                                      return food.name
-                                          .toLowerCase()
-                                          .contains(value.toLowerCase());
-                                    });
-                                    if (suggestions.isNotEmpty) {
-                                      final firstSuggestion = suggestions.first;
-                                      // Actualizar el texto del TextField y la lista de alimentos para mostrar solo el elemento seleccionado
-                                      setState(() {
-                                        searchController.text =
-                                            firstSuggestion.name;
-                                        filteredFoods = [firstSuggestion];
+                                    cursorColor: widget.color,
+                                    controller: fieldTextEditingController,
+                                    focusNode: fieldFocusNode,
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      focusColor: Colors.white,
+                                      fillColor: Colors.white,
+                                      iconColor: Colors.white,
+                                      hoverColor: Colors.white,
+                                      prefixIconColor: Colors.white,
+                                      icon: Icon(
+                                        Icons.search,
+                                        color: widget.color,
+                                      ),
+                                    ),
+                                    onChanged: (String value) {
+                                      searchController.text = value;
+                                    },
+                                    onSubmitted: (String value) {
+                                      final suggestions =
+                                          allFoods.where((Food food) {
+                                        return food.name
+                                            .toLowerCase()
+                                            .contains(value.toLowerCase());
                                       });
-                                    }
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30,
-                            child: Material(
-                              shape: const CircleBorder(),
-                              clipBehavior: Clip.hardEdge,
-                              color: widget.color, // Color del botón
-                              child: IconButton(
-                                icon: const Icon(
-                                  Icons.close,
-                                  color: Colors.white,
-                                  size: 15,
-                                ),
-                                onPressed: () {
-                                  searchController.clear();
+                                      if (suggestions.isNotEmpty) {
+                                        final firstSuggestion =
+                                            suggestions.first;
+
+                                        setState(() {
+                                          searchController.text =
+                                              firstSuggestion.name;
+                                          filteredFoods = [firstSuggestion];
+                                        });
+                                      }
+                                    },
+                                  );
                                 },
                               ),
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              height: 30,
+                              child: Material(
+                                shape: const CircleBorder(),
+                                clipBehavior: Clip.hardEdge,
+                                color: widget.color, // Color del botón
+                                child: IconButton(
+                                  icon: const Icon(
+                                    Icons.close,
+                                    color: Colors.white,
+                                    size: 15,
+                                  ),
+                                  onPressed: () {
+                                    searchController.clear();
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: GridView.count(
-                  shrinkWrap: true,
-                  crossAxisCount: 3,
-                  children: List.generate(filteredFoods.length, (index) {
-                    return Card(
-                      elevation: 5,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(10),
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (builder) {
-                                return ProportionFood(
-                                  color: widget.color,
-                                  food: filteredFoods[index],
-                                );
-                              });
-                        },
-                        child: LayoutBuilder(builder: (context, constraints) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Card(
-                                child: SizedBox(
-                                  width: constraints.maxWidth,
-                                  height: constraints.maxHeight / 1.8,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image(
-                                      image: filteredFoods[index].image!.image,
-                                      fit: BoxFit.cover,
+                Expanded(
+                  child: GridView.count(
+                    shrinkWrap: true,
+                    crossAxisCount: constraints.maxWidth ~/ 170 < 1
+                        ? 1
+                        : constraints.maxWidth ~/ 170,
+                    children: List.generate(filteredFoods.length, (index) {
+                      return LayoutBuilder(builder: ((context, constraints) {
+                        return Card(
+                          elevation: 5,
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(10),
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (builder) {
+                                    return ProportionFood(
+                                      color: widget.color,
+                                      food: filteredFoods[index],
+                                    );
+                                  });
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Card(
+                                  child: SizedBox(
+                                    width: constraints.maxWidth,
+                                    height: constraints.maxHeight / 2,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image(
+                                        image:
+                                            filteredFoods[index].image!.image,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              const Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  filteredFoods[index].name,
-                                  style: const TextStyle(fontSize: 16),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    filteredFoods[index].name,
+                                    style: const TextStyle(fontSize: 18),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          );
-                        }),
-                      ),
-                    );
-                  }),
+                              ],
+                            ),
+                          ),
+                        );
+                      }));
+                    }),
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
+              ],
+            ),
+          );
+        }),
       ),
     );
   }
