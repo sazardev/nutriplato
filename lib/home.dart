@@ -5,7 +5,6 @@ import 'dart:math' as math;
 
 import 'data.dart';
 import 'foods.dart';
-import 'iconpainter.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
