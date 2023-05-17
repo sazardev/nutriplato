@@ -1,102 +1,132 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 import 'data.dart';
 import 'foods.dart';
+import 'iconpainter.dart';
 
 class MyHomePage extends StatefulWidget {
-  final String title;
-
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
-}
-
-int getTappedSection(Offset tapPosition, double size, List<double> angles) {
-  double angle =
-      math.atan2(tapPosition.dy - size / 2, tapPosition.dx - size / 2);
-  if (angle < 0) angle += 2 * math.pi;
-
-  print('tapPosition: $tapPosition');
-  print('angle: $angle');
-
-  for (int i = 0; i < angles.length - 1; i++) {
-    if (angle >= angles[i] && angle < angles[i + 1]) {
-      print('tappedSection: $i');
-      return i;
-    }
-  }
-
-  print('tappedSection: -1');
-  return -1;
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int tappedSection = -1;
   List<double> angles = [
     0,
-    math.pi / 4,
     math.pi / 2,
+    math.pi * 3 / 4,
     math.pi,
     math.pi + math.pi / 2,
     math.pi * 2
   ];
 
+  int getTappedSection(Offset tapPosition, double size, List<double> angles,
+      BoxConstraints constraints) {
+    if (constraints.maxHeight > constraints.maxWidth) {
+      double width = constraints.maxWidth;
+      double height = constraints.maxHeight;
+
+      double x = tapPosition.dx;
+      double y = tapPosition.dy;
+
+      double centerX = width / 2;
+      double centerY = height / 2;
+
+      double angle = atan2(y - centerY, x - centerX);
+
+      if (angle < 0) {
+        angle += 2 * pi;
+      }
+
+      if (angle >= 0 && angle < pi / 2) {
+        return 0;
+      } else if (angle >= pi / 2 && angle < (3 * pi) / 4) {
+        return 1;
+      } else if (angle >= (3 * pi) / 4 && angle < pi) {
+        return 2;
+      } else if (angle >= pi && angle < (3 * pi) / 2) {
+        return 3;
+      } else {
+        return 4;
+      }
+    }
+
+    double angle =
+        math.atan2(tapPosition.dy - size / 2, tapPosition.dx - size / 2);
+    if (angle < 0) angle += 2 * math.pi;
+
+    for (int i = 0; i < angles.length - 1; i++) {
+      if (angle >= angles[i] && angle < angles[i + 1]) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(title: const Text('NutriPlato')),
         body: Row(children: [
-      Expanded(
-          child: Center(
-              child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: LayoutBuilder(builder: (context, constraints) {
-                    double size =
-                        math.min(constraints.maxWidth, constraints.maxHeight);
-                    List<double> radii = [
-                      size / 2 - 50,
-                      size / 2 - 50,
-                      size / 2 - 45,
-                      size / 2 - 40,
-                      size / 2 - 40,
-                    ];
+          Expanded(
+              child: Center(
+                  child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: LayoutBuilder(builder: (context, constraints) {
+                        double size = math.min(
+                            constraints.maxWidth, constraints.maxHeight);
+                        List<double> radii = [
+                          size / 2 - 50,
+                          size / 2 - 50,
+                          size / 2 - 45,
+                          size / 2 - 40,
+                          size / 2 - 40,
+                        ];
 
-                    return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          GestureDetector(
-                              onTapDown: (details) {
-                                RenderBox box =
-                                    context.findRenderObject() as RenderBox;
-                                Offset localPosition =
-                                    box.globalToLocal(details.globalPosition);
-                                tappedSection = getTappedSection(
-                                    localPosition, size, angles);
-                                Color color = sectionColors[tappedSection];
+                        return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              GestureDetector(
+                                  onTapDown: (details) {
+                                    RenderBox box =
+                                        context.findRenderObject() as RenderBox;
+                                    Offset localPosition = box
+                                        .globalToLocal(details.globalPosition);
+                                    tappedSection = getTappedSection(
+                                        localPosition,
+                                        size,
+                                        angles,
+                                        constraints);
+                                    Color color = sectionColors[tappedSection];
 
-                                displayDialog(color);
-                              },
-                              onPanEnd: (details) {
-                                setState(() {
-                                  tappedSection = -1;
-                                });
-                              },
-                              child: Material(
-                                  elevation: 100,
-                                  shape: const CircleBorder(),
-                                  child: SizedBox(
-                                      width: size,
-                                      height: size,
-                                      child: CustomPaint(
-                                          painter: CirclePainter(
-                                              radii: radii,
-                                              angles: angles,
-                                              lineLength: 1.1,
-                                              categories: shortCategories)))))
-                        ]);
-                  }))))
-    ]));
+                                    displayDialog(color);
+                                  },
+                                  onPanEnd: (details) {
+                                    setState(() {
+                                      tappedSection = -1;
+                                    });
+                                  },
+                                  child: Material(
+                                      elevation: 100,
+                                      shape: const CircleBorder(),
+                                      child: SizedBox(
+                                          width: size,
+                                          height: size,
+                                          child: CustomPaint(
+                                              painter: CirclePainter(
+                                                  radii: radii,
+                                                  angles: angles,
+                                                  lineLength: 1.1,
+                                                  categories:
+                                                      shortCategories)))))
+                            ]);
+                      }))))
+        ]));
   }
 
   void displayDialog(Color color) {
@@ -154,7 +184,7 @@ class CirclePainter extends CustomPainter {
     final paint = Paint()..style = PaintingStyle.fill;
     final linePaint = Paint()
       ..color = Colors.white
-      ..strokeWidth = 8.0;
+      ..strokeWidth = 12;
 
     for (int i = 0; i < radii.length; i++) {
       double startAngle = angles[i];
@@ -184,7 +214,16 @@ class CirclePainter extends CustomPainter {
           size.height / 2 + math.sin(textAngle) * (radii[i] + radii[i] * 0.1);
       canvas.save();
       canvas.translate(x2, y2);
-      canvas.rotate(textAngle + math.pi / 2);
+
+      if (i == 0) {
+        canvas.rotate(textAngle + math.pi * 4 / 2.72);
+      } else if (i == 1) {
+        canvas.rotate(textAngle + math.pi * 4 / 2.65);
+      } else if (i == 2) {
+        canvas.rotate(textAngle + math.pi * 4 / 2.65);
+      } else {
+        canvas.rotate(textAngle + math.pi / 2);
+      }
 
       TextPainter textPainter = TextPainter(
           text: TextSpan(

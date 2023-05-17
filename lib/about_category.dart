@@ -21,6 +21,10 @@ class AboutCategory extends StatelessWidget {
           color: Colors.white,
         ),
       ),
+      content: Text(
+        categoriesDescription[category],
+        style: const TextStyle(color: Colors.white),
+      ),
     );
   }
 }

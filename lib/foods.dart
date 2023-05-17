@@ -73,6 +73,7 @@ class _FoodsState extends State<Foods> {
           return Scaffold(
             backgroundColor: widget.color,
             appBar: AppBar(
+              elevation: 0,
               foregroundColor: Colors.white,
               backgroundColor: widget.color,
               title: Text(
