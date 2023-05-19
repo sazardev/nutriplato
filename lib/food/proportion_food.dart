@@ -42,14 +42,14 @@ class ProportionFood extends StatelessWidget {
                 height: 200,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: food.image,
+                  child: food.image ??
+                      Text(
+                        '${food.description}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                 ),
-              ),
-            ),
-            Text(
-              '${food.description}',
-              style: const TextStyle(
-                color: Colors.white,
               ),
             ),
             Padding(
