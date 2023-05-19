@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/food.dart';
+import 'package:nutriplato/object/food.dart';
 
 class ProportionFood extends StatelessWidget {
   final Color color;

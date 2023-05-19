@@ -13,8 +13,9 @@ class MyApp extends StatelessWidget {
       title: 'NutriPlato',
       theme: ThemeData(
         useMaterial3: true,
+        colorSchemeSeed: Colors.green,
       ),
-      home: const MyHomePage(),
+      home: const Dashboard(),
     );
   }
 }

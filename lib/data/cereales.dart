@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../food.dart';
+import '../object/food.dart';
 
 List<Food> cereales = [
   Food(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/data.dart';
+import 'package:nutriplato/data/data.dart';
 
 class AboutCategory extends StatelessWidget {
   final int category;
