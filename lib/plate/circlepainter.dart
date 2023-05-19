@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/plate/iconpainter.dart';
 
 import '../data/data.dart';
 import 'dart:math' as math;
