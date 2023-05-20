@@ -219,11 +219,11 @@ List<Food> vegetables = [
     image: Image.asset('img/vegetables/pimientoverde.jpg'),
   ),
   Food(
-    name: 'Remolacha',
+    name: 'Betabel',
     description:
         ' Verdura redonda y jugosa con piel roja o morada y pulpa dividida en capas ',
-    calories: 43,
-    portions: 0.5,
+    calories: 19,
+    portions: 0.25,
     image: Image.asset('img/vegetables/rabamolacha.jpg'),
   ),
   Food(
@@ -266,3 +266,25 @@ List<Food> vegetables = [
     image: Image.asset('img/vegetables/zanahoria.jpg'),
   ),
 ];
+
+/*
+gramos
+taza
+pieza
+cucharada
+cucharadita
+rebanada
+sobre
+hojas
+pieza promedio
+frasco
+lata
+galleta
+bolsita
+barra
+paquete
+bolsa
+filete
+envase
+vasito
+*/
