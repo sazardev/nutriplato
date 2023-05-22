@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../object/food.dart';
+import '../food/food.dart';
 
 List<Food> animals = [
   Food(
@@ -9,8 +9,6 @@ List<Food> animals = [
     calories: 43,
     portions: 4,
     image: Image.asset('img/animal/almeja.jpg'),
-    unit: 'piezas',
-    grams: 58,
   ),
   Food(
     name: 'Atún en agua',
@@ -18,8 +16,6 @@ List<Food> animals = [
     calories: 39,
     portions: 0.33,
     image: Image.asset('img/animal/atun.jpg'),
-    unit: 'lata',
-    grams: 33,
   ),
   Food(
     name: 'Atún fresco',
@@ -27,8 +23,6 @@ List<Food> animals = [
     calories: 43,
     portions: 30,
     image: Image.asset('img/animal/atunenagua.jpg'),
-    grams: 30,
-    unit: 'g',
   ),
   Food(
     name: 'Bacalao',
@@ -36,8 +30,6 @@ List<Food> animals = [
     calories: 37,
     portions: 45,
     image: Image.asset('img/animal/bacalao.jpg'),
-    grams: 45,
-    unit: 'g',
   ),
   Food(
     name: 'Tocino',
@@ -45,8 +37,6 @@ List<Food> animals = [
     calories: 111,
     portions: 40,
     image: Image.asset('img/animal/bacon.jpg'),
-    grams: 40,
-    unit: 'g',
   ),
   Food(
     name: 'Bola de res',
@@ -54,8 +44,6 @@ List<Food> animals = [
     calories: 71,
     portions: 25,
     image: Image.asset('img/animal/bistecderes.jpg'),
-    grams: 25,
-    unit: 'g',
   ),
   Food(
     name: 'Calamares',
@@ -63,8 +51,6 @@ List<Food> animals = [
     calories: 78.5,
     portions: 85,
     image: Image.asset('img/animal/calamar.jpg'),
-    grams: 85,
-    unit: 'g',
   ),
   Food(
     name: 'Camarones cocidos',
@@ -72,8 +58,6 @@ List<Food> animals = [
     calories: 34,
     portions: 5,
     image: Image.asset('img/animal/camarones.jpg'),
-    grams: 34,
-    unit: 'pieza',
   ),
   Food(
     name: 'Chuleta de cerdo',
@@ -81,8 +65,6 @@ List<Food> animals = [
     calories: 197,
     portions: 1,
     image: Image.asset('img/animal/chuletadecerdo.jpg'),
-    grams: 85,
-    unit: 'pieza',
   ),
   Food(
     name: 'Clara de huevo',
@@ -90,8 +72,6 @@ List<Food> animals = [
     calories: 17,
     portions: 1,
     image: Image.asset('img/animal/claradehuevo.jpg'),
-    grams: 60,
-    unit: '',
   ),
   Food(
     name: 'Codorniz',

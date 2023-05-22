@@ -8,7 +8,7 @@ import 'package:nutriplato/food/proportion_food.dart';
 
 import '../data/data.dart';
 import '../data/animal.dart';
-import '../object/food.dart';
+import 'food.dart';
 
 class Foods extends StatefulWidget {
   final Color color;

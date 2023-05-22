@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nutriplato/contact/contact.dart';
 import 'package:nutriplato/plate/plate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -14,13 +15,13 @@ class _Dashboard extends State<Dashboard> with SingleTickerProviderStateMixin {
 
   static const List<Widget> _tabs = [
     Tab(
-      icon: Icon(Icons.home),
+      icon: FaIcon(FontAwesomeIcons.plateWheat),
       text: 'Plato',
     ),
     Tab(
       icon: Icon(Icons.person),
-      text: 'Profile',
-    )
+      text: 'Contacto',
+    ),
   ];
 
   @override
@@ -42,9 +43,6 @@ class _Dashboard extends State<Dashboard> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('NutriPlato'),
-        ),
         body: TabBarView(
           controller: controller,
           children: const [
