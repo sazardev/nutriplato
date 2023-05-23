@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 import '../data/data.dart';
-import '../food/foods.dart';
-import 'circlepainter.dart';
+import '../widgets/foods.dart';
+import '../widgets/circlepainter.dart';
 
 class Plate extends StatefulWidget {
   const Plate({super.key});
@@ -80,62 +80,65 @@ class _Plate extends State<Plate> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(children: [
-            Expanded(
-                child: Center(
-                    child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: LayoutBuilder(builder: (context, constraints) {
-                          double size = math.min(
-                              constraints.maxWidth, constraints.maxHeight);
-                          List<double> radii = [
-                            size / 2 - 50,
-                            size / 2 - 50,
-                            size / 2 - 45,
-                            size / 2 - 40,
-                            size / 2 - 40,
-                          ];
+          Expanded(
+            child: Row(children: [
+              Expanded(
+                  child: Center(
+                      child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: LayoutBuilder(builder: (context, constraints) {
+                            double size = math.min(
+                                constraints.maxWidth, constraints.maxHeight);
+                            List<double> radii = [
+                              size / 2 - 50,
+                              size / 2 - 50,
+                              size / 2 - 45,
+                              size / 2 - 40,
+                              size / 2 - 40,
+                            ];
 
-                          return Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                GestureDetector(
-                                    onTapDown: (details) {
-                                      RenderBox box = context.findRenderObject()
-                                          as RenderBox;
-                                      Offset localPosition = box.globalToLocal(
-                                          details.globalPosition);
-                                      tappedSection = getTappedSection(
-                                          localPosition,
-                                          size,
-                                          angles,
-                                          constraints);
-                                      Color color =
-                                          sectionColors[tappedSection];
+                            return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  GestureDetector(
+                                      onTapDown: (details) {
+                                        RenderBox box = context
+                                            .findRenderObject() as RenderBox;
+                                        Offset localPosition =
+                                            box.globalToLocal(
+                                                details.globalPosition);
+                                        tappedSection = getTappedSection(
+                                            localPosition,
+                                            size,
+                                            angles,
+                                            constraints);
+                                        Color color =
+                                            sectionColors[tappedSection];
 
-                                      displayDialog(color);
-                                    },
-                                    onPanEnd: (details) {
-                                      setState(() {
-                                        tappedSection = -1;
-                                      });
-                                    },
-                                    child: Material(
-                                        elevation: 100,
-                                        shape: const CircleBorder(),
-                                        child: SizedBox(
-                                            width: size,
-                                            height: size,
-                                            child: CustomPaint(
-                                                painter: CirclePainter(
-                                                    radii: radii,
-                                                    angles: angles,
-                                                    lineLength: 1.1,
-                                                    categories:
-                                                        shortCategories)))))
-                              ]);
-                        }))))
-          ]),
+                                        displayDialog(color);
+                                      },
+                                      onPanEnd: (details) {
+                                        setState(() {
+                                          tappedSection = -1;
+                                        });
+                                      },
+                                      child: Material(
+                                          elevation: 100,
+                                          shape: const CircleBorder(),
+                                          child: SizedBox(
+                                              width: size,
+                                              height: size,
+                                              child: CustomPaint(
+                                                  painter: CirclePainter(
+                                                      radii: radii,
+                                                      angles: angles,
+                                                      lineLength: 1.1,
+                                                      categories:
+                                                          shortCategories)))))
+                                ]);
+                          }))))
+            ]),
+          ),
         ],
       ),
     );

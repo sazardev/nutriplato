@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'home.dart';
 
 void main() => runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: Colors.green,
       ),
-      home: const Dashboard(),
+      home: const Home(),
     );
   }
 }

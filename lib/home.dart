@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/contact/contact.dart';
-import 'package:nutriplato/plate/plate.dart';
+import 'package:nutriplato/screens/contact.dart';
+import 'package:nutriplato/screens/plate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+import 'screens/dashboard.dart';
+
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<Dashboard> createState() => _Dashboard();
+  State<Home> createState() => _Home();
 }
 
-class _Dashboard extends State<Dashboard> with SingleTickerProviderStateMixin {
+class _Home extends State<Home> with SingleTickerProviderStateMixin {
   static late TabController controller;
 
   static const List<Widget> _tabs = [
+    Tab(
+      icon: FaIcon(FontAwesomeIcons.house),
+      text: 'Inicio',
+    ),
     Tab(
       icon: FaIcon(FontAwesomeIcons.plateWheat),
       text: 'Plato',
     ),
     Tab(
-      icon: Icon(Icons.person),
+      icon: FaIcon(FontAwesomeIcons.addressCard),
       text: 'Contacto',
     ),
   ];
@@ -34,7 +40,7 @@ class _Dashboard extends State<Dashboard> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     controller = TabController(
-      length: 2,
+      length: 3,
       vsync: this,
     );
   }
@@ -46,6 +52,7 @@ class _Dashboard extends State<Dashboard> with SingleTickerProviderStateMixin {
         body: TabBarView(
           controller: controller,
           children: const [
+            Dashboard(),
             Plate(),
             Contact(),
           ],
