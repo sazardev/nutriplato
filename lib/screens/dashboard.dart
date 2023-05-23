@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/data/fruits.dart';
 
 class Dashboard extends StatelessWidget {
   final String name = "Jacqueline";
@@ -87,7 +86,11 @@ class Dashboard extends StatelessWidget {
                             bottom: 16,
                           ),
                           child: FilledButton(
-                              onPressed: () {}, child: Text('Aprender')),
+                            onPressed: () {},
+                            child: const Text(
+                              'Aprender',
+                            ),
+                          ),
                         )
                       ],
                     ),
