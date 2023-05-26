@@ -266,25 +266,3 @@ List<Food> vegetables = [
     image: Image.asset('img/vegetables/zanahoria.jpg'),
   ),
 ];
-
-/*
-gramos
-taza
-pieza
-cucharada
-cucharadita
-rebanada
-sobre
-hojas
-pieza promedio
-frasco
-lata
-galleta
-bolsita
-barra
-paquete
-bolsa
-filete
-envase
-vasito
-*/

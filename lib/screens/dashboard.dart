@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/focus_card.dart';
+import '../widgets/cards/focus_card.dart';
 
 class Dashboard extends StatelessWidget {
   final String name = "Jacqueline";

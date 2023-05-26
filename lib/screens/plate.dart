@@ -5,7 +5,7 @@ import 'dart:math' as math;
 
 import '../data/data.dart';
 import '../widgets/foods.dart';
-import '../widgets/circlepainter.dart';
+import '../widgets/painter/circlepainter.dart';
 
 class Plate extends StatefulWidget {
   const Plate({super.key});

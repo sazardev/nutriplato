@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../data/data.dart';
+import '../../data/data.dart';
 import 'dart:math' as math;
 
 class CirclePainter extends CustomPainter {

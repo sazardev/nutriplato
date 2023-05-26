@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/widgets/category.dart';
+import 'package:nutriplato/widgets/info/category.dart';
 import 'package:nutriplato/data/cereales.dart';
 import 'package:nutriplato/data/fruits.dart';
 import 'package:nutriplato/data/leguminosas.dart';
 import 'package:nutriplato/data/vegetables.dart';
-import 'package:nutriplato/widgets/food.dart';
+import 'package:nutriplato/widgets/painter/food.dart';
 
 import '../data/data.dart';
 import '../data/animal.dart';
