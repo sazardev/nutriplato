@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/food.dart';
+import '../models/food.dart';
 
 class ProportionFood extends StatelessWidget {
   final Color color;
@@ -61,7 +61,7 @@ class ProportionFood extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      '${food.calories} kCal por porción',
+                      '${food} kCal por porción',
                       style: const TextStyle(
                         fontSize: 18,
                       ),
@@ -78,7 +78,7 @@ class ProportionFood extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      '1 porción = ${food.portions} ${food.name}',
+                      '1 porción = ${food} ${food.name}',
                       style: const TextStyle(
                         fontSize: 18,
                       ),

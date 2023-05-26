@@ -1,4 +1,6 @@
-class Cereal {
+import 'food.dart';
+
+class Cereal extends Food {
   String alimento;
   String cantidadSugerida;
   String unidad;
@@ -35,5 +37,5 @@ class Cereal {
     required this.azucarEquivalente,
     required this.indiceGlicemico,
     required this.cargaGlicemica,
-  });
+  }) : super(name: alimento);
 }

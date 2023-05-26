@@ -1,4 +1,6 @@
-class Frutas {
+import 'food.dart';
+
+class Fruta extends Food {
   String alimento;
   String cantidadSugerida;
   String unidad;
@@ -17,7 +19,7 @@ class Frutas {
   String indiceGlicemico;
   String cargaGlicemica;
 
-  Frutas({
+  Fruta({
     required this.alimento,
     required this.cantidadSugerida,
     required this.unidad,
@@ -35,5 +37,5 @@ class Frutas {
     required this.potasio,
     required this.indiceGlicemico,
     required this.cargaGlicemica,
-  });
+  }) : super(name: alimento);
 }

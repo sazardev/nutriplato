@@ -1,4 +1,6 @@
-class Animal {
+import 'food.dart';
+
+class Animal extends Food {
   String alimento;
   String cantidadSugerida;
   String unidad;
@@ -31,5 +33,5 @@ class Animal {
     required this.hierro,
     required this.sodio,
     required this.selenio,
-  });
+  }) : super(name: alimento);
 }

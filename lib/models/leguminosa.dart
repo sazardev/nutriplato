@@ -1,4 +1,6 @@
-class Leguminosa {
+import 'food.dart';
+
+class Leguminosa extends Food {
   String alimento;
   String cantidadSugerida;
   String unidad;
@@ -35,5 +37,5 @@ class Leguminosa {
     required this.azucarEquivalente,
     required this.indiceGlicemico,
     required this.cargaGlicemica,
-  });
+  }) : super(name: alimento);
 }

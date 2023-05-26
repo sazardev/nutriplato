@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:nutriplato/widgets/info/category.dart';
 import 'package:nutriplato/data/cereales.dart';
-import 'package:nutriplato/data/fruits.dart';
+import 'package:nutriplato/data/frutas.dart';
 import 'package:nutriplato/data/leguminosas.dart';
-import 'package:nutriplato/data/vegetables.dart';
-import 'package:nutriplato/widgets/painter/food.dart';
+import 'package:nutriplato/data/verduras.dart';
+import 'package:nutriplato/widgets/food.dart';
 
 import '../data/data.dart';
-import '../data/animal.dart';
+import '../data/animals.dart';
 import '../models/food.dart';
 
 class Foods extends StatefulWidget {
@@ -45,13 +45,12 @@ class _FoodsState extends State<Foods> {
         allFoods = cereales;
         break;
       case 3:
-        allFoods = vegetables;
+        allFoods = verduras;
         break;
       case 4:
-        allFoods = fruits;
+        allFoods = frutas;
         break;
     }
-    allFoods.sort((a, b) => a.name.compareTo(b.name));
     filteredFoods = allFoods;
 
     searchController.addListener(() {
@@ -237,20 +236,24 @@ class _FoodsState extends State<Foods> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Card(
-                                  child: SizedBox(
-                                    width: constraints.maxWidth,
-                                    height: constraints.maxHeight / 2,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image(
-                                        image:
-                                            filteredFoods[index].image!.image,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                filteredFoods[index].image == null
+                                    ? Card(
+                                        child: SizedBox(
+                                          width: constraints.maxWidth,
+                                          height: constraints.maxHeight / 2,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: Image(
+                                              image: filteredFoods[index]
+                                                  .image!
+                                                  .image,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : const Center(),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
