@@ -114,7 +114,7 @@ class _FoodsState extends State<Foods> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             SizedBox(
-                              height: 20,
+                              height: 30,
                               width: constraints.maxWidth / 2,
                               child: Autocomplete<Food>(
                                 optionsBuilder:
@@ -123,7 +123,7 @@ class _FoodsState extends State<Foods> {
                                     return const Iterable<Food>.empty();
                                   }
                                   return allFoods.where((Food food) {
-                                    return food.name.toLowerCase().contains(
+                                    return food.name.toLowerCase().startsWith(
                                         textEditingValue.text.toLowerCase());
                                   });
                                 },
@@ -224,36 +224,29 @@ class _FoodsState extends State<Foods> {
                           child: InkWell(
                             borderRadius: BorderRadius.circular(10),
                             onTap: () {
-                              showDialog(
+                              int indexInAllFoods =
+                                  allFoods.indexOf(filteredFoods[index]);
+                              showModalBottomSheet(
                                   context: context,
-                                  builder: (builder) {
-                                    return ProportionFood(
-                                      color: widget.color,
-                                      food: filteredFoods[index],
+                                  isScrollControlled: true,
+                                  builder: (context) {
+                                    return SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.7,
+                                      child: ProportionFood(
+                                        color: widget.color,
+                                        food: filteredFoods[index],
+                                        section: widget.tappedSection,
+                                        index: indexInAllFoods,
+                                      ),
                                     );
                                   });
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                filteredFoods[index].image == null
-                                    ? Card(
-                                        child: SizedBox(
-                                          width: constraints.maxWidth,
-                                          height: constraints.maxHeight / 2,
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            child: Image(
-                                              image: filteredFoods[index]
-                                                  .image!
-                                                  .image,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    : const Center(),
+                                filteredFoods[index].image ?? const Center(),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
