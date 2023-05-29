@@ -236,7 +236,6 @@ class _FoodsState extends State<Foods> {
                                               0.7,
                                       child: ProportionFood(
                                         color: widget.color,
-                                        food: filteredFoods[index],
                                         section: widget.tappedSection,
                                         index: indexInAllFoods,
                                       ),

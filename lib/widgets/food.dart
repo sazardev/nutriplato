@@ -6,18 +6,15 @@ import '../data/animals.dart';
 import '../data/cereales.dart';
 import '../data/frutas.dart';
 import '../data/verduras.dart';
-import '../models/food.dart';
 
 class ProportionFood extends StatefulWidget {
   final Color color;
-  final Food food;
   final int section;
   final int index;
 
   const ProportionFood({
     super.key,
     required this.color,
-    required this.food,
     required this.section,
     required this.index,
   });
@@ -271,9 +268,48 @@ class _ProportionFoodState extends State<ProportionFood> {
                 ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 18,
+                right: 18,
+              ),
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  ((double.parse(list[widget.index].proteina) * 4) /
+                                  (double.parse(list[widget.index].energia))) *
+                              100 >
+                          20
+                      ? tagHealthy(
+                          'Alto en proteinas', Colors.green, Icons.done)
+                      : const Text(''),
+                  ((double.parse(list[widget.index].energia) /
+                                  double.parse(list[widget.index].pesoNeto)) *
+                              100) >=
+                          275
+                      ? tagHealthy('Alto en calorias', Colors.red, Icons.cancel)
+                      : const Text('')
+                ],
+              ),
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget tagHealthy(String text, Color advertice, IconData icon) {
+    return Chip(
+      avatar: CircleAvatar(
+        backgroundColor: advertice,
+        child: Icon(
+          icon,
+          color: Colors.white,
+          size: 15,
+        ),
+      ),
+      label: Text(text),
+      shape: const StadiumBorder(),
     );
   }
 }

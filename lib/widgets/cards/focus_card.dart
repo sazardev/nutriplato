@@ -31,7 +31,7 @@ class FocusCard extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.only(left: 16, top: 16, bottom: 4),
                   child: Text(
-                    'Super Alimentos',
+                    'Alto en proteinas',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -42,7 +42,7 @@ class FocusCard extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.only(left: 16.0),
                   child: Text(
-                    'Aprende sobre los super alimentos.',
+                    'Mejora tu fuerza y energia.',
                     style: TextStyle(
                         fontSize: 16,
                         color: Color.fromARGB(225, 255, 255, 255)),
