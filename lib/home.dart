@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nutriplato/screens/contact.dart';
 import 'package:nutriplato/screens/plate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nutriplato/screens/search.dart';
 
 import 'screens/dashboard.dart';
 
@@ -19,6 +20,10 @@ class _Home extends State<Home> with SingleTickerProviderStateMixin {
     Tab(
       icon: FaIcon(FontAwesomeIcons.house),
       text: 'Inicio',
+    ),
+    Tab(
+      icon: FaIcon(FontAwesomeIcons.magnifyingGlass),
+      text: 'Buscar',
     ),
     Tab(
       icon: FaIcon(FontAwesomeIcons.plateWheat),
@@ -40,7 +45,7 @@ class _Home extends State<Home> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     controller = TabController(
-      length: 3,
+      length: 4,
       vsync: this,
     );
   }
@@ -53,6 +58,7 @@ class _Home extends State<Home> with SingleTickerProviderStateMixin {
           controller: controller,
           children: const [
             Dashboard(),
+            Search(),
             Plate(),
             Contact(),
           ],

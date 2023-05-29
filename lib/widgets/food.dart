@@ -299,17 +299,30 @@ class _ProportionFoodState extends State<ProportionFood> {
   }
 
   Widget tagHealthy(String text, Color advertice, IconData icon) {
-    return Chip(
-      avatar: CircleAvatar(
-        backgroundColor: advertice,
-        child: Icon(
-          icon,
-          color: Colors.white,
-          size: 15,
-        ),
+    return FilledButton(
+      onPressed: () {},
+      style: TextButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.black.withAlpha(70),
       ),
-      label: Text(text),
-      shape: const StadiumBorder(),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CircleAvatar(
+            radius: 12,
+            backgroundColor: advertice,
+            child: Icon(
+              icon,
+              size: 18,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Text(text),
+        ],
+      ),
     );
   }
 }

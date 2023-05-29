@@ -144,9 +144,7 @@ class _FoodsState extends State<Foods> {
                                       searchController.text;
 
                                   return TextField(
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                    ),
+                                    style: const TextStyle(color: Colors.black),
                                     cursorColor: widget.color,
                                     controller: fieldTextEditingController,
                                     focusNode: fieldFocusNode,
@@ -166,22 +164,14 @@ class _FoodsState extends State<Foods> {
                                       searchController.text = value;
                                     },
                                     onSubmitted: (String value) {
-                                      final suggestions =
-                                          allFoods.where((Food food) {
-                                        return food.name
-                                            .toLowerCase()
-                                            .contains(value.toLowerCase());
+                                      setState(() {
+                                        filteredFoods =
+                                            allFoods.where((Food food) {
+                                          return food.name
+                                              .toLowerCase()
+                                              .contains(value.toLowerCase());
+                                        }).toList();
                                       });
-                                      if (suggestions.isNotEmpty) {
-                                        final firstSuggestion =
-                                            suggestions.first;
-
-                                        setState(() {
-                                          searchController.text =
-                                              firstSuggestion.name;
-                                          filteredFoods = [firstSuggestion];
-                                        });
-                                      }
                                     },
                                   );
                                 },
@@ -213,6 +203,7 @@ class _FoodsState extends State<Foods> {
                 ),
                 Expanded(
                   child: GridView.count(
+                    childAspectRatio: 2,
                     shrinkWrap: true,
                     crossAxisCount: constraints.maxWidth ~/ 170 < 1
                         ? 1
@@ -220,7 +211,7 @@ class _FoodsState extends State<Foods> {
                     children: List.generate(filteredFoods.length, (index) {
                       return LayoutBuilder(builder: ((context, constraints) {
                         return Card(
-                          elevation: 5,
+                          elevation: 1,
                           child: InkWell(
                             borderRadius: BorderRadius.circular(10),
                             onTap: () {
@@ -243,6 +234,7 @@ class _FoodsState extends State<Foods> {
                                   });
                             },
                             child: Column(
+                              mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 filteredFoods[index].image ?? const Center(),
