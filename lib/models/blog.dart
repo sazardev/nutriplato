@@ -7,6 +7,7 @@ class Blog {
   List<Color> gradientColors;
   Color buttonColor;
   String buttonText;
+  List<String> foods = [];
 
   Blog({
     required this.title,
