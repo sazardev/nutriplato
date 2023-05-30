@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../data/blog/blog.dart';
 import '../widgets/cards/focus_card.dart';
 
 class Dashboard extends StatelessWidget {
@@ -45,30 +46,15 @@ class Dashboard extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 6, right: 16),
-              child: FocusCard(
-                colorButton: Colors.purple,
-                content: 'Mejora tu fuerza y energia.',
-                gradientColors: [
-                  Colors.deepPurple.shade400,
-                  Colors.purple.shade400,
-                ],
-                promptButton: 'Ver alimentos',
-                title: 'Alto en proteinas',
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 6, right: 16),
-              child: FocusCard(
-                colorButton: Colors.orange,
-                content: 'Reduce las grasas.',
-                gradientColors: [
-                  Colors.deepOrange.shade600,
-                  Colors.amber.shade600,
-                ],
-                promptButton: 'Ver alimentos',
-                title: 'Bajo en grasas',
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 6, right: 6),
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: blogs.length,
+                    itemBuilder: (context, index) {
+                      return FocusCard(blog: blogs[index]);
+                    }),
               ),
             ),
           ],

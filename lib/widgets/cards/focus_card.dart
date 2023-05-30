@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../models/blog.dart';
+import '../../screens/blogs.dart';
+
 class FocusCard extends StatelessWidget {
-  final List<Color> gradientColors;
-  final String title;
-  final String content;
-  final String promptButton;
-  final Color colorButton;
+  final Blog blog;
 
   const FocusCard({
     super.key,
-    required this.gradientColors,
-    required this.title,
-    required this.content,
-    required this.promptButton,
-    required this.colorButton,
+    required this.blog,
   });
 
   @override
@@ -24,7 +19,7 @@ class FocusCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: gradientColors,
+            colors: blog.gradientColors,
             stops: const [
               0.0,
               1.0,
@@ -41,7 +36,7 @@ class FocusCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 16, top: 16, bottom: 4),
                   child: Text(
-                    title,
+                    blog.title,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -52,7 +47,7 @@ class FocusCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 16.0),
                   child: Text(
-                    content,
+                    blog.description,
                     style: const TextStyle(
                         fontSize: 16,
                         color: Color.fromARGB(225, 255, 255, 255)),
@@ -66,10 +61,17 @@ class FocusCard extends StatelessWidget {
                   ),
                   child: FilledButton(
                     style: FilledButton.styleFrom(
-                      backgroundColor: colorButton,
+                      backgroundColor: blog.buttonColor,
                     ),
-                    onPressed: () {},
-                    child: Text(promptButton),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return BlogState(
+                          blog: blog,
+                        );
+                      }));
+                    },
+                    child: Text(blog.buttonText),
                   ),
                 )
               ],

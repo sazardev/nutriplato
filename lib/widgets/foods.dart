@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:nutriplato/widgets/info/category.dart';
-import 'package:nutriplato/data/cereales.dart';
-import 'package:nutriplato/data/frutas.dart';
-import 'package:nutriplato/data/leguminosas.dart';
-import 'package:nutriplato/data/verduras.dart';
+import 'package:nutriplato/data/food/cereales.dart';
+import 'package:nutriplato/data/food/frutas.dart';
+import 'package:nutriplato/data/food/leguminosas.dart';
+import 'package:nutriplato/data/food/verduras.dart';
 import 'package:nutriplato/widgets/food.dart';
 
 import '../data/data.dart';
-import '../data/animals.dart';
+import '../data/food/animals.dart';
 import '../models/food.dart';
 
 class Foods extends StatefulWidget {

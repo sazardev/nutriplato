@@ -1,4 +1,4 @@
-import '../models/leguminosa.dart';
+import '../../models/leguminosa.dart';
 
 List<Leguminosa> leguminosas = [
   Leguminosa(
