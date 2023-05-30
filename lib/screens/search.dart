@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:nutriplato/data/cereales.dart';
 import 'package:nutriplato/data/frutas.dart';
+import 'package:nutriplato/data/leguminosas.dart';
+import 'package:nutriplato/data/verduras.dart';
 import '../data/data.dart';
 import '../data/animals.dart';
 import '../models/food.dart';
@@ -21,7 +24,12 @@ class _Search extends State<Search> {
   @override
   void initState() {
     super.initState();
-    allFoods = animals; // o cualquier otra lista de alimentos que quieras usar
+    allFoods = [];
+    allFoods.addAll(animals);
+    allFoods.addAll(verduras);
+    allFoods.addAll(frutas);
+    allFoods.addAll(leguminosas);
+    allFoods.addAll(cereales);
     filteredFoods = allFoods;
   }
 
@@ -33,7 +41,7 @@ class _Search extends State<Search> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Card(
-              elevation: 5,
+              elevation: 1,
               child: Padding(
                 padding: const EdgeInsets.only(left: 8, right: 8),
                 child: SizedBox(

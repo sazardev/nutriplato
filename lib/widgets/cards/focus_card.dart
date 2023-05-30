@@ -12,8 +12,8 @@ class FocusCard extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Colors.green.shade400,
-              Colors.teal.shade400,
+              Colors.deepPurple.shade400,
+              Colors.purple.shade400,
             ],
             stops: const [
               0.0,
