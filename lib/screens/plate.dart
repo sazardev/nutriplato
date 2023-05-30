@@ -71,6 +71,7 @@ class _Plate extends State<Plate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 245, 245, 245),
       appBar: AppBar(
         title: const Text('Plato del buen comer'),
         actions: [

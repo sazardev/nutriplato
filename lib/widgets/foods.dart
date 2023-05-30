@@ -215,8 +215,6 @@ class _FoodsState extends State<Foods> {
                           child: InkWell(
                             borderRadius: BorderRadius.circular(10),
                             onTap: () {
-                              int indexInAllFoods =
-                                  allFoods.indexOf(filteredFoods[index]);
                               showModalBottomSheet(
                                   context: context,
                                   isScrollControlled: true,
@@ -226,9 +224,7 @@ class _FoodsState extends State<Foods> {
                                           MediaQuery.of(context).size.height *
                                               0.7,
                                       child: ProportionFood(
-                                        color: widget.color,
-                                        section: widget.tappedSection,
-                                        index: indexInAllFoods,
+                                        food: filteredFoods[index],
                                       ),
                                     );
                                   });

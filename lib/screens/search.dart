@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter/material.dart';
 import 'package:nutriplato/data/cereales.dart';
 import 'package:nutriplato/data/frutas.dart';
 import 'package:nutriplato/data/leguminosas.dart';
 import 'package:nutriplato/data/verduras.dart';
-import '../data/data.dart';
 import '../data/animals.dart';
 import '../models/food.dart';
+import '../widgets/food.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -36,6 +34,7 @@ class _Search extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 245, 245, 245),
       body: Column(
         children: [
           Padding(
@@ -78,6 +77,16 @@ class _Search extends State<Search> {
                           hintText: 'Buscar alimentos o receta',
                           icon: Icon(Icons.search,
                               color: Theme.of(context).primaryColor),
+                          suffixIcon: IconButton(
+                            icon: const Icon(
+                              Icons.clear,
+                              color: Colors.purple,
+                            ),
+                            onPressed: () {
+                              fieldTextEditingController.clear();
+                              searchController.clear();
+                            },
+                          ),
                         ),
                         onChanged: (String value) {
                           searchController.text = value;
@@ -102,10 +111,23 @@ class _Search extends State<Search> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
-                itemCount: filteredFoods.length,
+                itemCount: 20,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (context) {
+                            return SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.7,
+                              child: ProportionFood(
+                                food: filteredFoods[index],
+                              ),
+                            );
+                          });
+                    },
+                    leading: filteredFoods[index].icon,
                     title: Text(filteredFoods[index].name),
                   );
                 },

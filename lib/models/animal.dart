@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nutriplato/data/data.dart';
+
 import 'food.dart';
 
 class Animal extends Food {
@@ -33,5 +37,18 @@ class Animal extends Food {
     required this.hierro,
     required this.sodio,
     required this.selenio,
-  }) : super(name: alimento);
+  }) : super(
+          name: alimento,
+          category: 'animal',
+          icon: const Icon(FontAwesomeIcons.cow),
+          color: sectionColors[1],
+          cantidadSugerida: cantidadSugerida,
+          unidad: unidad,
+          pesoRedondeado: pesoRedondeado,
+          pesoNeto: pesoNeto,
+          energia: energia,
+          proteina: proteina,
+          lipidos: lipidos,
+          hidratosDeCarbono: hidratosDeCarbono,
+        );
 }

@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
 class FocusCard extends StatelessWidget {
-  const FocusCard({super.key});
+  final List<Color> gradientColors;
+  final String title;
+  final String content;
+  final String promptButton;
+  final Color colorButton;
+
+  const FocusCard({
+    super.key,
+    required this.gradientColors,
+    required this.title,
+    required this.content,
+    required this.promptButton,
+    required this.colorButton,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +24,7 @@ class FocusCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Colors.deepPurple.shade400,
-              Colors.purple.shade400,
-            ],
+            colors: gradientColors,
             stops: const [
               0.0,
               1.0,
@@ -28,22 +38,22 @@ class FocusCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 16, top: 16, bottom: 4),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, top: 16, bottom: 4),
                   child: Text(
-                    'Alto en proteinas',
-                    style: TextStyle(
+                    title,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 16.0),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
                   child: Text(
-                    'Mejora tu fuerza y energia.',
-                    style: TextStyle(
+                    content,
+                    style: const TextStyle(
                         fontSize: 16,
                         color: Color.fromARGB(225, 255, 255, 255)),
                   ),
@@ -55,10 +65,11 @@ class FocusCard extends StatelessWidget {
                     bottom: 16,
                   ),
                   child: FilledButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Aprender',
+                    style: FilledButton.styleFrom(
+                      backgroundColor: colorButton,
                     ),
+                    onPressed: () {},
+                    child: Text(promptButton),
                   ),
                 )
               ],

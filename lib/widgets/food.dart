@@ -6,17 +6,14 @@ import '../data/animals.dart';
 import '../data/cereales.dart';
 import '../data/frutas.dart';
 import '../data/verduras.dart';
+import '../models/food.dart';
 
 class ProportionFood extends StatefulWidget {
-  final Color color;
-  final int section;
-  final int index;
+  final Food food;
 
   const ProportionFood({
     super.key,
-    required this.color,
-    required this.section,
-    required this.index,
+    required this.food,
   });
 
   @override
@@ -42,20 +39,20 @@ class _ProportionFoodState extends State<ProportionFood> {
 
   @override
   void initState() {
-    switch (widget.section) {
-      case 0:
+    switch (widget.food.category) {
+      case "leguminosa":
         list = leguminosas;
         break;
-      case 1:
+      case "animal":
         list = animals;
         break;
-      case 2:
+      case "cereal":
         list = cereales;
         break;
-      case 3:
+      case "verdura":
         list = verduras;
         break;
-      case 4:
+      case "fruta":
         list = frutas;
         break;
     }
@@ -68,7 +65,7 @@ class _ProportionFoodState extends State<ProportionFood> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: widget.color,
+      color: widget.food.color,
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -90,7 +87,7 @@ class _ProportionFoodState extends State<ProportionFood> {
                 bottom: 8,
               ),
               child: Text(
-                '${list[widget.index].alimento}',
+                widget.food.name,
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 30, color: Colors.white),
               ),
@@ -100,25 +97,25 @@ class _ProportionFoodState extends State<ProportionFood> {
               child: Row(
                 children: [
                   Text(
-                    '${(int.parse(list[widget.index].energia) * multiplicador)} kcal',
+                    '${(int.parse(widget.food.energia) * multiplicador)} kcal',
                     textAlign: TextAlign.center,
                     style: styleData,
                   ),
                   const Spacer(),
                   Text(
-                    '${(double.parse(list[widget.index].proteina) * multiplicador).toStringAsFixed(1)} g',
+                    '${(double.parse(widget.food.proteina) * multiplicador).toStringAsFixed(1)} g',
                     textAlign: TextAlign.center,
                     style: styleData,
                   ),
                   const Spacer(),
                   Text(
-                    '${(double.parse(list[widget.index].hidratosDeCarbono) * multiplicador).toStringAsFixed(1)} g',
+                    '${(double.parse(widget.food.hidratosDeCarbono) * multiplicador).toStringAsFixed(1)} g',
                     textAlign: TextAlign.center,
                     style: styleData,
                   ),
                   const Spacer(),
                   Text(
-                    '${(double.parse(list[widget.index].lipidos) * multiplicador).toStringAsFixed(1)} g',
+                    '${(double.parse(widget.food.lipidos) * multiplicador).toStringAsFixed(1)} g',
                     textAlign: TextAlign.center,
                     style: styleData,
                   ),
@@ -178,7 +175,7 @@ class _ProportionFoodState extends State<ProportionFood> {
                   const Spacer(),
                   Card(
                     elevation: 1,
-                    color: widget.color.withAlpha(10),
+                    color: widget.food.color.withAlpha(10),
                     child: Padding(
                       padding: const EdgeInsets.only(
                         left: 10,
@@ -188,8 +185,8 @@ class _ProportionFoodState extends State<ProportionFood> {
                       ),
                       child: Text(
                         multiplicador == 1
-                            ? '${list[widget.index].cantidadSugerida} ${list[widget.index].unidad} (${list[widget.index].pesoNeto} g)'
-                            : '(${int.parse(list[widget.index].pesoNeto) * multiplicador} g)',
+                            ? '${widget.food.cantidadSugerida} ${widget.food.unidad} (${widget.food.pesoNeto} g)'
+                            : '(${int.parse(widget.food.pesoNeto) * multiplicador} g)',
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -222,7 +219,7 @@ class _ProportionFoodState extends State<ProportionFood> {
                   const Spacer(),
                   Card(
                     elevation: 1,
-                    color: widget.color.withAlpha(10),
+                    color: widget.food.color.withAlpha(10),
                     child: Padding(
                       padding: const EdgeInsets.only(
                         left: 10,
@@ -276,15 +273,15 @@ class _ProportionFoodState extends State<ProportionFood> {
               child: Wrap(
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  ((double.parse(list[widget.index].proteina) * 4) /
-                                  (double.parse(list[widget.index].energia))) *
+                  ((double.parse(widget.food.proteina) * 4) /
+                                  (double.parse(widget.food.energia))) *
                               100 >
                           20
                       ? tagHealthy(
                           'Alto en proteinas', Colors.green, Icons.done)
                       : const Text(''),
-                  ((double.parse(list[widget.index].energia) /
-                                  double.parse(list[widget.index].pesoNeto)) *
+                  ((double.parse(widget.food.energia) /
+                                  double.parse(widget.food.pesoNeto)) *
                               100) >=
                           275
                       ? tagHealthy('Alto en calorias', Colors.red, Icons.cancel)

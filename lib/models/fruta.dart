@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../data/data.dart';
 import 'food.dart';
 
 class Fruta extends Food {
@@ -37,5 +41,18 @@ class Fruta extends Food {
     required this.potasio,
     required this.indiceGlicemico,
     required this.cargaGlicemica,
-  }) : super(name: alimento);
+  }) : super(
+          name: alimento,
+          category: 'fruta',
+          icon: const Icon(FontAwesomeIcons.appleWhole),
+          color: sectionColors[4],
+          cantidadSugerida: cantidadSugerida,
+          unidad: unidad,
+          pesoRedondeado: pesoRedondeado,
+          pesoNeto: pesoNeto,
+          energia: energia,
+          proteina: proteina,
+          lipidos: lipidos,
+          hidratosDeCarbono: hidratosDeCarbono,
+        );
 }
