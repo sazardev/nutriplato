@@ -8,7 +8,7 @@ List<Fitness> fitness = [
       difficulty: 'Facil',
       tags: ['Pierna', 'Hombro', 'Accesible'],
       sets: 1,
-      rest: 120,
+      rest: 1500,
       exercises: [
         Exercise(name: 'Sentadilla', description: '', quantity: 5, images: []),
         Exercise(

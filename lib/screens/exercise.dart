@@ -15,15 +15,18 @@ class ExerciseState extends StatefulWidget {
 
 class _ExerciseState extends State<ExerciseState> {
   int indexExercise = 0;
-
+  final CountDownController _controller = CountDownController();
   bool _timerCompleted = false;
   bool _restTimerCompleted = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: _restTimerCompleted ? Colors.white : Colors.purple,
       appBar: AppBar(
           title: Text(widget.fitness.name),
+          backgroundColor: _restTimerCompleted ? Colors.white : Colors.purple,
+          foregroundColor: _restTimerCompleted ? Colors.black : Colors.white,
           automaticallyImplyLeading: false,
           leading: IconButton(
               icon: const Icon(Icons.close),
@@ -34,10 +37,11 @@ class _ExerciseState extends State<ExerciseState> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            if (!_restTimerCompleted) restTimer(5, 'Descansa'),
+            if (!_restTimerCompleted)
+              restTimer(widget.fitness.rest, 'Descansa'),
             if (_restTimerCompleted && !_timerCompleted)
-              restTimer(3, '¿Listo?'),
-            if (_timerCompleted) ...[
+              restTimer(10, '¿Listo?'),
+            if (_timerCompleted && _restTimerCompleted) ...[
               const Spacer(),
               Center(
                 child: Text(widget.fitness.exercises[indexExercise].name,
@@ -91,13 +95,19 @@ class _ExerciseState extends State<ExerciseState> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(text,
-            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
+        Text(
+          text,
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          ),
+        ),
         Center(
           child: CircularCountDownTimer(
             duration: time,
             initialDuration: 0,
-            controller: CountDownController(),
+            controller: _controller,
             width: MediaQuery.of(context).size.width / 2,
             height: MediaQuery.of(context).size.height / 2,
             ringColor: Colors.grey[300]!,
@@ -109,7 +119,7 @@ class _ExerciseState extends State<ExerciseState> {
             strokeCap: StrokeCap.round,
             textStyle: const TextStyle(
                 fontSize: 33.0,
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.bold),
             textFormat: CountdownTextFormat.S,
             isReverse: true,
@@ -124,6 +134,103 @@ class _ExerciseState extends State<ExerciseState> {
               });
             },
           ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FilledButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.white.withAlpha(100),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _controller.isPaused
+                        ? _controller.resume()
+                        : _controller.pause();
+                  });
+                },
+                child: Text(
+                  _controller.isPaused ? '  Reanudar  ' : '  Pausar  ',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                )),
+            const SizedBox(width: 10),
+            FilledButton(
+              style: FilledButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.purple,
+                  textStyle: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  )),
+              onPressed: () {
+                setState(() {
+                  _timerCompleted = true;
+                  _restTimerCompleted = true;
+                });
+              },
+              child: const Text('  Saltar  '),
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 38, left: 32, right: 32),
+              child: Row(
+                children: [
+                  Text(
+                    'Siguiente ',
+                    style: TextStyle(
+                      color: Colors.white.withAlpha(200),
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  Text(
+                    ' $indexExercise/${widget.fitness.exercises.length}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 32, right: 32),
+              child: Row(
+                children: [
+                  Text(
+                    widget.fitness.exercises[indexExercise].name,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.info_outline,
+                        color: Colors.white,
+                        size: 20,
+                      )),
+                  const Spacer(),
+                  Text('x${widget.fitness.exercises[indexExercise].quantity}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      )),
+                ],
+              ),
+            )
+          ],
         ),
       ],
     );
