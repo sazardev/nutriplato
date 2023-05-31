@@ -11,7 +11,7 @@ class BlogState extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _BlogStateState createState() => _BlogStateState();
+  State<BlogState> createState() => _BlogStateState();
 }
 
 class _BlogStateState extends State<BlogState> {
@@ -50,8 +50,12 @@ class _BlogStateState extends State<BlogState> {
               child: Center(
                 child: Text(
                   widget.blog.description,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 18),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: widget.blog.gradientColors[0],
+                  ),
                 ),
               ),
             ),

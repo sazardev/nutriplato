@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/screens/contact.dart';
+import 'package:nutriplato/screens/fitness.dart';
 import 'package:nutriplato/screens/plate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nutriplato/screens/search.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import 'screens/dashboard.dart';
 
@@ -14,60 +15,42 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> with SingleTickerProviderStateMixin {
-  static late TabController controller;
+  int _currentIndex = 0;
 
-  static const List<Widget> _tabs = [
-    Tab(
-      icon: FaIcon(FontAwesomeIcons.house),
-      text: 'Inicio',
-    ),
-    Tab(
-      icon: FaIcon(FontAwesomeIcons.magnifyingGlass),
-      text: 'Buscar',
-    ),
-    Tab(
-      icon: FaIcon(FontAwesomeIcons.plateWheat),
-      text: 'Plato',
-    ),
-    Tab(
-      icon: FaIcon(FontAwesomeIcons.addressCard),
-      text: 'Contacto',
-    ),
+  final List<Widget> _screens = const [
+    Dashboard(),
+    Search(),
+    Plate(),
+    Fitness()
   ];
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    controller = TabController(
-      length: 4,
-      vsync: this,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: TabBarView(
-          controller: controller,
-          children: const [
-            Dashboard(),
-            Search(),
-            Plate(),
-            Contact(),
+        body: _screens[_currentIndex],
+        bottomNavigationBar: SalomonBottomBar(
+          currentIndex: _currentIndex,
+          onTap: (i) => setState(() => _currentIndex = i),
+          items: [
+            SalomonBottomBarItem(
+              icon: const FaIcon(FontAwesomeIcons.house),
+              title: const Text('Inicio'),
+            ),
+            SalomonBottomBarItem(
+              icon: const FaIcon(FontAwesomeIcons.magnifyingGlass),
+              title: const Text('Buscar'),
+            ),
+            SalomonBottomBarItem(
+              icon: const FaIcon(FontAwesomeIcons.plateWheat),
+              title: const Text('Plato'),
+            ),
+            SalomonBottomBarItem(
+              icon: const Icon(FontAwesomeIcons.dumbbell),
+              title: const Text('Ejercicio'),
+            ),
           ],
         ),
-        bottomNavigationBar: Material(
-            child: TabBar(
-          tabs: _tabs,
-          controller: controller,
-        )),
       ),
     );
   }

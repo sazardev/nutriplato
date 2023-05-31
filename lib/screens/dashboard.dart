@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nutriplato/widgets/contact.dart';
 
 import '../data/blog/blog.dart';
 import '../widgets/cards/focus_card.dart';
@@ -36,10 +38,18 @@ class Dashboard extends StatelessWidget {
                       ),
                       const Spacer(),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (builder) {
+                                  return const Dialog(
+                                    child: Contact(),
+                                  );
+                                });
+                          },
                           icon: const Icon(
-                            Icons.person,
-                            color: Colors.deepPurple,
+                            FontAwesomeIcons.addressCard,
+                            color: Colors.purple,
                           ))
                     ],
                   ),
