@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../data/fitness/exercises.dart';
-import '../models/exercise.dart';
 import 'exercise.dart';
 
 class Fitness extends StatefulWidget {
