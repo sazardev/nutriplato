@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:nutriplato/models/exercise.dart';
 
 class Fitness {
@@ -8,6 +9,8 @@ class Fitness {
   int sets;
   int rest;
   List<Exercise> exercises;
+  IconData icon;
+  List<Color> gradients;
 
   Fitness({
     required this.name,
@@ -17,5 +20,7 @@ class Fitness {
     required this.sets,
     required this.rest,
     required this.exercises,
+    required this.icon,
+    this.gradients = const [],
   });
 }

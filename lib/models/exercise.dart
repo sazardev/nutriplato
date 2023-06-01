@@ -4,12 +4,14 @@ class Exercise {
   String name;
   String description;
   int quantity;
+  int time;
   List<Image> images;
 
   Exercise({
     required this.name,
     required this.description,
-    required this.quantity,
+    this.quantity = 0,
     required this.images,
+    this.time = 0,
   });
 }

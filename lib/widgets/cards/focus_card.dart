@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/blog.dart';
-import '../../screens/blogs.dart';
+import '../blogs.dart';
 
 class FocusCard extends StatelessWidget {
   final Blog blog;

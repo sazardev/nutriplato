@@ -1,6 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:nutriplato/models/fitness.dart';
+import 'package:nutriplato/widgets/finished_exercise.dart';
 
 class ExerciseState extends StatefulWidget {
   final Fitness fitness;
@@ -53,10 +54,59 @@ class _ExerciseState extends State<ExerciseState> {
               Center(
                 child: Padding(
                   padding: const EdgeInsets.all(32.0),
-                  child: Text(
-                      'x${widget.fitness.exercises[indexExercise].quantity}',
-                      style: const TextStyle(
-                          fontSize: 48, fontWeight: FontWeight.bold)),
+                  child: widget.fitness.exercises[indexExercise].time == 0
+                      ? Text(
+                          'x${widget.fitness.exercises[indexExercise].quantity}',
+                          style: const TextStyle(
+                              fontSize: 48, fontWeight: FontWeight.bold))
+                      : Center(
+                          child: SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: CircularCountDownTimer(
+                              duration:
+                                  widget.fitness.exercises[indexExercise].time +
+                                      1,
+                              initialDuration: 0,
+                              width: MediaQuery.of(context).size.width / 2,
+                              height: MediaQuery.of(context).size.height / 2,
+                              ringColor: Colors.grey[300]!,
+                              ringGradient: null,
+                              fillColor: Colors.purpleAccent[100]!,
+                              fillGradient: null,
+                              backgroundGradient: null,
+                              strokeWidth: 20.0,
+                              strokeCap: StrokeCap.round,
+                              textStyle: const TextStyle(
+                                  fontSize: 33.0,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                              textFormat: CountdownTextFormat.S,
+                              isReverse: true,
+                              isReverseAnimation: false,
+                              isTimerTextShown: true,
+                              autoStart: true,
+                              onStart: () {},
+                              onComplete: () {
+                                if (!(indexExercise <
+                                    widget.fitness.exercises.length - 1)) {
+                                  Navigator.pop(context);
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (builder) {
+                                    return FinishedExercise(
+                                      fitness: widget.fitness,
+                                    );
+                                  }));
+                                } else {
+                                  setState(() {
+                                    _restTimerCompleted = false;
+                                    indexExercise += 1;
+                                  });
+                                }
+                              },
+                            ),
+                          ),
+                        ),
                 ),
               ),
               Padding(
@@ -97,10 +147,10 @@ class _ExerciseState extends State<ExerciseState> {
       children: [
         Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w500,
-            color: Colors.white,
+            color: _timerCompleted ? Colors.white : Colors.black,
           ),
         ),
         Center(
@@ -117,13 +167,13 @@ class _ExerciseState extends State<ExerciseState> {
             backgroundGradient: null,
             strokeWidth: 20.0,
             strokeCap: StrokeCap.round,
-            textStyle: const TextStyle(
+            textStyle: TextStyle(
                 fontSize: 33.0,
-                color: Colors.white,
+                color: _timerCompleted ? Colors.white : Colors.black,
                 fontWeight: FontWeight.bold),
             textFormat: CountdownTextFormat.S,
             isReverse: true,
-            isReverseAnimation: true,
+            isReverseAnimation: false,
             isTimerTextShown: true,
             autoStart: true,
             onStart: () {},
@@ -135,103 +185,112 @@ class _ExerciseState extends State<ExerciseState> {
             },
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FilledButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.white.withAlpha(100),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _controller.isPaused
-                        ? _controller.resume()
-                        : _controller.pause();
-                  });
-                },
-                child: Text(
-                  _controller.isPaused ? '  Reanudar  ' : '  Pausar  ',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
-                )),
-            const SizedBox(width: 10),
-            FilledButton(
-              style: FilledButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.purple,
-                  textStyle: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  )),
-              onPressed: () {
-                setState(() {
-                  _timerCompleted = true;
-                  _restTimerCompleted = true;
-                });
-              },
-              child: const Text('  Saltar  '),
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 38, left: 32, right: 32),
-              child: Row(
+        _timerCompleted
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Siguiente ',
-                    style: TextStyle(
-                      color: Colors.white.withAlpha(200),
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  Text(
-                    ' $indexExercise/${widget.fitness.exercises.length}',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  FilledButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.white.withAlpha(100),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _controller.isPaused
+                              ? _controller.resume()
+                              : _controller.pause();
+                        });
+                      },
+                      child: Text(
+                        _controller.isPaused ? '  Reanudar  ' : '  Pausar  ',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )),
+                  const SizedBox(width: 10),
+                  FilledButton(
+                    style: FilledButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.purple,
+                        textStyle: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        )),
+                    onPressed: () {
+                      setState(() {
+                        _timerCompleted = true;
+                        _restTimerCompleted = true;
+                      });
+                    },
+                    child: const Text('  Saltar  '),
                   ),
                 ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 32, right: 32),
-              child: Row(
+              )
+            : Container(),
+        _timerCompleted
+            ? Column(
                 children: [
-                  Text(
-                    widget.fitness.exercises[indexExercise].name,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 38, left: 32, right: 32),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Siguiente ',
+                          style: TextStyle(
+                            color: Colors.white.withAlpha(200),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        Text(
+                          ' $indexExercise/${widget.fitness.exercises.length}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.info_outline,
-                        color: Colors.white,
-                        size: 20,
-                      )),
-                  const Spacer(),
-                  Text('x${widget.fitness.exercises[indexExercise].quantity}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      )),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 32, right: 32),
+                    child: Row(
+                      children: [
+                        Text(
+                          widget.fitness.exercises[indexExercise].name,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.info_outline,
+                              color: Colors.white,
+                              size: 20,
+                            )),
+                        const Spacer(),
+                        Text(
+                            widget.fitness.exercises[indexExercise].quantity ==
+                                    0
+                                ? '${widget.fitness.exercises[indexExercise].time}s'
+                                : 'x${widget.fitness.exercises[indexExercise].quantity}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            )),
+                      ],
+                    ),
+                  )
                 ],
-              ),
-            )
-          ],
-        ),
+              )
+            : Container(),
       ],
     );
   }
