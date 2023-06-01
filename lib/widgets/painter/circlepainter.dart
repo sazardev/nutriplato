@@ -9,15 +9,15 @@ class CirclePainter extends CustomPainter {
   final double lineLength;
   final List<String> categories;
 
-  CirclePainter(
-      {required this.radii,
-      required this.angles,
-      required this.categories,
-      this.lineLength = 1.0});
+  CirclePainter({
+    required this.radii,
+    required this.angles,
+    required this.categories,
+    this.lineLength = 1.0,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..style = PaintingStyle.fill;
     final linePaint = Paint()
       ..color = Colors.white
       ..strokeWidth = 12;
@@ -26,16 +26,27 @@ class CirclePainter extends CustomPainter {
       double startAngle = angles[i];
       double endAngle = angles[i + 1];
 
-      paint.color = sectionColors[i];
+      final paint = Paint()
+        ..style = PaintingStyle.fill
+        ..shader = SweepGradient(
+          colors: [sectionColors[i], sectionColors[i].withAlpha(200)],
+          startAngle: startAngle,
+          endAngle: endAngle,
+        ).createShader(Rect.fromCircle(
+          center: Offset(size.width / 2, size.height / 2),
+          radius: radii[i],
+        ));
+
       canvas.drawArc(
-          Rect.fromCircle(
-            center: Offset(size.width / 2, size.height / 2),
-            radius: radii[i],
-          ),
-          startAngle,
-          endAngle - startAngle,
-          true,
-          paint);
+        Rect.fromCircle(
+          center: Offset(size.width / 2, size.height / 2),
+          radius: radii[i],
+        ),
+        startAngle,
+        endAngle - startAngle,
+        true,
+        paint,
+      );
 
       double x1 = size.width / 2 + math.cos(startAngle) * radii[i] * lineLength;
       double y1 =

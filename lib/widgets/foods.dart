@@ -203,49 +203,46 @@ class _FoodsState extends State<Foods> {
                 ),
                 Expanded(
                   child: GridView.count(
-                    childAspectRatio: 2,
+                    childAspectRatio: 1.8,
                     shrinkWrap: true,
                     crossAxisCount: constraints.maxWidth ~/ 170 < 1
                         ? 1
                         : constraints.maxWidth ~/ 170,
                     children: List.generate(filteredFoods.length, (index) {
-                      return LayoutBuilder(builder: ((context, constraints) {
-                        return Card(
-                          elevation: 1,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(10),
-                            onTap: () {
-                              showModalBottomSheet(
-                                  context: context,
-                                  isScrollControlled: true,
-                                  builder: (context) {
-                                    return SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.7,
-                                      child: ProportionFood(
-                                        food: filteredFoods[index],
-                                      ),
-                                    );
-                                  });
-                            },
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                filteredFoods[index].image ?? const Center(),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    filteredFoods[index].name,
-                                    style: const TextStyle(fontSize: 18),
-                                  ),
+                      return Card(
+                        elevation: 1,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(10),
+                          onTap: () {
+                            showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                builder: (context) {
+                                  return SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.7,
+                                    child: ProportionFood(
+                                      food: filteredFoods[index],
+                                    ),
+                                  );
+                                });
+                          },
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              filteredFoods[index].image ?? Container(),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  filteredFoods[index].name,
+                                  style: const TextStyle(fontSize: 18),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        );
-                      }));
+                        ),
+                      );
                     }),
                   ),
                 ),

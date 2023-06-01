@@ -58,19 +58,49 @@ class Dashboard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  children: List.generate(blogs.length, (index) {
-                    return FocusCard(blog: blogs[index]);
-                  }),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Articulos interesantes',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-                Column(
-                  children: List.generate(1, (index) {
-                    return SizedBox(
-                        width: constraints.maxWidth,
-                        child: RecommendedCard(fitness: fitness[1]));
-                  }),
-                )
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(blogs.length, (index) {
+                      return SizedBox(
+                          width: 250,
+                          height: 300,
+                          child: FocusCard(blog: blogs[index]));
+                    }),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Ejercicios destacados',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(3, (index) {
+                      return SizedBox(
+                          width: constraints.maxWidth / 1.2,
+                          child: RecommendedCard(fitness: fitness[index]));
+                    }),
+                  ),
+                ),
               ],
             ),
           ),

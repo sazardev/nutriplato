@@ -32,7 +32,8 @@ class FocusCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 16, top: 16, bottom: 4),
+              padding: const EdgeInsets.only(
+                  left: 16, top: 16, bottom: 4, right: 16),
               child: Text(
                 blog.title,
                 style: const TextStyle(
@@ -43,17 +44,17 @@ class FocusCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 16.0),
+              padding: const EdgeInsets.only(left: 16.0, right: 16),
               child: Text(
                 blog.description,
                 style: const TextStyle(
                     fontSize: 16, color: Color.fromARGB(225, 255, 255, 255)),
               ),
             ),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.only(
                 left: 16,
-                top: 32,
                 bottom: 16,
               ),
               child: FilledButton(

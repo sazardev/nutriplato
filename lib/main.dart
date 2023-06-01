@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
+import 'package:nutriplato/home.dart';
+import 'package:nutriplato/screens/presentation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  bool presentation = prefs.getBool('presentation') ?? true;
+
+  runApp(MyApp(
+    presentation: presentation,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool presentation;
+
+  const MyApp({super.key, required this.presentation});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +27,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: Colors.purple,
       ),
-      home: const Home(),
+      home: presentation ? const Presentation() : const Home(),
     );
   }
 }
