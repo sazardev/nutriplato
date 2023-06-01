@@ -203,7 +203,7 @@ class _FoodsState extends State<Foods> {
                 ),
                 Expanded(
                   child: GridView.count(
-                    childAspectRatio: 1.8,
+                    childAspectRatio: 1.2,
                     shrinkWrap: true,
                     crossAxisCount: constraints.maxWidth ~/ 170 < 1
                         ? 1

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../models/fitness.dart';
+import '../screens/exercise.dart';
 
 class DisplayExercise extends StatelessWidget {
   final Fitness fitness;
@@ -91,7 +92,13 @@ class DisplayExercise extends StatelessWidget {
       ]),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (builder) {
+            return ExerciseState(
+              fitness: fitness,
+            );
+          }));
+        },
         backgroundColor: Colors.purple,
         foregroundColor: Colors.white,
         label: const Padding(
