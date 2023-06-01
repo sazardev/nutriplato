@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nutriplato/data/food/leguminosas.dart';
+import 'package:nutriplato/widgets/info/advertice_food.dart';
 
 import '../data/food/animals.dart';
 import '../data/food/cereales.dart';
@@ -297,7 +298,14 @@ class _ProportionFoodState extends State<ProportionFood> {
 
   Widget tagHealthy(String text, Color advertice, IconData icon) {
     return FilledButton(
-      onPressed: () {},
+      onPressed: () {
+        showDialog(
+            context: context,
+            builder: (builder) {
+              return Advertice(
+                  color: advertice, title: text, content: 'content');
+            });
+      },
       style: TextButton.styleFrom(
         foregroundColor: Colors.white,
         backgroundColor: Colors.black.withAlpha(70),

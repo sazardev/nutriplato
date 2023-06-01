@@ -33,6 +33,7 @@ class _FitnessState extends State<Fitness> {
               ),
               SizedBox(
                 width: constraints.maxWidth,
+                height: 220,
                 child: RecommendedCard(
                   fitness: fitness[1],
                 ),

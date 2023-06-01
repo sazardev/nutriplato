@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../models/fitness.dart';
 import '../screens/exercise.dart';
+import 'info/exercise_info.dart';
 
 class DisplayExercise extends StatelessWidget {
   final Fitness fitness;
@@ -18,7 +19,17 @@ class DisplayExercise extends StatelessWidget {
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
         backgroundColor: Colors.white,
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.info_outline))
+          IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (builder) {
+                      return Exercise(
+                        fitness: fitness,
+                      );
+                    });
+              },
+              icon: const Icon(Icons.info_outline))
         ],
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [

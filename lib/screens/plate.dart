@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:nutriplato/widgets/info/plato_info.dart';
 import 'dart:math' as math;
 
 import '../data/data.dart';
@@ -75,7 +76,15 @@ class _Plate extends State<Plate> {
       appBar: AppBar(
         title: const Text('Plato del buen comer'),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.info_outline))
+          IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (builder) {
+                      return const Plato();
+                    });
+              },
+              icon: const Icon(Icons.info_outline))
         ],
       ),
       body: Column(

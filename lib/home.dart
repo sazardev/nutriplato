@@ -3,6 +3,7 @@ import 'package:nutriplato/screens/fitness.dart';
 import 'package:nutriplato/screens/plate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nutriplato/screens/search.dart';
+import 'package:nutriplato/widgets/drawer.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import 'screens/dashboard.dart';
@@ -28,6 +29,7 @@ class _Home extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        drawer: const DrawerProfile(),
         body: _screens[_currentIndex],
         bottomNavigationBar: SalomonBottomBar(
           currentIndex: _currentIndex,

@@ -28,54 +28,42 @@ class RecommendedCard extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(18.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Icon(
-                  fitness.icon,
+              Icon(
+                fitness.icon,
+                color: Colors.white,
+                size: 30,
+              ),
+              Text(
+                fitness.name,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  size: 30,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  fitness.name,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+              Text(
+                fitness.description,
+                style: const TextStyle(
+                  color: Colors.white,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  fitness.description,
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
+              const Spacer(),
+              FilledButton(
+                style: FilledButton.styleFrom(
+                    backgroundColor: Colors.pink.shade900),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (builder) {
+                    return DisplayExercise(
+                      fitness: fitness,
+                    );
+                  }));
+                },
+                child: const Text('Ver ejercicio'),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 32.0),
-                child: FilledButton(
-                  style: FilledButton.styleFrom(
-                      backgroundColor: Colors.pink.shade900),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (builder) {
-                      return DisplayExercise(
-                        fitness: fitness,
-                      );
-                    }));
-                  },
-                  child: const Text('Comenzar ejercicio'),
-                ),
-              )
             ],
           ),
         ),

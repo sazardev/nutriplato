@@ -19,7 +19,10 @@ class Dashboard extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 245, 245, 245),
         appBar: AppBar(
           toolbarHeight: 60,
-          automaticallyImplyLeading: false,
+          leading: IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
           title: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -96,7 +99,8 @@ class Dashboard extends StatelessWidget {
                   child: Row(
                     children: List.generate(3, (index) {
                       return SizedBox(
-                          width: constraints.maxWidth / 1.2,
+                          width: 300,
+                          height: 200,
                           child: RecommendedCard(fitness: fitness[index]));
                     }),
                   ),
