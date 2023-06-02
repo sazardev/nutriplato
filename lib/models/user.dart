@@ -5,6 +5,9 @@ class User {
   String name;
   String lastname;
   int age;
+  int exercisesCompleted;
+  int viewedFoods;
+  int blogsReaded;
   Image? image;
 
   User({
@@ -13,5 +16,8 @@ class User {
     this.lastname = "",
     this.age = 0,
     this.image,
+    this.exercisesCompleted = 0,
+    this.viewedFoods = 0,
+    this.blogsReaded = 0,
   });
 }
