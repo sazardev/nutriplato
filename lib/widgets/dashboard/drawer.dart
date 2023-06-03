@@ -1,5 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:nutriplato/models/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerProfile extends StatefulWidget {
   const DrawerProfile({super.key});
@@ -9,13 +14,23 @@ class DrawerProfile extends StatefulWidget {
 }
 
 class _DrawerProfileState extends State<DrawerProfile> {
-  late User user;
+  User user = User(username: '');
   bool editMode = false;
 
   @override
   void initState() {
     super.initState();
-    user = User(username: 'username');
+    user.loadUser().then((value) {
+      setState(() {
+        user = value;
+      });
+    });
+  }
+
+  Future<void> saveUser(User user) async {
+    final prefs = await SharedPreferences.getInstance();
+    String userString = jsonEncode(user.toJson());
+    await prefs.setString('user', userString);
   }
 
   Widget showCard(String number, String title) {
@@ -69,7 +84,7 @@ class _DrawerProfileState extends State<DrawerProfile> {
                           )),
                       const Spacer(),
                       IconButton(
-                          onPressed: () {
+                          onPressed: () async {
                             setState(() {
                               if (editMode) {
                                 editMode = false;
@@ -77,6 +92,7 @@ class _DrawerProfileState extends State<DrawerProfile> {
                                 editMode = true;
                               }
                             });
+                            await saveUser(user);
                           },
                           icon: Icon(
                             editMode ? Icons.done : Icons.edit,
@@ -111,10 +127,11 @@ class _DrawerProfileState extends State<DrawerProfile> {
                               fontSize: 24,
                             ),
                             controller: TextEditingController(text: user.name),
-                            onSubmitted: (value) {
+                            onSubmitted: (value) async {
                               setState(() {
                                 user.name = value;
                               });
+                              await saveUser(user);
                             },
                           ),
                         )
@@ -139,9 +156,17 @@ class _DrawerProfileState extends State<DrawerProfile> {
             ],
           ),
           ListTile(
+            leading: const Icon(Icons.balance),
             title: const Text('Terminos y condiciones'),
-            onTap: () {
-              // Aquí puedes agregar la funcionalidad para la opción 2
+            onTap: () async {
+              if (Platform.isAndroid) {
+                const url = 'https://www.buymeacoffee.com/sazarcode';
+                const intent = AndroidIntent(
+                  action: 'action_view',
+                  data: url,
+                );
+                intent.launch();
+              }
             },
           ),
         ],

@@ -1,19 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nutriplato/data/fitness/exercises.dart';
-import 'package:nutriplato/widgets/cards/recommended_card.dart';
-import 'package:nutriplato/widgets/contact.dart';
+import 'package:nutriplato/widgets/fitness/recommended_card.dart';
+import 'package:nutriplato/widgets/dashboard/contact.dart';
 
 import '../data/blog/blog.dart';
-import '../widgets/cards/focus_card.dart';
+import '../models/user.dart';
+import '../widgets/dashboard/focus_card.dart';
 
-class Dashboard extends StatelessWidget {
-  final String name = "Jacqueline";
-
+class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
 
   @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
+  User user = User(username: '');
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    user.loadUser().then((value) {
+      setState(() {
+        user = value;
+      });
+    });
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
         backgroundColor: const Color.fromARGB(255, 245, 245, 245),
@@ -32,7 +48,7 @@ class Dashboard extends StatelessWidget {
                       fontSize: 18,
                     )),
                 Text(
-                  '$name.',
+                  user.name,
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                       fontSize: 18,
@@ -51,7 +67,6 @@ class Dashboard extends StatelessWidget {
                     },
                     icon: const Icon(
                       FontAwesomeIcons.addressCard,
-                      color: Colors.purple,
                     ))
               ],
             ),

@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:nutriplato/widgets/info/plato_info.dart';
+import 'package:nutriplato/widgets/plate/plato_info.dart';
 import 'dart:math' as math;
 
 import '../data/data.dart';
-import '../widgets/foods.dart';
-import '../widgets/painter/circlepainter.dart';
+import '../widgets/plate/foods.dart';
+import '../widgets/plate/circlepainter.dart';
 
 class Plate extends StatefulWidget {
   const Plate({super.key});

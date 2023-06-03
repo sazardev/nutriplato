@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/widgets/display_exercise.dart';
+import 'package:nutriplato/widgets/fitness/display_exercise.dart';
 
 import '../../models/fitness.dart';
 

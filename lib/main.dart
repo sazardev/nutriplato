@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: Colors.purple,
       ),
-      home: presentation ? const Presentation() : const Home(),
+      home: true ? const Presentation() : const Home(),
     );
   }
 }

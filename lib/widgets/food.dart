@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nutriplato/data/food/leguminosas.dart';
-import 'package:nutriplato/widgets/info/advertice_food.dart';
+import 'package:nutriplato/widgets/plate/advertice_food.dart';
 
 import '../data/food/animals.dart';
 import '../data/food/cereales.dart';
