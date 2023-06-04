@@ -7,7 +7,7 @@ import '../data/food/animals.dart';
 import '../data/food/cereales.dart';
 import '../data/food/frutas.dart';
 import '../data/food/verduras.dart';
-import '../models/food.dart';
+import '../models/food/food.dart';
 
 class ProportionFood extends StatefulWidget {
   final Food food;

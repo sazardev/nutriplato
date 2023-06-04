@@ -1,4 +1,4 @@
-import '../../models/cereal.dart';
+import '../../models/food/cereal.dart';
 
 List<Cereal> cereales = [
   Cereal(

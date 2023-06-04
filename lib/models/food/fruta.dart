@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nutriplato/data/data.dart';
 
+import '../../data/data.dart';
 import 'food.dart';
 
-class Animal extends Food {
+class Fruta extends Food {
   String alimento;
   String cantidadSugerida;
   String unidad;
@@ -14,14 +14,17 @@ class Animal extends Food {
   String proteina;
   String lipidos;
   String hidratosDeCarbono;
-  String colesterol;
+  String fibra;
   String vitaminaA;
-  String calcio;
+  String acidoAscorbico;
+  String acidoFolico;
   String hierro;
-  String sodio;
-  String selenio;
+  String potasio;
+  String indiceGlicemico;
+  String cargaGlicemica;
+  Image? image;
 
-  Animal({
+  Fruta({
     required this.alimento,
     required this.cantidadSugerida,
     required this.unidad,
@@ -31,19 +34,23 @@ class Animal extends Food {
     required this.proteina,
     required this.lipidos,
     required this.hidratosDeCarbono,
-    required this.colesterol,
+    required this.fibra,
     required this.vitaminaA,
-    required this.calcio,
+    required this.acidoAscorbico,
+    required this.acidoFolico,
     required this.hierro,
-    required this.sodio,
-    required this.selenio,
+    required this.potasio,
+    required this.indiceGlicemico,
+    required this.cargaGlicemica,
+    this.image,
   }) : super(
           name: alimento,
-          category: 'animal',
-          icon: const Icon(FontAwesomeIcons.cow),
-          color: sectionColors[1],
+          category: 'fruta',
+          icon: const Icon(FontAwesomeIcons.appleWhole),
+          color: sectionColors[4],
           cantidadSugerida: cantidadSugerida,
           unidad: unidad,
+          image: image,
           pesoRedondeado: pesoRedondeado,
           pesoNeto: pesoNeto,
           energia: energia,

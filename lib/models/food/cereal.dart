@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../data/data.dart';
+import '../../data/data.dart';
 import 'food.dart';
 
-class Fruta extends Food {
+class Cereal extends Food {
   String alimento;
   String cantidadSugerida;
   String unidad;
@@ -15,15 +15,16 @@ class Fruta extends Food {
   String lipidos;
   String hidratosDeCarbono;
   String fibra;
-  String vitaminaA;
-  String acidoAscorbico;
   String acidoFolico;
+  String calcio;
   String hierro;
-  String potasio;
+  String sodio;
+  String azucarEquivalente;
   String indiceGlicemico;
   String cargaGlicemica;
+  Image? image;
 
-  Fruta({
+  Cereal({
     required this.alimento,
     required this.cantidadSugerida,
     required this.unidad,
@@ -34,20 +35,22 @@ class Fruta extends Food {
     required this.lipidos,
     required this.hidratosDeCarbono,
     required this.fibra,
-    required this.vitaminaA,
-    required this.acidoAscorbico,
     required this.acidoFolico,
+    required this.calcio,
     required this.hierro,
-    required this.potasio,
+    required this.sodio,
+    required this.azucarEquivalente,
     required this.indiceGlicemico,
     required this.cargaGlicemica,
+    this.image,
   }) : super(
           name: alimento,
-          category: 'fruta',
-          icon: const Icon(FontAwesomeIcons.appleWhole),
-          color: sectionColors[4],
+          category: 'cereal',
+          icon: const Icon(FontAwesomeIcons.wheatAwn),
+          color: sectionColors[0],
           cantidadSugerida: cantidadSugerida,
           unidad: unidad,
+          image: image,
           pesoRedondeado: pesoRedondeado,
           pesoNeto: pesoNeto,
           energia: energia,

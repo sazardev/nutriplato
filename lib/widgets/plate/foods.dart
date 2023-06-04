@@ -8,7 +8,7 @@ import 'package:nutriplato/widgets/food.dart';
 
 import '../../data/data.dart';
 import '../../data/food/animals.dart';
-import '../../models/food.dart';
+import '../../models/food/food.dart';
 
 class Foods extends StatefulWidget {
   final Color color;
@@ -231,12 +231,32 @@ class _FoodsState extends State<Foods> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              filteredFoods[index].image ?? Container(),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  filteredFoods[index].name,
-                                  style: const TextStyle(fontSize: 18),
+                              filteredFoods[index].image == null
+                                  ? Container()
+                                  : Expanded(
+                                      flex: 1,
+                                      child: SizedBox(
+                                        width: double.infinity,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image(
+                                            image: filteredFoods[index]
+                                                .image!
+                                                .image,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                              Expanded(
+                                flex: 1,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    filteredFoods[index].name,
+                                    style: const TextStyle(fontSize: 18),
+                                  ),
                                 ),
                               ),
                             ],

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../data/data.dart';
+import '../../data/data.dart';
 import 'food.dart';
 
-class Cereal extends Food {
+class Leguminosa extends Food {
   String alimento;
   String cantidadSugerida;
   String unidad;
@@ -15,15 +15,16 @@ class Cereal extends Food {
   String lipidos;
   String hidratosDeCarbono;
   String fibra;
-  String acidoFolico;
-  String calcio;
   String hierro;
-  String sodio;
+  String selenio;
+  String fosforo;
+  String potasio;
   String azucarEquivalente;
   String indiceGlicemico;
   String cargaGlicemica;
+  Image? image;
 
-  Cereal({
+  Leguminosa({
     required this.alimento,
     required this.cantidadSugerida,
     required this.unidad,
@@ -34,20 +35,22 @@ class Cereal extends Food {
     required this.lipidos,
     required this.hidratosDeCarbono,
     required this.fibra,
-    required this.acidoFolico,
-    required this.calcio,
     required this.hierro,
-    required this.sodio,
+    required this.selenio,
+    required this.fosforo,
+    required this.potasio,
     required this.azucarEquivalente,
     required this.indiceGlicemico,
     required this.cargaGlicemica,
+    this.image,
   }) : super(
           name: alimento,
-          category: 'cereal',
-          icon: const Icon(FontAwesomeIcons.wheatAwn),
-          color: sectionColors[0],
+          category: 'leguminosa',
+          icon: const Icon(FontAwesomeIcons.seedling),
+          color: sectionColors[2],
           cantidadSugerida: cantidadSugerida,
           unidad: unidad,
+          image: image,
           pesoRedondeado: pesoRedondeado,
           pesoNeto: pesoNeto,
           energia: energia,

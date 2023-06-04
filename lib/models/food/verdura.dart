@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../data/data.dart';
+import '../../data/data.dart';
 import 'food.dart';
 
-class Leguminosa extends Food {
+class Verdura extends Food {
   String alimento;
   String cantidadSugerida;
   String unidad;
@@ -15,15 +15,16 @@ class Leguminosa extends Food {
   String lipidos;
   String hidratosDeCarbono;
   String fibra;
+  String vitaminaA;
+  String acidoAscorbico;
+  String acidoFolico;
   String hierro;
-  String selenio;
-  String fosforo;
   String potasio;
-  String azucarEquivalente;
   String indiceGlicemico;
   String cargaGlicemica;
+  Image? image;
 
-  Leguminosa({
+  Verdura({
     required this.alimento,
     required this.cantidadSugerida,
     required this.unidad,
@@ -34,20 +35,22 @@ class Leguminosa extends Food {
     required this.lipidos,
     required this.hidratosDeCarbono,
     required this.fibra,
+    required this.vitaminaA,
+    required this.acidoAscorbico,
+    required this.acidoFolico,
     required this.hierro,
-    required this.selenio,
-    required this.fosforo,
     required this.potasio,
-    required this.azucarEquivalente,
     required this.indiceGlicemico,
     required this.cargaGlicemica,
+    this.image,
   }) : super(
           name: alimento,
-          category: 'leguminosa',
-          icon: const Icon(FontAwesomeIcons.seedling),
-          color: sectionColors[2],
+          category: 'verdura',
+          icon: const Icon(FontAwesomeIcons.carrot),
+          color: sectionColors[3],
           cantidadSugerida: cantidadSugerida,
           unidad: unidad,
+          image: image,
           pesoRedondeado: pesoRedondeado,
           pesoNeto: pesoNeto,
           energia: energia,

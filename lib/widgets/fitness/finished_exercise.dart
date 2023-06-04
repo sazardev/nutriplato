@@ -8,7 +8,7 @@ class FinishedExercise extends StatefulWidget {
   const FinishedExercise({Key? key, required this.fitness}) : super(key: key);
 
   @override
-  _FinishedExercise createState() => _FinishedExercise();
+  State<FinishedExercise> createState() => _FinishedExercise();
 }
 
 class _FinishedExercise extends State<FinishedExercise> {

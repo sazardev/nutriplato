@@ -5,7 +5,7 @@ import 'package:nutriplato/data/food/leguminosas.dart';
 import 'package:nutriplato/data/food/verduras.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/food/animals.dart';
-import '../models/food.dart';
+import '../models/food/food.dart';
 import '../widgets/food.dart';
 
 class Search extends StatefulWidget {
