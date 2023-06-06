@@ -146,6 +146,7 @@ class _DrawerProfileState extends State<DrawerProfile> {
               ),
             ),
           ),
+          /*
           showCard('${user.exercisesCompleted}', 'Ejercicios completados'),
           Row(
             children: [
@@ -155,6 +156,7 @@ class _DrawerProfileState extends State<DrawerProfile> {
                   child: showCard('${user.viewedFoods}', 'Alimentos vistos')),
             ],
           ),
+          */
           ListTile(
             leading: const Icon(Icons.balance),
             title: const Text('Terminos y condiciones'),

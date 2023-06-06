@@ -9,7 +9,7 @@ class Plato extends StatelessWidget {
   Widget build(BuildContext context) {
     return const AlertDialog(
       title: Text('Plato del buen comer'),
-      content: Text('El plato del buen comer es'),
+      content: Text('El plato del buen comer'),
     );
   }
 }

@@ -11,6 +11,7 @@ dependencies:
   circular_countdown_timer: ^0.2.3
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
   font_awesome_flutter: ^10.4.0
   introduction_screen: ^3.1.8
   salomon_bottom_bar: ^3.3.2
@@ -23,6 +24,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  image_path: "lib/data/img/logo_nutriplato.png"
 
 flutter:
   uses-material-design: true

@@ -74,6 +74,7 @@ class _Plate extends State<Plate> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 245, 245, 245),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Plato del buen comer'),
         actions: [
           IconButton(

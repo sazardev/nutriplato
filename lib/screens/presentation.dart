@@ -47,7 +47,11 @@ class _PresentationState extends State<Presentation> {
           MaterialPageRoute(builder: (_) => const Home()),
         );
       },
-      onSkip: () {},
+      onSkip: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const Home()),
+        );
+      },
       next: const Icon(Icons.arrow_forward),
       done: const Icon(Icons.done),
       skip: const Text('Skip'),
