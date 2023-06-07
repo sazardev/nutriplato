@@ -1,7 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:nutriplato/models/fitness.dart';
-import 'package:nutriplato/widgets/fitness/finished_exercise.dart';
+import 'package:nutriplato/widgets/dashboard/fitness/finished_exercise.dart';
 
 class ExerciseState extends StatefulWidget {
   final Fitness fitness;

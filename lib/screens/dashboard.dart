@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nutriplato/data/fitness/exercises.dart';
-import 'package:nutriplato/widgets/fitness/recommended_card.dart';
+import 'package:nutriplato/widgets/dashboard/fitness/recommended_card.dart';
 import 'package:nutriplato/widgets/dashboard/contact.dart';
 
 import '../data/blog/blog.dart';

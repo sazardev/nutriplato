@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../models/fitness.dart';
-import '../../screens/exercise.dart';
+import '../../../models/fitness.dart';
+import '../../../screens/exercise.dart';
 import 'exercise_info.dart';
 
 class DisplayExercise extends StatelessWidget {
