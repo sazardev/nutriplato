@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:random_avatar/random_avatar.dart';
 
 class Contact extends StatelessWidget {
   const Contact({super.key});
@@ -24,6 +28,7 @@ class Contact extends StatelessWidget {
                           child: SizedBox(
                             child: CircleAvatar(
                               radius: constraints.maxHeight / 10,
+                              child: RandomAvatar('jjjJuarez'),
                             ),
                           ),
                         ),
@@ -39,19 +44,32 @@ class Contact extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                      onPressed: () {},
-                      iconSize: 35,
-                      color: Colors.indigo,
-                      icon: const Icon(FontAwesomeIcons.facebookMessenger),
-                    ),
-                    IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (Platform.isAndroid) {
+                          const url =
+                              'https://www.instagram.com/jacqueline_juarezc/';
+                          const intent = AndroidIntent(
+                            action: 'action_view',
+                            data: url,
+                          );
+                          intent.launch();
+                        }
+                      },
                       iconSize: 35,
                       color: Colors.orange,
                       icon: const Icon(FontAwesomeIcons.instagram),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      //
+                      onPressed: () {
+                        const url =
+                            'https://api.whatsapp.com/send?phone=526865438402';
+                        const intent = AndroidIntent(
+                          action: 'action_view',
+                          data: url,
+                        );
+                        intent.launch();
+                      },
                       iconSize: 35,
                       color: Colors.green,
                       icon: const Icon(FontAwesomeIcons.whatsapp),

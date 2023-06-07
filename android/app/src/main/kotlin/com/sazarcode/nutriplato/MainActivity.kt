@@ -1,4 +1,4 @@
-package com.example.nutriplato
+package com.sazarcode.nutriplato
 
 import io.flutter.embedding.android.FlutterActivity
 

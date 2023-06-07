@@ -56,6 +56,8 @@ class _Search extends State<Search> {
     }
   }
 
+  FocusNode _myFocusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,6 +95,7 @@ class _Search extends State<Search> {
                     onSelected: (Food food) {
                       setState(() {
                         filteredFoods = [food];
+                        _myFocusNode.unfocus();
                       });
                     },
                     fieldViewBuilder: (BuildContext context,
@@ -100,12 +103,12 @@ class _Search extends State<Search> {
                         FocusNode fieldFocusNode,
                         VoidCallback onFieldSubmitted) {
                       fieldTextEditingController.text = searchController.text;
-
+                      _myFocusNode = fieldFocusNode;
                       return TextField(
                         style: const TextStyle(color: Colors.black),
                         cursorColor: Theme.of(context).primaryColor,
                         controller: fieldTextEditingController,
-                        focusNode: fieldFocusNode,
+                        focusNode: _myFocusNode,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Buscar alimentos o receta',
@@ -118,6 +121,7 @@ class _Search extends State<Search> {
                             ),
                             onPressed: () {
                               fieldTextEditingController.clear();
+                              fieldFocusNode.unfocus();
                               searchController.clear();
                               setState(() {
                                 showList = false;
@@ -161,8 +165,8 @@ class _Search extends State<Search> {
                       filteredFoods = recentFoods;
                     });
                   },
-                  child: Row(
-                    children: const [
+                  child: const Row(
+                    children: [
                       Icon(Icons.history, color: Colors.purple),
                       SizedBox(
                         width: 5,

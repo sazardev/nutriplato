@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class User {
@@ -11,14 +10,12 @@ class User {
   int exercisesCompleted;
   int viewedFoods;
   int blogsReaded;
-  Image? image;
 
   User({
     required this.username,
-    this.name = "default",
+    this.name = "usuario",
     this.lastname = "",
     this.age = 0,
-    this.image,
     this.exercisesCompleted = 0,
     this.viewedFoods = 0,
     this.blogsReaded = 0,

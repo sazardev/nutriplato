@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:nutriplato/models/user.dart';
+import 'package:random_avatar/random_avatar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerProfile extends StatefulWidget {
@@ -65,7 +66,7 @@ class _DrawerProfileState extends State<DrawerProfile> {
         padding: EdgeInsets.zero,
         children: [
           SizedBox(
-            height: 230,
+            height: 280,
             child: DrawerHeader(
               decoration: const BoxDecoration(
                 color: Colors.purple,
@@ -101,19 +102,11 @@ class _DrawerProfileState extends State<DrawerProfile> {
                     ],
                   ),
                   CircleAvatar(
-                    radius: 50,
-                    child: editMode
-                        ? IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.add,
-                              size: 50,
-                            ))
-                        : user.image ??
-                            const Icon(
-                              Icons.person,
-                              size: 50,
-                            ),
+                    radius: 70,
+                    child: RandomAvatar(user.name),
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   editMode
                       ? SizedBox(
@@ -149,9 +142,10 @@ class _DrawerProfileState extends State<DrawerProfile> {
           ListTile(
             leading: const Icon(Icons.balance),
             title: const Text('Terminos y condiciones'),
-            onTap: () async {
+            onTap: () {
               if (Platform.isAndroid) {
-                const url = 'https://www.buymeacoffee.com/sazarcode';
+                const url =
+                    'https://github.com/CerberusProgrammer/nutriplato/blob/master/Pol%C3%ADtica%20de%20Privacidad%20-%20NutriPlato.pdf';
                 const intent = AndroidIntent(
                   action: 'action_view',
                   data: url,
