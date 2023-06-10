@@ -130,6 +130,7 @@ List<Animal> animals = [
     hierro: '1.7',
     sodio: '18',
     selenio: '12.2',
+    image: Image.assets('lib/data/img/animal/almeja.jpg'),
   ),
   Animal(
       alimento: 'Almeja cruda mediana sin concha',
@@ -370,7 +371,7 @@ List<Animal> animals = [
       calcio: '0.8',
       hierro: '0.1',
       sodio: '91.2',
-      selenio: '18'),
+      selenio: '18', image: Image.assets('lib/data/img/animal/atunenagua.jpg'),),
   Animal(
       alimento: 'Atun blanco en agua (drenado)',
       cantidadSugerida: '1/3',
@@ -386,7 +387,7 @@ List<Animal> animals = [
       calcio: '4.7',
       hierro: '0.3',
       sodio: '125.7',
-      selenio: '21.9'),
+      selenio: '21.9', image: Image.assets('lib/data/img/animal/atunenagua.jpg'),),
   Animal(
       alimento: 'Atun en aceite drenado',
       cantidadSugerida: '1/3',
@@ -402,7 +403,7 @@ List<Animal> animals = [
       calcio: '4.3',
       hierro: '0.5',
       sodio: '118.0',
-      selenio: '25.3'),
+      selenio: '25.3',image: Image.assets('lib/data/img/animal/atunenagua.jpg'),),
   Animal(
       alimento: 'Atun en agua drenado',
       cantidadSugerida: '1/3',
@@ -418,7 +419,7 @@ List<Animal> animals = [
       calcio: '3.7',
       hierro: '0.5',
       sodio: '112.7',
-      selenio: '26.8'),
+      selenio: '26.8',image: Image.assets('lib/data/img/animal/atunenagua.jpg'),),
   Animal(
       alimento: 'Atun fresco',
       cantidadSugerida: '30',
@@ -434,7 +435,8 @@ List<Animal> animals = [
       calcio: '2.5',
       hierro: '0.3',
       sodio: '11.6',
-      selenio: '11.0'),
+      selenio: '11.0',
+      image: Image.assets('lib/data/img/animal/atun.jpg'),),
   Animal(
       alimento: 'Atun horneado',
       cantidadSugerida: '20',
@@ -450,7 +452,7 @@ List<Animal> animals = [
       calcio: '2',
       hierro: '0.3',
       sodio: '10',
-      selenio: '9.4'),
+      selenio: '9.4', image: Image.assets('lib/data/img/animal/atun.jpg'),),
   Animal(
       alimento: 'Atun light (drenado)',
       cantidadSugerida: '1/3',
@@ -466,7 +468,7 @@ List<Animal> animals = [
       calcio: '3.7',
       hierro: '0.5',
       sodio: '112.7',
-      selenio: '26.8'),
+      selenio: '26.8', image: Image.assets('lib/data/img/animal/atunenagua.jpg'),),
   Animal(
       alimento: 'Anejo tipo cotija',
       cantidadSugerida: '2',
@@ -498,7 +500,7 @@ List<Animal> animals = [
       calcio: '7.4',
       hierro: '0.2',
       sodio: '76.3',
-      selenio: '3'),
+      selenio: '3', image: Image.assets('lib/data/img/animal/bacalao.jpg'),),
   Animal(
       alimento: 'Bacalao fresco',
       cantidadSugerida: '45',
@@ -514,7 +516,7 @@ List<Animal> animals = [
       calcio: '7.4',
       hierro: '0.2',
       sodio: '24.4',
-      selenio: '14.9'),
+      selenio: '14.9', image: Image.assets('lib/data/img/animal/bacalao.jpg'),),
   Animal(
       alimento: 'Bacalao noruego',
       cantidadSugerida: '15',
@@ -530,7 +532,7 @@ List<Animal> animals = [
       calcio: '24',
       hierro: '0.4',
       sodio: '1054.1',
-      selenio: '22.2'),
+      selenio: '22.2', image: Image.assets('lib/data/img/animal/bacalao.jpg'),),
   Animal(
       alimento: 'Bacalao seco',
       cantidadSugerida: '15',
@@ -546,7 +548,7 @@ List<Animal> animals = [
       calcio: '24',
       hierro: '0.4',
       sodio: '1054.1',
-      selenio: '22.2'),
+      selenio: '22.2', image: Image.assets('lib/data/img/animal/bacalao.jpg'),),
   Animal(
       alimento: 'Bagre',
       cantidadSugerida: '80',
@@ -626,7 +628,7 @@ List<Animal> animals = [
       calcio: '2.7',
       hierro: '0.5',
       sodio: '18',
-      selenio: '5.7'),
+      selenio: '5.7', image: Image.assets('lib/data/img/animal/bistecderes.jpg'),),
   Animal(
       alimento: 'Bistec de bola',
       cantidadSugerida: '25',
@@ -642,7 +644,7 @@ List<Animal> animals = [
       calcio: '1.5',
       hierro: '0.8',
       sodio: '12.5',
-      selenio: '5'),
+      selenio: '5', image: Image.assets('lib/data/img/animal/bistecderes.jpg'),),
   Animal(
       alimento: 'Bistec de res',
       cantidadSugerida: '30',
@@ -658,7 +660,7 @@ List<Animal> animals = [
       calcio: '2.7',
       hierro: '0.5',
       sodio: '18',
-      selenio: '5.7'),
+      selenio: '5.7', image: Image.assets('lib/data/img/animal/bistecderes.jpg'),),
   Animal(
       alimento: 'Bistec de ternera',
       cantidadSugerida: '35',
