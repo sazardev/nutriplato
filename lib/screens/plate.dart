@@ -5,7 +5,7 @@ import 'package:nutriplato/widgets/plate/plato_info.dart';
 import 'dart:math' as math;
 
 import '../data/data.dart';
-import '../widgets/plate/foods.dart';
+import '../widgets/foods.dart';
 import '../widgets/plate/circlepainter.dart';
 
 class Plate extends StatefulWidget {
@@ -79,11 +79,9 @@ class _Plate extends State<Plate> {
         actions: [
           IconButton(
               onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (builder) {
-                      return const Plato();
-                    });
+                Navigator.push(context, MaterialPageRoute(builder: (builder) {
+                  return const Plato();
+                }));
               },
               icon: const Icon(Icons.info_outline))
         ],

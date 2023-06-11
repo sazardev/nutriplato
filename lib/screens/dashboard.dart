@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nutriplato/data/fitness/exercises.dart';
-import 'package:nutriplato/widgets/dashboard/fitness/recommended_card.dart';
+import 'package:nutriplato/widgets/dashboard/aprende.dart';
+import 'package:nutriplato/widgets/dashboard/articulos.dart';
+import 'package:nutriplato/widgets/dashboard/exercises.dart';
 import 'package:nutriplato/widgets/dashboard/contact.dart';
 
-import '../data/blog/blog.dart';
 import '../models/user.dart';
-import '../widgets/dashboard/focus_card.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -30,6 +29,7 @@ class _DashboardState extends State<Dashboard> {
         user = value;
       });
     });
+
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
         backgroundColor: const Color.fromARGB(255, 245, 245, 245),
@@ -72,55 +72,12 @@ class _DashboardState extends State<Dashboard> {
             ),
           ),
         ),
-        body: SingleChildScrollView(
+        body: const SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Articulos interesantes',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: List.generate(blogs.length, (index) {
-                      return SizedBox(
-                          width: 250,
-                          height: 300,
-                          child: FocusCard(blog: blogs[index]));
-                    }),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Ejercicios destacados',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: List.generate(3, (index) {
-                      return SizedBox(
-                          width: 300,
-                          height: 200,
-                          child: RecommendedCard(fitness: fitness[index]));
-                    }),
-                  ),
-                ),
-              ],
+              children: [Articles(), ExercisesNews(), Learn()],
             ),
           ),
         ),

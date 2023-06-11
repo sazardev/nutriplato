@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:random_avatar/random_avatar.dart';
 
 class Contact extends StatelessWidget {
@@ -20,6 +20,7 @@ class Contact extends StatelessWidget {
                 SizedBox(
                   height: constraints.maxHeight / 4,
                   child: Card(
+                    color: Colors.purple,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -36,9 +37,12 @@ class Contact extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Text(
-                  'Jacqueline Juarez',
-                  style: TextStyle(fontSize: 20),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Jacqueline Juárez',
+                    style: TextStyle(fontSize: 24),
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -55,12 +59,12 @@ class Contact extends StatelessWidget {
                           intent.launch();
                         }
                       },
-                      iconSize: 35,
-                      color: Colors.orange,
-                      icon: const Icon(FontAwesomeIcons.instagram),
+                      icon: Logo(
+                        Logos.instagram,
+                        size: 50,
+                      ),
                     ),
                     IconButton(
-                      //
                       onPressed: () {
                         const url =
                             'https://api.whatsapp.com/send?phone=526865438402';
@@ -70,9 +74,10 @@ class Contact extends StatelessWidget {
                         );
                         intent.launch();
                       },
-                      iconSize: 35,
-                      color: Colors.green,
-                      icon: const Icon(FontAwesomeIcons.whatsapp),
+                      icon: Logo(
+                        Logos.whatsapp,
+                        size: 55,
+                      ),
                     ),
                   ],
                 ),

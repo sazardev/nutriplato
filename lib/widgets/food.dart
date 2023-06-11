@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nutriplato/data/food/leguminosas.dart';
+import 'package:nutriplato/widgets/example_hands.dart';
 import 'package:nutriplato/widgets/plate/advertice_food.dart';
 
 import '../data/food/animals.dart';
@@ -168,15 +169,10 @@ class _ProportionFoodState extends State<ProportionFood> {
                   ),
                   IconButton(
                       onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (builder) {
-                              return const AlertDialog(
-                                title: Text('Porción'),
-                                content: Text(
-                                    'Cantidad recomendada por el Sistema Mexicano de Equivalencias.'),
-                              );
-                            });
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (builder) {
+                          return const ExampleHand();
+                        }));
                       },
                       icon: const Icon(
                         Icons.info_outline,
@@ -228,7 +224,7 @@ class _ProportionFoodState extends State<ProportionFood> {
                               return const AlertDialog(
                                 title: Text('Porciones'),
                                 content: Text(
-                                    'Cantidad recomendada por el Sistema Mexicano de Equivalencias. \n\n Puedes modificar la cantidad que es la equivalencia a una porcion del alimento.'),
+                                    'Cantidad recomendada por el Sistema Mexicano de Equivalencias. \n\nPuedes modificar la cantidad que es la equivalencia a una porcion del alimento.'),
                               );
                             });
                       },

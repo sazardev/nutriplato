@@ -6,9 +6,9 @@ import 'package:nutriplato/data/food/leguminosas.dart';
 import 'package:nutriplato/data/food/verduras.dart';
 import 'package:nutriplato/widgets/food.dart';
 
-import '../../data/data.dart';
-import '../../data/food/animals.dart';
-import '../../models/food/food.dart';
+import '../data/data.dart';
+import '../data/food/animals.dart';
+import '../models/food/food.dart';
 
 class Foods extends StatefulWidget {
   final Color color;
