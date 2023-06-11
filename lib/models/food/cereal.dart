@@ -23,6 +23,7 @@ class Cereal extends Food {
   String indiceGlicemico;
   String cargaGlicemica;
   Image? image;
+  String? description;
 
   Cereal({
     required this.alimento,
@@ -43,6 +44,7 @@ class Cereal extends Food {
     required this.indiceGlicemico,
     required this.cargaGlicemica,
     this.image,
+    this.description,
   }) : super(
           name: alimento,
           category: 'cereal',
@@ -51,6 +53,7 @@ class Cereal extends Food {
           cantidadSugerida: cantidadSugerida,
           unidad: unidad,
           image: image,
+          description: description,
           pesoRedondeado: pesoRedondeado,
           pesoNeto: pesoNeto,
           energia: energia,
