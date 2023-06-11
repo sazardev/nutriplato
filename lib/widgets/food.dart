@@ -163,11 +163,21 @@ class _ProportionFoodState extends State<ProportionFood> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Porcion',
+                    'Porción',
                     style: styleData,
                   ),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (builder) {
+                              return const AlertDialog(
+                                title: Text('Porción'),
+                                content: Text(
+                                    'Cantidad recomendada por el Sistema Mexicano de Equivalencias.'),
+                              );
+                            });
+                      },
                       icon: const Icon(
                         Icons.info_outline,
                         size: 20,
@@ -211,7 +221,17 @@ class _ProportionFoodState extends State<ProportionFood> {
                     style: styleData,
                   ),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (builder) {
+                              return const AlertDialog(
+                                title: Text('Porciones'),
+                                content: Text(
+                                    'Cantidad recomendada por el Sistema Mexicano de Equivalencias. \n\n Puedes modificar la cantidad que es la equivalencia a una porcion del alimento.'),
+                              );
+                            });
+                      },
                       icon: const Icon(
                         Icons.info_outline,
                         size: 20,
