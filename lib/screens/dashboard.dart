@@ -72,12 +72,12 @@ class _DashboardState extends State<Dashboard> {
             ),
           ),
         ),
-        body: const SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Articles(), ExercisesNews(), Learn()],
+              children: const [Articles(), ExercisesNews(), Learn()],
             ),
           ),
         ),

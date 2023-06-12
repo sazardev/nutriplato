@@ -47,10 +47,10 @@ class Plato extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          bodyWidget: const SingleChildScrollView(
+          bodyWidget: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Icon(
                   FontAwesomeIcons.cow,
                   size: 150,
@@ -84,10 +84,10 @@ class Plato extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          bodyWidget: const SingleChildScrollView(
+          bodyWidget: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Icon(
                   FontAwesomeIcons.seedling,
                   size: 150,
@@ -121,10 +121,10 @@ class Plato extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          bodyWidget: const SingleChildScrollView(
+          bodyWidget: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Icon(
                   FontAwesomeIcons.appleWhole,
                   size: 150,
@@ -158,10 +158,10 @@ class Plato extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          bodyWidget: const SingleChildScrollView(
+          bodyWidget: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Icon(
                   FontAwesomeIcons.carrot,
                   size: 150,
@@ -195,10 +195,10 @@ class Plato extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          bodyWidget: const SingleChildScrollView(
+          bodyWidget: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Icon(
                   FontAwesomeIcons.wheatAwn,
                   size: 150,

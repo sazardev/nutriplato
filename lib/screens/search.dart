@@ -165,7 +165,7 @@ class _Search extends State<Search> {
                       filteredFoods = recentFoods;
                     });
                   },
-                  child: const Row(
+                  child: Row(
                     children: [
                       Icon(Icons.history, color: Colors.purple),
                       SizedBox(
