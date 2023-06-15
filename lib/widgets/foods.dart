@@ -36,13 +36,13 @@ class _FoodsState extends State<Foods> {
     super.initState();
     switch (widget.tappedSection) {
       case 0:
-        allFoods = leguminosas;
+        allFoods = cereales;
         break;
       case 1:
         allFoods = animals;
         break;
       case 2:
-        allFoods = cereales;
+        allFoods = leguminosas;
         break;
       case 3:
         allFoods = verduras;
