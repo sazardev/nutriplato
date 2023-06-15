@@ -9,12 +9,15 @@ environment:
 dependencies:
   android_intent_plus: ^4.0.1
   circular_countdown_timer: ^0.2.3
+  firebase_core: ^2.14.0
+  firebase_database: ^10.2.3
   flutter:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1
   font_awesome_flutter: ^10.4.0
   icons_plus: ^4.0.0
   introduction_screen: ^3.1.8
+  provider: ^6.0.5
   random_avatar: ^0.0.8
   salomon_bottom_bar: ^3.3.2
   shared_preferences: ^2.1.1

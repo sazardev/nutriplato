@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nutriplato/providers/article_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../data/blog/blog.dart';
 import 'focus_card.dart';
@@ -24,11 +26,14 @@ class Articles extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: List.generate(blogs.length, (index) {
+            children: List.generate(
+                context.watch<ArticleProvider>().articles.length, (index) {
               return SizedBox(
                   width: 250,
                   height: 300,
-                  child: FocusCard(blog: blogs[index]));
+                  child: FocusCard(
+                      article:
+                          context.watch<ArticleProvider>().articles[index]));
             }),
           ),
         ),

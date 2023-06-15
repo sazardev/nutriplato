@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nutriplato/providers/article_provider.dart';
 import 'package:nutriplato/widgets/dashboard/aprende.dart';
 import 'package:nutriplato/widgets/dashboard/articulos.dart';
 import 'package:nutriplato/widgets/dashboard/exercises.dart';
 import 'package:nutriplato/widgets/dashboard/contact.dart';
+import 'package:provider/provider.dart';
 
 import '../models/user.dart';
 
@@ -77,7 +79,22 @@ class _DashboardState extends State<Dashboard> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [Articles(), ExercisesNews(), Learn()],
+              children: [
+                MultiProvider(
+                  providers: [
+                    ChangeNotifierProvider(
+                        lazy: false,
+                        create: (_) {
+                          final articleProvider = ArticleProvider();
+                          articleProvider.getArticles();
+                          return ArticleProvider();
+                        })
+                  ],
+                  child: const Articles(),
+                ),
+                const ExercisesNews(),
+                const Learn()
+              ],
             ),
           ),
         ),

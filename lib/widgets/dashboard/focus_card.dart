@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:nutriplato/models/article.dart';
 
 import '../../models/blog.dart';
 import '../blogs.dart';
 
 class FocusCard extends StatelessWidget {
-  final Blog blog;
+  final Article article;
 
   const FocusCard({
     super.key,
-    required this.blog,
+    required this.article,
   });
 
   @override
@@ -19,7 +20,7 @@ class FocusCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: blog.gradientColors,
+            colors: [article.color, article.color],
             stops: const [
               0.0,
               1.0,
@@ -35,7 +36,7 @@ class FocusCard extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: 16, top: 16, bottom: 4, right: 16),
               child: Text(
-                blog.title,
+                article.title,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -46,7 +47,7 @@ class FocusCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16.0, right: 16),
               child: Text(
-                blog.description,
+                article.description,
                 style: const TextStyle(
                     fontSize: 16, color: Color.fromARGB(225, 255, 255, 255)),
               ),
@@ -59,16 +60,16 @@ class FocusCard extends StatelessWidget {
               ),
               child: FilledButton(
                 style: FilledButton.styleFrom(
-                  backgroundColor: blog.buttonColor,
+                  backgroundColor: article.color,
                 ),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return BlogState(
-                      blog: blog,
+                      article: article,
                     );
                   }));
                 },
-                child: Text(blog.buttonText),
+                child: const Text('Ver más'),
               ),
             )
           ],

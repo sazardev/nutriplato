@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "957531038343",
+    "firebase_url": "https://nutriplato-blog-default-rtdb.firebaseio.com",
+    "project_id": "nutriplato-blog",
+    "storage_bucket": "nutriplato-blog.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957531038343:android:3529dc88c1db678cb50e22",
+        "android_client_info": {
+          "package_name": "com.sazarcode.nutriplato"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "957531038343-cu6s3vrqr14p3knp6opas5u82kqal6kn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgcikPO-DQCtZfYgG7DQXzgDQ6QfKvQ1g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "957531038343-cu6s3vrqr14p3knp6opas5u82kqal6kn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

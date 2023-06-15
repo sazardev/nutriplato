@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-
-import '../models/blog.dart';
+import 'package:nutriplato/models/article.dart';
 
 class BlogState extends StatefulWidget {
-  final Blog blog;
+  final Article article;
 
   const BlogState({
     Key? key,
-    required this.blog,
+    required this.article,
   }) : super(key: key);
 
   @override
@@ -36,9 +35,9 @@ class _BlogStateState extends State<BlogState> {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
-        backgroundColor: widget.blog.gradientColors[0],
+        backgroundColor: widget.article.color,
         title: Text(
-          widget.blog.title,
+          widget.article.title,
         ),
       ),
       body: SingleChildScrollView(
@@ -49,12 +48,12 @@ class _BlogStateState extends State<BlogState> {
               padding: const EdgeInsets.all(16.0),
               child: Center(
                 child: Text(
-                  widget.blog.description,
+                  widget.article.description,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
-                    color: widget.blog.gradientColors[0],
+                    color: widget.article.color,
                   ),
                 ),
               ),
@@ -62,7 +61,7 @@ class _BlogStateState extends State<BlogState> {
             Padding(
               padding: const EdgeInsets.all(22.0),
               child: Text(
-                widget.blog.content,
+                widget.article.content,
                 style: const TextStyle(fontSize: 21),
                 textAlign: TextAlign.justify,
               ),
@@ -72,7 +71,7 @@ class _BlogStateState extends State<BlogState> {
       ),
       floatingActionButton: _showButton
           ? FloatingActionButton(
-              backgroundColor: widget.blog.gradientColors[0],
+              backgroundColor: widget.article.color,
               onPressed: () => Navigator.pop(context),
               child: const Icon(
                 Icons.done,
