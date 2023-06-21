@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/food/animal.dart';
+import '../../domain/food/animal.dart';
 
 List<Animal> animals = [
   Animal(

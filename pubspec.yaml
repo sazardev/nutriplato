@@ -1,7 +1,7 @@
 name: nutriplato
 description: Aprende a crear tu plato del Bien Comer y cuidarte en el dia a dia.
 publish_to: 'none'
-version: 1.0.0+2
+version: 1.0.0+3
 
 environment:
   sdk: '>=2.19.5 <3.0.0'

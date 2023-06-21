@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nutriplato/home.dart';
-import 'package:nutriplato/screens/presentation.dart';
+import 'package:nutriplato/domain/article/article_provider.dart';
+import 'package:nutriplato/presentation/presentation/presentation.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'firebase_options.dart';
@@ -25,14 +27,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'NutriPlato',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.purple,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            lazy: false,
+            create: (_) {
+              final articleProvider = ArticleProvider();
+              articleProvider.getArticles();
+              return articleProvider;
+            }),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'NutriPlato',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorSchemeSeed: Colors.purple,
+        ),
+        home: presentation ? const Presentation() : const Home(),
       ),
-      home: presentation ? const Presentation() : const Home(),
     );
   }
 }

@@ -1,4 +1,4 @@
-import '../../models/food/verdura.dart';
+import '../../domain/food/verdura.dart';
 
 List<Verdura> verduras = [
   Verdura(

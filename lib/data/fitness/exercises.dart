@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nutriplato/models/exercise.dart';
-import 'package:nutriplato/models/fitness.dart';
+import 'package:nutriplato/domain/exercise/exercise.dart';
+import 'package:nutriplato/domain/fitness/fitness.dart';
 
 List<Fitness> fitness = [
   Fitness(
