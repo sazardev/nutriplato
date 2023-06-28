@@ -28,11 +28,12 @@ class Articles extends StatelessWidget {
             children: List.generate(
                 context.watch<ArticleProvider>().articles.length, (index) {
               return SizedBox(
-                  width: 250,
-                  height: 300,
-                  child: FocusCard(
-                      article:
-                          context.watch<ArticleProvider>().articles[index]));
+                width: 250,
+                height: 300,
+                child: FocusCard(
+                  article: context.watch<ArticleProvider>().articles[index],
+                ),
+              );
             }),
           ),
         ),
