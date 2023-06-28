@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nutriplato/presentation/dashboard/provider/user_provider.dart';
-import 'package:nutriplato/presentation/dashboard/widgets/aprende.dart';
-import 'package:nutriplato/presentation/dashboard/widgets/articulos.dart';
-import 'package:nutriplato/presentation/dashboard/widgets/exercises.dart';
-import 'package:nutriplato/presentation/dashboard/widgets/contact.dart';
+import 'package:nutriplato/screens/dashboard/provider/user_provider.dart';
+import 'package:nutriplato/screens/dashboard/widgets/aprende.dart';
+import 'package:nutriplato/screens/dashboard/widgets/articulos.dart';
+import 'package:nutriplato/screens/dashboard/widgets/exercises.dart';
+import 'package:nutriplato/screens/dashboard/widgets/contact.dart';
 import 'package:provider/provider.dart';
 
 class Dashboard extends StatefulWidget {
