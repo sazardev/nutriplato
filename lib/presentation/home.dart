@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/presentation/screens/fitness/fitness.dart';
+import 'package:nutriplato/presentation/screens/fitness/fitness_screen.dart';
 import 'package:nutriplato/presentation/screens/plate/plate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nutriplato/presentation/screens/search/search.dart';
 import 'package:nutriplato/presentation/screens/widgets/drawer.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-import 'presentation/screens/dashboard/dashboard.dart';
+import 'screens/dashboard/dashboard_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -19,10 +19,10 @@ class _Home extends State<Home> with SingleTickerProviderStateMixin {
   int _currentIndex = 0;
 
   final List<Widget> _screens = const [
-    Dashboard(),
+    DashboardScreen(),
     Search(),
     Plate(),
-    Fitness()
+    FitnessScreen(),
   ];
 
   @override

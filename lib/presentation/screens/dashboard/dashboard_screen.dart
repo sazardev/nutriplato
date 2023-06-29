@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nutriplato/presentation/provider/user_provider.dart';
-import 'package:nutriplato/presentation/screens/dashboard/widgets/aprende.dart';
-import 'package:nutriplato/presentation/screens/dashboard/widgets/articulos.dart';
-import 'package:nutriplato/presentation/screens/dashboard/widgets/exercises.dart';
-import 'package:nutriplato/presentation/screens/dashboard/widgets/contact.dart';
+import 'package:nutriplato/presentation/screens/dashboard/widgets/learn_screen.dart';
+import 'package:nutriplato/presentation/screens/dashboard/articles/articles_screen.dart';
+import 'package:nutriplato/presentation/screens/fitness/fitness_screen.dart';
+import 'package:nutriplato/presentation/screens/widgets/contact.dart';
 import 'package:provider/provider.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     String user = context.watch<UserProvider>().username;
+
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
         backgroundColor: const Color.fromARGB(255, 245, 245, 245),
@@ -66,8 +67,8 @@ class _DashboardState extends State<Dashboard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Articles(),
-                ExercisesNews(),
+                ArticlesScreen(),
+                PopularExercisesScreen(),
                 Learn(),
               ],
             ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../home.dart';
+import '../../home.dart';
 
 class Presentation extends StatefulWidget {
   const Presentation({super.key});

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:nutriplato/presentation/provider/article_provider.dart';
+import 'package:provider/provider.dart';
 
-import '../../../../data/fitness/exercises.dart';
-import '../../fitness/widgets/recommended_card.dart';
+import 'focus_card_screen.dart';
 
-class ExercisesNews extends StatelessWidget {
-  const ExercisesNews({super.key});
+class ArticlesScreen extends StatelessWidget {
+  const ArticlesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class ExercisesNews extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(
-            'Ejercicios destacados',
+            'Articulos interesantes',
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -24,11 +25,15 @@ class ExercisesNews extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: List.generate(3, (index) {
+            children: List.generate(
+                context.watch<ArticleProvider>().articles.length, (index) {
               return SizedBox(
-                  width: 300,
-                  height: 200,
-                  child: RecommendedCard(fitness: fitness[index]));
+                width: 250,
+                height: 300,
+                child: FocusCardScreen(
+                  article: context.watch<ArticleProvider>().articles[index],
+                ),
+              );
             }),
           ),
         ),

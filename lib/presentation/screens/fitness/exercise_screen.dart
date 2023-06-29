@@ -1,21 +1,21 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:nutriplato/presentation/provider/fitness_provider.dart';
 import 'package:nutriplato/presentation/screens/fitness/widgets/finished_exercise.dart';
+import 'package:provider/provider.dart';
 
 import '../../../infrastructure/entities/fitness/fitness.dart';
 
-class ExerciseState extends StatefulWidget {
-  final Fitness fitness;
-  const ExerciseState({
+class ExerciseScreen extends StatefulWidget {
+  const ExerciseScreen({
     super.key,
-    required this.fitness,
   });
 
   @override
-  State<ExerciseState> createState() => _ExerciseState();
+  State<ExerciseScreen> createState() => _ExerciseState();
 }
 
-class _ExerciseState extends State<ExerciseState> {
+class _ExerciseState extends State<ExerciseScreen> {
   int indexExercise = 0;
   final CountDownController _controller = CountDownController();
   bool _timerCompleted = false;
@@ -23,10 +23,12 @@ class _ExerciseState extends State<ExerciseState> {
 
   @override
   Widget build(BuildContext context) {
+    final Fitness? fitness = context.watch<FitnessProvider>().selectedExercise;
+
     return Scaffold(
       backgroundColor: _restTimerCompleted ? Colors.white : Colors.purple,
       appBar: AppBar(
-          title: Text(widget.fitness.name),
+          title: Text(fitness!.name),
           backgroundColor: _restTimerCompleted ? Colors.white : Colors.purple,
           foregroundColor: _restTimerCompleted ? Colors.black : Colors.white,
           automaticallyImplyLeading: false,
@@ -40,13 +42,13 @@ class _ExerciseState extends State<ExerciseState> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             if (!_restTimerCompleted)
-              restTimer(widget.fitness.rest, 'Descansa'),
+              restTimer(fitness.rest, 'Descansa'),
             if (_restTimerCompleted && !_timerCompleted)
               restTimer(10, '¿Listo?'),
             if (_timerCompleted && _restTimerCompleted) ...[
               const Spacer(),
               Center(
-                child: Text(widget.fitness.exercises[indexExercise].name,
+                child: Text(fitness.exercises[indexExercise].name,
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w500,
@@ -55,9 +57,9 @@ class _ExerciseState extends State<ExerciseState> {
               Center(
                 child: Padding(
                   padding: const EdgeInsets.all(32.0),
-                  child: widget.fitness.exercises[indexExercise].time == 0
+                  child: fitness.exercises[indexExercise].time == 0
                       ? Text(
-                          'x${widget.fitness.exercises[indexExercise].quantity}',
+                          'x${fitness.exercises[indexExercise].quantity}',
                           style: const TextStyle(
                               fontSize: 48, fontWeight: FontWeight.bold))
                       : Center(
@@ -66,7 +68,7 @@ class _ExerciseState extends State<ExerciseState> {
                             height: 100,
                             child: CircularCountDownTimer(
                               duration:
-                                  widget.fitness.exercises[indexExercise].time +
+                                  fitness.exercises[indexExercise].time +
                                       1,
                               initialDuration: 0,
                               width: MediaQuery.of(context).size.width / 2,
@@ -90,13 +92,11 @@ class _ExerciseState extends State<ExerciseState> {
                               onStart: () {},
                               onComplete: () {
                                 if (!(indexExercise <
-                                    widget.fitness.exercises.length - 1)) {
+                                  fitness.exercises.length - 1)) {
                                   Navigator.pop(context);
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (builder) {
-                                    return FinishedExercise(
-                                      fitness: widget.fitness,
-                                    );
+                                    return const FinishedExerciseScreen();
                                   }));
                                 } else {
                                   setState(() {
@@ -112,7 +112,7 @@ class _ExerciseState extends State<ExerciseState> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 42, right: 42, bottom: 32),
-                child: indexExercise < widget.fitness.exercises.length - 1
+                child: indexExercise < fitness.exercises.length - 1
                     ? FilledButton(
                         onPressed: () {
                           setState(() {
@@ -131,9 +131,7 @@ class _ExerciseState extends State<ExerciseState> {
                           Navigator.pop(context);
                           Navigator.push(context,
                               MaterialPageRoute(builder: (builder) {
-                            return FinishedExercise(
-                              fitness: widget.fitness,
-                            );
+                            return const FinishedExerciseScreen();
                           }));
                         },
                         child: const Padding(
@@ -149,6 +147,8 @@ class _ExerciseState extends State<ExerciseState> {
   }
 
   Widget restTimer(int time, String text) {
+    final Fitness? fitness = context.watch<FitnessProvider>().selectedExercise;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -252,7 +252,7 @@ class _ExerciseState extends State<ExerciseState> {
                           ),
                         ),
                         Text(
-                          ' $indexExercise/${widget.fitness.exercises.length}',
+                          ' $indexExercise/${fitness?.exercises.length}',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -267,7 +267,7 @@ class _ExerciseState extends State<ExerciseState> {
                     child: Row(
                       children: [
                         Text(
-                          widget.fitness.exercises[indexExercise].name,
+                          fitness!.exercises[indexExercise].name,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -283,10 +283,10 @@ class _ExerciseState extends State<ExerciseState> {
                             )),
                         const Spacer(),
                         Text(
-                            widget.fitness.exercises[indexExercise].quantity ==
+                            fitness.exercises[indexExercise].quantity ==
                                     0
-                                ? '${widget.fitness.exercises[indexExercise].time}s'
-                                : 'x${widget.fitness.exercises[indexExercise].quantity}',
+                                ? '${fitness.exercises[indexExercise].time}s'
+                                : 'x${fitness.exercises[indexExercise].quantity}',
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/presentation/screens/dashboard/widgets/view_article.dart';
+import 'package:nutriplato/presentation/screens/dashboard/articles/read_articles_screen.dart';
 
 import '../../../../infrastructure/entities/article/article.dart';
 
-class FocusCard extends StatelessWidget {
+class FocusCardScreen extends StatelessWidget {
   final Article article;
 
-  const FocusCard({
+  const FocusCardScreen({
     super.key,
     required this.article,
   });

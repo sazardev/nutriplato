@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../../infrastructure/entities/fitness/fitness.dart';
 
-class Exercise extends StatelessWidget {
+class ExerciseInfoScreen extends StatelessWidget {
   final Fitness fitness;
 
-  const Exercise({
+  const ExerciseInfoScreen({
     super.key,
     required this.fitness,
   });

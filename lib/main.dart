@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:nutriplato/home.dart';
+import 'package:nutriplato/presentation/home.dart';
 import 'package:nutriplato/presentation/provider/article_provider.dart';
 import 'package:nutriplato/presentation/provider/user_provider.dart';
 import 'package:nutriplato/presentation/screens/presentation/presentation.dart';
@@ -17,8 +17,9 @@ void main() async {
   bool presentation = prefs.getBool('presentation') ?? true;
 
   runApp(MyApp(
-    presentation: presentation,
-  ));
+      presentation: presentation,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
