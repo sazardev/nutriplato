@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:nutriplato/screens/plate/widgets/plato_info.dart';
+import 'package:nutriplato/presentation/screens/plate/widgets/plato_info.dart';
 import 'dart:math' as math;
 
-import '../../data/data.dart';
+import '../../../data/data.dart';
 import '../search/widgets/foods.dart';
 import 'widgets/circlepainter.dart';
 

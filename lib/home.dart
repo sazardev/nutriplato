@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/screens/fitness/fitness.dart';
-import 'package:nutriplato/screens/plate/plate.dart';
+import 'package:nutriplato/presentation/screens/fitness/fitness.dart';
+import 'package:nutriplato/presentation/screens/plate/plate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nutriplato/screens/search/search.dart';
-import 'package:nutriplato/screens/widgets/drawer.dart';
+import 'package:nutriplato/presentation/screens/search/search.dart';
+import 'package:nutriplato/presentation/screens/widgets/drawer.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-import 'screens/dashboard/dashboard.dart';
+import 'presentation/screens/dashboard/dashboard.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

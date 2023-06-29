@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nutriplato/home.dart';
 import 'package:nutriplato/domain/article/article_provider.dart';
-import 'package:nutriplato/screens/dashboard/provider/user_provider.dart';
-import 'package:nutriplato/screens/presentation/presentation.dart';
+import 'package:nutriplato/presentation/provider/user_provider.dart';
+import 'package:nutriplato/presentation/screens/presentation/presentation.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

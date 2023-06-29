@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nutriplato/data/food/leguminosas.dart';
-import 'package:nutriplato/screens/plate/widgets/example_hands.dart';
-import 'package:nutriplato/screens/plate/widgets/advertice_food.dart';
+import 'package:nutriplato/presentation/screens/plate/widgets/example_hands.dart';
+import 'package:nutriplato/presentation/screens/plate/widgets/advertice_food.dart';
 
-import '../../../data/food/animals.dart';
-import '../../../data/food/cereales.dart';
-import '../../../data/food/frutas.dart';
-import '../../../data/food/verduras.dart';
-import '../../../domain/food/food.dart';
+import '../../../../data/food/animals.dart';
+import '../../../../data/food/cereales.dart';
+import '../../../../data/food/frutas.dart';
+import '../../../../data/food/verduras.dart';
+import '../../../../domain/food/food.dart';
 
 class ProportionFood extends StatefulWidget {
   final Food food;

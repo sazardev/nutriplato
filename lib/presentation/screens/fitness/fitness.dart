@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nutriplato/data/fitness/exercises.dart';
-import 'package:nutriplato/screens/fitness/widgets/exercise_card.dart';
-import 'package:nutriplato/screens/fitness/widgets/recommended_card.dart';
+import 'package:nutriplato/presentation/screens/fitness/widgets/exercise_card.dart';
+import 'package:nutriplato/presentation/screens/fitness/widgets/recommended_card.dart';
 
 class Fitness extends StatefulWidget {
   const Fitness({super.key});

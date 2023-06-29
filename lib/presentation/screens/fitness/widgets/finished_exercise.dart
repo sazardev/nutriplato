@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/fitness/fitness.dart';
+import '../../../../domain/fitness/fitness.dart';
 
 class FinishedExercise extends StatefulWidget {
   final Fitness fitness;

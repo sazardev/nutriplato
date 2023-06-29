@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/fitness/exercises.dart';
+import '../../../../data/fitness/exercises.dart';
 import '../../fitness/widgets/recommended_card.dart';
 
 class ExercisesNews extends StatelessWidget {
