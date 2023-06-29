@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../domain/food/animal.dart';
+import 'package:nutriplato/infrastructure/entities/food/animal.dart';
 
 List<Animal> animals = [
   Animal(

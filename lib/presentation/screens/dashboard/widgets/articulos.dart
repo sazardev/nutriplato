@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/domain/article/article_provider.dart';
+import 'package:nutriplato/presentation/provider/article_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'focus_card.dart';

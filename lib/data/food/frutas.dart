@@ -1,4 +1,4 @@
-import '../../domain/food/fruta.dart';
+import 'package:nutriplato/infrastructure/entities/food/fruta.dart';
 
 List<Fruta> frutas = [
   Fruta(

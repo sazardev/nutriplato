@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/domain/exercise/exercise.dart';
+
+import '../exercise/exercise.dart';
 
 class Fitness {
   String name;

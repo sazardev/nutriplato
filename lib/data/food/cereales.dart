@@ -1,4 +1,4 @@
-import '../../domain/food/cereal.dart';
+import 'package:nutriplato/infrastructure/entities/food/cereal.dart';
 
 List<Cereal> cereales = [
   Cereal(

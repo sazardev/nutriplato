@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../domain/fitness/fitness.dart';
+import '../../../../infrastructure/entities/fitness/fitness.dart';
 
 class Exercise extends StatelessWidget {
   final Fitness fitness;

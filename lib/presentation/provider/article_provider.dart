@@ -1,7 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-
-import 'article.dart';
+import 'package:nutriplato/infrastructure/entities/article/article.dart';
 
 class ArticleProvider extends ChangeNotifier {
   List<Article> articles = [];

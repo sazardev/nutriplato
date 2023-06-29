@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/presentation/screens/plate/widgets/category.dart';
 import 'package:nutriplato/data/food/cereales.dart';
 import 'package:nutriplato/data/food/frutas.dart';
@@ -8,7 +9,6 @@ import 'package:nutriplato/presentation/screens/search/widgets/food.dart';
 
 import '../../../../data/data.dart';
 import '../../../../data/food/animals.dart';
-import '../../../../domain/food/food.dart';
 
 class Foods extends StatefulWidget {
   final Color color;

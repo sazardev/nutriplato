@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../domain/fitness/fitness.dart';
+import '../../../../infrastructure/entities/fitness/fitness.dart';
 import '../../exercise/exercise.dart';
 import 'exercise_info.dart';
 

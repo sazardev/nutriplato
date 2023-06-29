@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nutriplato/presentation/screens/fitness/widgets/display_exercise.dart';
 
-import '../../../../domain/fitness/fitness.dart';
+import '../../../../infrastructure/entities/fitness/fitness.dart';
 
 class RecommendedCard extends StatelessWidget {
   final Fitness fitness;

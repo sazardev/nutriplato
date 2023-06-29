@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/domain/article/article.dart';
 import 'package:nutriplato/presentation/screens/dashboard/widgets/view_article.dart';
+
+import '../../../../infrastructure/entities/article/article.dart';
 
 class FocusCard extends StatelessWidget {
   final Article article;
