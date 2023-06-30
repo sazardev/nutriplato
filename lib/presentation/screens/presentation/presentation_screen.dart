@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../home.dart';
 
-class Presentation extends StatefulWidget {
-  const Presentation({super.key});
+class PresentationScreen extends StatelessWidget {
+  const PresentationScreen({super.key});
 
-  @override
-  State<Presentation> createState() => _PresentationState();
-}
+  static const appRouterName = "PresentationScreen";
 
-class _PresentationState extends State<Presentation> {
   PageViewModel buildPageViewModel(String title, String body) {
     return PageViewModel(
       title: title,
@@ -43,9 +41,7 @@ class _PresentationState extends State<Presentation> {
         final prefs = await SharedPreferences.getInstance();
         prefs.setBool('presentation', false);
 
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => const Home()),
-        );
+        context.pushReplacementNamed('home');
       },
       onSkip: () {
         Navigator.of(context).push(

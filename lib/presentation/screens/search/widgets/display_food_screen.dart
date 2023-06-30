@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nutriplato/data/food/leguminosas.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
-import 'package:nutriplato/presentation/screens/plate/widgets/example_hands.dart';
+import 'package:nutriplato/presentation/screens/plate/widgets/example_hands_screen.dart';
 import 'package:nutriplato/presentation/screens/plate/widgets/advertice_food.dart';
 
 import '../../../../data/food/animals.dart';
@@ -10,19 +10,19 @@ import '../../../../data/food/cereales.dart';
 import '../../../../data/food/frutas.dart';
 import '../../../../data/food/verduras.dart';
 
-class ProportionFood extends StatefulWidget {
+class DisplayFoodScreen extends StatefulWidget {
   final Food food;
 
-  const ProportionFood({
+  const DisplayFoodScreen({
     super.key,
     required this.food,
   });
 
   @override
-  State<ProportionFood> createState() => _ProportionFoodState();
+  State<DisplayFoodScreen> createState() => _DisplayFoodScreen();
 }
 
-class _ProportionFoodState extends State<ProportionFood> {
+class _DisplayFoodScreen extends State<DisplayFoodScreen> {
   final TextStyle styleData = const TextStyle(
     color: Colors.white,
     fontSize: 18,
@@ -171,7 +171,7 @@ class _ProportionFoodState extends State<ProportionFood> {
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (builder) {
-                          return const ExampleHand();
+                          return const ExampleHandScreen();
                         }));
                       },
                       icon: const Icon(

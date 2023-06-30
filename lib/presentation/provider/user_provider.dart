@@ -1,24 +1,32 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../infrastructure/entities/user.dart';
+
 class UserProvider extends ChangeNotifier {
-  String username = "usuario";
+  User user = User();
 
   void loadUser() async {
     final prefs = await SharedPreferences.getInstance();
-    String? userString = prefs.getString('user');
+    final userString = prefs.getString('username');
 
     if (userString != null) {
-      username = userString;
+      final userMap = jsonDecode(userString);
+      final user = User.fromJson(userMap);
+      this.user = user;
     }
 
     notifyListeners();
   }
 
-  void saveUser(String user) async {
+  void saveUser(User username) async {
+    user = username;
+
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('user', user);
-    username = user;
+    final userJson = jsonEncode(user.toJson());
+    await prefs.setString('username', userJson);
 
     notifyListeners();
   }

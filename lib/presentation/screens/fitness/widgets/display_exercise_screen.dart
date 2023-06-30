@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nutriplato/presentation/provider/fitness_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -8,8 +9,9 @@ import '../exercise_screen.dart';
 import 'exercise_info_screen.dart';
 
 class DisplayExerciseScreen extends StatelessWidget {
-
   const DisplayExerciseScreen({super.key});
+
+  static const appRouterName = "DisplayExerciseScreen";
 
   @override
   Widget build(BuildContext context) {
@@ -107,9 +109,7 @@ class DisplayExerciseScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (builder) {
-            return const ExerciseScreen();
-          }));
+          context.pushNamed(ExerciseScreen.appRouterName);
         },
         backgroundColor: Colors.purple,
         foregroundColor: Colors.white,

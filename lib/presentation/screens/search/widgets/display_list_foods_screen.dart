@@ -5,17 +5,17 @@ import 'package:nutriplato/data/food/cereales.dart';
 import 'package:nutriplato/data/food/frutas.dart';
 import 'package:nutriplato/data/food/leguminosas.dart';
 import 'package:nutriplato/data/food/verduras.dart';
-import 'package:nutriplato/presentation/screens/search/widgets/food.dart';
+import 'package:nutriplato/presentation/screens/search/widgets/display_food_screen.dart';
 
 import '../../../../data/data.dart';
 import '../../../../data/food/animals.dart';
 
-class Foods extends StatefulWidget {
+class DisplayListFoodsScreen extends StatefulWidget {
   final Color color;
   final int tappedSection;
   final bool isPhone;
 
-  const Foods({
+  const DisplayListFoodsScreen({
     Key? key,
     required this.color,
     required this.tappedSection,
@@ -23,10 +23,10 @@ class Foods extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<Foods> createState() => _FoodsState();
+  State<DisplayListFoodsScreen> createState() => _DisplayListFoodsScreen();
 }
 
-class _FoodsState extends State<Foods> {
+class _DisplayListFoodsScreen extends State<DisplayListFoodsScreen> {
   late List<Food> allFoods;
   late List<Food> filteredFoods;
   final TextEditingController searchController = TextEditingController();
@@ -221,7 +221,7 @@ class _FoodsState extends State<Foods> {
                                   return SizedBox(
                                     height: MediaQuery.of(context).size.height *
                                         0.7,
-                                    child: ProportionFood(
+                                    child: DisplayFoodScreen(
                                       food: filteredFoods[index],
                                     ),
                                   );

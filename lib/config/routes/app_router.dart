@@ -6,27 +6,37 @@ final appRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      name: '',
+      name: Home.appRouterName,
       builder: (context, state) => const Home(),
     ),
     GoRoute(
+      path: '/presentation',
+      name: PresentationScreen.appRouterName,
+      builder: (context, state) => const PresentationScreen(),
+    ),
+    GoRoute(
+      path: '/theme-changer-screen',
+      name: ThemeChangerScreen.appRouterName,
+      builder: (context, state) => const ThemeChangerScreen(),
+    ),
+    GoRoute(
       path: '/fitness',
-      name: 'fitness',
+      name: FitnessScreen.appRouterName,
       builder: (context, state) => const FitnessScreen(),
       routes: [
         GoRoute(
           path: 'display-exercise-screen',
-          name: 'DisplayExerciseScreen',
+          name: DisplayExerciseScreen.appRouterName,
           builder: (context, state) => const DisplayExerciseScreen(),
           routes: [
             GoRoute(
               path: 'exercise-screen',
-              name: 'ExerciseScreen',
+              name: ExerciseScreen.appRouterName,
               builder: (context, state) => const ExerciseScreen(),
               routes: [
                 GoRoute(
                   path: 'finished-exercise-screen',
-                  name: 'FinishedExerciseScreen',
+                  name: FinishedExerciseScreen.appRouterName,
                   builder: (context, state) => const FinishedExerciseScreen(),
                 ),
               ],

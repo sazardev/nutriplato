@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nutriplato/presentation/provider/fitness_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -6,8 +7,9 @@ import '../../../infrastructure/entities/fitness/fitness.dart';
 import 'widgets/display_exercise_screen.dart';
 
 class FitnessScreen extends StatelessWidget {
-  
   const FitnessScreen({super.key});
+
+  static const appRouterName = "FitnessScreen";
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,6 @@ class FitnessScreen extends StatelessWidget {
               ),
               SizedBox(
                 width: constraints.maxWidth,
-                height: 220,
                 child: const PopularExercisesScreen(),
               ),
               const Padding(
@@ -69,12 +70,11 @@ class PopularExercisesScreen extends StatelessWidget {
     super.key,
   });
 
-
   @override
   Widget build(BuildContext context) {
-    final List<Fitness> listFitness = context.watch<FitnessProvider>().listedExercises;
-
-    return  Column(
+    final List<Fitness> listFitness =
+        context.watch<FitnessProvider>().listedExercises;
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
@@ -93,64 +93,69 @@ class PopularExercisesScreen extends StatelessWidget {
             children: List.generate(3, (index) {
               final Fitness fitness = listFitness[index];
 
-              return Card(
-      elevation: 0,
-      clipBehavior: Clip.antiAlias,
-      child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.purple,
-              Colors.pink,
-            ],
-            stops: [
-              0.0,
-              1.0,
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(
-                fitness.icon,
-                color: Colors.white,
-                size: 30,
-              ),
-              Text(
-                fitness.name,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              return SizedBox(
+                width: 220,
+                height: 300,
+                child: Card(
+                  elevation: 0,
+                  clipBehavior: Clip.antiAlias,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.purple,
+                          Colors.pink,
+                        ],
+                        stops: [
+                          0.0,
+                          1.0,
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            fitness.icon,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          Text(
+                            fitness.name,
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            fitness.description,
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          const Spacer(),
+                          FilledButton(
+                            style: FilledButton.styleFrom(
+                                backgroundColor: Colors.pink.shade900),
+                            onPressed: () {
+                              context.read<FitnessProvider>().selectedExercise =
+                                  fitness;
+                              context.pushNamed(
+                                  DisplayExerciseScreen.appRouterName);
+                            },
+                            child: const Text('Ver ejercicio'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              Text(
-                fitness.description,
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              const Spacer(),
-              FilledButton(
-                style: FilledButton.styleFrom(
-                    backgroundColor: Colors.pink.shade900),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (builder) {
-                    return const DisplayExerciseScreen();
-                  }));
-                },
-                child: const Text('Ver ejercicio'),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+              );
             }),
           ),
         ),
@@ -178,10 +183,7 @@ class CardExerciseScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           onTap: () {
             context.read<FitnessProvider>().selectedExercise = fitness;
-            
-            Navigator.push(context, MaterialPageRoute(builder: (builder) {
-              return const DisplayExerciseScreen();
-            }));
+            context.pushNamed(DisplayExerciseScreen.appRouterName);
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

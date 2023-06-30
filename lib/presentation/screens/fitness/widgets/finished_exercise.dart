@@ -5,8 +5,9 @@ import 'package:provider/provider.dart';
 import '../../../../infrastructure/entities/fitness/fitness.dart';
 
 class FinishedExerciseScreen extends StatelessWidget {
-
   const FinishedExerciseScreen({Key? key}) : super(key: key);
+
+  static const appRouterName = "FinishedExerciseScreen";
 
   @override
   Widget build(BuildContext context) {

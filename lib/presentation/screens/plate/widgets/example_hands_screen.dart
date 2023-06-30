@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
-class ExampleHand extends StatelessWidget {
-  const ExampleHand({super.key});
+class ExampleHandScreen extends StatelessWidget {
+  const ExampleHandScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

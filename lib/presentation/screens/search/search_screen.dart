@@ -6,16 +6,16 @@ import 'package:nutriplato/data/food/verduras.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../data/food/animals.dart';
-import 'widgets/food.dart';
+import 'widgets/display_food_screen.dart';
 
-class Search extends StatefulWidget {
-  const Search({super.key});
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _Search();
+  State<StatefulWidget> createState() => _SearchScreen();
 }
 
-class _Search extends State<Search> {
+class _SearchScreen extends State<SearchScreen> {
   late List<Food> allFoods;
   late List<Food> filteredFoods;
   final TextEditingController searchController = TextEditingController();
@@ -199,7 +199,7 @@ class _Search extends State<Search> {
                                   return SizedBox(
                                     height: MediaQuery.of(context).size.height *
                                         0.7,
-                                    child: ProportionFood(
+                                    child: DisplayFoodScreen(
                                       food: filteredFoods[index],
                                     ),
                                   );

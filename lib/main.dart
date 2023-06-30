@@ -1,9 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:nutriplato/presentation/home.dart';
+import 'package:nutriplato/config/routes/app_router.dart';
+import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/presentation/provider/article_provider.dart';
+import 'package:nutriplato/presentation/provider/fitness_provider.dart';
+import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
 import 'package:nutriplato/presentation/provider/user_provider.dart';
-import 'package:nutriplato/presentation/screens/presentation/presentation.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,7 +18,8 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   bool presentation = prefs.getBool('presentation') ?? true;
 
-  runApp(MyApp(
+  runApp(
+    MyApp(
       presentation: presentation,
     ),
   );
@@ -32,28 +35,42 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            lazy: false,
-            create: (_) {
-              final articleProvider = ArticleProvider();
-              articleProvider.getArticles();
-              return articleProvider;
-            }),
+          lazy: false,
+          create: (_) {
+            final articleProvider = ArticleProvider();
+            articleProvider.getArticles();
+            return articleProvider;
+          },
+        ),
         ChangeNotifierProvider(
-            lazy: false,
-            create: (_) {
-              final userProvider = UserProvider();
-              userProvider.loadUser();
-              return userProvider;
-            }),
+          lazy: false,
+          create: (_) {
+            final userProvider = UserProvider();
+            userProvider.loadUser();
+            return userProvider;
+          },
+        ),
+        ChangeNotifierProvider(
+          lazy: false,
+          create: (_) {
+            final fitnessProvider = FitnessProvider();
+            fitnessProvider.loadLocalData();
+            return fitnessProvider;
+          },
+        ),
+        ChangeNotifierProvider(
+          lazy: false,
+          create: (_) {
+            final themeChangerProvider = ThemeChangerProvider();
+            return themeChangerProvider;
+          },
+        ),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
+        routerConfig: appRouter,
         debugShowCheckedModeBanner: false,
         title: 'NutriPlato',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorSchemeSeed: Colors.purple,
-        ),
-        home: presentation ? const Presentation() : const Home(),
+        theme: AppTheme().getTheme(),
       ),
     );
   }

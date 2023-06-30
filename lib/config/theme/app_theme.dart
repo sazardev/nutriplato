@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+//TODO: implement color index for change the theme color.
+int selectedColorIndex = 0;
+
 const List<Color> colorList = [
   Colors.blue,
   Colors.indigo,
@@ -23,7 +26,7 @@ class AppTheme {
   final bool isDarkMode;
 
   AppTheme({
-    this.selectedColor = 0,
+    this.selectedColor = 3,
     this.isDarkMode = false,
   })  : assert(selectedColor >= 0, 'Selected color must be greater then 0'),
         assert(selectedColor < colorList.length,

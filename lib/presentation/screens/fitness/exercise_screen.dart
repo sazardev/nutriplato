@@ -1,5 +1,6 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nutriplato/presentation/provider/fitness_provider.dart';
 import 'package:nutriplato/presentation/screens/fitness/widgets/finished_exercise.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,8 @@ import 'package:provider/provider.dart';
 import '../../../infrastructure/entities/fitness/fitness.dart';
 
 class ExerciseScreen extends StatefulWidget {
+  static const appRouterName = "ExerciseScreen";
+
   const ExerciseScreen({
     super.key,
   });
@@ -35,14 +38,13 @@ class _ExerciseState extends State<ExerciseScreen> {
           leading: IconButton(
               icon: const Icon(Icons.close),
               onPressed: () {
-                Navigator.pop(context);
+                context.pop();
               })),
       body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            if (!_restTimerCompleted)
-              restTimer(fitness.rest, 'Descansa'),
+            if (!_restTimerCompleted) restTimer(fitness.rest, 'Descansa'),
             if (_restTimerCompleted && !_timerCompleted)
               restTimer(10, '¿Listo?'),
             if (_timerCompleted && _restTimerCompleted) ...[
@@ -58,8 +60,7 @@ class _ExerciseState extends State<ExerciseScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(32.0),
                   child: fitness.exercises[indexExercise].time == 0
-                      ? Text(
-                          'x${fitness.exercises[indexExercise].quantity}',
+                      ? Text('x${fitness.exercises[indexExercise].quantity}',
                           style: const TextStyle(
                               fontSize: 48, fontWeight: FontWeight.bold))
                       : Center(
@@ -68,8 +69,7 @@ class _ExerciseState extends State<ExerciseScreen> {
                             height: 100,
                             child: CircularCountDownTimer(
                               duration:
-                                  fitness.exercises[indexExercise].time +
-                                      1,
+                                  fitness.exercises[indexExercise].time + 1,
                               initialDuration: 0,
                               width: MediaQuery.of(context).size.width / 2,
                               height: MediaQuery.of(context).size.height / 2,
@@ -92,7 +92,7 @@ class _ExerciseState extends State<ExerciseScreen> {
                               onStart: () {},
                               onComplete: () {
                                 if (!(indexExercise <
-                                  fitness.exercises.length - 1)) {
+                                    fitness.exercises.length - 1)) {
                                   Navigator.pop(context);
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (builder) {
@@ -128,11 +128,9 @@ class _ExerciseState extends State<ExerciseScreen> {
                       )
                     : FilledButton(
                         onPressed: () {
-                          Navigator.pop(context);
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (builder) {
-                            return const FinishedExerciseScreen();
-                          }));
+                          context.pop();
+                          context
+                              .pushNamed(FinishedExerciseScreen.appRouterName);
                         },
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
@@ -283,8 +281,7 @@ class _ExerciseState extends State<ExerciseScreen> {
                             )),
                         const Spacer(),
                         Text(
-                            fitness.exercises[indexExercise].quantity ==
-                                    0
+                            fitness.exercises[indexExercise].quantity == 0
                                 ? '${fitness.exercises[indexExercise].time}s'
                                 : 'x${fitness.exercises[indexExercise].quantity}',
                             style: const TextStyle(

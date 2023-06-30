@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../plate/widgets/example_hands.dart';
-import '../../plate/widgets/plato_info.dart';
+import '../../plate/widgets/example_hands_screen.dart';
+import '../../plate/widgets/plato_info_screen.dart';
 
-class Learn extends StatelessWidget {
-  const Learn({super.key});
+class LearnScreen extends StatelessWidget {
+  const LearnScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class Learn extends StatelessWidget {
                             onPressed: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (builder) {
-                                return const ExampleHand();
+                                return const ExampleHandScreen();
                               }));
                             },
                             child: const Text('Aprende'),
@@ -128,7 +128,7 @@ class Learn extends StatelessWidget {
                             onPressed: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (builder) {
-                                return const Plato();
+                                return const PlatoInformationScreen();
                               }));
                             },
                             child: const Text('Aprende'),

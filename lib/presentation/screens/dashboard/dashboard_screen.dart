@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nutriplato/presentation/provider/user_provider.dart';
 import 'package:nutriplato/presentation/screens/dashboard/widgets/learn_screen.dart';
-import 'package:nutriplato/presentation/screens/dashboard/articles/articles_screen.dart';
+import 'package:nutriplato/presentation/screens/articles/articles_screen.dart';
 import 'package:nutriplato/presentation/screens/fitness/fitness_screen.dart';
 import 'package:nutriplato/presentation/screens/widgets/contact.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +17,7 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
-    String user = context.watch<UserProvider>().username;
+    String user = context.watch<UserProvider>().user.username;
 
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
@@ -69,7 +69,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               children: [
                 ArticlesScreen(),
                 PopularExercisesScreen(),
-                Learn(),
+                LearnScreen(),
               ],
             ),
           ),
