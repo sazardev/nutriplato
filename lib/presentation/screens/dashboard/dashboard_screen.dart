@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nutriplato/presentation/provider/user_provider.dart';
 import 'package:nutriplato/presentation/screens/dashboard/widgets/learn_screen.dart';
-import 'package:nutriplato/presentation/screens/articles/articles_screen.dart';
-import 'package:nutriplato/presentation/screens/fitness/fitness_screen.dart';
+import 'package:nutriplato/fitness/fitness.screen.dart';
 import 'package:nutriplato/presentation/screens/widgets/contact.dart';
+import 'package:nutriplato/presentation/screens/widgets/sidebar.dart';
 import 'package:provider/provider.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -21,13 +21,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
+        drawer: const DrawerProfile(),
         backgroundColor: const Color.fromARGB(255, 245, 245, 245),
         appBar: AppBar(
           toolbarHeight: 60,
-          leading: IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          ),
           title: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -67,7 +64,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ArticlesScreen(),
                 PopularExercisesScreen(),
                 LearnScreen(),
               ],

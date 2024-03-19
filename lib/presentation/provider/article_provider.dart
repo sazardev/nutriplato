@@ -1,4 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:nutriplato/infrastructure/entities/article/article.dart';
 
@@ -7,19 +6,6 @@ class ArticleProvider extends ChangeNotifier {
   Article? selectedArticle;
 
   void getArticles() async {
-    DatabaseReference itemRef =
-        FirebaseDatabase.instance.ref().child('noticias');
-
-    await itemRef.once().then((DatabaseEvent event) {
-      if (event.snapshot.value is Map) {
-        Map<dynamic, dynamic> values =
-            event.snapshot.value as Map<dynamic, dynamic>;
-
-        values.forEach((key, value) {
-          articles.add(Article.fromJson(value));
-        });
-      }
-    });
     notifyListeners();
   }
 }

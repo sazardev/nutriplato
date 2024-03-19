@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -41,7 +40,7 @@ class PresentationScreen extends StatelessWidget {
         final prefs = await SharedPreferences.getInstance();
         prefs.setBool('presentation', false);
 
-        context.pushReplacementNamed('home');
+        // TODO: context.pushReplacementNamed('home');
       },
       onSkip: () {
         Navigator.of(context).push(

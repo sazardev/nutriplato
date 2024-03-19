@@ -1,18 +1,16 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:nutriplato/presentation/provider/fitness_provider.dart';
-import 'package:nutriplato/presentation/screens/fitness/widgets/finished_exercise.dart';
-import 'package:provider/provider.dart';
-
-import '../../../infrastructure/entities/fitness/fitness.dart';
+import 'package:get/get.dart';
+import 'package:nutriplato/fitness/finished_exercise.dart';
+import 'package:nutriplato/fitness/fitness.model.dart';
 
 class ExerciseScreen extends StatefulWidget {
-  static const appRouterName = "ExerciseScreen";
-
   const ExerciseScreen({
     super.key,
+    required this.selectedFitness,
   });
+
+  final Fitness selectedFitness;
 
   @override
   State<ExerciseScreen> createState() => _ExerciseState();
@@ -26,41 +24,44 @@ class _ExerciseState extends State<ExerciseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final Fitness? fitness = context.watch<FitnessProvider>().selectedExercise;
-
     return Scaffold(
       backgroundColor: _restTimerCompleted ? Colors.white : Colors.purple,
       appBar: AppBar(
-          title: Text(fitness!.name),
-          backgroundColor: _restTimerCompleted ? Colors.white : Colors.purple,
-          foregroundColor: _restTimerCompleted ? Colors.black : Colors.white,
-          automaticallyImplyLeading: false,
-          leading: IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () {
-                context.pop();
-              })),
+        title: Text(widget.selectedFitness.name),
+        backgroundColor: _restTimerCompleted ? Colors.white : Colors.purple,
+        foregroundColor: _restTimerCompleted ? Colors.black : Colors.white,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () => Get.back(),
+        ),
+      ),
       body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            if (!_restTimerCompleted) restTimer(fitness.rest, 'Descansa'),
+            if (!_restTimerCompleted)
+              restTimer(widget.selectedFitness.rest, 'Descansa',
+                  widget.selectedFitness),
             if (_restTimerCompleted && !_timerCompleted)
-              restTimer(10, '¿Listo?'),
+              restTimer(10, '¿Listo?', widget.selectedFitness),
             if (_timerCompleted && _restTimerCompleted) ...[
               const Spacer(),
               Center(
-                child: Text(fitness.exercises[indexExercise].name,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w500,
-                    )),
+                child:
+                    Text(widget.selectedFitness.exercises[indexExercise].name,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                        )),
               ),
               Center(
                 child: Padding(
                   padding: const EdgeInsets.all(32.0),
-                  child: fitness.exercises[indexExercise].time == 0
-                      ? Text('x${fitness.exercises[indexExercise].quantity}',
+                  child: widget.selectedFitness.exercises[indexExercise].time ==
+                          0
+                      ? Text(
+                          'x${widget.selectedFitness.exercises[indexExercise].quantity}',
                           style: const TextStyle(
                               fontSize: 48, fontWeight: FontWeight.bold))
                       : Center(
@@ -68,8 +69,9 @@ class _ExerciseState extends State<ExerciseScreen> {
                             width: 100,
                             height: 100,
                             child: CircularCountDownTimer(
-                              duration:
-                                  fitness.exercises[indexExercise].time + 1,
+                              duration: widget.selectedFitness
+                                      .exercises[indexExercise].time +
+                                  1,
                               initialDuration: 0,
                               width: MediaQuery.of(context).size.width / 2,
                               height: MediaQuery.of(context).size.height / 2,
@@ -92,12 +94,12 @@ class _ExerciseState extends State<ExerciseScreen> {
                               onStart: () {},
                               onComplete: () {
                                 if (!(indexExercise <
-                                    fitness.exercises.length - 1)) {
+                                    widget.selectedFitness.exercises.length -
+                                        1)) {
                                   Navigator.pop(context);
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (builder) {
-                                    return const FinishedExerciseScreen();
-                                  }));
+                                  Get.to(() => FinishedExerciseScreen(
+                                        selectedFitness: widget.selectedFitness,
+                                      ));
                                 } else {
                                   setState(() {
                                     _restTimerCompleted = false;
@@ -112,7 +114,8 @@ class _ExerciseState extends State<ExerciseScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 42, right: 42, bottom: 32),
-                child: indexExercise < fitness.exercises.length - 1
+                child: indexExercise <
+                        widget.selectedFitness.exercises.length - 1
                     ? FilledButton(
                         onPressed: () {
                           setState(() {
@@ -128,9 +131,9 @@ class _ExerciseState extends State<ExerciseScreen> {
                       )
                     : FilledButton(
                         onPressed: () {
-                          context.pop();
-                          context
-                              .pushNamed(FinishedExerciseScreen.appRouterName);
+                          // TODO: context.pop();
+                          // context
+                          //     .pushNamed(FinishedExerciseScreen.appRouterName);
                         },
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
@@ -144,9 +147,7 @@ class _ExerciseState extends State<ExerciseScreen> {
     );
   }
 
-  Widget restTimer(int time, String text) {
-    final Fitness? fitness = context.watch<FitnessProvider>().selectedExercise;
-
+  Widget restTimer(int time, String text, Fitness fitness) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -250,7 +251,7 @@ class _ExerciseState extends State<ExerciseScreen> {
                           ),
                         ),
                         Text(
-                          ' $indexExercise/${fitness?.exercises.length}',
+                          ' $indexExercise/${fitness.exercises.length}',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -265,7 +266,7 @@ class _ExerciseState extends State<ExerciseScreen> {
                     child: Row(
                       children: [
                         Text(
-                          fitness!.exercises[indexExercise].name,
+                          fitness.exercises[indexExercise].name,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,

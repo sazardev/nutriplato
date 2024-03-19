@@ -16,11 +16,11 @@ class DisplayListFoodsScreen extends StatefulWidget {
   final bool isPhone;
 
   const DisplayListFoodsScreen({
-    Key? key,
+    super.key,
     required this.color,
     required this.tappedSection,
     required this.isPhone,
-  }) : super(key: key);
+  });
 
   @override
   State<DisplayListFoodsScreen> createState() => _DisplayListFoodsScreen();

@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:nutriplato/presentation/provider/fitness_provider.dart';
-import 'package:provider/provider.dart';
-
-import '../../../infrastructure/entities/fitness/fitness.dart';
-import 'widgets/display_exercise_screen.dart';
+import 'package:get/get.dart';
+import 'package:nutriplato/fitness/fitness.controller.dart';
+import 'package:nutriplato/fitness/fitness.model.dart';
+import 'package:nutriplato/presentation/screens/screens.dart';
 
 class FitnessScreen extends StatelessWidget {
   const FitnessScreen({super.key});
 
-  static const appRouterName = "FitnessScreen";
-
   @override
   Widget build(BuildContext context) {
-    final listedExercises = context.watch<FitnessProvider>().listedExercises;
+    final listedExercises = Get.find<FitnessController>().listedExercises;
 
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
@@ -72,8 +68,8 @@ class PopularExercisesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Fitness> listFitness =
-        context.watch<FitnessProvider>().listedExercises;
+    final listedExercises = Get.find<FitnessController>().listedExercises;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -91,7 +87,7 @@ class PopularExercisesScreen extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: List.generate(3, (index) {
-              final Fitness fitness = listFitness[index];
+              final Fitness fitness = listedExercises[index];
 
               return SizedBox(
                 width: 220,
@@ -142,12 +138,8 @@ class PopularExercisesScreen extends StatelessWidget {
                           FilledButton(
                             style: FilledButton.styleFrom(
                                 backgroundColor: Colors.pink.shade900),
-                            onPressed: () {
-                              context.read<FitnessProvider>().selectedExercise =
-                                  fitness;
-                              context.pushNamed(
-                                  DisplayExerciseScreen.appRouterName);
-                            },
+                            onPressed: () => Get.to(() =>
+                                ExerciseViewScreen(selectedFitness: fitness)),
                             child: const Text('Ver ejercicio'),
                           ),
                         ],
@@ -181,10 +173,8 @@ class CardExerciseScreen extends StatelessWidget {
         elevation: 0,
         child: InkWell(
           borderRadius: BorderRadius.circular(10),
-          onTap: () {
-            context.read<FitnessProvider>().selectedExercise = fitness;
-            context.pushNamed(DisplayExerciseScreen.appRouterName);
-          },
+          onTap: () =>
+              Get.to(() => ExerciseViewScreen(selectedFitness: fitness)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

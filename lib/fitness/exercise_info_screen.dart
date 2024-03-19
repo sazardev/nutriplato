@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../infrastructure/entities/fitness/fitness.dart';
+import 'package:nutriplato/fitness/fitness.model.dart';
 
 class ExerciseInfoScreen extends StatelessWidget {
   final Fitness fitness;

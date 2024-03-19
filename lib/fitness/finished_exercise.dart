@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/presentation/provider/fitness_provider.dart';
-import 'package:provider/provider.dart';
-
-import '../../../../infrastructure/entities/fitness/fitness.dart';
+import 'package:nutriplato/fitness/fitness.model.dart';
 
 class FinishedExerciseScreen extends StatelessWidget {
-  const FinishedExerciseScreen({Key? key}) : super(key: key);
+  const FinishedExerciseScreen({super.key, required this.selectedFitness});
 
-  static const appRouterName = "FinishedExerciseScreen";
+  final Fitness selectedFitness;
 
   @override
   Widget build(BuildContext context) {
-    final Fitness? fitness = context.watch<FitnessProvider>().selectedExercise;
-
     return Scaffold(
       backgroundColor: Colors.purple,
       body: Padding(
@@ -31,7 +26,7 @@ class FinishedExerciseScreen extends StatelessWidget {
               ),
             ),
             Text(
-              'Haz completado ${fitness?.name}',
+              'Haz completado ${selectedFitness.name}',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white.withAlpha(200),

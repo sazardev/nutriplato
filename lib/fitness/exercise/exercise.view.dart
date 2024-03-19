@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
-import 'package:nutriplato/presentation/provider/fitness_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
+import 'package:nutriplato/fitness/exercise/exercise.screen.dart';
+import 'package:nutriplato/fitness/fitness.model.dart';
 
-import '../../../../infrastructure/entities/fitness/fitness.dart';
-import '../exercise_screen.dart';
-import 'exercise_info_screen.dart';
+import '../exercise_info_screen.dart';
 
-class DisplayExerciseScreen extends StatelessWidget {
-  const DisplayExerciseScreen({super.key});
+class ExerciseViewScreen extends StatelessWidget {
+  const ExerciseViewScreen({super.key, required this.selectedFitness});
 
-  static const appRouterName = "DisplayExerciseScreen";
+  final Fitness selectedFitness;
 
   @override
   Widget build(BuildContext context) {
-    final Fitness? fitness = context.watch<FitnessProvider>().selectedExercise;
-
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 238, 237, 237),
       appBar: AppBar(
-        title: Text(fitness!.name,
+        title: Text(selectedFitness.name,
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
         backgroundColor: Colors.white,
         actions: [
@@ -30,7 +26,7 @@ class DisplayExerciseScreen extends StatelessWidget {
                     context: context,
                     builder: (builder) {
                       return ExerciseInfoScreen(
-                        fitness: fitness,
+                        fitness: selectedFitness,
                       );
                     });
               },
@@ -54,7 +50,7 @@ class DisplayExerciseScreen extends StatelessWidget {
                     width: 10,
                   ),
                   Text(
-                    '${fitness.exercises.length ~/ 2} minutos',
+                    '${selectedFitness.exercises.length ~/ 2} minutos',
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.w500),
                   ),
@@ -69,7 +65,7 @@ class DisplayExerciseScreen extends StatelessWidget {
                     width: 10,
                   ),
                   Text(
-                    '${(fitness.exercises.length ~/ 2) * 20} calorias',
+                    '${(selectedFitness.exercises.length ~/ 2) * 20} calorias',
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.w500),
                   )
@@ -81,24 +77,24 @@ class DisplayExerciseScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: ListView.builder(
               shrinkWrap: true,
-              itemCount: fitness.exercises.length,
+              itemCount: selectedFitness.exercises.length,
               itemBuilder: ((context, index) {
                 return ListTile(
-                  leading: fitness.exercises[index].images.isEmpty
+                  leading: selectedFitness.exercises[index].images.isEmpty
                       ? const Padding(
                           padding: EdgeInsets.only(right: 16.0),
                           child: Icon(FontAwesomeIcons.dumbbell),
                         )
-                      : fitness.exercises[index].images[0],
+                      : selectedFitness.exercises[index].images[0],
                   title: Text(
-                    fitness.exercises[index].name,
+                    selectedFitness.exercises[index].name,
                     style: const TextStyle(
                         fontWeight: FontWeight.w500, fontSize: 20),
                   ),
                   subtitle: Text(
-                    fitness.exercises[index].quantity == 0
-                        ? '${fitness.exercises[index].time} segundos'
-                        : 'x${fitness.exercises[index].quantity} repeticiones',
+                    selectedFitness.exercises[index].quantity == 0
+                        ? '${selectedFitness.exercises[index].time} segundos'
+                        : 'x${selectedFitness.exercises[index].quantity} repeticiones',
                     style: const TextStyle(),
                   ),
                   onTap: () {},
@@ -108,9 +104,11 @@ class DisplayExerciseScreen extends StatelessWidget {
       ]),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          context.pushNamed(ExerciseScreen.appRouterName);
-        },
+        onPressed: () => Get.to(
+          () => ExerciseScreen(
+            selectedFitness: selectedFitness,
+          ),
+        ),
         backgroundColor: Colors.purple,
         foregroundColor: Colors.white,
         label: const Padding(

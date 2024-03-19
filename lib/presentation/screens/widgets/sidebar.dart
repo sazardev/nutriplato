@@ -2,11 +2,9 @@ import 'dart:io';
 
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:nutriplato/presentation/provider/user_provider.dart';
 import 'package:nutriplato/presentation/screens/widgets/theme_changer_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:random_avatar/random_avatar.dart';
 
 import '../../../infrastructure/entities/user.dart';
 
@@ -40,7 +38,8 @@ class _DrawerProfileState extends State<DrawerProfile> {
             intent.launch();
           }
         } else {
-          context.pushNamed(routes[value]);
+          // TODO:
+          // context.pushNamed(routes[value]);
         }
       },
       children: const [
@@ -115,7 +114,7 @@ class _UserCardState extends State<UserCard> {
             ),
             CircleAvatar(
               radius: 70,
-              child: RandomAvatar(user.username),
+              child: Text(user.username),
             ),
             const SizedBox(
               height: 10,

@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
-import 'package:random_avatar/random_avatar.dart';
 
 class Contact extends StatelessWidget {
   const Contact({super.key});
@@ -29,7 +27,7 @@ class Contact extends StatelessWidget {
                           child: SizedBox(
                             child: CircleAvatar(
                               radius: constraints.maxHeight / 10,
-                              child: RandomAvatar('jjjJuarez'),
+                              child: const Text('JJ'),
                             ),
                           ),
                         ),
@@ -59,26 +57,19 @@ class Contact extends StatelessWidget {
                           intent.launch();
                         }
                       },
-                      icon: Logo(
-                        Logos.instagram,
-                        size: 50,
-                      ),
+                      icon: const Icon(Icons.camera),
                     ),
                     IconButton(
-                      onPressed: () {
-                        const url =
-                            'https://api.whatsapp.com/send?phone=526865438402';
-                        const intent = AndroidIntent(
-                          action: 'action_view',
-                          data: url,
-                        );
-                        intent.launch();
-                      },
-                      icon: Logo(
-                        Logos.whatsapp,
-                        size: 55,
-                      ),
-                    ),
+                        onPressed: () {
+                          const url =
+                              'https://api.whatsapp.com/send?phone=526865438402';
+                          const intent = AndroidIntent(
+                            action: 'action_view',
+                            data: url,
+                          );
+                          intent.launch();
+                        },
+                        icon: const Icon(Icons.phone)),
                   ],
                 ),
               ],
