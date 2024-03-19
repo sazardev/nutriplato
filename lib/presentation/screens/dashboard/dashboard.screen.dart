@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:nutriplato/fitness/fitness.controller.dart';
+import 'package:nutriplato/fitness/shared/fitness-popular.widget.dart';
 import 'package:nutriplato/presentation/provider/user_provider.dart';
 import 'package:nutriplato/presentation/screens/dashboard/widgets/learn_screen.dart';
-import 'package:nutriplato/fitness/fitness.screen.dart';
 import 'package:nutriplato/presentation/screens/widgets/contact.dart';
 import 'package:nutriplato/presentation/screens/widgets/sidebar.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +17,8 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  final listedExercises = Get.find<FitnessController>().listedExercises;
+
   @override
   Widget build(BuildContext context) {
     String user = context.watch<UserProvider>().user.username;

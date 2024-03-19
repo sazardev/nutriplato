@@ -5,18 +5,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nutriplato/presentation/screens/search/search_screen.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-import 'screens/dashboard/dashboard_screen.dart';
+import 'screens/dashboard/dashboard.screen.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
-
-  static const appRouterName = "Home";
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<Home> createState() => _Home();
+  State<HomeScreen> createState() => _Home();
 }
 
-class _Home extends State<Home> with SingleTickerProviderStateMixin {
+class _Home extends State<HomeScreen> with SingleTickerProviderStateMixin {
   int _currentIndex = 0;
 
   final List<Widget> _screens = const [

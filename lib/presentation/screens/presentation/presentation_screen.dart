@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../home.dart';
+import '../../home.screen.dart';
 
 class PresentationScreen extends StatelessWidget {
   const PresentationScreen({super.key});
@@ -44,7 +44,7 @@ class PresentationScreen extends StatelessWidget {
       },
       onSkip: () {
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => const Home()),
+          MaterialPageRoute(builder: (_) => const HomeScreen()),
         );
       },
       next: const Icon(Icons.arrow_forward),

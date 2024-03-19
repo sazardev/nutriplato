@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/fitness/fitness.controller.dart';
-import 'package:nutriplato/presentation/home.dart';
+import 'package:nutriplato/presentation/home.screen.dart';
 import 'package:nutriplato/presentation/provider/article_provider.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
 import 'package:nutriplato/presentation/provider/user_provider.dart';
@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'NutriPlato',
         theme: AppTheme().getTheme(),
-        home: const Home(),
+        home: const HomeScreen(),
         initialBinding: BindingsBuilder(() {
           Get.put(FitnessController());
         }),

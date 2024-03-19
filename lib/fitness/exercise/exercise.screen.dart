@@ -1,7 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nutriplato/fitness/finished_exercise.dart';
+import 'package:nutriplato/fitness/exercise/exercise.finish.dart';
 import 'package:nutriplato/fitness/fitness.model.dart';
 
 class ExerciseScreen extends StatefulWidget {
@@ -37,113 +37,115 @@ class _ExerciseState extends State<ExerciseScreen> {
         ),
       ),
       body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            if (!_restTimerCompleted)
-              restTimer(widget.selectedFitness.rest, 'Descansa',
-                  widget.selectedFitness),
-            if (_restTimerCompleted && !_timerCompleted)
-              restTimer(10, '¿Listo?', widget.selectedFitness),
-            if (_timerCompleted && _restTimerCompleted) ...[
-              const Spacer(),
-              Center(
-                child:
-                    Text(widget.selectedFitness.exercises[indexExercise].name,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          if (!_restTimerCompleted)
+            restTimer(widget.selectedFitness.rest, 'Descansa',
+                widget.selectedFitness),
+          if (_restTimerCompleted && !_timerCompleted)
+            restTimer(10, '¿Listo?', widget.selectedFitness),
+          if (_timerCompleted && _restTimerCompleted) ...[
+            const Spacer(),
+            Center(
+              child: Text(widget.selectedFitness.exercises[indexExercise].name,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500,
+                  )),
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: widget.selectedFitness.exercises[indexExercise].time == 0
+                    ? Text(
+                        'x${widget.selectedFitness.exercises[indexExercise].quantity}',
                         style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w500,
-                        )),
-              ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(32.0),
-                  child: widget.selectedFitness.exercises[indexExercise].time ==
-                          0
-                      ? Text(
-                          'x${widget.selectedFitness.exercises[indexExercise].quantity}',
-                          style: const TextStyle(
-                              fontSize: 48, fontWeight: FontWeight.bold))
-                      : Center(
-                          child: SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: CircularCountDownTimer(
-                              duration: widget.selectedFitness
-                                      .exercises[indexExercise].time +
-                                  1,
-                              initialDuration: 0,
-                              width: MediaQuery.of(context).size.width / 2,
-                              height: MediaQuery.of(context).size.height / 2,
-                              ringColor: Colors.grey[300]!,
-                              ringGradient: null,
-                              fillColor: Colors.purpleAccent[100]!,
-                              fillGradient: null,
-                              backgroundGradient: null,
-                              strokeWidth: 20.0,
-                              strokeCap: StrokeCap.round,
-                              textStyle: const TextStyle(
-                                  fontSize: 33.0,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                              textFormat: CountdownTextFormat.S,
-                              isReverse: true,
-                              isReverseAnimation: false,
-                              isTimerTextShown: true,
-                              autoStart: true,
-                              onStart: () {},
-                              onComplete: () {
-                                if (!(indexExercise <
-                                    widget.selectedFitness.exercises.length -
-                                        1)) {
-                                  Navigator.pop(context);
-                                  Get.to(() => FinishedExerciseScreen(
-                                        selectedFitness: widget.selectedFitness,
-                                      ));
-                                } else {
-                                  setState(() {
-                                    _restTimerCompleted = false;
-                                    indexExercise += 1;
-                                  });
-                                }
-                              },
-                            ),
+                            fontSize: 48, fontWeight: FontWeight.bold))
+                    : Center(
+                        child: SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: CircularCountDownTimer(
+                            duration: widget.selectedFitness
+                                    .exercises[indexExercise].time +
+                                1,
+                            initialDuration: 0,
+                            width: MediaQuery.of(context).size.width / 2,
+                            height: MediaQuery.of(context).size.height / 2,
+                            ringColor: Colors.grey[300]!,
+                            ringGradient: null,
+                            fillColor: Colors.purpleAccent[100]!,
+                            fillGradient: null,
+                            backgroundGradient: null,
+                            strokeWidth: 20.0,
+                            strokeCap: StrokeCap.round,
+                            textStyle: const TextStyle(
+                                fontSize: 33.0,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                            textFormat: CountdownTextFormat.S,
+                            isReverse: true,
+                            isReverseAnimation: false,
+                            isTimerTextShown: true,
+                            autoStart: true,
+                            onStart: () {},
+                            onComplete: () {
+                              if (!(indexExercise <
+                                  widget.selectedFitness.exercises.length -
+                                      1)) {
+                                Navigator.pop(context);
+                                Get.to(() => FinishedExerciseScreen(
+                                      selectedFitness: widget.selectedFitness,
+                                    ));
+                              } else {
+                                setState(() {
+                                  _restTimerCompleted = false;
+                                  indexExercise += 1;
+                                });
+                              }
+                            },
                           ),
-                        ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 42, right: 42, bottom: 32),
-                child: indexExercise <
-                        widget.selectedFitness.exercises.length - 1
-                    ? FilledButton(
-                        onPressed: () {
-                          setState(() {
-                            _restTimerCompleted = false;
-                            indexExercise += 1;
-                          });
-                        },
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child:
-                              Text('Siguiente', style: TextStyle(fontSize: 18)),
-                        ),
-                      )
-                    : FilledButton(
-                        onPressed: () {
-                          // TODO: context.pop();
-                          // context
-                          //     .pushNamed(FinishedExerciseScreen.appRouterName);
-                        },
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child:
-                              Text('Terminar', style: TextStyle(fontSize: 18)),
                         ),
                       ),
               ),
-            ],
-          ]),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 42,
+                right: 42,
+                bottom: 32,
+              ),
+              child: indexExercise < widget.selectedFitness.exercises.length - 1
+                  ? FilledButton(
+                      onPressed: () => setState(
+                        () {
+                          _restTimerCompleted = false;
+                          indexExercise += 1;
+                        },
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child:
+                            Text('Siguiente', style: TextStyle(fontSize: 18)),
+                      ),
+                    )
+                  : FilledButton(
+                      onPressed: () => Get.back(),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Terminar',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+            ),
+          ],
+        ],
+      ),
     );
   }
 
