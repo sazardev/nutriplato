@@ -10,19 +10,19 @@ import '../../../../data/food/cereales.dart';
 import '../../../../data/food/frutas.dart';
 import '../../../../data/food/verduras.dart';
 
-class DisplayFoodScreen extends StatefulWidget {
+class FoodViewScreen extends StatefulWidget {
   final Food food;
 
-  const DisplayFoodScreen({
+  const FoodViewScreen({
     super.key,
     required this.food,
   });
 
   @override
-  State<DisplayFoodScreen> createState() => _DisplayFoodScreen();
+  State<FoodViewScreen> createState() => _DisplayFoodScreen();
 }
 
-class _DisplayFoodScreen extends State<DisplayFoodScreen> {
+class _DisplayFoodScreen extends State<FoodViewScreen> {
   final TextStyle styleData = const TextStyle(
     color: Colors.white,
     fontSize: 18,

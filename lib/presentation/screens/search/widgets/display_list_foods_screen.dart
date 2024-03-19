@@ -5,7 +5,7 @@ import 'package:nutriplato/data/food/cereales.dart';
 import 'package:nutriplato/data/food/frutas.dart';
 import 'package:nutriplato/data/food/leguminosas.dart';
 import 'package:nutriplato/data/food/verduras.dart';
-import 'package:nutriplato/presentation/screens/search/widgets/display_food_screen.dart';
+import 'package:nutriplato/presentation/screens/search/widgets/food.view.dart';
 
 import '../../../../data/data.dart';
 import '../../../../data/food/animals.dart';
@@ -215,17 +215,18 @@ class _DisplayListFoodsScreen extends State<DisplayListFoodsScreen> {
                           borderRadius: BorderRadius.circular(10),
                           onTap: () {
                             showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                builder: (context) {
-                                  return SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.7,
-                                    child: DisplayFoodScreen(
-                                      food: filteredFoods[index],
-                                    ),
-                                  );
-                                });
+                              context: context,
+                              isScrollControlled: true,
+                              builder: (context) {
+                                return SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.7,
+                                  child: FoodViewScreen(
+                                    food: filteredFoods[index],
+                                  ),
+                                );
+                              },
+                            );
                           },
                           child: Column(
                             mainAxisSize: MainAxisSize.min,

@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:nutriplato/fitness/exercise/exercise.screen.dart';
 import 'package:nutriplato/fitness/fitness.model.dart';
 
-import '../exercise_info_screen.dart';
-
 class ExerciseViewScreen extends StatelessWidget {
   const ExerciseViewScreen({super.key, required this.selectedFitness});
 
@@ -21,16 +19,23 @@ class ExerciseViewScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         actions: [
           IconButton(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (builder) {
-                      return ExerciseInfoScreen(
-                        fitness: selectedFitness,
-                      );
-                    });
-              },
-              icon: const Icon(Icons.info_outline))
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (builder) => AlertDialog(
+                  title: Text(selectedFitness.name),
+                  content: Text(selectedFitness.description),
+                  actions: [
+                    FilledButton(
+                      onPressed: () => Get.back(),
+                      child: const Text('Aceptar'),
+                    ),
+                  ],
+                ),
+              );
+            },
+            icon: const Icon(Icons.info_outline),
+          ),
         ],
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [

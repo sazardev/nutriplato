@@ -13,7 +13,7 @@ export 'package:nutriplato/fitness/exercise/exercise.start.dart';
 export 'package:nutriplato/fitness/exercise/exercise.finish.dart';
 
 // Search export.
-export 'package:nutriplato/presentation/screens/search/search_screen.dart';
+export 'package:nutriplato/presentation/screens/search/search.screen.dart';
 
 // Plate export.
 export 'package:nutriplato/presentation/screens/plate/plate_screen.dart';
