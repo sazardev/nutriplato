@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nutriplato/fitness/fitness.screen.dart';
 import 'package:nutriplato/presentation/screens/plate/plate_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nutriplato/presentation/screens/search/search.screen.dart';
+import 'package:nutriplato/search/search.screen.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import 'screens/dashboard/dashboard.screen.dart';

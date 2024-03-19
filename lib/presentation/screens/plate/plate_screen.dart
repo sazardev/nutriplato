@@ -5,7 +5,7 @@ import 'package:nutriplato/presentation/screens/plate/widgets/plato_info_screen.
 import 'dart:math' as math;
 
 import '../../../data/data.dart';
-import '../search/widgets/display_list_foods_screen.dart';
+import '../food/foods.screen.dart';
 import 'widgets/circlepainter.dart';
 
 class PlateScreen extends StatefulWidget {
@@ -153,7 +153,7 @@ class _Plate extends State<PlateScreen> {
       showGeneralDialog(
           context: context,
           pageBuilder: (context, animation1, animation2) {
-            return DisplayListFoodsScreen(
+            return FoodsScreen(
               color: color,
               tappedSection: tappedSection,
               isPhone: false,
@@ -174,7 +174,7 @@ class _Plate extends State<PlateScreen> {
           builder: (context) {
             return SizedBox(
               height: MediaQuery.of(context).size.height * 0.8,
-              child: DisplayListFoodsScreen(
+              child: FoodsScreen(
                 color: color,
                 tappedSection: tappedSection,
                 isPhone: true,

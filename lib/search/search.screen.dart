@@ -6,7 +6,7 @@ import 'package:nutriplato/data/food/leguminosas.dart';
 import 'package:nutriplato/data/food/verduras.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'widgets/food.view.dart';
+import '../presentation/screens/food/food.view.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -59,47 +59,54 @@ class _SearchScreen extends State<SearchScreen> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Column(
-              children: [
-                SearchAnchor.bar(
-                  barElevation: const MaterialStatePropertyAll(1),
-                  viewElevation: 1,
-                  suggestionsBuilder: (context, controller) {
-                    var textEditingValue = controller.text;
-                    var startsWith = allFoods.where((Food food) {
-                      return food.name
-                          .toLowerCase()
-                          .startsWith(textEditingValue.toLowerCase());
-                    }).toList();
-                    var contains = allFoods.where((Food food) {
-                      return food.name
-                          .toLowerCase()
-                          .contains(textEditingValue.toLowerCase());
-                    }).toList();
-                    contains
-                        .removeWhere((element) => startsWith.contains(element));
-                    startsWith.addAll(contains);
-
-                    return startsWith
-                        .map(
-                          (food) => ListTile(
-                            title: Text(food.name),
-                            onTap: () => showModalBottomSheet(
-                              context: context,
-                              isScrollControlled: true,
-                              builder: (context) => SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.6,
-                                child: FoodViewScreen(food: food),
-                              ),
-                            ),
-                          ),
-                        )
-                        .toList();
-                  },
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+            child: SearchAnchor.bar(
+              barElevation: const MaterialStatePropertyAll(2),
+              viewElevation: 2,
+              isFullScreen: true,
+              barHintText: 'Buscar alimentos',
+              barShape: MaterialStatePropertyAll(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              ],
+              ),
+              viewShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              suggestionsBuilder: (context, controller) {
+                var textEditingValue = controller.text;
+                var startsWith = allFoods.where((Food food) {
+                  return food.name
+                      .toLowerCase()
+                      .startsWith(textEditingValue.toLowerCase());
+                }).toList();
+                var contains = allFoods.where((Food food) {
+                  return food.name
+                      .toLowerCase()
+                      .contains(textEditingValue.toLowerCase());
+                }).toList();
+                contains.removeWhere((element) => startsWith.contains(element));
+                startsWith.addAll(contains);
+
+                return startsWith
+                    .map(
+                      (food) => ListTile(
+                        title: Text(food.name),
+                        onTap: () => showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (context) => SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.6,
+                            child: FoodViewScreen(food: food),
+                          ),
+                        ),
+                      ),
+                    )
+                    .toList();
+              },
             ),
           ),
           Row(
