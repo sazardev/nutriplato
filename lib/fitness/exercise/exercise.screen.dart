@@ -203,13 +203,15 @@ class _ExerciseState extends State<ExerciseScreen> {
                       ),
                       onPressed: () {
                         setState(() {
-                          _controller.isPaused
+                          _controller.isPaused.value
                               ? _controller.resume()
                               : _controller.pause();
                         });
                       },
                       child: Text(
-                        _controller.isPaused ? '  Reanudar  ' : '  Pausar  ',
+                        _controller.isPaused.value
+                            ? '  Reanudar  '
+                            : '  Pausar  ',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
