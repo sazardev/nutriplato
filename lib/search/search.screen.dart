@@ -64,11 +64,11 @@ class _SearchScreen extends State<SearchScreen> {
               vertical: 8,
             ),
             child: SearchAnchor.bar(
-              barElevation: const MaterialStatePropertyAll(2),
+              barElevation: const WidgetStatePropertyAll(2),
               viewElevation: 2,
               isFullScreen: true,
               barHintText: 'Buscar alimentos',
-              barShape: MaterialStatePropertyAll(
+              barShape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
