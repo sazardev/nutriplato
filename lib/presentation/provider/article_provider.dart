@@ -46,13 +46,13 @@ class ArticleProvider extends ChangeNotifier {
             title: "¿Qué es una alimentación balanceada?",
             content:
                 "Una alimentación balanceada consiste en consumir una variedad de alimentos que proporcionen los nutrientes necesarios para mantener la salud y tener energía. Según la Secretaría de Salud de México y el 'Plato del Bien Comer', una dieta equilibrada debe incluir:\n\n• Verduras y frutas (⅓ del plato)\n• Cereales y tubérculos (⅓ del plato)\n• Leguminosas y alimentos de origen animal (⅓ del plato)\n\n¿Sabías que? Los mexicanos consumen en promedio solo 34% de las verduras recomendadas diariamente, según datos del INSP.",
-            images: ["lib/data/img/nutrition_balance.jpg"],
+            images: ["lib/data/img/nutrition_balance.jpeg"],
           ),
           ArticleSection(
             title: "Beneficios para la salud física",
             content:
                 "El IMSS destaca que una alimentación equilibrada tiene múltiples beneficios comprobados:\n\n• Mantiene un peso saludable, combatiendo la obesidad que afecta al 75.2% de la población adulta mexicana\n• Fortalece el sistema inmunológico, aumentando hasta 25% la capacidad de defensa\n• Reduce hasta un 80% el riesgo de enfermedades crónicas como diabetes (que afecta a 14% de mexicanos) y enfermedades cardíacas\n• Previene la desnutrición y deficiencias nutricionales\n• Mejora la energía y vitalidad diaria\n\nPara toda la familia: Un juego divertido es crear 'platos arcoíris' con alimentos de diferentes colores. ¡Mientras más colores naturales tenga tu plato, más nutrientes contiene!",
-            images: ["lib/data/img/healthy_food_variety.jpg"],
+            images: ["lib/data/img/healthy_food_variety.jpeg"],
           ),
           ArticleSection(
             title: "Impacto en la salud mental",
@@ -87,13 +87,13 @@ class ArticleProvider extends ChangeNotifier {
             title: "Carbohidratos: El combustible principal",
             content:
                 "Los carbohidratos son la fuente primaria de energía para el ejercicio. La CONADE (Comisión Nacional de Cultura Física y Deporte) recomienda:\n\n• Antes del ejercicio: Consume carbohidratos complejos 2-3 horas antes (avena, pan integral, camote)\n• Durante el ejercicio: Para actividades mayores a 60 minutos, 30-60g de carbohidratos por hora\n• Después del ejercicio: Reponer 1-1.2g/kg de peso en las primeras 4 horas\n\n¿Sabías que? Un plátano aporta aproximadamente 27g de carbohidratos, ideal para recuperarse después de entrenar. Los deportistas mexicanos de alto rendimiento consumen en promedio 5-7g de carbohidratos/kg de peso corporal.",
-            images: ["lib/data/img/carbs_for_athletes.jpg"],
+            images: ["lib/data/img/carbs_for_athletes.jpeg"],
           ),
           ArticleSection(
             title: "Proteínas para recuperación y crecimiento",
             content:
                 "Según el Instituto Nacional de Medicina del Deporte, las proteínas son esenciales para la reparación muscular:\n\n• Requerimiento diario: 1.2-2.0g/kg de peso corporal para deportistas (vs 0.8g/kg en sedentarios)\n• Timing: Distribuir el consumo cada 3-4 horas para maximizar la síntesis proteica muscular\n• Fuentes mexicanas recomendadas: Pollo, huevo, frijoles, lentejas, amaranto, chía\n\nPara niños deportistas: Explícales que las proteínas son como \"ladrillos\" que reparan sus músculos después de jugar. Un vaso de leche con chocolate natural después de entrenar es una excelente opción de recuperación.",
-            images: ["lib/data/img/protein_sources_mx.jpg"],
+            images: ["lib/data/img/protein_sources_mx.jpeg"],
           ),
           ArticleSection(
             title: "Hidratación estratégica",
@@ -104,7 +104,7 @@ class ArticleProvider extends ChangeNotifier {
             title: "Alimentos tradicionales mexicanos para deportistas",
             content:
                 "Nuestra gastronomía ofrece excelentes opciones para deportistas, respaldadas por estudios de la UNAM:\n\n• Amaranto: Con 16g de proteína por 100g, es un superalimento mexicano que contiene los 9 aminoácidos esenciales\n• Chía: Rica en omega-3, proteínas y antioxidantes. 1 cucharada antes del ejercicio puede mantener la hidratación\n• Frijoles + maíz (tortilla): Combinación que aporta proteína completa y carbohidratos complejos\n• Nopales: Altos en fibra y antioxidantes, regulan glucosa e insulina\n• Aguacate: Grasa saludable que mejora la absorción de nutrientes y reduce inflamación\n\nIdea práctica: Prepara un batido deportivo mexicano: 1 plátano + 1 cucharada de amaranto + 1 cucharada de chía + agua de coco.",
-            images: ["lib/data/img/traditional_mexican_superfoods.jpg"],
+            images: ["lib/data/img/traditional_mexican_superfoods.jpeg"],
           ),
           ArticleSection(
             title: "Suplementación: ¿Cuándo es necesaria?",
@@ -128,7 +128,7 @@ class ArticleProvider extends ChangeNotifier {
             title: "Leguminosas: El superalimento mexicano",
             content:
                 "Las leguminosas como frijoles, lentejas, habas y garbanzos son parte fundamental de la dieta mexicana desde tiempos prehispánicos. El Instituto Nacional de Nutrición Salvador Zubirán destaca:\n\n• Son excelente fuente de proteína vegetal (20-25%)\n• Contienen fibra soluble e insoluble que mejora la digestión\n• Aportan hierro, zinc, magnesio y vitaminas del complejo B\n• Tienen índice glucémico bajo, ideal para control de azúcar en sangre\n\n¿Sabías que? México es uno de los principales productores de frijol en el mundo, con más de 70 variedades nativas. El consumo de frijoles se ha reducido 50% en zonas urbanas en las últimas décadas según la FAO.",
-            images: ["lib/data/img/variedades_frijoles.jpg"],
+            images: ["lib/data/img/variedades_frijoles.jpeg"],
           ),
           ArticleSection(
             title: "Beneficios para la salud comprobados",
@@ -139,7 +139,7 @@ class ArticleProvider extends ChangeNotifier {
             title: "La combinación perfecta: Cereales + Leguminosas",
             content:
                 "La tradicional combinación mexicana de frijoles con maíz (tortilla) no es casualidad. La Secretaría de Agricultura explica que:\n\n• Juntos forman una proteína completa con todos los aminoácidos esenciales\n• Esta combinación tiene valor nutricional similar a proteínas animales\n• Aportan energía sostenida por la fibra y carbohidratos complejos\n• Son económicamente accesibles para toda la población\n\nEjemplos de platillos completos: Enfrijoladas, tlacoyos, huaraches, sopes con frijoles, tacos de frijol con nopales.\n\nPara niños: Explícales que los frijoles y la tortilla son \"amigos inseparables\" porque juntos forman un equipo más poderoso que por separado.",
-            images: ["lib/data/img/maiz_frijol_combo.jpg"],
+            images: ["lib/data/img/maiz_frijol_combo.jpeg"],
           ),
           ArticleSection(
             title: "Cómo incorporarlas diariamente",
@@ -150,7 +150,7 @@ class ArticleProvider extends ChangeNotifier {
             title: "Leguminosas para todas las edades",
             content:
                 "El DIF Nacional recomienda las leguminosas en todas las etapas de vida:\n\n• Niños: Iniciar con purés de lenteja o frijol desde los 6 meses\n• Adolescentes: Snacks como garbanzos tostados para crecimiento\n• Embarazo: Fundamentales por su aporte de ácido fólico y hierro\n• Adultos mayores: Textura suave y alta densidad nutricional\n\nEl programa gubernamental PREVENIMSS incluye las leguminosas como alimento indispensable en la orientación alimentaria para prevención de enfermedades crónicas.\n\nRecuerda: Un plato saludable mexicano debería incluir ⅓ de leguminosas o alimentos de origen animal, priorizando las primeras varias veces por semana.",
-            images: ["lib/data/img/legumbres_todas_edades.jpg"],
+            images: ["lib/data/img/legumbres_todas_edades.jpeg"],
           ),
         ],
       ),
@@ -169,7 +169,7 @@ class ArticleProvider extends ChangeNotifier {
             title: "La importancia vital del agua",
             content:
                 "La Secretaría de Salud señala que el agua constituye entre el 50-70% de nuestro peso corporal y es esencial para:\n\n• Transportar nutrientes a las células\n• Regular la temperatura corporal\n• Eliminar toxinas y desechos\n• Lubricar articulaciones y órganos\n• Mantener funciones cognitivas óptimas\n\n¿Sabías que? Una deshidratación de solo 1-2% puede reducir tu capacidad cognitiva hasta un 10%. Según el INSP, el 70% de los escolares mexicanos llegan deshidratados a la escuela, afectando su rendimiento académico.",
-            images: ["lib/data/img/importance_of_water.jpg"],
+            images: ["lib/data/img/importance_of_water.jpeg"],
           ),
           ArticleSection(
             title: "¿Cuánta agua necesitamos realmente?",
@@ -191,7 +191,7 @@ class ArticleProvider extends ChangeNotifier {
             title: "Hábitos para mejor hidratación",
             content:
                 "Recomendaciones del programa gubernamental Salud para Todos:\n\n• Comenzar el día con 1-2 vasos de agua\n• Llevar siempre una botella reutilizable\n• Establecer horarios de hidratación (al despertar, entre comidas, antes de dormir)\n• Consumir frutas y verduras con alto contenido de agua\n• Limitar bebidas con cafeína o alcohol que tienen efecto diurético\n• En clima cálido o actividad física, aumentar consumo preventivamente\n\nPara toda la familia: Creen una \"estación de hidratación\" en casa con agua natural infusionada con frutas, hierbas o verduras. Ejemplos: agua con rodajas de pepino y limón; agua con hierbabuena y naranja.",
-            images: ["lib/data/img/healthy_hydration_habits.jpg"],
+            images: ["lib/data/img/healthy_hydration_habits.jpeg"],
           ),
           ArticleSection(
             title: "Mitos y realidades sobre la hidratación",
