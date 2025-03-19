@@ -19,8 +19,17 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
   late AnimationController _highlightAnimationController;
   late AnimationController _sheetAnimationController;
 
-  // Definición de los ángulos para las secciones del plato
-  final List<double> angles = [0, pi / 2, pi * 3 / 4, pi, pi + pi / 2, pi * 2];
+  // Definición de los ángulos para las secciones del plato (en radianes)
+  // Los ángulos representan las nuevas proporciones:
+  // 22% Cereales, 15% Leguminosas, 8% Animal, 5% Grasas, 50% Verduras & Frutas
+  final List<double> angles = [
+    0, // Inicio de cereales
+    0.44 * pi, // Fin de cereales / Inicio de leguminosas
+    0.74 * pi, // Fin de leguminosas / Inicio de animal
+    0.9 * pi, // Fin de animal / Inicio de grasas
+    pi, // Fin de grasas / Inicio de verduras & frutas
+    2 * pi // Fin de verduras & frutas / Cierre del círculo
+  ];
 
   @override
   void initState() {
@@ -113,13 +122,14 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
       builder: (context, constraints) {
         final double size = min(constraints.maxWidth, constraints.maxHeight);
 
-        // Ajustar los radios para cada sección
+        // Ajustar los radios para cada sección (ahora con 5 secciones)
+        // El tamaño de cada sección está ajustado visualmente para que sea agradable
         final List<double> radii = [
-          size / 2 - 50,
-          size / 2 - 50,
-          size / 2 - 45,
-          size / 2 - 40,
-          size / 2 - 40,
+          size / 2 - 45, // Cereales (22%)
+          size / 2 - 43, // Leguminosas (15%)
+          size / 2 - 40, // Animal (8%)
+          size / 2 - 38, // Grasas (5%)
+          size / 2 - 50, // Verduras & Frutas (50%)
         ];
 
         return GestureDetector(
@@ -203,8 +213,7 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
         context: context,
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
-        transitionAnimationController:
-            _sheetAnimationController, // Use the pre-created controller
+        transitionAnimationController: _sheetAnimationController,
         builder: (context) {
           return Container(
             height: MediaQuery.of(context).size.height * 0.8,

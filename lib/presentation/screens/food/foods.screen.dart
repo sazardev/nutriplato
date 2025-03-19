@@ -39,18 +39,20 @@ class _DisplayListFoodsScreen extends State<FoodsScreen> {
         allFoods = cereales;
         break;
       case 1:
-        allFoods = animals;
-        break;
-      case 2:
         allFoods = leguminosas;
         break;
+      case 2:
+        allFoods = animals;
+        break;
       case 3:
-        allFoods = verduras;
+        allFoods = animals; // Necesitarás crear esta lista
         break;
       case 4:
-        allFoods = frutas;
+        // Combinamos verduras y frutas para la sección "Verduras & Frutas"
+        allFoods = [...verduras, ...frutas];
         break;
     }
+
     filteredFoods = allFoods;
 
     searchController.addListener(() {

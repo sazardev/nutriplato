@@ -4,28 +4,32 @@ const String name = "Jacqueline Juarez";
 const String developer = "Omar Flores";
 
 final List<Color> sectionColors = [
-  Colors.amber,
-  Colors.red,
-  Colors.orange,
-  const Color.fromARGB(255, 50, 147, 54),
-  const Color.fromARGB(255, 50, 147, 54)
+  Colors.amber, // Cereales (22%)
+  Colors.orange, // Leguminosas (15%)
+  Colors.red, // Animal (8%)
+  Colors.purple, // Grasas (5%)
+  Color.fromARGB(255, 50, 147, 54), // Verduras (25%)
+  Color.fromARGB(255, 247, 183, 51), // Frutas (25%)
 ];
 
 List<String> shortCategories = [
   'Cereales',
-  'Animal',
   'Leguminosas',
+  'Animal',
+  'Grasas',
   'Verduras',
   'Frutas',
 ];
 
 List<String> categories = [
   'Cereales',
-  'Alimentos de Origen Animal',
   'Leguminosas',
+  'Alimentos de Origen Animal',
+  'Grasas saludables',
   'Verduras',
   'Frutas',
 ];
+
 List<String> categoriesDescription = [
   'Los cereales son una opción saludable para incluir en una dieta equilibrada y su consumo puede ayudar a proporcionar energía y nutrientes esenciales para el cuerpo.',
   'Los alimentos de origen animal ofrecen diversos beneficios nutricionales. Son una fuente importante de proteínas de alta calidad que contienen una mayor variedad de aminoácidos esenciales 1. Estos aminoácidos son necesarios para el crecimiento y desarrollo de los niños, así como para la formación y reparación de tejidos en el cuerpo humano.',
