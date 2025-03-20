@@ -8,26 +8,23 @@ final List<Color> sectionColors = [
   Colors.orange, // Leguminosas (15%)
   Colors.red, // Animal (8%)
   Colors.purple, // Grasas (5%)
-  Color.fromARGB(255, 50, 147, 54), // Verduras (25%)
-  Color.fromARGB(255, 247, 183, 51), // Frutas (25%)
+  Color.fromARGB(255, 50, 147, 54), // Verduras & Frutas (50%)
 ];
 
 List<String> shortCategories = [
-  'Cereales',
+  'Granos & Cereales',
   'Leguminosas',
   'Animal',
   'Grasas',
-  'Verduras',
-  'Frutas',
+  'Verduras & Frutas',
 ];
 
 List<String> categories = [
-  'Cereales',
+  'Granos & Cereales',
   'Leguminosas',
   'Alimentos de Origen Animal',
   'Grasas saludables',
-  'Verduras',
-  'Frutas',
+  'Verduras & Frutas',
 ];
 
 List<String> categoriesDescription = [

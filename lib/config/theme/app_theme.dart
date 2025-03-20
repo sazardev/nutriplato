@@ -1,50 +1,69 @@
 import 'package:flutter/material.dart';
-
-//TODO: implement color index for change the theme color.
-int selectedColorIndex = 0;
-
-const List<Color> colorList = [
-  Colors.blue,
-  Colors.indigo,
-  Colors.purple,
-  Colors.purpleAccent,
-  Colors.deepPurple,
-  Colors.red,
-  Colors.redAccent,
-  Colors.pink,
-  Colors.green,
-  Colors.greenAccent,
-  Colors.lightGreen,
-  Colors.teal,
-  Colors.tealAccent,
-  Colors.lightBlue,
-  Colors.blueGrey,
-];
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  final int selectedColor;
-  final bool isDarkMode;
+  final List<Color> colorThemes = [Colors.purple];
 
-  AppTheme({
-    this.selectedColor = 3,
-    this.isDarkMode = false,
-  })  : assert(selectedColor >= 0, 'Selected color must be greater then 0'),
-        assert(selectedColor < colorList.length,
-            'Selected color must be less or equal than ${colorList.length - 1}');
+  ThemeData getTheme([int selectedColor = 0]) {
+    final Color primaryColor = colorThemes[selectedColor];
 
-  ThemeData getTheme() => ThemeData(
-        useMaterial3: true,
-        brightness: isDarkMode ? Brightness.dark : Brightness.light,
-        colorSchemeSeed: colorList[selectedColor],
-        appBarTheme: const AppBarTheme(centerTitle: false),
-      );
-
-  AppTheme copyWith({
-    int? selectedColor,
-    bool? isDarkMode,
-  }) =>
-      AppTheme(
-        selectedColor: selectedColor ?? this.selectedColor,
-        isDarkMode: isDarkMode ?? this.isDarkMode,
-      );
+    return ThemeData(
+      useMaterial3: true,
+      colorSchemeSeed: primaryColor,
+      textTheme: GoogleFonts.nunitoSansTextTheme(),
+      appBarTheme: AppBarTheme(
+        centerTitle: false,
+        elevation: 0,
+        color: Colors.transparent,
+        iconTheme: IconThemeData(color: primaryColor),
+        titleTextStyle: GoogleFonts.nunitoSans(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.black87,
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          elevation: 2,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      ),
+      cardTheme: CardTheme(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+      ),
+      chipTheme: ChipThemeData(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        side: BorderSide.none,
+        selectedColor: primaryColor,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: Colors.grey.shade100,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: primaryColor, width: 2),
+        ),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        prefixIconColor: Colors.grey,
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        elevation: 8,
+        selectedItemColor: Colors.green,
+        unselectedItemColor: Colors.grey,
+      ),
+    );
+  }
 }

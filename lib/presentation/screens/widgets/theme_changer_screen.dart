@@ -18,19 +18,6 @@ class ThemeChangerScreen extends StatelessWidget {
           appRouterName,
         ),
       ),
-      body: ListView.builder(
-          itemCount: colorList.length,
-          itemBuilder: (context, index) {
-            return RadioListTile(
-              title: Text(colorList[index].toString()),
-              activeColor: colorList[index],
-              value: index,
-              groupValue: selected,
-              onChanged: (value) {
-                context.read<ThemeChangerProvider>().changeColorIndex(index);
-              },
-            );
-          }),
     );
   }
 }

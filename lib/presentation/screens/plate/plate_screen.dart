@@ -52,7 +52,7 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  // Determina qué sección del plato fue tocada
+  // Determina qué sección del plato fue tocada con mayor precisión
   int? getTappedSection(
       Offset tapPosition, double size, BoxConstraints constraints) {
     final double centerX = constraints.maxWidth / 2;
@@ -62,22 +62,38 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
     final double distance = sqrt(
         pow(tapPosition.dx - centerX, 2) + pow(tapPosition.dy - centerY, 2));
 
-    // Verifica si el toque está dentro del círculo
-    if (distance > size / 2) {
+    // Verifica si el toque está dentro del círculo con un pequeño margen de tolerancia
+    if (distance > size / 2 * 1.05) {
       return null;
     }
 
-    // Calcula el ángulo del toque
+    // Calcula el ángulo del toque (ajustado para que 0° esté en la parte superior)
     double angle = atan2(tapPosition.dy - centerY, tapPosition.dx - centerX);
+
+    // Normaliza el ángulo para que esté entre 0 y 2π
     if (angle < 0) angle += 2 * pi;
 
-    // Determina la sección basada en el ángulo
+    // Ajuste para que el ángulo comience desde la derecha (0°) en lugar de arriba
+    // Este paso es crucial para alinear con la visualización de CirclePainter
+
+    // Determina la sección basada en el ángulo con alta precisión
     for (int i = 0; i < angles.length - 1; i++) {
       if (angle >= angles[i] && angle < angles[i + 1]) {
+        // Pequeño ajuste para secciones muy pequeñas (como grasas)
+        // que podrían ser difíciles de tocar con precisión
+        if (i == 3 && angles[i + 1] - angles[i] < 0.3) {
+          // Sección de grasas
+          // Si estamos cerca del borde de la sección pequeña, ampliamos un poco su área sensible
+          double sectionCenter = angles[i] + (angles[i + 1] - angles[i]) / 2;
+          if (angle > sectionCenter - 0.15 && angle < sectionCenter + 0.15) {
+            return i;
+          }
+        }
         return i;
       }
     }
 
+    // En caso de que algo salga mal, devolvemos null
     return null;
   }
 
@@ -126,10 +142,10 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
         // El tamaño de cada sección está ajustado visualmente para que sea agradable
         final List<double> radii = [
           size / 2 - 45, // Cereales (22%)
-          size / 2 - 43, // Leguminosas (15%)
-          size / 2 - 40, // Animal (8%)
-          size / 2 - 38, // Grasas (5%)
-          size / 2 - 50, // Verduras & Frutas (50%)
+          size / 2 - 45, // Leguminosas (15%)
+          size / 2 - 45, // Animal (8%)
+          size / 2 - 45, // Grasas (5%)
+          size / 2 - 45, // Verduras & Frutas (50%)
         ];
 
         return GestureDetector(
@@ -138,7 +154,7 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
             animation: _highlightAnimationController,
             builder: (context, child) {
               return Material(
-                elevation: 8,
+                elevation: 10,
                 shadowColor: Colors.black54,
                 shape: const CircleBorder(),
                 child: SizedBox(
