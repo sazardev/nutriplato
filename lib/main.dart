@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/fitness/fitness.controller.dart';
+import 'package:nutriplato/infrastructure/entities/food/food_log_provider.dart';
 import 'package:nutriplato/presentation/home.screen.dart';
 import 'package:nutriplato/presentation/provider/article_provider.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
@@ -37,6 +38,14 @@ class MyApp extends StatelessWidget {
             final articleProvider = ArticleProvider();
             articleProvider.getArticles();
             return articleProvider;
+          },
+        ),
+        ChangeNotifierProvider(
+          lazy: false,
+          create: (_) {
+            final foodLogProvider = FoodLogProvider();
+            foodLogProvider.loadLogs();
+            return foodLogProvider;
           },
         ),
         ChangeNotifierProvider(
