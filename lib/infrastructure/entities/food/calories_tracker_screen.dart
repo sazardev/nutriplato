@@ -148,18 +148,6 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
             ),
           ],
         ),
-        background: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                primaryColor.withOpacity(0.7),
-                primaryColor.withOpacity(0.2),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }
