@@ -65,7 +65,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                               end: Alignment.bottomCenter,
                               colors: [
                                 Colors.transparent,
-                                Colors.black.withOpacity(0.7),
+                                Colors.black.withValues(alpha: .7),
                               ],
                             ),
                           ),
@@ -100,7 +100,8 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                     children: article.tags
                         .map((tag) => Chip(
                               label: Text(tag),
-                              backgroundColor: article.color.withOpacity(0.1),
+                              backgroundColor:
+                                  article.color.withValues(alpha: .1),
                               labelStyle: TextStyle(color: article.color),
                             ))
                         .toList(),
@@ -128,7 +129,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                             decoration: BoxDecoration(
                               border: Border(
                                 bottom: BorderSide(
-                                  color: article.color.withOpacity(0.3),
+                                  color: article.color.withValues(alpha: .3),
                                   width: 2.0,
                                 ),
                               ),

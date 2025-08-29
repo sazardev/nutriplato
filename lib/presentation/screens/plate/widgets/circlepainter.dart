@@ -73,7 +73,7 @@ class CirclePainter extends CustomPainter {
       final borderPaint = Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = 1.5
-        ..color = Colors.white.withOpacity(0.6);
+        ..color = Colors.white.withValues(alpha: .6);
 
       canvas.drawArc(
         Rect.fromCircle(center: center, radius: radius),
@@ -88,7 +88,7 @@ class CirclePainter extends CustomPainter {
   void _drawDividers(Canvas canvas, Size size, Offset center) {
     // Efecto de brillo sutil para las líneas
     final glowPaint = Paint()
-      ..color = Colors.white.withOpacity(0.45)
+      ..color = Colors.white.withValues(alpha: .45)
       ..strokeWidth = 4.5
       ..strokeCap = StrokeCap.round
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 2.5);
@@ -182,14 +182,16 @@ class CirclePainter extends CustomPainter {
         text: TextSpan(
           text: categories[i],
           style: TextStyle(
-            color: isHighlighted ? Colors.black : Colors.black.withOpacity(0.9),
+            color: isHighlighted
+                ? Colors.black
+                : Colors.black.withValues(alpha: .9),
             fontSize: isHighlighted ? fontSize + 0.5 : fontSize,
             fontWeight: isHighlighted ? FontWeight.w700 : FontWeight.w600,
             shadows: [
               Shadow(
                 offset: const Offset(0.5, 0.5),
                 blurRadius: 2.0,
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.white.withValues(alpha: .9),
               )
             ],
           ),

@@ -37,13 +37,13 @@ class ArticleCard extends StatelessWidget {
                         article.imageUrl!,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) => Container(
-                          color: article.color.withOpacity(0.2),
+                          color: article.color.withValues(alpha: .2),
                           child: Icon(Icons.image_not_supported,
                               color: article.color),
                         ),
                       )
                     : Container(
-                        color: article.color.withOpacity(0.2),
+                        color: article.color.withValues(alpha: .2),
                         child: Icon(Icons.article, color: article.color),
                       ),
               ),
@@ -92,7 +92,8 @@ class ArticleCard extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 8, vertical: 2),
                                         decoration: BoxDecoration(
-                                          color: article.color.withOpacity(0.1),
+                                          color: article.color
+                                              .withValues(alpha: .1),
                                           borderRadius:
                                               BorderRadius.circular(10),
                                         ),

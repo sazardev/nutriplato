@@ -69,7 +69,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
                           _activeFilter = tag;
                         });
                       },
-                      selectedColor: Colors.purple.withOpacity(0.2),
+                      selectedColor: Colors.purple.withValues(alpha: .2),
                       checkmarkColor: Colors.purple,
                     ),
                   );
@@ -139,7 +139,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
                                                     label: Text(tag),
                                                     backgroundColor: article
                                                         .color
-                                                        .withOpacity(0.1),
+                                                        .withValues(alpha: .1),
                                                     labelStyle: TextStyle(
                                                       color: article.color,
                                                       fontSize: 12,

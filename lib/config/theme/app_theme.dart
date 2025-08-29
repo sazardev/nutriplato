@@ -14,7 +14,7 @@ class AppTheme {
       appBarTheme: AppBarTheme(
         centerTitle: false,
         elevation: 0,
-        color: Colors.transparent,
+        backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(color: primaryColor),
         titleTextStyle: GoogleFonts.nunitoSans(
           fontSize: 20,
@@ -31,7 +31,7 @@ class AppTheme {
           ),
         ),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),

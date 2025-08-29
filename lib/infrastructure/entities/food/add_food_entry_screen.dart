@@ -10,9 +10,9 @@ class AddFoodEntryScreen extends StatefulWidget {
   final DateTime selectedDate;
 
   const AddFoodEntryScreen({
-    Key? key,
+    super.key,
     required this.selectedDate,
-  }) : super(key: key);
+  });
 
   @override
   State<AddFoodEntryScreen> createState() => _AddFoodEntryScreenState();
@@ -59,7 +59,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha: .2),
             spreadRadius: 1,
             blurRadius: 3,
             offset: const Offset(0, 1),
@@ -141,7 +141,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha: .2),
             spreadRadius: 1,
             blurRadius: 3,
             offset: const Offset(0, 1),
@@ -221,9 +221,9 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: _selectedFood!.color.withOpacity(0.1),
+        color: _selectedFood!.color.withValues(alpha: .1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: _selectedFood!.color.withOpacity(0.3)),
+        border: Border.all(color: _selectedFood!.color.withValues(alpha: .3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -233,7 +233,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: _selectedFood!.color.withOpacity(0.2),
+                  color: _selectedFood!.color.withValues(alpha: .2),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: _selectedFood!.icon,
@@ -314,7 +314,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha: .1),
             spreadRadius: 1,
             blurRadius: 1,
           ),
@@ -360,7 +360,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha: .2),
             spreadRadius: 1,
             blurRadius: 3,
             offset: const Offset(0, 1),
@@ -449,7 +449,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha: .2),
             spreadRadius: 1,
             blurRadius: 3,
             offset: const Offset(0, 1),

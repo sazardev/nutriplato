@@ -327,7 +327,7 @@ class _SearchScreen extends State<SearchScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor.withOpacity(0.1),
+                    color: Theme.of(context).primaryColor.withValues(alpha: .1),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
@@ -469,9 +469,9 @@ class _SearchScreen extends State<SearchScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: .1),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: color.withOpacity(0.5)),
+          border: Border.all(color: color.withValues(alpha: .5)),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -503,7 +503,7 @@ class _SearchScreen extends State<SearchScreen> {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha: .2),
             spreadRadius: 1,
             blurRadius: 6,
             offset: const Offset(0, 3),
@@ -631,15 +631,15 @@ class _SearchScreen extends State<SearchScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: iconColor.withOpacity(0.1),
+                color: iconColor.withValues(alpha: .1),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: iconColor.withOpacity(0.3)),
+                border: Border.all(color: iconColor.withValues(alpha: .3)),
               ),
               child: Text(
                 '${currentRange.start.round()} $unit',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: iconColor.withOpacity(0.8),
+                  color: iconColor.withValues(alpha: .8),
                 ),
               ),
             ),
@@ -648,15 +648,15 @@ class _SearchScreen extends State<SearchScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: iconColor.withOpacity(0.1),
+                color: iconColor.withValues(alpha: .1),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: iconColor.withOpacity(0.3)),
+                border: Border.all(color: iconColor.withValues(alpha: .3)),
               ),
               child: Text(
                 '${currentRange.end.round()} $unit',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: iconColor.withOpacity(0.8),
+                  color: iconColor.withValues(alpha: .8),
                 ),
               ),
             ),
@@ -665,9 +665,9 @@ class _SearchScreen extends State<SearchScreen> {
         SliderTheme(
           data: SliderThemeData(
             activeTrackColor: iconColor,
-            inactiveTrackColor: iconColor.withOpacity(0.2),
+            inactiveTrackColor: iconColor.withValues(alpha: .2),
             thumbColor: iconColor,
-            overlayColor: iconColor.withOpacity(0.2),
+            overlayColor: iconColor.withValues(alpha: .2),
             trackHeight: 4.0,
             rangeThumbShape: const RoundRangeSliderThumbShape(
               enabledThumbRadius: 6.0,
@@ -772,7 +772,9 @@ class _SearchScreen extends State<SearchScreen> {
 
                       return Material(
                         color: isSelected
-                            ? Theme.of(context).primaryColor.withOpacity(0.1)
+                            ? Theme.of(context)
+                                .primaryColor
+                                .withValues(alpha: .1)
                             : Colors.transparent,
                         child: InkWell(
                           onTap: () {
@@ -794,7 +796,7 @@ class _SearchScreen extends State<SearchScreen> {
                                     color: isSelected
                                         ? Theme.of(context)
                                             .primaryColor
-                                            .withOpacity(0.2)
+                                            .withValues(alpha: .2)
                                         : Colors.grey[100],
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -900,7 +902,7 @@ class _SearchScreen extends State<SearchScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              color: categoryColor.withOpacity(0.2),
+              color: categoryColor.withValues(alpha: .2),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: Row(
                 children: [
@@ -924,13 +926,13 @@ class _SearchScreen extends State<SearchScreen> {
             Expanded(
               flex: 3,
               child: Container(
-                color: categoryColor.withOpacity(0.1),
+                color: categoryColor.withValues(alpha: .1),
                 width: double.infinity,
                 child: food.image ??
                     Icon(
                       categoryIcon,
                       size: 50,
-                      color: categoryColor.withOpacity(0.5),
+                      color: categoryColor.withValues(alpha: .5),
                     ),
               ),
             ),

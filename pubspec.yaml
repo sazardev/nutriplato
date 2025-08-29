@@ -23,7 +23,7 @@ dependencies:
   salomon_bottom_bar: ^3.3.2
   shared_preferences: ^2.1.1
   showcaseview: ^4.0.1
-  social_share: ^2.3.1
+  share_plus: ^10.1.1
 
 dev_dependencies:
   flutter_lints: ^5.0.0

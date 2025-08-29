@@ -87,8 +87,8 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
     final Color textColor =
         _isColorDark(baseColor) ? Colors.white : Colors.black87;
     final Color cardColor = _isColorDark(baseColor)
-        ? Colors.white.withOpacity(0.15)
-        : Colors.black.withOpacity(0.05);
+        ? Colors.white.withValues(alpha: .15)
+        : Colors.black.withValues(alpha: .05);
 
     return Container(
       decoration: BoxDecoration(
@@ -97,7 +97,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
           end: Alignment.bottomCenter,
           colors: [
             baseColor,
-            baseColor.withOpacity(0.85),
+            baseColor.withValues(alpha: .85),
           ],
         ),
         borderRadius: const BorderRadius.only(
@@ -117,7 +117,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                 width: 40,
                 height: 5,
                 decoration: BoxDecoration(
-                  color: textColor.withOpacity(0.3),
+                  color: textColor.withValues(alpha: .3),
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
@@ -162,7 +162,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                           _getCategoryName(widget.food.category),
                           style: TextStyle(
                             fontSize: 14,
-                            color: textColor.withOpacity(0.7),
+                            color: textColor.withValues(alpha: .7),
                           ),
                         ),
                       ],
@@ -202,7 +202,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                                 title: 'Porción',
                                 value: multiplicador == 1
                                     ? '${widget.food.cantidadSugerida} ${widget.food.unidad} (${widget.food.pesoNeto} g)'
-                                    : '${multiplicador} ${widget.food.unidad} (${(double.tryParse(widget.food.pesoNeto) ?? 0) * multiplicador} g)',
+                                    : '$multiplicador ${widget.food.unidad} (${(double.tryParse(widget.food.pesoNeto) ?? 0) * multiplicador} g)',
                                 icon: Icons.restaurant,
                                 onInfoPressed: () => _showInfoDialog('Porción',
                                     'Cantidad recomendada por porción según el Sistema Mexicano de Equivalencias.'),
@@ -297,9 +297,8 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
   }
 
   bool _isColorDark(Color color) {
-    // Calculate luminance, if less than 0.5, the color is considered dark
     double luminance =
-        (0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
+        (0.299 * color.r + 0.587 * color.g + 0.114 * color.b) / 255;
     return luminance < 0.5;
   }
 
@@ -310,7 +309,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha: .1),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -329,21 +328,24 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                 Colors.red.shade400,
               ),
               _buildNutrientValue(
-                '${(double.parse(widget.food.proteina) * multiplicador).toStringAsFixed(1)}',
+                (double.parse(widget.food.proteina) * multiplicador)
+                    .toStringAsFixed(1),
                 'g',
                 'Proteínas',
                 FontAwesomeIcons.dna,
                 Colors.green.shade500,
               ),
               _buildNutrientValue(
-                '${(double.parse(widget.food.hidratosDeCarbono) * multiplicador).toStringAsFixed(1)}',
+                (double.parse(widget.food.hidratosDeCarbono) * multiplicador)
+                    .toStringAsFixed(1),
                 'g',
                 'Carbohidratos',
                 FontAwesomeIcons.breadSlice,
                 Colors.amber.shade700,
               ),
               _buildNutrientValue(
-                '${(double.parse(widget.food.lipidos) * multiplicador).toStringAsFixed(1)}',
+                (double.parse(widget.food.lipidos) * multiplicador)
+                    .toStringAsFixed(1),
                 'g',
                 'Grasas',
                 FontAwesomeIcons.oilWell,
@@ -363,7 +365,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: .1),
             shape: BoxShape.circle,
           ),
           child: Icon(
@@ -425,7 +427,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: widget.food.color.withOpacity(0.1),
+            color: widget.food.color.withValues(alpha: .1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(
@@ -656,9 +658,9 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: .1),
           borderRadius: BorderRadius.circular(32),
-          border: Border.all(color: color.withOpacity(0.3)),
+          border: Border.all(color: color.withValues(alpha: .3)),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,

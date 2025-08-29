@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class CaloriesTrackerScreen extends StatefulWidget {
-  const CaloriesTrackerScreen({Key? key}) : super(key: key);
+  const CaloriesTrackerScreen({super.key});
 
   @override
   State<CaloriesTrackerScreen> createState() => _CaloriesTrackerScreenState();
@@ -161,7 +161,7 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: .05),
             blurRadius: 10,
             spreadRadius: 1,
           ),
@@ -264,7 +264,7 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha: .1),
             spreadRadius: 2,
             blurRadius: 15,
             offset: const Offset(0, 5),
@@ -591,7 +591,7 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: _getMealColor(mealType).withOpacity(0.1),
+                    color: _getMealColor(mealType).withValues(alpha: .1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
@@ -649,7 +649,7 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
                         width: 40,
                         height: 40,
                         decoration: BoxDecoration(
-                          color: entry.food.color.withOpacity(0.15),
+                          color: entry.food.color.withValues(alpha: .15),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Center(
@@ -735,7 +735,7 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
                     width: 50,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: entry.food.color.withOpacity(0.15),
+                      color: entry.food.color.withValues(alpha: .15),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     child: Center(
@@ -844,7 +844,7 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: _getMealColor(mealType).withOpacity(0.1),
+                color: _getMealColor(mealType).withValues(alpha: .1),
                 shape: BoxShape.circle,
               ),
               child: Icon(

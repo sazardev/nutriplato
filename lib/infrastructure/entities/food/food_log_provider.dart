@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_entry.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer' as dev;
 
 class FoodLogProvider with ChangeNotifier {
   List<DailyFoodLog> _logs = [];
@@ -140,7 +141,7 @@ class FoodLogProvider with ChangeNotifier {
             entries.add(entry);
           } catch (e) {
             // Ignorar entradas mal formadas
-            print('Error al deserializar entrada: $e');
+            dev.log('Error al deserializar entrada: $e');
           }
         }
 
@@ -153,7 +154,7 @@ class FoodLogProvider with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     } catch (e) {
-      print('Error al cargar registros: $e');
+      dev.log('Error al cargar registros: $e');
       _isLoading = false;
       notifyListeners();
     }
@@ -182,7 +183,7 @@ class FoodLogProvider with ChangeNotifier {
             'category': entry.food.category,
             'iconCodePoint': entry.food.icon.icon!.codePoint,
             'iconFontFamily': entry.food.icon.icon!.fontFamily,
-            'color': entry.food.color.value,
+            'color': entry.food.color,
             'cantidadSugerida': entry.food.cantidadSugerida,
             'unidad': entry.food.unidad,
             'pesoRedondeado': entry.food.pesoRedondeado,
@@ -212,7 +213,7 @@ class FoodLogProvider with ChangeNotifier {
       // Guardar la lista de días
       await prefs.setStringList('food_log_days', days);
     } catch (e) {
-      print('Error al guardar registros: $e');
+      dev.log('Error al guardar registros: $e');
     }
   }
 }
