@@ -7,6 +7,7 @@ import 'package:nutriplato/presentation/home.screen.dart';
 import 'package:nutriplato/presentation/provider/article_provider.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
 import 'package:nutriplato/presentation/provider/user_provider.dart';
+import 'package:nutriplato/presentation/screens/presentation/presentation_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -64,14 +65,19 @@ class MyApp extends StatelessWidget {
           },
         ),
       ],
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'NutriPlato',
-        theme: AppTheme().getTheme(),
-        home: const HomeScreen(),
-        initialBinding: BindingsBuilder(() {
-          Get.put(FitnessController());
-        }),
+      child: Consumer<ThemeChangerProvider>(
+        builder: (context, themeProvider, child) {
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'NutriPlato',
+            theme: AppTheme().getTheme(themeProvider.selectedColor),
+            home:
+                presentation ? const PresentationScreen() : const HomeScreen(),
+            initialBinding: BindingsBuilder(() {
+              Get.put(FitnessController());
+            }),
+          );
+        },
       ),
     );
   }

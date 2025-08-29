@@ -952,7 +952,7 @@ class _SearchScreen extends State<SearchScreen> {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const Spacer(),
+                    const SizedBox(height: 4),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -961,6 +961,7 @@ class _SearchScreen extends State<SearchScreen> {
                           '${double.tryParse(food.energia)?.round() ?? 0}',
                           'kcal',
                         ),
+                        const SizedBox(width: 8),
                         _buildNutrientBadge(
                           'Proteína',
                           food.proteina,
@@ -979,24 +980,29 @@ class _SearchScreen extends State<SearchScreen> {
   }
 
   Widget _buildNutrientBadge(String label, String value, String unit) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 10,
-            color: Colors.grey[600],
+    return Flexible(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 8,
+              color: Colors.grey[600],
+            ),
+            overflow: TextOverflow.ellipsis,
           ),
-        ),
-        Text(
-          '$value $unit',
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 12,
+          Text(
+            '$value $unit',
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 10,
+            ),
+            overflow: TextOverflow.ellipsis,
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

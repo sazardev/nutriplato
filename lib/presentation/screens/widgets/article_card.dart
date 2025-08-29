@@ -51,56 +51,60 @@ class ArticleCard extends StatelessWidget {
               // Content area with remaining space
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       // Title with max 2 lines
                       Text(
                         article.title,
                         style: const TextStyle(
-                          fontSize: 16,
+                          fontSize: 14,
                           fontWeight: FontWeight.bold,
+                          height: 1.2,
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 1),
 
                       // Description with flexible space
-                      Expanded(
+                      Flexible(
                         child: Text(
                           article.description,
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 10,
                             color: Colors.grey[700],
+                            height: 1.2,
                           ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      if (article.tags.isNotEmpty)
+                      if (article.tags.isNotEmpty) ...[
+                        const SizedBox(height: 1),
                         SizedBox(
-                          height: 20,
+                          height: 14,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
                               children: article.tags
                                   .take(2)
                                   .map((tag) => Container(
-                                        margin: const EdgeInsets.only(right: 4),
+                                        margin: const EdgeInsets.only(right: 2),
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 8, vertical: 2),
+                                            horizontal: 4, vertical: 1),
                                         decoration: BoxDecoration(
                                           color: article.color
                                               .withValues(alpha: .1),
                                           borderRadius:
-                                              BorderRadius.circular(10),
+                                              BorderRadius.circular(5),
                                         ),
                                         child: Text(
                                           tag,
                                           style: TextStyle(
-                                            fontSize: 10,
+                                            fontSize: 7,
                                             color: article.color,
                                           ),
                                         ),
@@ -109,6 +113,7 @@ class ArticleCard extends StatelessWidget {
                             ),
                           ),
                         ),
+                      ],
                     ],
                   ),
                 ),
