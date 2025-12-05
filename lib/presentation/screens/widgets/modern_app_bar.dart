@@ -79,7 +79,7 @@ class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
             return Container(
               margin: const EdgeInsets.only(right: 8),
               child: IconButton(
-                onPressed: (action as IconButton).onPressed,
+                onPressed: (action).onPressed,
                 icon: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
@@ -185,7 +185,7 @@ class SliverModernAppBar extends StatelessWidget {
           return Container(
             margin: const EdgeInsets.only(right: 8),
             child: IconButton(
-              onPressed: (action as IconButton).onPressed,
+              onPressed: (action).onPressed,
               icon: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(

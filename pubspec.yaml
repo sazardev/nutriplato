@@ -7,7 +7,7 @@ environment:
   sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
-  android_intent_plus: ^5.3.0
+  android_intent_plus: ^6.0.0
   circular_countdown_timer: ^0.2.3
   flutter:
     sdk: flutter
@@ -17,19 +17,19 @@ dependencies:
   http: ^1.2.1
   icons_plus: ^5.0.0
   intl: ^0.20.2
-  introduction_screen: ^3.1.8
+  introduction_screen: ^4.0.0
   percent_indicator: ^4.2.4
   provider: ^6.0.5
   salomon_bottom_bar: ^3.3.2
   shared_preferences: ^2.1.1
-  showcaseview: ^4.0.1
-  share_plus: ^10.1.1
+  showcaseview: ^5.0.1
+  share_plus: ^12.0.1
   shimmer: ^3.0.0
   lottie: ^3.1.2
   smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
 

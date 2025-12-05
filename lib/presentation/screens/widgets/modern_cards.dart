@@ -240,7 +240,7 @@ class StatCard extends StatelessWidget {
                 ),
                 const Spacer(),
                 if (progress != null)
-                  Container(
+                  SizedBox(
                     width: 36,
                     height: 36,
                     child: CircularProgressIndicator(

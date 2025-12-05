@@ -193,7 +193,7 @@ class ThemeChangerScreen extends StatelessWidget {
                     value: false, // themeProvider.isDarkMode,
                     onChanged:
                         null, // (value) => themeProvider.toggleDarkMode(),
-                    activeColor:
+                    activeThumbColor:
                         appTheme.colorThemes[themeProvider.selectedColor],
                   ),
                 ],
