@@ -5,10 +5,14 @@ import 'package:provider/provider.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
 import 'package:nutriplato/presentation/provider/user_provider.dart';
+import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
 import 'package:nutriplato/presentation/screens/widgets/modern_cards.dart';
 import 'package:nutriplato/presentation/screens/dashboard/widgets/modern_learn_screen.dart';
+import 'package:nutriplato/presentation/screens/dashboard/widgets/nutrition_summary_card.dart';
+import 'package:nutriplato/presentation/screens/dashboard/widgets/smart_suggestions_widget.dart';
 import 'package:nutriplato/presentation/screens/featured_articles.dart';
 import 'package:nutriplato/presentation/screens/widgets/modern_sidebar.dart';
+import 'package:nutriplato/presentation/screens/profile/profile_screen.dart';
 
 class ModernDashboardScreen extends StatefulWidget {
   const ModernDashboardScreen({super.key});
@@ -75,6 +79,22 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
               pinned: true,
               elevation: 0,
               backgroundColor: Colors.transparent,
+              leading: Builder(
+                builder: (context) => IconButton(
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                  icon: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(
+                      Icons.menu_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
               flexibleSpace: FlexibleSpaceBar(
                 background: Container(
                   decoration: BoxDecoration(
@@ -141,10 +161,70 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                     ),
                   ),
                 ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ProfileScreen(),
+                      ),
+                    );
+                  },
+                  icon: Consumer<UserProfileProvider>(
+                    builder: (context, profileProvider, _) {
+                      final profile = profileProvider.profile;
+                      return Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: profile.username.isNotEmpty
+                            ? Text(
+                                profile.username[0].toUpperCase(),
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            : const Icon(
+                                Icons.person_outline,
+                                color: Colors.white,
+                              ),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
 
-            // Estadísticas del usuario
+            // Resumen nutricional personalizado
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: SlideTransition(
+                    position: _slideAnimation,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        NutritionSummaryCard(gradientColors: currentTheme),
+                        const SizedBox(height: 12),
+                        const HealthAlertsCard(),
+                        const SizedBox(height: 12),
+                        HydrationCard(accentColor: currentTheme[0]),
+                        const SizedBox(height: 20),
+                        // Sugerencias inteligentes
+                        const SmartSuggestionsWidget(),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            // Estadisticas del usuario
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(16),

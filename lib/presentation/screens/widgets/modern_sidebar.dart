@@ -6,6 +6,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nutriplato/presentation/provider/user_provider.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
 import 'package:nutriplato/presentation/screens/widgets/theme_changer_screen.dart';
+import 'package:nutriplato/presentation/screens/meal_plan/meal_plan_screen.dart';
+import 'package:nutriplato/presentation/screens/education/nutrition_education_screen.dart';
+import 'package:nutriplato/presentation/screens/profile/profile_screen.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 import '../../../infrastructure/entities/user.dart';
@@ -36,6 +39,57 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
               padding: EdgeInsets.zero,
               children: [
                 const SizedBox(height: 8),
+                _buildMenuSection(
+                  context,
+                  'Nutrición Inteligente',
+                  [
+                    _buildMenuItem(
+                      context,
+                      'Plan Alimenticio',
+                      FontAwesomeIcons.bowlFood,
+                      Colors.green.shade600,
+                      () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const MealPlanScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildMenuItem(
+                      context,
+                      'Aprende Nutrición',
+                      FontAwesomeIcons.graduationCap,
+                      Colors.purple.shade600,
+                      () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const NutritionEducationScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildMenuItem(
+                      context,
+                      'Mi Perfil de Salud',
+                      FontAwesomeIcons.heartPulse,
+                      Colors.red.shade600,
+                      () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const ProfileScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
                 _buildMenuSection(
                   context,
                   'Personalización',

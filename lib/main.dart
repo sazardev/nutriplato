@@ -7,7 +7,8 @@ import 'package:nutriplato/presentation/home.screen.dart';
 import 'package:nutriplato/presentation/provider/article_provider.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
 import 'package:nutriplato/presentation/provider/user_provider.dart';
-import 'package:nutriplato/presentation/screens/presentation/presentation_screen.dart';
+import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
+import 'package:nutriplato/presentation/screens/onboarding/enhanced_onboarding_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -64,6 +65,14 @@ class MyApp extends StatelessWidget {
             return themeChangerProvider;
           },
         ),
+        ChangeNotifierProvider(
+          lazy: false,
+          create: (_) {
+            final userProfileProvider = UserProfileProvider();
+            userProfileProvider.loadProfile();
+            return userProfileProvider;
+          },
+        ),
       ],
       child: Consumer<ThemeChangerProvider>(
         builder: (context, themeProvider, child) {
@@ -71,8 +80,9 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'NutriPlato',
             theme: AppTheme().getTheme(themeProvider.selectedColor),
-            home:
-                presentation ? const PresentationScreen() : const HomeScreen(),
+            home: presentation
+                ? const EnhancedOnboardingScreen()
+                : const HomeScreen(),
             initialBinding: BindingsBuilder(() {
               Get.put(FitnessController());
             }),

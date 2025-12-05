@@ -6,6 +6,7 @@ import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_entry.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_provider.dart';
 import 'package:nutriplato/presentation/home.screen.dart';
+import 'package:nutriplato/presentation/screens/food/widgets/food_health_alert_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -185,6 +186,12 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // Alertas de salud personalizadas
+                        FoodHealthAlertWidget(
+                          food: widget.food,
+                          baseColor: baseColor,
+                        ),
+
                         // Nutrition Summary Card
                         _buildNutritionCard(),
 
@@ -194,7 +201,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _buildSectionTitle('Información nutricional'),
+                              _buildSectionTitle('Informacion nutricional'),
                               const SizedBox(height: 12),
 
                               // Serving info row
