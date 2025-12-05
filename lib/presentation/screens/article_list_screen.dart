@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:nutriplato/infrastructure/entities/article/article.dart';
 import 'package:nutriplato/presentation/provider/article_provider.dart';
 import 'package:nutriplato/presentation/screens/article_detail_screen.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:provider/provider.dart';
 
 class ArticleListScreen extends StatefulWidget {
@@ -45,118 +46,228 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
             .toList();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Artículos"),
-        elevation: 0,
-      ),
-      body: Column(
-        children: [
-          // Filtros de categorías
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                children: _allTags.map((tag) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: FilterChip(
-                      selected: _activeFilter == tag,
-                      label: Text(tag),
-                      onSelected: (selected) {
-                        setState(() {
-                          _activeFilter = tag;
-                        });
-                      },
-                      selectedColor: Colors.purple.withValues(alpha: .2),
-                      checkmarkColor: Colors.purple,
+      backgroundColor: AppColors.background,
+      body: CustomScrollView(
+        slivers: [
+          // Header con gradiente
+          SliverAppBar(
+            expandedHeight: 140,
+            floating: false,
+            pinned: true,
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: AppGradients.ocean,
+              ),
+              child: FlexibleSpaceBar(
+                centerTitle: false,
+                titlePadding: const EdgeInsets.only(left: 16, bottom: 16),
+                title: Text(
+                  'Artículos',
+                  style: AppTypography.titleLarge.copyWith(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
+                background: Container(
+                  decoration: BoxDecoration(
+                    gradient: AppGradients.ocean,
+                  ),
+                  child: SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 50),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.article_outlined,
+                            color: Colors.white.withValues(alpha: .3),
+                            size: 80,
+                          ),
+                        ],
+                      ),
                     ),
-                  );
-                }).toList(),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // Filtros de categorías
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+                child: Row(
+                  children: _allTags.map((tag) {
+                    final isActive = _activeFilter == tag;
+                    return Padding(
+                      padding: const EdgeInsets.only(right: AppSpacing.sm),
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            _activeFilter = tag;
+                          });
+                        },
+                        borderRadius: BorderRadius.circular(AppRadius.full),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppSpacing.md,
+                            vertical: AppSpacing.sm,
+                          ),
+                          decoration: BoxDecoration(
+                            gradient: isActive ? AppGradients.ocean : null,
+                            color: isActive ? null : AppColors.surface,
+                            borderRadius: BorderRadius.circular(AppRadius.full),
+                            boxShadow: [AppShadows.subtle],
+                          ),
+                          child: Text(
+                            tag,
+                            style: AppTypography.labelLarge.copyWith(
+                              color: isActive
+                                  ? Colors.white
+                                  : AppColors.textSecondary,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
               ),
             ),
           ),
 
           // Lista de artículos
-          Expanded(
-            child: articleProvider.isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : filteredArticles.isEmpty
-                    ? const Center(child: Text("No hay artículos disponibles"))
-                    : ListView.builder(
-                        padding: const EdgeInsets.all(16),
-                        itemCount: filteredArticles.length,
-                        itemBuilder: (context, index) {
-                          final article = filteredArticles[index];
-                          return Card(
-                            clipBehavior: Clip.antiAlias,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
+          articleProvider.isLoading
+              ? const SliverFillRemaining(
+                  child: Center(child: CircularProgressIndicator()),
+                )
+              : filteredArticles.isEmpty
+                  ? SliverFillRemaining(
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.article_outlined,
+                              size: 64,
+                              color:
+                                  AppColors.textSecondary.withValues(alpha: .5),
                             ),
-                            margin: const EdgeInsets.only(bottom: 16),
-                            child: InkWell(
-                              onTap: () {
-                                articleProvider.setSelectedArticle(article);
-                                Get.to(() => const ArticleDetailScreen());
-                              },
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  if (article.imageUrl != null)
-                                    Image.asset(
-                                      article.imageUrl!,
-                                      height: 180,
-                                      width: double.infinity,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          article.title,
-                                          style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          article.description,
-                                          style: TextStyle(
-                                            color: Colors.grey[700],
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 12),
-                                        Wrap(
-                                          spacing: 8,
-                                          children: article.tags
-                                              .map((tag) => Chip(
-                                                    label: Text(tag),
-                                                    backgroundColor: article
-                                                        .color
-                                                        .withValues(alpha: .1),
-                                                    labelStyle: TextStyle(
-                                                      color: article.color,
-                                                      fontSize: 12,
-                                                    ),
-                                                  ))
-                                              .toList(),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
+                            const SizedBox(height: AppSpacing.md),
+                            Text(
+                              "No hay artículos disponibles",
+                              style: AppTypography.bodyLarge.copyWith(
+                                color: AppColors.textSecondary,
                               ),
                             ),
-                          );
-                        },
+                          ],
+                        ),
                       ),
-          ),
+                    )
+                  : SliverPadding(
+                      padding: const EdgeInsets.all(AppSpacing.md),
+                      sliver: SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            final article = filteredArticles[index];
+                            return Container(
+                              margin:
+                                  const EdgeInsets.only(bottom: AppSpacing.md),
+                              decoration: BoxDecoration(
+                                color: AppColors.surface,
+                                borderRadius:
+                                    BorderRadius.circular(AppRadius.lg),
+                                boxShadow: [AppShadows.card],
+                              ),
+                              clipBehavior: Clip.antiAlias,
+                              child: InkWell(
+                                onTap: () {
+                                  articleProvider.setSelectedArticle(article);
+                                  Get.to(() => const ArticleDetailScreen());
+                                },
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    if (article.imageUrl != null)
+                                      Image.asset(
+                                        article.imageUrl!,
+                                        height: 180,
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.all(AppSpacing.md),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            article.title,
+                                            style: AppTypography.titleMedium
+                                                .copyWith(
+                                              color: AppColors.textPrimary,
+                                            ),
+                                          ),
+                                          const SizedBox(height: AppSpacing.sm),
+                                          Text(
+                                            article.description,
+                                            style: AppTypography.bodyMedium
+                                                .copyWith(
+                                              color: AppColors.textSecondary,
+                                            ),
+                                          ),
+                                          const SizedBox(height: AppSpacing.md),
+                                          Wrap(
+                                            spacing: AppSpacing.sm,
+                                            runSpacing: AppSpacing.xs,
+                                            children: article.tags
+                                                .map((tag) => Container(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                        horizontal:
+                                                            AppSpacing.sm,
+                                                        vertical: AppSpacing.xs,
+                                                      ),
+                                                      decoration: BoxDecoration(
+                                                        color: article.color
+                                                            .withValues(
+                                                                alpha: .1),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    AppRadius
+                                                                        .full),
+                                                      ),
+                                                      child: Text(
+                                                        tag,
+                                                        style: AppTypography
+                                                            .labelSmall
+                                                            .copyWith(
+                                                          color: article.color,
+                                                        ),
+                                                      ),
+                                                    ))
+                                                .toList(),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                          childCount: filteredArticles.length,
+                        ),
+                      ),
+                    ),
         ],
       ),
     );

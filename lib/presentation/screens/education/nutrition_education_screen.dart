@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nutriplato/infrastructure/services/smart_nutrition_service.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 
 class NutritionEducationScreen extends StatefulWidget {
   const NutritionEducationScreen({super.key});
@@ -53,7 +54,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade50,
+      backgroundColor: AppColors.background,
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [

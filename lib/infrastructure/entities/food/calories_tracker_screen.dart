@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nutriplato/infrastructure/entities/food/add_food_entry_screen.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_entry.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_provider.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -41,6 +42,7 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
     final primaryColor = theme.colorScheme.primary;
 
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: Consumer<FoodLogProvider>(
         builder: (context, provider, child) {
           if (provider.isLoading) {

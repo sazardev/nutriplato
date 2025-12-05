@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
 import 'package:nutriplato/presentation/provider/user_provider.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
@@ -67,7 +68,7 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
     final currentTheme = AppTheme.gradientThemes[themeProvider.selectedColor];
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade50,
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),

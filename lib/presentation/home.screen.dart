@@ -6,6 +6,7 @@ import 'package:nutriplato/presentation/screens/plate/plate_screen.dart';
 import 'package:nutriplato/search/search.screen.dart';
 import 'package:nutriplato/presentation/screens/widgets/custom_bottom_nav.dart';
 import 'package:nutriplato/presentation/screens/dashboard/modern_dashboard_screen.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -61,7 +62,7 @@ class _Home extends State<HomeScreen> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade50,
+      backgroundColor: AppColors.background,
       extendBody: true,
       body: PageView(
         controller: _pageController,

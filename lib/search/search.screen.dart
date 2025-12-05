@@ -5,6 +5,7 @@ import 'package:nutriplato/data/food/frutas.dart';
 import 'package:nutriplato/data/food/leguminosas.dart';
 import 'package:nutriplato/data/food/verduras.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../presentation/screens/food/food.view.dart';
@@ -235,168 +236,295 @@ class _SearchScreen extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 245, 245, 245),
-      appBar: AppBar(
-        title: const Text('Buscador de Alimentos'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.sort),
-            onPressed: () => _showSortingDialog(),
-          ),
-          IconButton(
-            icon: const Icon(Icons.filter_list),
-            onPressed: () {
-              setState(() {
-                _showFilterPanel = !_showFilterPanel;
-              });
-            },
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              controller: searchController,
-              decoration: InputDecoration(
-                hintText: 'Buscar alimentos...',
-                prefixIcon: const Icon(Icons.search),
-                suffixIcon: searchController.text.isNotEmpty
-                    ? IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: () {
-                          searchController.clear();
-                          _applyFilters();
-                        },
-                      )
-                    : null,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
+      backgroundColor: AppColors.background,
+      body: CustomScrollView(
+        slivers: [
+          // Header con gradiente unificado
+          SliverAppBar(
+            expandedHeight: 140,
+            floating: false,
+            pinned: true,
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: AppGradients.primary,
               ),
-              onChanged: (value) {
-                _applyFilters();
-              },
-            ),
-          ),
-          SizedBox(
-            height: 60,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              children: _foodCategories.entries.map((entry) {
-                bool isActive = _activeView == entry.key;
-                return Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        _activeView = entry.key;
-                        _applyFilters();
-                      });
-                    },
-                    borderRadius: BorderRadius.circular(12),
-                    child: Chip(
-                      backgroundColor:
-                          isActive ? Colors.purple : Colors.grey[200],
-                      avatar: Icon(
-                        entry.value,
-                        color: isActive ? Colors.white : Colors.grey[700],
-                        size: 16,
-                      ),
-                      label: Text(
-                        entry.key,
-                        style: TextStyle(
-                          color: isActive ? Colors.white : Colors.grey[700],
-                        ),
+              child: FlexibleSpaceBar(
+                centerTitle: false,
+                titlePadding: const EdgeInsets.only(left: 16, bottom: 16),
+                title: Text(
+                  'Buscador de Alimentos',
+                  style: AppTypography.titleLarge.copyWith(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
+                background: Container(
+                  decoration: BoxDecoration(
+                    gradient: AppGradients.primary,
+                  ),
+                  child: SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 50),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(Icons.restaurant_menu,
+                              color: Colors.white.withValues(alpha: .3),
+                              size: 80),
+                        ],
                       ),
                     ),
                   ),
-                );
-              }).toList(),
+                ),
+              ),
             ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.sort, color: Colors.white),
+                onPressed: () => _showSortingDialog(),
+              ),
+              IconButton(
+                icon: Icon(
+                  _showFilterPanel ? Icons.filter_list_off : Icons.filter_list,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _showFilterPanel = !_showFilterPanel;
+                  });
+                },
+              ),
+            ],
           ),
-          if (_hasActiveFilters()) _buildActiveFiltersBar(),
-          if (_showFilterPanel) _buildFilterPanel(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Row(
+
+          // Contenido principal
+          SliverToBoxAdapter(
+            child: Column(
               children: [
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor.withValues(alpha: .1),
-                    borderRadius: BorderRadius.circular(20),
+                // Barra de búsqueda
+                Padding(
+                  padding: const EdgeInsets.all(AppSpacing.md),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.surface,
+                      borderRadius: BorderRadius.circular(AppRadius.lg),
+                      boxShadow: [AppShadows.subtle],
+                    ),
+                    child: TextField(
+                      controller: searchController,
+                      style: AppTypography.bodyMedium,
+                      decoration: InputDecoration(
+                        hintText: 'Buscar alimentos...',
+                        hintStyle: AppTypography.bodyMedium.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
+                        prefixIcon:
+                            Icon(Icons.search, color: AppColors.textSecondary),
+                        suffixIcon: searchController.text.isNotEmpty
+                            ? IconButton(
+                                icon: Icon(Icons.clear,
+                                    color: AppColors.textSecondary),
+                                onPressed: () {
+                                  searchController.clear();
+                                  _applyFilters();
+                                },
+                              )
+                            : null,
+                        border: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.md,
+                          vertical: AppSpacing.md,
+                        ),
+                      ),
+                      onChanged: (value) {
+                        _applyFilters();
+                      },
+                    ),
+                  ),
+                ),
+
+                // Chips de categorías
+                SizedBox(
+                  height: 50,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+                    children: _foodCategories.entries.map((entry) {
+                      bool isActive = _activeView == entry.key;
+                      return Padding(
+                        padding: const EdgeInsets.only(right: AppSpacing.sm),
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              _activeView = entry.key;
+                              _applyFilters();
+                            });
+                          },
+                          borderRadius: BorderRadius.circular(AppRadius.full),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.md,
+                              vertical: AppSpacing.sm,
+                            ),
+                            decoration: BoxDecoration(
+                              gradient: isActive ? AppGradients.primary : null,
+                              color: isActive ? null : AppColors.surface,
+                              borderRadius:
+                                  BorderRadius.circular(AppRadius.full),
+                              boxShadow: [AppShadows.subtle],
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  entry.value,
+                                  color: isActive
+                                      ? Colors.white
+                                      : AppColors.textSecondary,
+                                  size: 16,
+                                ),
+                                const SizedBox(width: AppSpacing.xs),
+                                Text(
+                                  entry.key,
+                                  style: AppTypography.labelLarge.copyWith(
+                                    color: isActive
+                                        ? Colors.white
+                                        : AppColors.textSecondary,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+
+                // Barra de filtros activos
+                if (_hasActiveFilters()) _buildActiveFiltersBar(),
+
+                // Panel de filtros
+                if (_showFilterPanel) _buildFilterPanel(),
+
+                // Contador de resultados y ordenamiento
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.md,
+                    vertical: AppSpacing.sm,
                   ),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.list_alt,
-                        size: 16,
-                        color: Theme.of(context).primaryColor,
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.md,
+                          vertical: AppSpacing.xs,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context)
+                              .primaryColor
+                              .withValues(alpha: .1),
+                          borderRadius: BorderRadius.circular(AppRadius.full),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.list_alt,
+                              size: 16,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            const SizedBox(width: AppSpacing.xs),
+                            Text(
+                              '${filteredFoods.length} resultados',
+                              style: AppTypography.labelLarge.copyWith(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      const SizedBox(width: 4),
-                      Text(
-                        '${filteredFoods.length} resultados',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor,
+                      const Spacer(),
+                      InkWell(
+                        onTap: () => _showSortingDialog(),
+                        borderRadius: BorderRadius.circular(AppRadius.full),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppSpacing.md,
+                            vertical: AppSpacing.xs,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.surface,
+                            borderRadius: BorderRadius.circular(AppRadius.full),
+                            boxShadow: [AppShadows.subtle],
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.sort,
+                                size: 16,
+                                color: AppColors.textSecondary,
+                              ),
+                              const SizedBox(width: AppSpacing.xs),
+                              Text(
+                                _getSortMethodShortName(),
+                                style: AppTypography.labelSmall.copyWith(
+                                  color: AppColors.textSecondary,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                const Spacer(),
-                InkWell(
-                  onTap: () => _showSortingDialog(),
-                  borderRadius: BorderRadius.circular(20),
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Row(
+              ],
+            ),
+          ),
+
+          // Grid de alimentos
+          filteredFoods.isEmpty
+              ? SliverFillRemaining(
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(
-                          Icons.sort,
-                          size: 16,
-                          color: Colors.black87,
+                        Icon(
+                          Icons.search_off,
+                          size: 64,
+                          color: AppColors.textSecondary.withValues(alpha: .5),
                         ),
-                        const SizedBox(width: 4),
+                        const SizedBox(height: AppSpacing.md),
                         Text(
-                          _getSortMethodShortName(),
-                          style: const TextStyle(
-                              fontSize: 12, color: Colors.black87),
+                          'No se encontraron alimentos',
+                          style: AppTypography.bodyLarge.copyWith(
+                            color: AppColors.textSecondary,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: filteredFoods.isEmpty
-                ? const Center(child: Text('No se encontraron alimentos'))
-                : GridView.builder(
-                    padding: const EdgeInsets.all(16),
+                )
+              : SliverPadding(
+                  padding: const EdgeInsets.all(AppSpacing.md),
+                  sliver: SliverGrid(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 0.75,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
+                      crossAxisSpacing: AppSpacing.sm,
+                      mainAxisSpacing: AppSpacing.sm,
                     ),
-                    itemCount: filteredFoods.length,
-                    itemBuilder: (context, index) {
-                      return _buildFoodCard(filteredFoods[index]);
-                    },
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) => _buildFoodCard(filteredFoods[index]),
+                      childCount: filteredFoods.length,
+                    ),
                   ),
-          ),
+                ),
         ],
       ),
     );
@@ -404,8 +532,16 @@ class _SearchScreen extends State<SearchScreen> {
 
   Widget _buildActiveFiltersBar() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      color: Colors.grey[200],
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadius.md),
+        boxShadow: [AppShadows.subtle],
+      ),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
@@ -423,7 +559,7 @@ class _SearchScreen extends State<SearchScreen> {
                   });
                 },
               ),
-            const SizedBox(width: 8),
+            const SizedBox(width: AppSpacing.sm),
             if (_proteinRange.start > 0 || _proteinRange.end < 100)
               _buildFilterChip(
                 label:
@@ -437,12 +573,12 @@ class _SearchScreen extends State<SearchScreen> {
                   });
                 },
               ),
-            const SizedBox(width: 8),
+            const SizedBox(width: AppSpacing.sm),
             if (_hasActiveFilters())
               _buildFilterChip(
                 label: 'Limpiar todos',
                 icon: Icons.clear_all,
-                color: Colors.red,
+                color: AppColors.error,
                 onTap: () {
                   setState(() {
                     _caloriesRange = const RangeValues(0, 1000);
@@ -465,25 +601,30 @@ class _SearchScreen extends State<SearchScreen> {
   }) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(AppRadius.full),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.xs,
+        ),
         decoration: BoxDecoration(
           color: color.withValues(alpha: .1),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(AppRadius.full),
           border: Border.all(color: color.withValues(alpha: .5)),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(icon, size: 14, color: color),
-            const SizedBox(width: 4),
+            const SizedBox(width: AppSpacing.xs),
             Text(
               label,
-              style: TextStyle(
-                  color: color, fontWeight: FontWeight.w500, fontSize: 12),
+              style: AppTypography.labelSmall.copyWith(
+                color: color,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-            const SizedBox(width: 4),
+            const SizedBox(width: AppSpacing.xs),
             Icon(Icons.close, size: 14, color: color),
           ],
         ),
@@ -494,25 +635,12 @@ class _SearchScreen extends State<SearchScreen> {
   Widget _buildFilterPanel() {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(AppSpacing.md),
+      padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.white, Colors.grey.shade100],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withValues(alpha: .2),
-            spreadRadius: 1,
-            blurRadius: 6,
-            offset: const Offset(0, 3),
-          ),
-        ],
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(16),
-          bottomRight: Radius.circular(16),
-        ),
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadius.lg),
+        boxShadow: [AppShadows.card],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -520,14 +648,14 @@ class _SearchScreen extends State<SearchScreen> {
           Row(
             children: [
               Icon(Icons.tune, color: Theme.of(context).primaryColor),
-              const SizedBox(width: 8),
-              const Text(
+              const SizedBox(width: AppSpacing.sm),
+              Text(
                 'Filtros Avanzados',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: AppTypography.titleMedium,
               ),
             ],
           ),
-          const Divider(),
+          const Divider(height: AppSpacing.lg),
           _buildRangeFilterSection(
             title: 'Calorías',
             icon: Icons.local_fire_department,
@@ -542,7 +670,7 @@ class _SearchScreen extends State<SearchScreen> {
               });
             },
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppSpacing.md),
           _buildRangeFilterSection(
             title: 'Proteínas',
             icon: FontAwesomeIcons.dna,
@@ -558,7 +686,7 @@ class _SearchScreen extends State<SearchScreen> {
             },
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.only(top: AppSpacing.lg),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -571,12 +699,12 @@ class _SearchScreen extends State<SearchScreen> {
                     });
                   },
                   icon: const Icon(Icons.restore),
-                  label: const Text('Restablecer'),
+                  label: Text('Restablecer', style: AppTypography.labelLarge),
                   style: TextButton.styleFrom(
-                    foregroundColor: Colors.grey[700],
+                    foregroundColor: AppColors.textSecondary,
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: AppSpacing.md),
                 ElevatedButton.icon(
                   onPressed: () {
                     _applyFilters();
@@ -585,13 +713,20 @@ class _SearchScreen extends State<SearchScreen> {
                     });
                   },
                   icon: const Icon(Icons.check),
-                  label: const Text('Aplicar'),
+                  label: Text('Aplicar',
+                      style: AppTypography.labelLarge
+                          .copyWith(color: Colors.white)),
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Theme.of(context).primaryColor,
-                    elevation: 2,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    elevation: 0,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.md,
+                      vertical: AppSpacing.sm,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppRadius.md),
+                    ),
                   ),
                 ),
               ],
@@ -617,45 +752,48 @@ class _SearchScreen extends State<SearchScreen> {
         Row(
           children: [
             Icon(icon, size: 18, color: iconColor),
-            const SizedBox(width: 8),
+            const SizedBox(width: AppSpacing.sm),
             Text(
               title,
-              style: const TextStyle(fontWeight: FontWeight.w500),
+              style: AppTypography.titleSmall,
             ),
           ],
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: AppSpacing.xs),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.sm,
+                vertical: AppSpacing.xs,
+              ),
               decoration: BoxDecoration(
                 color: iconColor.withValues(alpha: .1),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(AppRadius.md),
                 border: Border.all(color: iconColor.withValues(alpha: .3)),
               ),
               child: Text(
                 '${currentRange.start.round()} $unit',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
+                style: AppTypography.labelLarge.copyWith(
                   color: iconColor.withValues(alpha: .8),
                 ),
               ),
             ),
-            Text('hasta',
-                style: TextStyle(color: Colors.grey[600], fontSize: 12)),
+            Text('hasta', style: AppTypography.bodySmall),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.sm,
+                vertical: AppSpacing.xs,
+              ),
               decoration: BoxDecoration(
                 color: iconColor.withValues(alpha: .1),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(AppRadius.md),
                 border: Border.all(color: iconColor.withValues(alpha: .3)),
               ),
               child: Text(
                 '${currentRange.end.round()} $unit',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
+                style: AppTypography.labelLarge.copyWith(
                   color: iconColor.withValues(alpha: .8),
                 ),
               ),
@@ -692,16 +830,12 @@ class _SearchScreen extends State<SearchScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('0',
-                  style: TextStyle(fontSize: 10, color: Colors.grey[500])),
-              Text('${(maxRange / 4).round()}',
-                  style: TextStyle(fontSize: 10, color: Colors.grey[500])),
-              Text('${(maxRange / 2).round()}',
-                  style: TextStyle(fontSize: 10, color: Colors.grey[500])),
+              Text('0', style: AppTypography.bodySmall),
+              Text('${(maxRange / 4).round()}', style: AppTypography.bodySmall),
+              Text('${(maxRange / 2).round()}', style: AppTypography.bodySmall),
               Text('${(maxRange * 3 / 4).round()}',
-                  style: TextStyle(fontSize: 10, color: Colors.grey[500])),
-              Text('${maxRange.round()}',
-                  style: TextStyle(fontSize: 10, color: Colors.grey[500])),
+                  style: AppTypography.bodySmall),
+              Text('${maxRange.round()}', style: AppTypography.bodySmall),
             ],
           ),
         ),
@@ -736,26 +870,29 @@ class _SearchScreen extends State<SearchScreen> {
       builder: (context) {
         return Dialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(AppRadius.xl),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+            padding: const EdgeInsets.symmetric(
+              vertical: AppSpacing.md,
+              horizontal: AppSpacing.sm,
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 16, left: 16, right: 16),
+                  padding: const EdgeInsets.only(
+                    bottom: AppSpacing.md,
+                    left: AppSpacing.md,
+                    right: AppSpacing.md,
+                  ),
                   child: Row(
                     children: [
                       Icon(Icons.sort, color: Theme.of(context).primaryColor),
-                      const SizedBox(width: 8),
-                      const Text(
+                      const SizedBox(width: AppSpacing.sm),
+                      Text(
                         'Ordenar Alimentos',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: AppTypography.titleMedium,
                       ),
                     ],
                   ),
@@ -784,46 +921,49 @@ class _SearchScreen extends State<SearchScreen> {
                               _applySorting();
                             });
                           },
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(AppRadius.sm),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 16),
+                              vertical: AppSpacing.md,
+                              horizontal: AppSpacing.md,
+                            ),
                             child: Row(
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.all(8),
+                                  padding: const EdgeInsets.all(AppSpacing.sm),
                                   decoration: BoxDecoration(
                                     color: isSelected
                                         ? Theme.of(context)
                                             .primaryColor
                                             .withValues(alpha: .2)
-                                        : Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(8),
+                                        : AppColors.background,
+                                    borderRadius:
+                                        BorderRadius.circular(AppRadius.sm),
                                   ),
                                   child: Icon(
                                     sortIcons[method],
                                     color: isSelected
                                         ? Theme.of(context).primaryColor
-                                        : Colors.grey[700],
+                                        : AppColors.textSecondary,
                                     size: 20,
                                   ),
                                 ),
-                                const SizedBox(width: 16),
+                                const SizedBox(width: AppSpacing.md),
                                 Expanded(
                                   child: Text(
                                     method.replaceAll(' (', '\n('),
-                                    style: TextStyle(
+                                    style: AppTypography.bodyMedium.copyWith(
                                       fontWeight: isSelected
                                           ? FontWeight.bold
                                           : FontWeight.normal,
                                       color: isSelected
                                           ? Theme.of(context).primaryColor
-                                          : null,
+                                          : AppColors.textPrimary,
                                     ),
                                   ),
                                 ),
                                 sortDirections[method] ?? Container(),
-                                const SizedBox(width: 8),
+                                const SizedBox(width: AppSpacing.sm),
                                 if (isSelected)
                                   Icon(
                                     Icons.check_circle,
@@ -838,10 +978,15 @@ class _SearchScreen extends State<SearchScreen> {
                     },
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: AppSpacing.sm),
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Cancelar'),
+                  child: Text(
+                    'Cancelar',
+                    style: AppTypography.labelLarge.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -877,14 +1022,17 @@ class _SearchScreen extends State<SearchScreen> {
         categoryIcon = FontAwesomeIcons.appleWhole;
         break;
       default:
-        categoryColor = Colors.grey;
+        categoryColor = AppColors.textSecondary;
         categoryIcon = Icons.food_bank;
     }
 
-    return Card(
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadius.lg),
+        boxShadow: [AppShadows.card],
+      ),
       clipBehavior: Clip.antiAlias,
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         onTap: () {
           addToRecentFoods(food);
@@ -892,8 +1040,15 @@ class _SearchScreen extends State<SearchScreen> {
           showModalBottomSheet(
             context: context,
             isScrollControlled: true,
-            builder: (context) => SizedBox(
+            backgroundColor: Colors.transparent,
+            builder: (context) => Container(
               height: MediaQuery.of(context).size.height * 0.7,
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(AppRadius.xl),
+                ),
+              ),
               child: FoodViewScreen(food: food),
             ),
           );
@@ -901,21 +1056,24 @@ class _SearchScreen extends State<SearchScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Category header
             Container(
-              color: categoryColor.withValues(alpha: .2),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              color: categoryColor.withValues(alpha: .15),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.sm,
+                vertical: AppSpacing.xs,
+              ),
               child: Row(
                 children: [
                   Icon(categoryIcon, size: 14, color: categoryColor),
-                  const SizedBox(width: 4),
+                  const SizedBox(width: AppSpacing.xs),
                   Expanded(
                     child: Text(
                       food.category.substring(0, 1).toUpperCase() +
                           food.category.substring(1),
-                      style: TextStyle(
-                        fontSize: 12,
+                      style: AppTypography.labelSmall.copyWith(
                         color: categoryColor,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -923,36 +1081,37 @@ class _SearchScreen extends State<SearchScreen> {
                 ],
               ),
             ),
+            // Image
             Expanded(
               flex: 3,
               child: Container(
-                color: categoryColor.withValues(alpha: .1),
+                color: categoryColor.withValues(alpha: .08),
                 width: double.infinity,
                 child: food.image ??
                     Icon(
                       categoryIcon,
                       size: 50,
-                      color: categoryColor.withValues(alpha: .5),
+                      color: categoryColor.withValues(alpha: .4),
                     ),
               ),
             ),
+            // Info
             Expanded(
               flex: 2,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(AppSpacing.sm),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       food.name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
+                      style: AppTypography.labelLarge.copyWith(
+                        color: AppColors.textPrimary,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: AppSpacing.xs),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -961,7 +1120,7 @@ class _SearchScreen extends State<SearchScreen> {
                           '${double.tryParse(food.energia)?.round() ?? 0}',
                           'kcal',
                         ),
-                        const SizedBox(width: 8),
+                        const SizedBox(width: AppSpacing.sm),
                         _buildNutrientBadge(
                           'Proteína',
                           food.proteina,
@@ -987,15 +1146,14 @@ class _SearchScreen extends State<SearchScreen> {
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: AppTypography.bodySmall.copyWith(
               fontSize: 8,
-              color: Colors.grey[600],
             ),
             overflow: TextOverflow.ellipsis,
           ),
           Text(
             '$value $unit',
-            style: const TextStyle(
+            style: AppTypography.labelSmall.copyWith(
               fontWeight: FontWeight.bold,
               fontSize: 10,
             ),

@@ -10,6 +10,7 @@ import 'package:nutriplato/presentation/screens/meal_plan/meal_plan_screen.dart'
 import 'package:nutriplato/presentation/screens/education/nutrition_education_screen.dart';
 import 'package:nutriplato/presentation/screens/profile/profile_screen.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:provider/provider.dart';
 import '../../../infrastructure/entities/user.dart';
 
@@ -27,7 +28,7 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
     final currentTheme = AppTheme.gradientThemes[themeProvider.selectedColor];
 
     return Drawer(
-      backgroundColor: Colors.grey.shade50,
+      backgroundColor: AppColors.background,
       child: Column(
         children: [
           // Header moderno con gradiente

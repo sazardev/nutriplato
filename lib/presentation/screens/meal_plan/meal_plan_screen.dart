@@ -7,6 +7,7 @@ import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
 import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 
 class MealPlanScreen extends StatefulWidget {
   const MealPlanScreen({super.key});
@@ -92,7 +93,7 @@ class _MealPlanScreenState extends State<MealPlanScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade50,
+      backgroundColor: AppColors.background,
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [

@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:nutriplato/presentation/screens/plate/widgets/plato_info_screen.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 
 import '../../../data/data.dart';
 import '../food/foods.screen.dart';
@@ -111,24 +112,74 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 245, 245, 245),
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Plato del buen comer'),
-        actions: [
-          IconButton(
-              onPressed: () => Navigator.push(
+      backgroundColor: AppColors.background,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 140,
+            floating: false,
+            pinned: true,
+            automaticallyImplyLeading: false,
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: AppGradients.success,
+              ),
+              child: FlexibleSpaceBar(
+                centerTitle: false,
+                titlePadding: const EdgeInsets.only(left: 16, bottom: 16),
+                title: Text(
+                  'Plato del Buen Comer',
+                  style: AppTypography.titleLarge.copyWith(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
+                background: Container(
+                  decoration: BoxDecoration(
+                    gradient: AppGradients.success,
+                  ),
+                  child: SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 50),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.pie_chart,
+                            color: Colors.white.withValues(alpha: .3),
+                            size: 80,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            actions: [
+              IconButton(
+                onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (_) => const PlatoInformationScreen())),
-              icon: const Icon(Icons.info_outline))
+                    builder: (_) => const PlatoInformationScreen(),
+                  ),
+                ),
+                icon: const Icon(Icons.info_outline, color: Colors.white),
+              ),
+            ],
+          ),
+          SliverFillRemaining(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.md),
+                child: _buildPlateContent(),
+              ),
+            ),
+          ),
         ],
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: _buildPlateContent(),
-        ),
       ),
     );
   }
@@ -233,9 +284,11 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
         builder: (context) {
           return Container(
             height: MediaQuery.of(context).size.height * 0.8,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(AppRadius.xl),
+              ),
             ),
             child: FoodsScreen(
               color: color,
