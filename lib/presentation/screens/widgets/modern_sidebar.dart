@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nutriplato/presentation/provider/user_provider.dart';
@@ -116,7 +118,13 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
                       FontAwesomeIcons.gear,
                       Colors.grey.shade600,
                       () {
-                        // TODO: Implementar configuración
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const ThemeChangerScreen(),
+                          ),
+                        );
                       },
                     ),
                   ],
@@ -147,14 +155,74 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
                       FontAwesomeIcons.fileContract,
                       Colors.purple.shade600,
                       () {
+                        const url =
+                            'https://github.com/CerberusProgrammer/nutriplato/blob/master/Pol%C3%ADtica%20de%20Privacidad%20-%20NutriPlato.pdf';
+                        Navigator.pop(context);
                         if (Platform.isAndroid) {
-                          const url =
-                              'https://github.com/CerberusProgrammer/nutriplato/blob/master/Pol%C3%ADtica%20de%20Privacidad%20-%20NutriPlato.pdf';
                           const intent = AndroidIntent(
                             action: 'action_view',
                             data: url,
                           );
                           intent.launch();
+                        } else {
+                          Get.dialog(
+                            AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16)),
+                              title: Text(
+                                'Términos y Condiciones',
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w700, fontSize: 16),
+                              ),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Consulta nuestra Política de Privacidad en el siguiente enlace:',
+                                    style: GoogleFonts.poppins(fontSize: 13),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: SelectableText(
+                                      url,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 10,
+                                          color: Colors.blue.shade700),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              actions: [
+                                TextButton.icon(
+                                  onPressed: () {
+                                    Clipboard.setData(
+                                        const ClipboardData(text: url));
+                                    Get.back();
+                                    Get.snackbar(
+                                      'Copiado',
+                                      'Enlace copiado al portapapeles',
+                                      snackPosition: SnackPosition.BOTTOM,
+                                      duration: const Duration(seconds: 2),
+                                    );
+                                  },
+                                  icon: const Icon(Icons.copy, size: 14),
+                                  label: Text('Copiar',
+                                      style: GoogleFonts.poppins()),
+                                ),
+                                TextButton(
+                                  onPressed: () => Get.back(),
+                                  child: Text('Cerrar',
+                                      style: GoogleFonts.poppins()),
+                                ),
+                              ],
+                            ),
+                          );
                         }
                       },
                     ),
