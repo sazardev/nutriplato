@@ -297,10 +297,7 @@ class UserProfile {
 
   /// Verifica si el perfil está completo para cálculos nutricionales
   bool get isProfileComplete {
-    return heightCm != null &&
-        weightKg != null &&
-        birthDate != null &&
-        gender != Gender.other;
+    return heightCm != null && weightKg != null && birthDate != null;
   }
 
   /// Copia el perfil con modificaciones

@@ -1,6 +1,9 @@
+import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:nutriplato/infrastructure/entities/article/article.dart';
 import 'package:nutriplato/infrastructure/entities/article/article_section.dart';
+
+const _tag = 'NutriPlato|ArticleProvider';
 
 class ArticleProvider extends ChangeNotifier {
   List<Article> articles = [];
@@ -9,6 +12,7 @@ class ArticleProvider extends ChangeNotifier {
   String? error;
 
   void getArticles() async {
+    dev.log('getArticles → iniciando carga de artículos', name: _tag);
     isLoading = true;
     notifyListeners();
 
@@ -17,15 +21,22 @@ class ArticleProvider extends ChangeNotifier {
       articles = _getExampleArticles();
       isLoading = false;
       error = null;
-    } catch (e) {
+      dev.log(
+        'getArticles → ${articles.length} artículos cargados: '
+        '[${articles.map((a) => '"${a.title}"').join(', ')}]',
+        name: _tag,
+      );
+    } catch (e, st) {
       error = e.toString();
       isLoading = false;
+      dev.log('getArticles → ERROR: $e', name: _tag, error: e, stackTrace: st);
     }
 
     notifyListeners();
   }
 
   void setSelectedArticle(Article article) {
+    dev.log('setSelectedArticle → "${article.title}"', name: _tag);
     selectedArticle = article;
     notifyListeners();
   }
@@ -206,7 +217,7 @@ class ArticleProvider extends ChangeNotifier {
         description:
             "Cómo diseñar un desayuno nutritivo que te dé energía para toda la mañana",
         content: "El desayuno es considerado la comida más importante del día.",
-        imageUrl: "lib/data/img/breakfast_healthy.jpeg",
+        imageUrl: "lib/data/img/healthy_food_variety.jpeg",
         color: Colors.orange,
         publishDate: DateTime.now().subtract(const Duration(days: 2)),
         tags: ["desayuno", "energía", "nutrición"],
@@ -244,7 +255,7 @@ class ArticleProvider extends ChangeNotifier {
             "Guía completa para entender el nuevo etiquetado frontal mexicano",
         content:
             "Entender las etiquetas te ayuda a tomar mejores decisiones alimentarias.",
-        imageUrl: "lib/data/img/etiquetado_frontal.jpeg",
+        imageUrl: "lib/data/img/nutrition_balance.jpeg",
         color: Colors.red,
         publishDate: DateTime.now().subtract(const Duration(days: 4)),
         tags: ["etiquetado", "salud", "regulación"],
@@ -281,7 +292,7 @@ class ArticleProvider extends ChangeNotifier {
         description:
             "Tesoros nutricionales de nuestra tierra respaldados por la ciencia",
         content: "México es cuna de alimentos con propiedades extraordinarias.",
-        imageUrl: "lib/data/img/superfoods_mexico.jpeg",
+        imageUrl: "lib/data/img/traditional_mexican_superfoods.jpeg",
         color: Colors.teal,
         publishDate: DateTime.now().subtract(const Duration(days: 6)),
         tags: ["superalimentos", "tradición", "nutrientes"],
@@ -318,7 +329,7 @@ class ArticleProvider extends ChangeNotifier {
         description:
             "Cómo lo que comes afecta la calidad de tu descanso nocturno",
         content: "La nutrición y el sueño están íntimamente conectados.",
-        imageUrl: "lib/data/img/sleep_nutrition.jpeg",
+        imageUrl: "lib/data/img/dehydration_signs.jpeg",
         color: Colors.indigo,
         publishDate: DateTime.now().subtract(const Duration(days: 8)),
         tags: ["sueño", "descanso", "nutrición"],
@@ -356,7 +367,7 @@ class ArticleProvider extends ChangeNotifier {
             "Guía completa de alimentación para mamás embarazadas según la NOM mexicana",
         content:
             "La nutrición durante el embarazo es fundamental para la salud de madre e hijo.",
-        imageUrl: "lib/data/img/pregnancy_nutrition.jpeg",
+        imageUrl: "lib/data/img/protein_sources_mx.jpeg",
         color: Colors.pink,
         publishDate: DateTime.now().subtract(const Duration(days: 12)),
         tags: ["embarazo", "maternidad", "nutrición"],
@@ -394,7 +405,7 @@ class ArticleProvider extends ChangeNotifier {
             "Estrategias nutricionales para prevenir y controlar la diabetes tipo 2",
         content:
             "La alimentación es clave en la prevención y control de la diabetes.",
-        imageUrl: "lib/data/img/diabetes_control.jpeg",
+        imageUrl: "lib/data/img/carbs_for_athletes.jpeg",
         color: Colors.purple,
         publishDate: DateTime.now().subtract(const Duration(days: 14)),
         tags: ["diabetes", "salud", "prevención"],
@@ -431,7 +442,7 @@ class ArticleProvider extends ChangeNotifier {
         description:
             "Necesidades nutricionales especiales después de los 60 años",
         content: "La nutrición en adultos mayores requiere atención especial.",
-        imageUrl: "lib/data/img/senior_nutrition.jpeg",
+        imageUrl: "lib/data/img/legumbres_todas_edades.jpeg",
         color: Colors.amber,
         publishDate: DateTime.now().subtract(const Duration(days: 16)),
         tags: ["adultos mayores", "envejecimiento", "nutrición"],
@@ -469,7 +480,7 @@ class ArticleProvider extends ChangeNotifier {
             "Cómo alimentar correctamente a tus hijos para un óptimo desarrollo",
         content:
             "La alimentación en la infancia sienta las bases para toda la vida.",
-        imageUrl: "lib/data/img/kids_nutrition.jpeg",
+        imageUrl: "lib/data/img/maiz_frijol_combo.jpeg",
         color: Colors.cyan,
         publishDate: DateTime.now().subtract(const Duration(days: 18)),
         tags: ["niños", "crecimiento", "escolares"],

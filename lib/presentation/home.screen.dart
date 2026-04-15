@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nutriplato/fitness/fitness.screen.dart';
+import 'package:nutriplato/fitness/smart/smart_fitness.screen.dart';
 import 'package:nutriplato/infrastructure/entities/food/calories_tracker_screen.dart';
 import 'package:nutriplato/presentation/screens/plate/plate_screen.dart';
 import 'package:nutriplato/search/search.screen.dart';
@@ -24,7 +24,7 @@ class _Home extends State<HomeScreen> with SingleTickerProviderStateMixin {
     CaloriesTrackerScreen(),
     SearchScreen(),
     PlateScreen(),
-    FitnessScreen(),
+    SmartFitnessScreen(),
   ];
 
   @override

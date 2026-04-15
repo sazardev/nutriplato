@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
 import 'package:nutriplato/infrastructure/services/nutrition_calculator_service.dart';
+
+const _tag = 'NutriPlato|UserProfileProvider';
 
 /// Provider mejorado para el perfil completo del usuario
 class UserProfileProvider extends ChangeNotifier {
@@ -24,6 +27,7 @@ class UserProfileProvider extends ChangeNotifier {
 
   /// Carga el perfil desde almacenamiento local
   Future<void> loadProfile() async {
+    dev.log('loadProfile → iniciando carga', name: _tag);
     _isLoading = true;
     _error = null;
     notifyListeners();
@@ -36,6 +40,22 @@ class UserProfileProvider extends ChangeNotifier {
       if (profileJson != null) {
         final profileMap = jsonDecode(profileJson);
         _profile = UserProfile.fromJson(profileMap);
+        dev.log(
+          'loadProfile → perfil cargado: '
+          'username="${_profile.username}" '
+          'gender=${_profile.gender.name} '
+          'weight=${_profile.weightKg}kg '
+          'height=${_profile.heightCm}cm '
+          'birthDate=${_profile.birthDate?.toIso8601String() ?? "null"} '
+          'age=${_profile.age ?? "null"} '
+          'goal=${_profile.nutritionGoal.name} '
+          'onboarding=${_profile.onboardingCompleted} '
+          'profileComplete=${_profile.isProfileComplete}',
+          name: _tag,
+        );
+      } else {
+        dev.log('loadProfile → no hay perfil guardado (nuevo usuario)',
+            name: _tag);
       }
 
       // Cargar condiciones de salud del usuario
@@ -45,6 +65,13 @@ class UserProfileProvider extends ChangeNotifier {
           final map = jsonDecode(json);
           return HealthCondition.fromJson(map);
         }).toList();
+        dev.log(
+          'loadProfile → condiciones de salud: ${_healthConditions.length} → '
+          '[${_healthConditions.map((c) => c.name).join(', ')}]',
+          name: _tag,
+        );
+      } else {
+        dev.log('loadProfile → sin condiciones de salud guardadas', name: _tag);
       }
 
       // Cargar métricas de salud
@@ -54,22 +81,39 @@ class UserProfileProvider extends ChangeNotifier {
           final map = jsonDecode(json);
           return HealthMetric.fromJson(map);
         }).toList();
+        dev.log(
+          'loadProfile → métricas: ${_healthMetrics.length} registros',
+          name: _tag,
+        );
+      } else {
+        dev.log('loadProfile → sin métricas guardadas', name: _tag);
       }
 
       // Actualizar streak si es necesario
       await _updateStreak();
 
       _isLoading = false;
+      dev.log(
+        'loadProfile → completado. '
+        'streak=${_profile.currentStreak}d '
+        'level=${getUserLevel()} '
+        'articlesRead=${_profile.articlesRead} '
+        'exercisesCompleted=${_profile.exercisesCompleted}',
+        name: _tag,
+      );
       notifyListeners();
-    } catch (e) {
+    } catch (e, st) {
       _error = 'Error al cargar el perfil: $e';
       _isLoading = false;
+      dev.log('loadProfile → ERROR: $e', name: _tag, error: e, stackTrace: st);
       notifyListeners();
     }
   }
 
   /// Guarda el perfil en almacenamiento local
   Future<void> saveProfile() async {
+    dev.log('saveProfile → guardando perfil de "${_profile.username}"',
+        name: _tag);
     try {
       final prefs = await SharedPreferences.getInstance();
 
@@ -90,9 +134,15 @@ class UserProfileProvider extends ChangeNotifier {
           _healthMetrics.map((m) => jsonEncode(m.toJson())).toList();
       await prefs.setStringList('user_health_metrics', metricsJson);
 
+      dev.log(
+        'saveProfile → guardado OK. '
+        'condiciones=${_healthConditions.length} métricas=${_healthMetrics.length}',
+        name: _tag,
+      );
       notifyListeners();
-    } catch (e) {
+    } catch (e, st) {
       _error = 'Error al guardar el perfil: $e';
+      dev.log('saveProfile → ERROR: $e', name: _tag, error: e, stackTrace: st);
       notifyListeners();
     }
   }
@@ -122,6 +172,21 @@ class UserProfileProvider extends ChangeNotifier {
     bool? onboardingCompleted,
     int? onboardingStep,
   }) async {
+    dev.log(
+      'updateProfileFields → '
+      '${[
+        if (username != null) 'username=$username',
+        if (gender != null) 'gender=${gender.name}',
+        if (heightCm != null) 'height=${heightCm}cm',
+        if (weightKg != null) 'weight=${weightKg}kg',
+        if (targetWeightKg != null) 'targetWeight=${targetWeightKg}kg',
+        if (activityLevel != null) 'activity=${activityLevel.name}',
+        if (nutritionGoal != null) 'goal=${nutritionGoal.name}',
+        if (onboardingCompleted != null) 'onboarding=$onboardingCompleted',
+        if (onboardingStep != null) 'step=$onboardingStep',
+      ].join(' ')}',
+      name: _tag,
+    );
     _profile = _profile.copyWith(
       username: username,
       email: email,
@@ -145,6 +210,9 @@ class UserProfileProvider extends ChangeNotifier {
 
   /// Completa el onboarding
   Future<void> completeOnboarding() async {
+    dev.log(
+        'completeOnboarding → onboarding completado para "${_profile.username}"',
+        name: _tag);
     _profile = _profile.copyWith(
       onboardingCompleted: true,
       onboardingStep: -1, // Completado
@@ -154,6 +222,7 @@ class UserProfileProvider extends ChangeNotifier {
 
   /// Actualiza el paso actual del onboarding
   Future<void> setOnboardingStep(int step) async {
+    dev.log('setOnboardingStep → step=$step', name: _tag);
     _profile = _profile.copyWith(onboardingStep: step);
     await saveProfile();
   }
@@ -161,6 +230,9 @@ class UserProfileProvider extends ChangeNotifier {
   /// Agrega una condición de salud
   Future<void> addHealthCondition(HealthCondition condition) async {
     if (!_healthConditions.any((c) => c.id == condition.id)) {
+      dev.log(
+          'addHealthCondition → agregando "${condition.name}" (id=${condition.id})',
+          name: _tag);
       _healthConditions.add(condition);
       _profile = _profile.copyWith(
         healthConditionIds: [
@@ -174,6 +246,7 @@ class UserProfileProvider extends ChangeNotifier {
 
   /// Elimina una condición de salud
   Future<void> removeHealthCondition(String conditionId) async {
+    dev.log('removeHealthCondition → eliminando id=$conditionId', name: _tag);
     _healthConditions.removeWhere((c) => c.id == conditionId);
     _profile = _profile.copyWith(
       healthConditionIds:
@@ -192,6 +265,10 @@ class UserProfileProvider extends ChangeNotifier {
 
   /// Registra una métrica de salud
   Future<void> addHealthMetric(HealthMetric metric) async {
+    dev.log(
+      'addHealthMetric → tipo=${metric.type.name} valor=${metric.value} fecha=${metric.date}',
+      name: _tag,
+    );
     _healthMetrics.add(metric);
 
     // Si es peso, actualizar el perfil
@@ -258,6 +335,7 @@ class UserProfileProvider extends ChangeNotifier {
       // Primera vez
       _profile = _profile.copyWith(currentStreak: 1, longestStreak: 1);
       await prefs.setString('last_use_date', todayStr);
+      dev.log('_updateStreak → primera vez, streak=1', name: _tag);
     } else {
       final parts = lastUseDateStr.split('-');
       final lastUseDate = DateTime(
@@ -268,7 +346,9 @@ class UserProfileProvider extends ChangeNotifier {
       final difference = today.difference(lastUseDate).inDays;
 
       if (difference == 0) {
-        // Ya se registró hoy
+        dev.log(
+            '_updateStreak → ya registrado hoy, streak=${_profile.currentStreak}',
+            name: _tag);
         return;
       } else if (difference == 1) {
         // Día consecutivo
@@ -280,8 +360,14 @@ class UserProfileProvider extends ChangeNotifier {
           currentStreak: newStreak,
           longestStreak: longestStreak,
         );
+        dev.log(
+            '_updateStreak → día consecutivo, streak=$newStreak (record=${longestStreak})',
+            name: _tag);
       } else {
         // Se rompió el streak
+        dev.log(
+            '_updateStreak → streak roto (${difference}d sin uso), reiniciando a 1',
+            name: _tag);
         _profile = _profile.copyWith(currentStreak: 1);
       }
 
@@ -291,7 +377,18 @@ class UserProfileProvider extends ChangeNotifier {
 
   /// Obtiene los cálculos nutricionales del usuario
   NutritionCalculation? getNutritionCalculation() {
-    if (!_profile.isProfileComplete) return null;
+    if (!_profile.isProfileComplete) {
+      final missing = [
+        if (_profile.heightCm == null) 'heightCm',
+        if (_profile.weightKg == null) 'weightKg',
+        if (_profile.birthDate == null) 'birthDate',
+      ];
+      dev.log(
+        'getNutritionCalculation → perfil incompleto. Campos faltantes: $missing',
+        name: _tag,
+      );
+      return null;
+    }
 
     final bmr = NutritionCalculatorService.calculateBMR(
       weightKg: _profile.weightKg!,
@@ -338,7 +435,7 @@ class UserProfileProvider extends ChangeNotifier {
       );
     }
 
-    return NutritionCalculation(
+    final result = NutritionCalculation(
       bmr: bmr,
       tdee: tdee,
       targetCalories: targetCalories,
@@ -349,6 +446,15 @@ class UserProfileProvider extends ChangeNotifier {
       bmi: _profile.bmi,
       bmiCategory: _profile.bmiCategory,
     );
+    dev.log(
+      'getNutritionCalculation → '
+      'BMR=${bmr.toStringAsFixed(0)}kcal '
+      'TDEE=${tdee.toStringAsFixed(0)}kcal '
+      'target=${targetCalories.toStringAsFixed(0)}kcal '
+      'BMI=${_profile.bmi?.toStringAsFixed(1) ?? "N/A"} (${_profile.bmiCategory ?? "N/A"})',
+      name: _tag,
+    );
+    return result;
   }
 
   /// Obtiene el nivel del usuario basado en su actividad
@@ -412,6 +518,7 @@ class UserProfileProvider extends ChangeNotifier {
 
   /// Limpia todos los datos del usuario
   Future<void> clearAllData() async {
+    dev.log('clearAllData → limpiando todos los datos del usuario', name: _tag);
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('user_profile');
     await prefs.remove('user_health_conditions');
@@ -422,6 +529,7 @@ class UserProfileProvider extends ChangeNotifier {
     _healthConditions = [];
     _healthMetrics = [];
 
+    dev.log('clearAllData → datos eliminados, perfil reseteado', name: _tag);
     notifyListeners();
   }
 }

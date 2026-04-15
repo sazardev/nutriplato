@@ -317,7 +317,7 @@ class _ModernUserCardState extends State<ModernUserCard> {
       ),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -370,14 +370,14 @@ class _ModernUserCardState extends State<ModernUserCard> {
                 ],
               ),
 
-              const SizedBox(height: 16),
+              const SizedBox(height: 6),
 
               // Avatar y nombre
               Row(
                 children: [
                   Container(
-                    width: 70,
-                    height: 70,
+                    width: 54,
+                    height: 54,
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(18),
@@ -453,7 +453,7 @@ class _ModernUserCardState extends State<ModernUserCard> {
                 ],
               ),
 
-              const SizedBox(height: 16),
+              const SizedBox(height: 6),
 
               // Estadísticas
               Row(

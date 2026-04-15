@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_entry.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:developer' as dev;
+
+const _tag = 'NutriPlato|FoodLogProvider';
 
 class FoodLogProvider with ChangeNotifier {
   List<DailyFoodLog> _logs = [];
@@ -27,6 +29,15 @@ class FoodLogProvider with ChangeNotifier {
 
   // Agregar un alimento al registro
   Future<void> addFoodEntry(FoodLogEntry entry) async {
+    dev.log(
+      'addFoodEntry → "${entry.food.name}" '
+      'cat=${entry.food.category} '
+      'qty=${entry.quantity} '
+      'meal=${entry.mealType} '
+      'kcal=${entry.food.energia} '
+      'fecha=${entry.timestamp.toIso8601String().substring(0, 10)}',
+      name: _tag,
+    );
     _isLoading = true;
     notifyListeners();
 
@@ -42,12 +53,18 @@ class FoodLogProvider with ChangeNotifier {
       final updatedEntries = List<FoodLogEntry>.from(dailyLog.entries)
         ..add(entry);
       _logs[index] = DailyFoodLog(date: dailyLog.date, entries: updatedEntries);
+      dev.log(
+          'addFoodEntry → día existente actualizado (${updatedEntries.length} entradas)',
+          name: _tag);
     } else {
       // Si no existe, crear un nuevo registro para este día
       _logs.add(DailyFoodLog(
         date: formattedDate,
         entries: [entry],
       ));
+      dev.log(
+          'addFoodEntry → nuevo día de registro creado (total días: ${_logs.length})',
+          name: _tag);
     }
 
     await _saveLogs();
@@ -58,6 +75,9 @@ class FoodLogProvider with ChangeNotifier {
 
   // Eliminar un alimento del registro
   Future<void> removeFoodEntry(DateTime date, int entryIndex) async {
+    dev.log(
+        'removeFoodEntry → fecha=${date.toIso8601String().substring(0, 10)} idx=$entryIndex',
+        name: _tag);
     _isLoading = true;
     notifyListeners();
 
@@ -68,17 +88,29 @@ class FoodLogProvider with ChangeNotifier {
       final updatedEntries = List<FoodLogEntry>.from(dailyLog.entries);
 
       if (entryIndex >= 0 && entryIndex < updatedEntries.length) {
+        final removed = updatedEntries[entryIndex];
         updatedEntries.removeAt(entryIndex);
+        dev.log(
+            'removeFoodEntry → eliminado "${removed.food.name}" (${updatedEntries.length} entradas restantes)',
+            name: _tag);
 
         if (updatedEntries.isEmpty) {
           _logs.removeAt(index);
+          dev.log('removeFoodEntry → día vacío eliminado', name: _tag);
         } else {
           _logs[index] =
               DailyFoodLog(date: dailyLog.date, entries: updatedEntries);
         }
 
         await _saveLogs();
+      } else {
+        dev.log(
+            'removeFoodEntry → índice $entryIndex inválido (max=${updatedEntries.length - 1})',
+            name: _tag);
       }
+    } else {
+      dev.log('removeFoodEntry → no se encontró log para esa fecha',
+          name: _tag);
     }
 
     _isLoading = false;
@@ -87,6 +119,7 @@ class FoodLogProvider with ChangeNotifier {
 
   // Cargar registros guardados
   Future<void> loadLogs() async {
+    dev.log('loadLogs → iniciando carga de registros', name: _tag);
     _isLoading = true;
     notifyListeners();
 
@@ -95,6 +128,8 @@ class FoodLogProvider with ChangeNotifier {
 
       // Obtener los datos guardados de los días
       final days = prefs.getStringList('food_log_days') ?? [];
+      dev.log('loadLogs → ${days.length} días encontrados en storage',
+          name: _tag);
 
       _logs = []; // Limpiar los logs actuales
 
@@ -141,20 +176,28 @@ class FoodLogProvider with ChangeNotifier {
             entries.add(entry);
           } catch (e) {
             // Ignorar entradas mal formadas
-            dev.log('Error al deserializar entrada: $e');
+            dev.log('loadLogs → ERROR deserializando entrada: $e', name: _tag);
           }
         }
 
         // Agregar el registro diario si hay entradas
         if (entries.isNotEmpty) {
           _logs.add(DailyFoodLog(date: date, entries: entries));
+          dev.log('loadLogs → día $dayStr cargado (${entries.length} entradas)',
+              name: _tag);
         }
       }
 
       _isLoading = false;
+      final totalEntries =
+          _logs.fold(0, (sum, log) => sum + log.entries.length);
+      dev.log(
+        'loadLogs → completado. ${_logs.length} días, $totalEntries entradas en total',
+        name: _tag,
+      );
       notifyListeners();
-    } catch (e) {
-      dev.log('Error al cargar registros: $e');
+    } catch (e, st) {
+      dev.log('loadLogs → ERROR: $e', name: _tag, error: e, stackTrace: st);
       _isLoading = false;
       notifyListeners();
     }
@@ -162,6 +205,7 @@ class FoodLogProvider with ChangeNotifier {
 
   // Guardar registros
   Future<void> _saveLogs() async {
+    dev.log('_saveLogs → guardando ${_logs.length} días', name: _tag);
     try {
       final prefs = await SharedPreferences.getInstance();
 
@@ -212,8 +256,9 @@ class FoodLogProvider with ChangeNotifier {
 
       // Guardar la lista de días
       await prefs.setStringList('food_log_days', days);
-    } catch (e) {
-      dev.log('Error al guardar registros: $e');
+      dev.log('_saveLogs → guardado OK (${days.length} días)', name: _tag);
+    } catch (e, st) {
+      dev.log('_saveLogs → ERROR: $e', name: _tag, error: e, stackTrace: st);
     }
   }
 }
