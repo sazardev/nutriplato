@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:android_intent_plus/android_intent.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -158,7 +159,7 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
                         const url =
                             'https://github.com/CerberusProgrammer/nutriplato/blob/master/Pol%C3%ADtica%20de%20Privacidad%20-%20NutriPlato.pdf';
                         Navigator.pop(context);
-                        if (Platform.isAndroid) {
+                        if (!kIsWeb && Platform.isAndroid) {
                           const intent = AndroidIntent(
                             action: 'action_view',
                             data: url,
