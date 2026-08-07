@@ -30,6 +30,11 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
   condiciones, alergias) y el historial reciente (comidas y ejercicios) para
   evitar repeticiones. Widget "Tu predicción de hoy" en el dashboard con
   botones para aplicar las comidas al registro y empezar la rutina.
+- Banco de ejercicios ampliado: se añadieron 53 ejercicios nuevos
+  (`smart_exercise_extra.data.dart`) cubriendo cardio, fuerza, core,
+  flexibilidad, movilidad e HIIT con distintos equipamientos, intensidades,
+  límites por IMC, pasos, tips y contraindicaciones. La biblioteca pasa de 55
+  a 108 ejercicios.
 - Accesibilidad (WCAG 2.2): nombre accesible (`tooltip`) en todos los
   `IconButton`, semántica de botón/estado en todos los `GestureDetector`
   interactivos, encabezados navegables en el onboarding, contraste AA en chips,

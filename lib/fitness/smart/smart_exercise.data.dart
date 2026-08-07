@@ -1,7 +1,13 @@
 import 'smart_exercise.model.dart';
+import 'smart_exercise_extra.data.dart';
 
-/// Biblioteca completa de ejercicios inteligentes
+/// Biblioteca completa de ejercicios inteligentes (base + banco ampliado).
 const List<SmartExercise> smartExercisesLibrary = [
+  ..._smartExercisesBase,
+  ...smartExercisesExtra,
+];
+
+const List<SmartExercise> _smartExercisesBase = [
   // ─── MOVILIDAD / BAJO IMPACTO (BMI alto, principiantes) ───────────────────
   SmartExercise(
     id: 'marcha_lugar',
