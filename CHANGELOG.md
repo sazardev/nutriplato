@@ -9,6 +9,11 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
 ### Añadido
 
+- Blog ampliado: 62 artículos nuevos en `lib/data/articles/` (fundamentos de
+  nutrición, recetas y menús, salud y condiciones, estilo de vida, tradición
+  gastronómica mexicana y bienestar), conectados al `ArticleProvider` para
+  alimentar las secciones "Artículos destacados" y el listado completo con sus
+  filtros por etiqueta.
 - Política de versionado: script `tool/bump_version.dart`, `CHANGELOG.md`,
   hook de `pre-commit` y documentación en `VERSIONING.md`.
 - Página "Tu plan personalizado" al final del onboarding: propuesta calculada
@@ -19,6 +24,12 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 - Botón "Aplicar plan a mi registro de hoy" en el plan del onboarding: agrega
   las comidas generadas (desayuno, almuerzo, cena y snacks con sus porciones)
   directamente al registro diario de alimentos.
+- Motor de predicción diaria (`DailyPredictionService`): algoritmo determinista
+  (misma semilla por usuario y fecha) que predice qué comer, qué ejercicio
+  hacer y qué leer hoy, personalizando con el perfil (meta, actividad,
+  condiciones, alergias) y el historial reciente (comidas y ejercicios) para
+  evitar repeticiones. Widget "Tu predicción de hoy" en el dashboard con
+  botones para aplicar las comidas al registro y empezar la rutina.
 - Accesibilidad (WCAG 2.2): nombre accesible (`tooltip`) en todos los
   `IconButton`, semántica de botón/estado en todos los `GestureDetector`
   interactivos, encabezados navegables en el onboarding, contraste AA en chips,

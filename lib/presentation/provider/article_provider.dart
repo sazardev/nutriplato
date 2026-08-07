@@ -1,5 +1,6 @@
 import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
+import 'package:nutriplato/data/articles/articles.dart';
 import 'package:nutriplato/infrastructure/entities/article/article.dart';
 import 'package:nutriplato/infrastructure/entities/article/article_section.dart';
 
@@ -42,6 +43,10 @@ class ArticleProvider extends ChangeNotifier {
   }
 
   List<Article> _getExampleArticles() {
+    return [..._existingArticles(), ...allBlogArticles()];
+  }
+
+  List<Article> _existingArticles() {
     return [
       Article(
         title: "Beneficios de una alimentación balanceada",

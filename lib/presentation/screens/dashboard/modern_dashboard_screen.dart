@@ -12,6 +12,7 @@ import 'package:nutriplato/presentation/screens/dashboard/widgets/modern_learn_s
 import 'package:nutriplato/presentation/screens/dashboard/widgets/nutrition_summary_card.dart';
 import 'package:nutriplato/presentation/screens/dashboard/widgets/smart_suggestions_widget.dart';
 import 'package:nutriplato/presentation/screens/dashboard/widgets/calorie_balance_card.dart';
+import 'package:nutriplato/presentation/screens/dashboard/widgets/today_prediction_widget.dart';
 import 'package:nutriplato/presentation/screens/featured_articles.dart';
 import 'package:nutriplato/presentation/screens/widgets/modern_sidebar.dart';
 import 'package:nutriplato/presentation/screens/profile/profile_screen.dart';
@@ -208,6 +209,8 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const TodayPredictionWidget(),
+                        const SizedBox(height: 12),
                         NutritionSummaryCard(gradientColors: currentTheme),
                         const SizedBox(height: 12),
                         const CalorieBalanceCard(),

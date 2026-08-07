@@ -10,7 +10,7 @@ flutter run            # device/emulator
 flutter run -d chrome  # web
 flutter build apk --release
 flutter analyze        # lint. Baseline: 36 issues (infos), ZERO errors
-flutter test           # unit tests (test/plate_section_detection_test.dart)
+flutter test           # unit tests (test/plate_section_detection_test.dart, test/daily_prediction_service_test.dart)
 dart run tool/bump_version.dart <major|minor|patch>   # SemVer bump (pubspec + CHANGELOG + tag vX.Y.Z)
 ./tools/install-hooks.sh  # pre-commit: bloquea secretos y exige CHANGELOG
 ```
