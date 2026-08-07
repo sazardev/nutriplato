@@ -60,12 +60,7 @@ class FoodSuggestion {
   });
 }
 
-enum SuggestionType {
-  recommended,
-  alternative,
-  avoid,
-  limitConsumption,
-}
+enum SuggestionType { recommended, alternative, avoid, limitConsumption }
 
 /// Plan de comidas diario
 class DailyMealPlan {
@@ -708,13 +703,15 @@ class SmartNutritionService {
       }
 
       if (score > 0) {
-        suggestions.add(FoodSuggestion(
-          food: food,
-          reason: _generateReason(food, profile, conditions),
-          score: score.clamp(0, 100),
-          benefits: benefits,
-          type: type,
-        ));
+        suggestions.add(
+          FoodSuggestion(
+            food: food,
+            reason: _generateReason(food, profile, conditions),
+            score: score.clamp(0, 100),
+            benefits: benefits,
+            type: type,
+          ),
+        );
       }
     }
 
@@ -748,13 +745,15 @@ class SmartNutritionService {
       }
 
       if (reasons.isNotEmpty) {
-        suggestions.add(FoodSuggestion(
-          food: food,
-          reason: reasons.join('. '),
-          score: 0,
-          benefits: [],
-          type: SuggestionType.avoid,
-        ));
+        suggestions.add(
+          FoodSuggestion(
+            food: food,
+            reason: reasons.join('. '),
+            score: 0,
+            benefits: [],
+            type: SuggestionType.avoid,
+          ),
+        );
       }
     }
 
@@ -772,8 +771,9 @@ class SmartNutritionService {
     final alternatives = <FoodSuggestion>[];
 
     // Buscar alimentos de la misma categoria
-    final sameCategory =
-        allFoods.where((f) => f.category == originalFood.category).toList();
+    final sameCategory = allFoods
+        .where((f) => f.category == originalFood.category)
+        .toList();
 
     final originalCalories = double.tryParse(originalFood.energia) ?? 0;
 
@@ -805,13 +805,15 @@ class SmartNutritionService {
       }
 
       if (!shouldAvoid && !_matchesAny(food.name, profile.allergies)) {
-        alternatives.add(FoodSuggestion(
-          food: food,
-          reason: 'Alternativa a ${originalFood.name}',
-          score: score,
-          benefits: benefits,
-          type: SuggestionType.alternative,
-        ));
+        alternatives.add(
+          FoodSuggestion(
+            food: food,
+            reason: 'Alternativa a ${originalFood.name}',
+            score: score,
+            benefits: benefits,
+            type: SuggestionType.alternative,
+          ),
+        );
       }
     }
 
@@ -919,12 +921,14 @@ class SmartNutritionService {
           .clamp(0.5, 2.0)
           .toDouble();
 
-      suggestions.add(MealSuggestion(
-        food: food,
-        portions: portions,
-        preparationTip: _getPreparationTip(food, mealType),
-        calories: calories * portions,
-      ));
+      suggestions.add(
+        MealSuggestion(
+          food: food,
+          portions: portions,
+          preparationTip: _getPreparationTip(food, mealType),
+          calories: calories * portions,
+        ),
+      );
 
       currentCalories += calories * portions;
 
@@ -968,7 +972,9 @@ class SmartNutritionService {
   }
 
   static Map<String, double> _calculateMacros(
-      double calories, NutritionGoal goal) {
+    double calories,
+    NutritionGoal goal,
+  ) {
     double proteinPercent, carbPercent, fatPercent;
 
     switch (goal) {

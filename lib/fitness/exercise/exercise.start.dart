@@ -14,8 +14,10 @@ class ExerciseViewScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 238, 237, 237),
       appBar: AppBar(
-        title: Text(selectedFitness.name,
-            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
+        title: Text(
+          selectedFitness.name,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+        ),
         backgroundColor: Colors.white,
         actions: [
           IconButton(
@@ -35,85 +37,83 @@ class ExerciseViewScreen extends StatelessWidget {
               );
             },
             icon: const Icon(Icons.info_outline),
+            tooltip: 'Información del ejercicio',
           ),
         ],
       ),
-      body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        Container(
-          color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 16.0),
-            child: Row(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8, bottom: 16.0),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  const Icon(
-                    FontAwesomeIcons.stopwatch,
-                    color: Colors.purple,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                  Icon(FontAwesomeIcons.stopwatch.data, color: Colors.purple),
+                  const SizedBox(width: 10),
                   Text(
                     '${selectedFitness.exercises.length ~/ 2} minutos',
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w500),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  const Icon(
-                    FontAwesomeIcons.fire,
-                    color: Colors.purple,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                  const SizedBox(width: 20),
+                  Icon(FontAwesomeIcons.fire.data, color: Colors.purple),
+                  const SizedBox(width: 10),
                   Text(
                     '${(selectedFitness.exercises.length ~/ 2) * 20} calorias',
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w500),
-                  )
-                ]),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-        Expanded(
+          Expanded(
             child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: selectedFitness.exercises.length,
-              itemBuilder: ((context, index) {
-                return ListTile(
-                  leading: selectedFitness.exercises[index].images.isEmpty
-                      ? const Padding(
-                          padding: EdgeInsets.only(right: 16.0),
-                          child: Icon(FontAwesomeIcons.dumbbell),
-                        )
-                      : selectedFitness.exercises[index].images[0],
-                  title: Text(
-                    selectedFitness.exercises[index].name,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w500, fontSize: 20),
-                  ),
-                  subtitle: Text(
-                    selectedFitness.exercises[index].quantity == 0
-                        ? '${selectedFitness.exercises[index].time} segundos'
-                        : 'x${selectedFitness.exercises[index].quantity} repeticiones',
-                    style: const TextStyle(),
-                  ),
-                  onTap: () {},
-                );
-              })),
-        ))
-      ]),
+              padding: const EdgeInsets.all(16.0),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: selectedFitness.exercises.length,
+                itemBuilder: ((context, index) {
+                  return ListTile(
+                    leading: selectedFitness.exercises[index].images.isEmpty
+                        ? Padding(
+                            padding: const EdgeInsets.only(right: 16.0),
+                            child: Icon(FontAwesomeIcons.dumbbell.data),
+                          )
+                        : selectedFitness.exercises[index].images[0],
+                    title: Text(
+                      selectedFitness.exercises[index].name,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                      ),
+                    ),
+                    subtitle: Text(
+                      selectedFitness.exercises[index].quantity == 0
+                          ? '${selectedFitness.exercises[index].time} segundos'
+                          : 'x${selectedFitness.exercises[index].quantity} repeticiones',
+                      style: const TextStyle(),
+                    ),
+                    onTap: () {},
+                  );
+                }),
+              ),
+            ),
+          ),
+        ],
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => Get.to(
-          () => ExerciseScreen(
-            selectedFitness: selectedFitness,
-          ),
-        ),
+        onPressed: () =>
+            Get.to(() => ExerciseScreen(selectedFitness: selectedFitness)),
         backgroundColor: Colors.purple,
         foregroundColor: Colors.white,
         label: const Padding(

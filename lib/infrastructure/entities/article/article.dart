@@ -35,7 +35,8 @@ class Article {
       tags: json['tags'] != null ? List<String>.from(json['tags']) : [],
       sections: json['sections'] != null
           ? List<ArticleSection>.from(
-              json['sections'].map((x) => ArticleSection.fromJson(x)))
+              json['sections'].map((x) => ArticleSection.fromJson(x)),
+            )
           : [],
     );
   }

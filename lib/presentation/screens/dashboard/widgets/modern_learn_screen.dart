@@ -26,7 +26,7 @@ class ModernLearnScreen extends StatelessWidget {
           context,
           'Plato del Bien Comer',
           'Conoce los grupos alimenticios',
-          FontAwesomeIcons.utensils,
+          FontAwesomeIcons.utensils.data,
           currentTheme[0],
           () {
             Get.to(() => const PlatoInformationScreen());
@@ -36,7 +36,7 @@ class ModernLearnScreen extends StatelessWidget {
           context,
           'Porciones con las Manos',
           'Aprende a medir tus porciones',
-          FontAwesomeIcons.handPaper,
+          FontAwesomeIcons.handPaper.data,
           Colors.orange.shade600,
           () {
             Get.to(() => const ExampleHandScreen());
@@ -46,7 +46,7 @@ class ModernLearnScreen extends StatelessWidget {
           context,
           'Nutrición Balanceada',
           'Tips para una vida saludable',
-          FontAwesomeIcons.heartPulse,
+          FontAwesomeIcons.heartPulse.data,
           Colors.red.shade500,
           () {
             // Navigate to nutrition tips
@@ -56,7 +56,7 @@ class ModernLearnScreen extends StatelessWidget {
           context,
           'Ejercicio y Salud',
           'Mantente activo cada día',
-          FontAwesomeIcons.dumbbell,
+          FontAwesomeIcons.dumbbell.data,
           Colors.purple.shade600,
           () {
             // Navigate to fitness tips
@@ -78,10 +78,7 @@ class ModernLearnScreen extends StatelessWidget {
       width: 200,
       margin: const EdgeInsets.only(right: 16),
       child: GradientCard(
-        colors: [
-          color,
-          color.withValues(alpha: 0.8),
-        ],
+        colors: [color, color.withValues(alpha: 0.8)],
         onTap: onTap,
         child: SizedBox(
           height: 180, // Altura fija para evitar overflow
@@ -94,11 +91,7 @@ class ModernLearnScreen extends StatelessWidget {
                   color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 24,
-                ),
+                child: Icon(icon, color: Colors.white, size: 24),
               ),
               const SizedBox(height: 12),
               Flexible(

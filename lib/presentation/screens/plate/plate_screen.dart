@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:nutriplato/presentation/screens/plate/widgets/plato_info_screen.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 
@@ -29,7 +30,7 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
     0.74 * pi, // Fin de leguminosas / Inicio de animal
     0.9 * pi, // Fin de animal / Inicio de grasas
     pi, // Fin de grasas / Inicio de verduras & frutas
-    2 * pi // Fin de verduras & frutas / Cierre del círculo
+    2 * pi, // Fin de verduras & frutas / Cierre del círculo
   ];
 
   @override
@@ -55,13 +56,17 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
 
   // Determina qué sección del plato fue tocada con mayor precisión
   int? getTappedSection(
-      Offset tapPosition, double size, BoxConstraints constraints) {
+    Offset tapPosition,
+    double size,
+    BoxConstraints constraints,
+  ) {
     final double centerX = constraints.maxWidth / 2;
     final double centerY = constraints.maxHeight / 2;
 
     // Calcula la distancia desde el centro
     final double distance = sqrt(
-        pow(tapPosition.dx - centerX, 2) + pow(tapPosition.dy - centerY, 2));
+      pow(tapPosition.dx - centerX, 2) + pow(tapPosition.dy - centerY, 2),
+    );
 
     // Verifica si el toque está dentro del círculo con un pequeño margen de tolerancia
     if (distance > size / 2 * 1.05) {
@@ -123,9 +128,7 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
             elevation: 0,
             backgroundColor: Colors.transparent,
             flexibleSpace: Container(
-              decoration: BoxDecoration(
-                gradient: AppGradients.success,
-              ),
+              decoration: BoxDecoration(gradient: AppGradients.success),
               child: FlexibleSpaceBar(
                 centerTitle: false,
                 titlePadding: const EdgeInsets.only(left: 16, bottom: 16),
@@ -137,9 +140,7 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
                   ),
                 ),
                 background: Container(
-                  decoration: BoxDecoration(
-                    gradient: AppGradients.success,
-                  ),
+                  decoration: BoxDecoration(gradient: AppGradients.success),
                   child: SafeArea(
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(16, 16, 16, 50),
@@ -168,6 +169,7 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
                   ),
                 ),
                 icon: const Icon(Icons.info_outline, color: Colors.white),
+                tooltip: 'Información del plato',
               ),
             ],
           ),
@@ -199,31 +201,44 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
           size / 2 - 45, // Verduras & Frutas (50%)
         ];
 
-        return GestureDetector(
-          onTapDown: (details) => _handleTapDown(details, size, constraints),
-          child: AnimatedBuilder(
-            animation: _highlightAnimationController,
-            builder: (context, child) {
-              return Material(
-                elevation: 10,
-                shadowColor: Colors.black54,
-                shape: const CircleBorder(),
-                child: SizedBox(
-                  width: size,
-                  height: size,
-                  child: CustomPaint(
-                    painter: CirclePainter(
-                      radii: radii,
-                      angles: angles,
-                      lineLength: 1.1,
-                      categories: shortCategories,
-                      highlightedSection: highlightedSection,
-                      highlightAnimation: _highlightAnimationController.value,
+        final Map<CustomSemanticsAction, VoidCallback> sectionActions = {
+          for (int i = 0; i < shortCategories.length; i++)
+            CustomSemanticsAction(label: shortCategories[i]): () =>
+                _openSection(i),
+        };
+
+        return Semantics(
+          container: true,
+          label:
+              'Plato del Buen Comer: 5 grupos de alimentos. Activa una sección para ver sus alimentos.',
+          focusable: true,
+          customSemanticsActions: sectionActions,
+          child: GestureDetector(
+            onTapDown: (details) => _handleTapDown(details, size, constraints),
+            child: AnimatedBuilder(
+              animation: _highlightAnimationController,
+              builder: (context, child) {
+                return Material(
+                  elevation: 10,
+                  shadowColor: Colors.black54,
+                  shape: const CircleBorder(),
+                  child: SizedBox(
+                    width: size,
+                    height: size,
+                    child: CustomPaint(
+                      painter: CirclePainter(
+                        radii: radii,
+                        angles: angles,
+                        lineLength: 1.1,
+                        categories: shortCategories,
+                        highlightedSection: highlightedSection,
+                        highlightAnimation: _highlightAnimationController.value,
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         );
       },
@@ -231,17 +246,24 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
   }
 
   void _handleTapDown(
-      TapDownDetails details, double size, BoxConstraints constraints) {
+    TapDownDetails details,
+    double size,
+    BoxConstraints constraints,
+  ) {
     RenderBox box = context.findRenderObject() as RenderBox;
     Offset localPosition = box.globalToLocal(details.globalPosition);
 
     final tappedSection = getTappedSection(localPosition, size, constraints);
 
     if (tappedSection != null) {
-      _highlightSection(tappedSection);
-      Color color = sectionColors[tappedSection];
-      displayDialog(color, tappedSection);
+      _openSection(tappedSection);
     }
+  }
+
+  void _openSection(int section) {
+    _highlightSection(section);
+    Color color = sectionColors[section];
+    displayDialog(color, section);
   }
 
   void displayDialog(Color color, int tappedSection) {
@@ -257,45 +279,49 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
 
   void _showSlidingDialog(Color color, int tappedSection) {
     showGeneralDialog(
-        context: context,
-        pageBuilder: (context, animation1, animation2) {
-          return FoodsScreen(
-            color: color,
-            tappedSection: tappedSection,
-            isPhone: false,
-          );
-        },
-        barrierDismissible: true,
-        barrierLabel: '',
-        transitionDuration: const Duration(milliseconds: 300),
-        transitionBuilder: (context, animation1, animation2, widget) {
-          final curvedValue = Curves.easeInOutQuart.transform(animation1.value);
-          return Transform.translate(
-              offset: Offset(300 * (1 - curvedValue), 0), child: widget);
-        });
+      context: context,
+      pageBuilder: (context, animation1, animation2) {
+        return FoodsScreen(
+          color: color,
+          tappedSection: tappedSection,
+          isPhone: false,
+        );
+      },
+      barrierDismissible: true,
+      barrierLabel: 'Cerrar sección',
+      transitionDuration: const Duration(milliseconds: 300),
+      transitionBuilder: (context, animation1, animation2, widget) {
+        final curvedValue = Curves.easeInOutQuart.transform(animation1.value);
+        return Transform.translate(
+          offset: Offset(300 * (1 - curvedValue), 0),
+          child: widget,
+        );
+      },
+    );
   }
 
   void _showBottomSheetDialog(Color color, int tappedSection) {
     showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        backgroundColor: Colors.transparent,
-        transitionAnimationController: _sheetAnimationController,
-        builder: (context) {
-          return Container(
-            height: MediaQuery.of(context).size.height * 0.8,
-            decoration: BoxDecoration(
-              color: AppColors.surface,
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(AppRadius.xl),
-              ),
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      transitionAnimationController: _sheetAnimationController,
+      builder: (context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.8,
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(AppRadius.xl),
             ),
-            child: FoodsScreen(
-              color: color,
-              tappedSection: tappedSection,
-              isPhone: true,
-            ),
-          );
-        });
+          ),
+          child: FoodsScreen(
+            color: color,
+            tappedSection: tappedSection,
+            isPhone: true,
+          ),
+        );
+      },
+    );
   }
 }

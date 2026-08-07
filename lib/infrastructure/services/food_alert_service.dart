@@ -3,12 +3,7 @@ import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
 
 /// Severidad de una alerta
-enum AlertSeverity {
-  info,
-  positive,
-  warning,
-  danger,
-}
+enum AlertSeverity { info, positive, warning, danger }
 
 /// Item de alerta individual
 class AlertItem {
@@ -69,13 +64,15 @@ class FoodAlertService {
       // Verificar alimentos a evitar
       for (final avoidFood in condition.avoidFoods) {
         if (_matchesFood(food.name, avoidFood)) {
-          alerts.add(AlertItem(
-            severity: AlertSeverity.danger,
-            title: 'Evitar para ${condition.name}',
-            message: '${food.name} está en la lista de alimentos a evitar.',
-            icon: Icons.dangerous,
-            color: Colors.red,
-          ));
+          alerts.add(
+            AlertItem(
+              severity: AlertSeverity.danger,
+              title: 'Evitar para ${condition.name}',
+              message: '${food.name} está en la lista de alimentos a evitar.',
+              icon: Icons.dangerous,
+              color: Colors.red,
+            ),
+          );
           maxSeverity = AlertSeverity.danger;
         }
       }
@@ -83,13 +80,15 @@ class FoodAlertService {
       // Verificar alimentos a limitar
       for (final limitFood in condition.limitFoods) {
         if (_matchesFood(food.name, limitFood)) {
-          alerts.add(AlertItem(
-            severity: AlertSeverity.warning,
-            title: 'Limitar para ${condition.name}',
-            message: '${food.name} debe consumirse con moderación.',
-            icon: Icons.warning_amber_rounded,
-            color: Colors.orange,
-          ));
+          alerts.add(
+            AlertItem(
+              severity: AlertSeverity.warning,
+              title: 'Limitar para ${condition.name}',
+              message: '${food.name} debe consumirse con moderación.',
+              icon: Icons.warning_amber_rounded,
+              color: Colors.orange,
+            ),
+          );
           if (maxSeverity != AlertSeverity.danger) {
             maxSeverity = AlertSeverity.warning;
           }
@@ -112,13 +111,15 @@ class FoodAlertService {
       // Verificar si es un alimento recomendado
       for (final recFood in condition.recommendedFoods) {
         if (_matchesFood(food.name, recFood)) {
-          alerts.add(AlertItem(
-            severity: AlertSeverity.positive,
-            title: 'Recomendado para ${condition.name}',
-            message: '${food.name} es beneficioso para tu condición.',
-            icon: Icons.thumb_up,
-            color: Colors.green,
-          ));
+          alerts.add(
+            AlertItem(
+              severity: AlertSeverity.positive,
+              title: 'Recomendado para ${condition.name}',
+              message: '${food.name} es beneficioso para tu condición.',
+              icon: Icons.thumb_up,
+              color: Colors.green,
+            ),
+          );
         }
       }
     }
@@ -129,13 +130,15 @@ class FoodAlertService {
         if (_matchesFood(food.name, allergy) ||
             (food.description?.toLowerCase().contains(allergy.toLowerCase()) ??
                 false)) {
-          alerts.add(AlertItem(
-            severity: AlertSeverity.danger,
-            title: '⚠️ ALERGIA DETECTADA',
-            message: 'Este alimento puede contener $allergy.',
-            icon: Icons.error,
-            color: Colors.red.shade800,
-          ));
+          alerts.add(
+            AlertItem(
+              severity: AlertSeverity.danger,
+              title: '⚠️ ALERGIA DETECTADA',
+              message: 'Este alimento puede contener $allergy.',
+              icon: Icons.error,
+              color: Colors.red.shade800,
+            ),
+          );
           maxSeverity = AlertSeverity.danger;
         }
       }
@@ -197,49 +200,57 @@ class FoodAlertService {
     // Alertas para diabéticos
     if (condition.alertOnHighGlycemicIndex) {
       if (carbohidratos > 25) {
-        alerts.add(AlertItem(
-          severity: AlertSeverity.warning,
-          title: 'Alto en carbohidratos',
-          message: 'Contiene ${carbohidratos}g de carbohidratos por porción.',
-          icon: Icons.cake,
-          color: Colors.orange,
-        ));
+        alerts.add(
+          AlertItem(
+            severity: AlertSeverity.warning,
+            title: 'Alto en carbohidratos',
+            message: 'Contiene ${carbohidratos}g de carbohidratos por porción.',
+            icon: Icons.cake,
+            color: Colors.orange,
+          ),
+        );
       }
     }
 
     if (condition.alertOnHighSugar) {
       if (_isHighSugarFood(food)) {
-        alerts.add(AlertItem(
-          severity: AlertSeverity.warning,
-          title: 'Puede tener azúcar alto',
-          message: 'Este alimento puede elevar rápidamente la glucosa.',
-          icon: Icons.local_cafe,
-          color: Colors.orange,
-        ));
+        alerts.add(
+          AlertItem(
+            severity: AlertSeverity.warning,
+            title: 'Puede tener azúcar alto',
+            message: 'Este alimento puede elevar rápidamente la glucosa.',
+            icon: Icons.local_cafe,
+            color: Colors.orange,
+          ),
+        );
       }
     }
 
     if (condition.alertOnHighSodium) {
       if (_isHighSodiumFood(food)) {
-        alerts.add(AlertItem(
-          severity: AlertSeverity.warning,
-          title: 'Posiblemente alto en sodio',
-          message: 'Verifica el contenido de sodio antes de consumir.',
-          icon: Icons.water_drop,
-          color: Colors.blue,
-        ));
+        alerts.add(
+          AlertItem(
+            severity: AlertSeverity.warning,
+            title: 'Posiblemente alto en sodio',
+            message: 'Verifica el contenido de sodio antes de consumir.',
+            icon: Icons.water_drop,
+            color: Colors.blue,
+          ),
+        );
       }
     }
 
     if (condition.alertOnHighFat) {
       if (lipidos > 15) {
-        alerts.add(AlertItem(
-          severity: AlertSeverity.warning,
-          title: 'Alto en grasas',
-          message: 'Contiene ${lipidos}g de grasas por porción.',
-          icon: Icons.opacity,
-          color: Colors.amber,
-        ));
+        alerts.add(
+          AlertItem(
+            severity: AlertSeverity.warning,
+            title: 'Alto en grasas',
+            message: 'Contiene ${lipidos}g de grasas por porción.',
+            icon: Icons.opacity,
+            color: Colors.amber,
+          ),
+        );
       }
     }
 
@@ -293,8 +304,14 @@ class FoodAlertService {
     switch (restriction.toLowerCase()) {
       case 'vegetariano':
         if (category.contains('animal') ||
-            _containsAny(name,
-                ['carne', 'pollo', 'pescado', 'res', 'cerdo', 'mariscos'])) {
+            _containsAny(name, [
+              'carne',
+              'pollo',
+              'pescado',
+              'res',
+              'cerdo',
+              'mariscos',
+            ])) {
           return AlertItem(
             severity: AlertSeverity.danger,
             title: 'No vegetariano',
@@ -317,7 +334,7 @@ class FoodAlertService {
               'miel',
               'mantequilla',
               'crema',
-              'yogurt'
+              'yogurt',
             ])) {
           return AlertItem(
             severity: AlertSeverity.danger,
@@ -338,7 +355,7 @@ class FoodAlertService {
           'cereal',
           'avena',
           'cebada',
-          'centeno'
+          'centeno',
         ])) {
           return AlertItem(
             severity: AlertSeverity.danger,
@@ -351,8 +368,14 @@ class FoodAlertService {
         break;
 
       case 'sin lactosa':
-        if (_containsAny(name,
-            ['leche', 'queso', 'yogurt', 'crema', 'mantequilla', 'helado'])) {
+        if (_containsAny(name, [
+          'leche',
+          'queso',
+          'yogurt',
+          'crema',
+          'mantequilla',
+          'helado',
+        ])) {
           return AlertItem(
             severity: AlertSeverity.danger,
             title: 'Contiene lactosa',
@@ -403,8 +426,9 @@ class FoodAlertService {
     final suggestions = <String>[];
     final foodName = _normalize(food.name);
 
-    if (healthConditions
-        .any((c) => c.id == 'diabetes_type_2' || c.id == 'prediabetes')) {
+    if (healthConditions.any(
+      (c) => c.id == 'diabetes_type_2' || c.id == 'prediabetes',
+    )) {
       if (foodName.contains('refresco')) {
         suggestions.add('Agua natural con limón');
         suggestions.add('Agua de jamaica sin azúcar');
@@ -467,9 +491,7 @@ class FoodAlertWidget extends StatelessWidget {
             decoration: BoxDecoration(
               color: alertItem.color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: alertItem.color.withValues(alpha: 0.3),
-              ),
+              border: Border.all(color: alertItem.color.withValues(alpha: 0.3)),
             ),
             child: Row(
               children: [
@@ -535,15 +557,8 @@ class FoodAlertBadge extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        color: badgeColor,
-        shape: BoxShape.circle,
-      ),
-      child: Icon(
-        badgeIcon,
-        color: Colors.white,
-        size: 16,
-      ),
+      decoration: BoxDecoration(color: badgeColor, shape: BoxShape.circle),
+      child: Icon(badgeIcon, color: Colors.white, size: 16),
     );
   }
 }

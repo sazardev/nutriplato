@@ -38,11 +38,8 @@ class ModernCard extends StatelessWidget {
             padding: padding ?? const EdgeInsets.all(16),
             decoration: BoxDecoration(
               borderRadius: borderRadius ?? BorderRadius.circular(20),
-              border: border ??
-                  Border.all(
-                    color: Colors.grey.shade200,
-                    width: 1,
-                  ),
+              border:
+                  border ?? Border.all(color: Colors.grey.shade200, width: 1),
               boxShadow: boxShadow,
             ),
             child: child,
@@ -80,11 +77,7 @@ class GradientCard extends StatelessWidget {
     return Container(
       margin: margin ?? const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: colors,
-          begin: begin,
-          end: end,
-        ),
+        gradient: LinearGradient(colors: colors, begin: begin, end: end),
         borderRadius: borderRadius ?? BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -141,11 +134,7 @@ class InfoCard extends StatelessWidget {
               color: iconColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(
-              icon,
-              color: iconColor,
-              size: 24,
-            ),
+            child: Icon(icon, color: iconColor, size: 24),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -190,7 +179,7 @@ class InfoCard extends StatelessWidget {
               ),
             ),
           ],
-          if (trailing != null) trailing!,
+          ?trailing,
           if (onTap != null) ...[
             const SizedBox(width: 8),
             Icon(
@@ -233,11 +222,7 @@ class StatCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(
-                  icon,
-                  color: color,
-                  size: 22,
-                ),
+                Icon(icon, color: color, size: 22),
                 const Spacer(),
                 if (progress != null)
                   SizedBox(
@@ -283,7 +268,7 @@ class StatCard extends StatelessWidget {
                   subtitle!,
                   style: GoogleFonts.poppins(
                     fontSize: 11,
-                    color: Colors.grey.shade500,
+                    color: Colors.grey.shade700,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),

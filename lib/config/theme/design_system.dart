@@ -61,118 +61,113 @@ class NutriDesign {
 
   // ============ TIPOGRAFÍA ============
   static TextStyle get heading1 => GoogleFonts.poppins(
-        fontSize: 28,
-        fontWeight: FontWeight.w700,
-        color: grey900,
-      );
+    fontSize: 28,
+    fontWeight: FontWeight.w700,
+    color: grey900,
+  );
 
   static TextStyle get heading2 => GoogleFonts.poppins(
-        fontSize: 24,
-        fontWeight: FontWeight.w700,
-        color: grey900,
-      );
+    fontSize: 24,
+    fontWeight: FontWeight.w700,
+    color: grey900,
+  );
 
   static TextStyle get heading3 => GoogleFonts.poppins(
-        fontSize: 20,
-        fontWeight: FontWeight.w600,
-        color: grey900,
-      );
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    color: grey900,
+  );
 
   static TextStyle get heading4 => GoogleFonts.poppins(
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-        color: grey900,
-      );
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: grey900,
+  );
 
   static TextStyle get subtitle1 => GoogleFonts.poppins(
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-        color: grey700,
-      );
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    color: grey700,
+  );
 
   static TextStyle get subtitle2 => GoogleFonts.poppins(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        color: grey700,
-      );
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: grey700,
+  );
 
   static TextStyle get body1 => GoogleFonts.poppins(
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        color: grey800,
-      );
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: grey800,
+  );
 
   static TextStyle get body2 => GoogleFonts.poppins(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-        color: grey700,
-      );
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: grey700,
+  );
 
   static TextStyle get caption => GoogleFonts.poppins(
-        fontSize: 12,
-        fontWeight: FontWeight.w400,
-        color: grey600,
-      );
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: grey600,
+  );
 
-  static TextStyle get buttonText => GoogleFonts.poppins(
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
-      );
+  static TextStyle get buttonText =>
+      GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w600);
 
   // ============ DECORACIONES ============
   static BoxDecoration get cardDecoration => BoxDecoration(
-        color: surfaceColor,
-        borderRadius: BorderRadius.circular(radiusLarge),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      );
+    color: surfaceColor,
+    borderRadius: BorderRadius.circular(radiusLarge),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black.withValues(alpha: 0.05),
+        blurRadius: 10,
+        offset: const Offset(0, 4),
+      ),
+    ],
+  );
 
   static BoxDecoration cardDecorationWithColor(Color color) => BoxDecoration(
-        color: surfaceColor,
-        borderRadius: BorderRadius.circular(radiusLarge),
-        border: Border.all(
-          color: color.withValues(alpha: 0.2),
-          width: 1,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: color.withValues(alpha: 0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      );
+    color: surfaceColor,
+    borderRadius: BorderRadius.circular(radiusLarge),
+    border: Border.all(color: color.withValues(alpha: 0.2), width: 1),
+    boxShadow: [
+      BoxShadow(
+        color: color.withValues(alpha: 0.1),
+        blurRadius: 10,
+        offset: const Offset(0, 4),
+      ),
+    ],
+  );
 
   static BoxDecoration gradientDecoration(List<Color> colors) => BoxDecoration(
-        gradient: LinearGradient(
-          colors: colors,
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(radiusXLarge),
-      );
+    gradient: LinearGradient(
+      colors: colors,
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+    borderRadius: BorderRadius.circular(radiusXLarge),
+  );
 
   // ============ SOMBRAS ============
   static List<BoxShadow> get softShadow => [
-        BoxShadow(
-          color: Colors.black.withValues(alpha: 0.05),
-          blurRadius: 10,
-          offset: const Offset(0, 4),
-        ),
-      ];
+    BoxShadow(
+      color: Colors.black.withValues(alpha: 0.05),
+      blurRadius: 10,
+      offset: const Offset(0, 4),
+    ),
+  ];
 
   static List<BoxShadow> shadowWithColor(Color color) => [
-        BoxShadow(
-          color: color.withValues(alpha: 0.2),
-          blurRadius: 15,
-          offset: const Offset(0, 5),
-        ),
-      ];
+    BoxShadow(
+      color: color.withValues(alpha: 0.2),
+      blurRadius: 15,
+      offset: const Offset(0, 5),
+    ),
+  ];
 
   // ============ BORDES ============
   static BorderRadius get borderRadiusSmall =>
@@ -345,7 +340,8 @@ class NutriSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding ??
+      padding:
+          padding ??
           const EdgeInsets.symmetric(
             horizontal: NutriDesign.spacing16,
             vertical: NutriDesign.spacing8,
@@ -357,7 +353,7 @@ class NutriSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(title, style: NutriDesign.heading4),
-              if (trailing != null) trailing!,
+              ?trailing,
             ],
           ),
           const SizedBox(height: NutriDesign.spacing12),
@@ -521,11 +517,7 @@ class NutriEmptyState extends StatelessWidget {
                 color: NutriDesign.grey100,
                 shape: BoxShape.circle,
               ),
-              child: Icon(
-                icon,
-                size: 48,
-                color: NutriDesign.grey400,
-              ),
+              child: Icon(icon, size: 48, color: NutriDesign.grey400),
             ),
             const SizedBox(height: NutriDesign.spacing24),
             Text(
@@ -557,11 +549,7 @@ class NutriLoading extends StatelessWidget {
   final String? message;
   final Color? color;
 
-  const NutriLoading({
-    super.key,
-    this.message,
-    this.color,
-  });
+  const NutriLoading({super.key, this.message, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -571,16 +559,10 @@ class NutriLoading extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircularProgressIndicator(
-            color: primaryColor,
-            strokeWidth: 3,
-          ),
+          CircularProgressIndicator(color: primaryColor, strokeWidth: 3),
           if (message != null) ...[
             const SizedBox(height: NutriDesign.spacing16),
-            Text(
-              message!,
-              style: NutriDesign.body2,
-            ),
+            Text(message!, style: NutriDesign.body2),
           ],
         ],
       ),
@@ -652,22 +634,22 @@ class AppShadows {
   AppShadows._();
 
   static BoxShadow get subtle => BoxShadow(
-        color: Colors.black.withValues(alpha: 0.04),
-        blurRadius: 8,
-        offset: const Offset(0, 2),
-      );
+    color: Colors.black.withValues(alpha: 0.04),
+    blurRadius: 8,
+    offset: const Offset(0, 2),
+  );
 
   static BoxShadow get card => BoxShadow(
-        color: Colors.black.withValues(alpha: 0.08),
-        blurRadius: 12,
-        offset: const Offset(0, 4),
-      );
+    color: Colors.black.withValues(alpha: 0.08),
+    blurRadius: 12,
+    offset: const Offset(0, 4),
+  );
 
   static BoxShadow get elevated => BoxShadow(
-        color: Colors.black.withValues(alpha: 0.12),
-        blurRadius: 20,
-        offset: const Offset(0, 8),
-      );
+    color: Colors.black.withValues(alpha: 0.12),
+    blurRadius: 20,
+    offset: const Offset(0, 8),
+  );
 }
 
 /// Gradientes de la aplicación
@@ -675,32 +657,32 @@ class AppGradients {
   AppGradients._();
 
   static LinearGradient get primary => const LinearGradient(
-        colors: [Color(0xFF7C3AED), Color(0xFF9333EA)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      );
+    colors: [Color(0xFF7C3AED), Color(0xFF9333EA)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 
   static LinearGradient get success => const LinearGradient(
-        colors: [Color(0xFF10B981), Color(0xFF059669)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      );
+    colors: [Color(0xFF10B981), Color(0xFF059669)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 
   static LinearGradient get warning => const LinearGradient(
-        colors: [Color(0xFFF59E0B), Color(0xFFD97706)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      );
+    colors: [Color(0xFFF59E0B), Color(0xFFD97706)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 
   static LinearGradient get danger => const LinearGradient(
-        colors: [Color(0xFFEF4444), Color(0xFFDC2626)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      );
+    colors: [Color(0xFFEF4444), Color(0xFFDC2626)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 
   static LinearGradient get ocean => const LinearGradient(
-        colors: [Color(0xFF0EA5E9), Color(0xFF0284C7)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      );
+    colors: [Color(0xFF0EA5E9), Color(0xFF0284C7)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }

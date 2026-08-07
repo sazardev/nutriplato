@@ -42,8 +42,8 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
     final List<Article> filteredArticles = _activeFilter == "Todos"
         ? allArticles
         : allArticles
-            .where((article) => article.tags.contains(_activeFilter))
-            .toList();
+              .where((article) => article.tags.contains(_activeFilter))
+              .toList();
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -57,9 +57,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
             elevation: 0,
             backgroundColor: Colors.transparent,
             flexibleSpace: Container(
-              decoration: BoxDecoration(
-                gradient: AppGradients.ocean,
-              ),
+              decoration: BoxDecoration(gradient: AppGradients.ocean),
               child: FlexibleSpaceBar(
                 centerTitle: false,
                 titlePadding: const EdgeInsets.only(left: 16, bottom: 16),
@@ -71,9 +69,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
                   ),
                 ),
                 background: Container(
-                  decoration: BoxDecoration(
-                    gradient: AppGradients.ocean,
-                  ),
+                  decoration: BoxDecoration(gradient: AppGradients.ocean),
                   child: SafeArea(
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(16, 16, 16, 50),
@@ -148,126 +144,115 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
                   child: Center(child: CircularProgressIndicator()),
                 )
               : filteredArticles.isEmpty
-                  ? SliverFillRemaining(
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.article_outlined,
-                              size: 64,
-                              color:
-                                  AppColors.textSecondary.withValues(alpha: .5),
-                            ),
-                            const SizedBox(height: AppSpacing.md),
-                            Text(
-                              "No hay artículos disponibles",
-                              style: AppTypography.bodyLarge.copyWith(
-                                color: AppColors.textSecondary,
-                              ),
-                            ),
-                          ],
+              ? SliverFillRemaining(
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.article_outlined,
+                          size: 64,
+                          color: AppColors.textSecondary.withValues(alpha: .5),
                         ),
-                      ),
-                    )
-                  : SliverPadding(
-                      padding: const EdgeInsets.all(AppSpacing.md),
-                      sliver: SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          (context, index) {
-                            final article = filteredArticles[index];
-                            return Container(
-                              margin:
-                                  const EdgeInsets.only(bottom: AppSpacing.md),
-                              decoration: BoxDecoration(
-                                color: AppColors.surface,
-                                borderRadius:
-                                    BorderRadius.circular(AppRadius.lg),
-                                boxShadow: [AppShadows.card],
-                              ),
-                              clipBehavior: Clip.antiAlias,
-                              child: InkWell(
-                                onTap: () {
-                                  articleProvider.setSelectedArticle(article);
-                                  Get.to(() => const ArticleDetailScreen());
-                                },
+                        const SizedBox(height: AppSpacing.md),
+                        Text(
+                          "No hay artículos disponibles",
+                          style: AppTypography.bodyLarge.copyWith(
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              : SliverPadding(
+                  padding: const EdgeInsets.all(AppSpacing.md),
+                  sliver: SliverList(
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                      final article = filteredArticles[index];
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: AppSpacing.md),
+                        decoration: BoxDecoration(
+                          color: AppColors.surface,
+                          borderRadius: BorderRadius.circular(AppRadius.lg),
+                          boxShadow: [AppShadows.card],
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: InkWell(
+                          onTap: () {
+                            articleProvider.setSelectedArticle(article);
+                            Get.to(() => const ArticleDetailScreen());
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (article.imageUrl != null)
+                                Image.asset(
+                                  article.imageUrl!,
+                                  height: 180,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
+                              Padding(
+                                padding: const EdgeInsets.all(AppSpacing.md),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    if (article.imageUrl != null)
-                                      Image.asset(
-                                        article.imageUrl!,
-                                        height: 180,
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
+                                    Text(
+                                      article.title,
+                                      style: AppTypography.titleMedium.copyWith(
+                                        color: AppColors.textPrimary,
                                       ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.all(AppSpacing.md),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            article.title,
-                                            style: AppTypography.titleMedium
-                                                .copyWith(
-                                              color: AppColors.textPrimary,
-                                            ),
-                                          ),
-                                          const SizedBox(height: AppSpacing.sm),
-                                          Text(
-                                            article.description,
-                                            style: AppTypography.bodyMedium
-                                                .copyWith(
-                                              color: AppColors.textSecondary,
-                                            ),
-                                          ),
-                                          const SizedBox(height: AppSpacing.md),
-                                          Wrap(
-                                            spacing: AppSpacing.sm,
-                                            runSpacing: AppSpacing.xs,
-                                            children: article.tags
-                                                .map((tag) => Container(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                        horizontal:
-                                                            AppSpacing.sm,
-                                                        vertical: AppSpacing.xs,
-                                                      ),
-                                                      decoration: BoxDecoration(
-                                                        color: article.color
-                                                            .withValues(
-                                                                alpha: .1),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    AppRadius
-                                                                        .full),
-                                                      ),
-                                                      child: Text(
-                                                        tag,
-                                                        style: AppTypography
-                                                            .labelSmall
-                                                            .copyWith(
-                                                          color: article.color,
-                                                        ),
-                                                      ),
-                                                    ))
-                                                .toList(),
-                                          ),
-                                        ],
+                                    ),
+                                    const SizedBox(height: AppSpacing.sm),
+                                    Text(
+                                      article.description,
+                                      style: AppTypography.bodyMedium.copyWith(
+                                        color: AppColors.textSecondary,
                                       ),
+                                    ),
+                                    const SizedBox(height: AppSpacing.md),
+                                    Wrap(
+                                      spacing: AppSpacing.sm,
+                                      runSpacing: AppSpacing.xs,
+                                      children: article.tags
+                                          .map(
+                                            (tag) => Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                    horizontal: AppSpacing.sm,
+                                                    vertical: AppSpacing.xs,
+                                                  ),
+                                              decoration: BoxDecoration(
+                                                color: article.color.withValues(
+                                                  alpha: .1,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                      AppRadius.full,
+                                                    ),
+                                              ),
+                                              child: Text(
+                                                tag,
+                                                style: AppTypography.labelSmall
+                                                    .copyWith(
+                                                      color: article.color,
+                                                    ),
+                                              ),
+                                            ),
+                                          )
+                                          .toList(),
                                     ),
                                   ],
                                 ),
                               ),
-                            );
-                          },
-                          childCount: filteredArticles.length,
+                            ],
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    }, childCount: filteredArticles.length),
+                  ),
+                ),
         ],
       ),
     );

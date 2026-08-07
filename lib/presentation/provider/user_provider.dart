@@ -20,8 +20,10 @@ class UserProvider extends ChangeNotifier {
       final userMap = jsonDecode(userString);
       final user = User.fromJson(userMap);
       this.user = user;
-      dev.log('loadUser → usuario cargado: username="${user.username}"',
-          name: _tag);
+      dev.log(
+        'loadUser → usuario cargado: username="${user.username}"',
+        name: _tag,
+      );
     } else {
       dev.log('loadUser → no hay usuario guardado (primera vez)', name: _tag);
     }
@@ -30,8 +32,10 @@ class UserProvider extends ChangeNotifier {
   }
 
   void saveUser(User username) async {
-    dev.log('saveUser → guardando usuario: username="${username.username}"',
-        name: _tag);
+    dev.log(
+      'saveUser → guardando usuario: username="${username.username}"',
+      name: _tag,
+    );
     user = username;
 
     final prefs = await SharedPreferences.getInstance();

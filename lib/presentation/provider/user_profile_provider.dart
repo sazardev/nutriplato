@@ -54,8 +54,10 @@ class UserProfileProvider extends ChangeNotifier {
           name: _tag,
         );
       } else {
-        dev.log('loadProfile → no hay perfil guardado (nuevo usuario)',
-            name: _tag);
+        dev.log(
+          'loadProfile → no hay perfil guardado (nuevo usuario)',
+          name: _tag,
+        );
       }
 
       // Cargar condiciones de salud del usuario
@@ -112,8 +114,10 @@ class UserProfileProvider extends ChangeNotifier {
 
   /// Guarda el perfil en almacenamiento local
   Future<void> saveProfile() async {
-    dev.log('saveProfile → guardando perfil de "${_profile.username}"',
-        name: _tag);
+    dev.log(
+      'saveProfile → guardando perfil de "${_profile.username}"',
+      name: _tag,
+    );
     try {
       final prefs = await SharedPreferences.getInstance();
 
@@ -125,13 +129,15 @@ class UserProfileProvider extends ChangeNotifier {
       await prefs.setString('user_profile', profileJson);
 
       // Guardar condiciones de salud
-      final conditionsJson =
-          _healthConditions.map((c) => jsonEncode(c.toJson())).toList();
+      final conditionsJson = _healthConditions
+          .map((c) => jsonEncode(c.toJson()))
+          .toList();
       await prefs.setStringList('user_health_conditions', conditionsJson);
 
       // Guardar métricas
-      final metricsJson =
-          _healthMetrics.map((m) => jsonEncode(m.toJson())).toList();
+      final metricsJson = _healthMetrics
+          .map((m) => jsonEncode(m.toJson()))
+          .toList();
       await prefs.setStringList('user_health_metrics', metricsJson);
 
       dev.log(
@@ -174,17 +180,7 @@ class UserProfileProvider extends ChangeNotifier {
   }) async {
     dev.log(
       'updateProfileFields → '
-      '${[
-        if (username != null) 'username=$username',
-        if (gender != null) 'gender=${gender.name}',
-        if (heightCm != null) 'height=${heightCm}cm',
-        if (weightKg != null) 'weight=${weightKg}kg',
-        if (targetWeightKg != null) 'targetWeight=${targetWeightKg}kg',
-        if (activityLevel != null) 'activity=${activityLevel.name}',
-        if (nutritionGoal != null) 'goal=${nutritionGoal.name}',
-        if (onboardingCompleted != null) 'onboarding=$onboardingCompleted',
-        if (onboardingStep != null) 'step=$onboardingStep',
-      ].join(' ')}',
+      '${[if (username != null) 'username=$username', if (gender != null) 'gender=${gender.name}', if (heightCm != null) 'height=${heightCm}cm', if (weightKg != null) 'weight=${weightKg}kg', if (targetWeightKg != null) 'targetWeight=${targetWeightKg}kg', if (activityLevel != null) 'activity=${activityLevel.name}', if (nutritionGoal != null) 'goal=${nutritionGoal.name}', if (onboardingCompleted != null) 'onboarding=$onboardingCompleted', if (onboardingStep != null) 'step=$onboardingStep'].join(' ')}',
       name: _tag,
     );
     _profile = _profile.copyWith(
@@ -211,8 +207,9 @@ class UserProfileProvider extends ChangeNotifier {
   /// Completa el onboarding
   Future<void> completeOnboarding() async {
     dev.log(
-        'completeOnboarding → onboarding completado para "${_profile.username}"',
-        name: _tag);
+      'completeOnboarding → onboarding completado para "${_profile.username}"',
+      name: _tag,
+    );
     _profile = _profile.copyWith(
       onboardingCompleted: true,
       onboardingStep: -1, // Completado
@@ -231,14 +228,12 @@ class UserProfileProvider extends ChangeNotifier {
   Future<void> addHealthCondition(HealthCondition condition) async {
     if (!_healthConditions.any((c) => c.id == condition.id)) {
       dev.log(
-          'addHealthCondition → agregando "${condition.name}" (id=${condition.id})',
-          name: _tag);
+        'addHealthCondition → agregando "${condition.name}" (id=${condition.id})',
+        name: _tag,
+      );
       _healthConditions.add(condition);
       _profile = _profile.copyWith(
-        healthConditionIds: [
-          ..._profile.healthConditionIds,
-          condition.id,
-        ],
+        healthConditionIds: [..._profile.healthConditionIds, condition.id],
       );
       await saveProfile();
     }
@@ -249,8 +244,9 @@ class UserProfileProvider extends ChangeNotifier {
     dev.log('removeHealthCondition → eliminando id=$conditionId', name: _tag);
     _healthConditions.removeWhere((c) => c.id == conditionId);
     _profile = _profile.copyWith(
-      healthConditionIds:
-          _profile.healthConditionIds.where((id) => id != conditionId).toList(),
+      healthConditionIds: _profile.healthConditionIds
+          .where((id) => id != conditionId)
+          .toList(),
     );
     await saveProfile();
   }
@@ -285,6 +281,16 @@ class UserProfileProvider extends ChangeNotifier {
       ..sort((a, b) => b.date.compareTo(a.date));
   }
 
+  /// Elimina una métrica específica
+  Future<void> removeHealthMetric(HealthMetric metric) async {
+    dev.log(
+      'removeHealthMetric → tipo=${metric.type.name} fecha=${metric.date}',
+      name: _tag,
+    );
+    _healthMetrics.removeWhere((m) => m.id == metric.id);
+    await saveProfile();
+  }
+
   /// Obtiene la última métrica de un tipo
   HealthMetric? getLatestMetric(HealthMetricType type) {
     final metrics = getMetricsByType(type);
@@ -293,9 +299,7 @@ class UserProfileProvider extends ChangeNotifier {
 
   /// Incrementa contador de artículos leídos
   Future<void> incrementArticlesRead() async {
-    _profile = _profile.copyWith(
-      articlesRead: _profile.articlesRead + 1,
-    );
+    _profile = _profile.copyWith(articlesRead: _profile.articlesRead + 1);
     await saveProfile();
   }
 
@@ -309,17 +313,13 @@ class UserProfileProvider extends ChangeNotifier {
 
   /// Incrementa contador de alimentos vistos
   Future<void> incrementFoodsViewed() async {
-    _profile = _profile.copyWith(
-      foodsViewed: _profile.foodsViewed + 1,
-    );
+    _profile = _profile.copyWith(foodsViewed: _profile.foodsViewed + 1);
     await saveProfile();
   }
 
   /// Registra un día de uso
   Future<void> logDailyUsage() async {
-    _profile = _profile.copyWith(
-      daysLogged: _profile.daysLogged + 1,
-    );
+    _profile = _profile.copyWith(daysLogged: _profile.daysLogged + 1);
     await _updateStreak();
     await saveProfile();
   }
@@ -347,8 +347,9 @@ class UserProfileProvider extends ChangeNotifier {
 
       if (difference == 0) {
         dev.log(
-            '_updateStreak → ya registrado hoy, streak=${_profile.currentStreak}',
-            name: _tag);
+          '_updateStreak → ya registrado hoy, streak=${_profile.currentStreak}',
+          name: _tag,
+        );
         return;
       } else if (difference == 1) {
         // Día consecutivo
@@ -361,13 +362,15 @@ class UserProfileProvider extends ChangeNotifier {
           longestStreak: longestStreak,
         );
         dev.log(
-            '_updateStreak → día consecutivo, streak=$newStreak (record=${longestStreak})',
-            name: _tag);
+          '_updateStreak → día consecutivo, streak=$newStreak (record=${longestStreak})',
+          name: _tag,
+        );
       } else {
         // Se rompió el streak
         dev.log(
-            '_updateStreak → streak roto (${difference}d sin uso), reiniciando a 1',
-            name: _tag);
+          '_updateStreak → streak roto (${difference}d sin uso), reiniciando a 1',
+          name: _tag,
+        );
         _profile = _profile.copyWith(currentStreak: 1);
       }
 
@@ -429,10 +432,10 @@ class UserProfileProvider extends ChangeNotifier {
       final deficit = tdee - targetCalories;
       weightProjection =
           NutritionCalculatorService.calculateWeightGoalProjection(
-        currentWeight: _profile.weightKg!,
-        targetWeight: _profile.targetWeightKg!,
-        dailyCalorieDeficit: deficit,
-      );
+            currentWeight: _profile.weightKg!,
+            targetWeight: _profile.targetWeightKg!,
+            dailyCalorieDeficit: deficit,
+          );
     }
 
     final result = NutritionCalculation(
@@ -459,7 +462,8 @@ class UserProfileProvider extends ChangeNotifier {
 
   /// Obtiene el nivel del usuario basado en su actividad
   int getUserLevel() {
-    final points = _profile.articlesRead * 10 +
+    final points =
+        _profile.articlesRead * 10 +
         _profile.exercisesCompleted * 20 +
         _profile.foodsViewed * 5 +
         _profile.daysLogged * 15 +
@@ -497,7 +501,8 @@ class UserProfileProvider extends ChangeNotifier {
 
   /// Obtiene el progreso hacia el siguiente nivel (0-100)
   double getLevelProgress() {
-    final points = _profile.articlesRead * 10 +
+    final points =
+        _profile.articlesRead * 10 +
         _profile.exercisesCompleted * 20 +
         _profile.foodsViewed * 5 +
         _profile.daysLogged * 15 +

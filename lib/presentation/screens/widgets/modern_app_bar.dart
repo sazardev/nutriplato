@@ -49,15 +49,18 @@ class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
         centerTitle: centerTitle,
-        backgroundColor: backgroundColor ??
+        backgroundColor:
+            backgroundColor ??
             (showGradient ? Colors.transparent : Colors.transparent),
         elevation: 0,
         scrolledUnderElevation: 0,
         surfaceTintColor: Colors.transparent,
-        leading: leading ??
+        leading:
+            leading ??
             (Navigator.canPop(context)
                 ? IconButton(
                     onPressed: onBackPressed ?? () => Navigator.pop(context),
+                    tooltip: 'Regresar',
                     icon: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
@@ -80,6 +83,7 @@ class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
               margin: const EdgeInsets.only(right: 8),
               child: IconButton(
                 onPressed: (action).onPressed,
+                tooltip: (action).tooltip,
                 icon: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
@@ -139,7 +143,8 @@ class SliverModernAppBar extends StatelessWidget {
       elevation: 0,
       backgroundColor: Colors.transparent,
       flexibleSpace: FlexibleSpaceBar(
-        background: background ??
+        background:
+            background ??
             Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -169,8 +174,8 @@ class SliverModernAppBar extends StatelessWidget {
                           subtitle!,
                           style: GoogleFonts.poppins(
                             fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white.withValues(alpha: 0.9),
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
                           ),
                         ),
                       ],
@@ -186,6 +191,7 @@ class SliverModernAppBar extends StatelessWidget {
             margin: const EdgeInsets.only(right: 8),
             child: IconButton(
               onPressed: (action).onPressed,
+              tooltip: (action).tooltip,
               icon: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(

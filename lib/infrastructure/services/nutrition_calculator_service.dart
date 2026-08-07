@@ -1,18 +1,10 @@
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 
 /// Fórmulas para calcular TMB
-enum BMRFormula {
-  mifflinStJeor,
-  harrisBenedict,
-  katchMcArdle,
-}
+enum BMRFormula { mifflinStJeor, harrisBenedict, katchMcArdle }
 
 /// Nivel de riesgo
-enum RiskLevel {
-  low,
-  moderate,
-  high,
-}
+enum RiskLevel { low, moderate, high }
 
 /// Servicio para calcular requerimientos nutricionales basados en el perfil del usuario
 /// y estándares mexicanos de salud (NOM-043-SSA2-2012)
@@ -433,16 +425,16 @@ class MacroDistribution {
   });
 
   Map<String, dynamic> toJson() => {
-        'calories': calories,
-        'proteinGrams': proteinGrams,
-        'carbGrams': carbGrams,
-        'fatGrams': fatGrams,
-        'fiberGrams': fiberGrams,
-        'proteinPercent': proteinPercent,
-        'carbPercent': carbPercent,
-        'fatPercent': fatPercent,
-        'proteinPerKg': proteinPerKg,
-      };
+    'calories': calories,
+    'proteinGrams': proteinGrams,
+    'carbGrams': carbGrams,
+    'fatGrams': fatGrams,
+    'fiberGrams': fiberGrams,
+    'proteinPercent': proteinPercent,
+    'carbPercent': carbPercent,
+    'fatPercent': fatPercent,
+    'proteinPerKg': proteinPerKg,
+  };
 }
 
 /// Resultado de peso ideal

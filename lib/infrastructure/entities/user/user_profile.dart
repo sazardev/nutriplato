@@ -21,9 +21,15 @@ enum Gender {
 enum ActivityLevel {
   sedentary('Sedentario', 'Poco o ningún ejercicio', 1.2),
   lightlyActive(
-      'Ligeramente activo', 'Ejercicio ligero 1-3 días/semana', 1.375),
+    'Ligeramente activo',
+    'Ejercicio ligero 1-3 días/semana',
+    1.375,
+  ),
   moderatelyActive(
-      'Moderadamente activo', 'Ejercicio moderado 3-5 días/semana', 1.55),
+    'Moderadamente activo',
+    'Ejercicio moderado 3-5 días/semana',
+    1.55,
+  ),
   veryActive('Muy activo', 'Ejercicio intenso 6-7 días/semana', 1.725),
   extraActive('Extra activo', 'Ejercicio muy intenso o trabajo físico', 1.9);
 
@@ -95,7 +101,7 @@ class UserProfile {
 
   // Preferencias alimentarias
   final List<String>
-      dietaryRestrictions; // vegetariano, vegano, sin gluten, etc.
+  dietaryRestrictions; // vegetariano, vegano, sin gluten, etc.
   final List<String> allergies; // Alergias alimentarias
   final List<String> dislikedFoods; // Alimentos que no le gustan
   final List<String> favoriteFoods; // Alimentos favoritos
@@ -434,8 +440,9 @@ class UserProfile {
       updatedAt: json['updatedAt'] != null
           ? DateTime.parse(json['updatedAt'])
           : DateTime.now(),
-      birthDate:
-          json['birthDate'] != null ? DateTime.parse(json['birthDate']) : null,
+      birthDate: json['birthDate'] != null
+          ? DateTime.parse(json['birthDate'])
+          : null,
       gender: Gender.fromString(json['gender'] ?? 'other'),
       heightCm: json['heightCm']?.toDouble(),
       weightKg: json['weightKg']?.toDouble(),
@@ -444,10 +451,12 @@ class UserProfile {
       hipCm: json['hipCm']?.toDouble(),
       neckCm: json['neckCm']?.toDouble(),
       chestCm: json['chestCm']?.toDouble(),
-      activityLevel:
-          ActivityLevel.fromString(json['activityLevel'] ?? 'sedentary'),
-      nutritionGoal:
-          NutritionGoal.fromString(json['nutritionGoal'] ?? 'maintainWeight'),
+      activityLevel: ActivityLevel.fromString(
+        json['activityLevel'] ?? 'sedentary',
+      ),
+      nutritionGoal: NutritionGoal.fromString(
+        json['nutritionGoal'] ?? 'maintainWeight',
+      ),
       sleepHoursPerDay: json['sleepHoursPerDay'],
       waterGlassesPerDay: json['waterGlassesPerDay'] ?? 8,
       dietaryRestrictions: List<String>.from(json['dietaryRestrictions'] ?? []),

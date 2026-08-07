@@ -16,9 +16,7 @@ class DrawerProfile extends StatefulWidget {
 }
 
 class _DrawerProfileState extends State<DrawerProfile> {
-  List<String> routes = [
-    ThemeChangerScreen.appRouterName,
-  ];
+  List<String> routes = [ThemeChangerScreen.appRouterName];
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +29,7 @@ class _DrawerProfileState extends State<DrawerProfile> {
           if (Platform.isAndroid) {
             const url =
                 'https://github.com/CerberusProgrammer/nutriplato/blob/master/Pol%C3%ADtica%20de%20Privacidad%20-%20NutriPlato.pdf';
-            const intent = AndroidIntent(
-              action: 'action_view',
-              data: url,
-            );
+            const intent = AndroidIntent(action: 'action_view', data: url);
             intent.launch();
           }
         } else {
@@ -79,46 +74,40 @@ class _UserCardState extends State<UserCard> {
     return SizedBox(
       height: 280,
       child: DrawerHeader(
-        decoration: const BoxDecoration(
-          color: Colors.purple,
-        ),
+        decoration: const BoxDecoration(color: Colors.purple),
         child: Column(
           children: [
             Row(
               children: [
                 IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(
-                      Icons.close,
-                      color: Colors.white,
-                    )),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.close, color: Colors.white),
+                  tooltip: 'Cerrar',
+                ),
                 const Spacer(),
                 IconButton(
-                    onPressed: () {
-                      setState(() {
-                        if (editMode) {
-                          editMode = false;
-                        } else {
-                          editMode = true;
-                        }
-                      });
-                      context.read<UserProvider>().saveUser(user);
-                    },
-                    icon: Icon(
-                      editMode ? Icons.done : Icons.edit,
-                      color: Colors.white,
-                    )),
+                  onPressed: () {
+                    setState(() {
+                      if (editMode) {
+                        editMode = false;
+                      } else {
+                        editMode = true;
+                      }
+                    });
+                    context.read<UserProvider>().saveUser(user);
+                  },
+                  icon: Icon(
+                    editMode ? Icons.done : Icons.edit,
+                    color: Colors.white,
+                  ),
+                  tooltip: editMode ? 'Guardar nombre' : 'Editar nombre',
+                ),
               ],
             ),
-            CircleAvatar(
-              radius: 70,
-              child: Text(user.username),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
+            CircleAvatar(radius: 70, child: Text(user.username)),
+            const SizedBox(height: 10),
             editMode
                 ? SizedBox(
                     width: 200,
@@ -126,11 +115,13 @@ class _UserCardState extends State<UserCard> {
                     child: TextField(
                       textAlign: TextAlign.center,
                       cursorColor: Colors.white,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                      ),
+                      style: const TextStyle(color: Colors.white, fontSize: 24),
                       controller: TextEditingController(text: user.username),
+                      decoration: const InputDecoration(
+                        hintText: 'Tu nombre',
+                        hintStyle: TextStyle(color: Colors.white70),
+                        border: InputBorder.none,
+                      ),
                       onSubmitted: (value) {
                         user.username = value;
                         context.read<UserProvider>().saveUser(user);
@@ -139,10 +130,7 @@ class _UserCardState extends State<UserCard> {
                   )
                 : Text(
                     user.username,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                    ),
+                    style: const TextStyle(color: Colors.white, fontSize: 24),
                   ),
           ],
         ),

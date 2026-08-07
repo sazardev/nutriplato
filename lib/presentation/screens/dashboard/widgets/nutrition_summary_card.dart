@@ -9,10 +9,7 @@ import 'package:nutriplato/presentation/screens/profile/profile_screen.dart';
 class NutritionSummaryCard extends StatelessWidget {
   final List<Color> gradientColors;
 
-  const NutritionSummaryCard({
-    super.key,
-    required this.gradientColors,
-  });
+  const NutritionSummaryCard({super.key, required this.gradientColors});
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +31,7 @@ class NutritionSummaryCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               gradient: LinearGradient(
-                colors: [
-                  gradientColors[0].withOpacity(0.1),
-                  Colors.white,
-                ],
+                colors: [gradientColors[0].withOpacity(0.1), Colors.white],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -155,17 +149,12 @@ class NutritionSummaryCard extends StatelessWidget {
   Widget _buildIncompleteProfileCard(BuildContext context) {
     return Card(
       elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
-            colors: [
-              Colors.orange.shade100,
-              Colors.white,
-            ],
+            colors: [Colors.orange.shade100, Colors.white],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -198,10 +187,7 @@ class NutritionSummaryCard extends StatelessWidget {
             Text(
               'Configura tu perfil para obtener recomendaciones nutricionales personalizadas',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.grey.shade600,
-                fontSize: 14,
-              ),
+              style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
             ),
             const SizedBox(height: 16),
             ElevatedButton.icon(
@@ -251,10 +237,7 @@ class NutritionSummaryCard extends StatelessWidget {
           ),
           Text(
             'kcal',
-            style: TextStyle(
-              fontSize: 10,
-              color: Colors.grey.shade600,
-            ),
+            style: TextStyle(fontSize: 10, color: Colors.grey.shade600),
           ),
         ],
       ),
@@ -270,25 +253,16 @@ class NutritionSummaryCard extends StatelessWidget {
         Container(
           width: 10,
           height: 10,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
         const SizedBox(height: 8),
         Text(
           value,
-          style: GoogleFonts.poppins(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+          style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         Text(
           label,
-          style: TextStyle(
-            fontSize: 11,
-            color: Colors.grey.shade600,
-          ),
+          style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
         ),
       ],
     );
@@ -299,10 +273,7 @@ class NutritionSummaryCard extends StatelessWidget {
 class HydrationCard extends StatelessWidget {
   final Color accentColor;
 
-  const HydrationCard({
-    super.key,
-    required this.accentColor,
-  });
+  const HydrationCard({super.key, required this.accentColor});
 
   @override
   Widget build(BuildContext context) {
@@ -411,10 +382,7 @@ class HealthAlertsCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(
-                      Icons.health_and_safety,
-                      color: Colors.amber.shade700,
-                    ),
+                    Icon(Icons.health_and_safety, color: Colors.amber.shade700),
                     const SizedBox(width: 8),
                     Text(
                       'Condiciones de salud activas',
@@ -439,9 +407,7 @@ class HealthAlertsCard extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: Colors.amber.shade300,
-                        ),
+                        border: Border.all(color: Colors.amber.shade300),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -468,10 +434,7 @@ class HealthAlertsCard extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   'Tus recomendaciones nutricionales estan ajustadas',
-                  style: TextStyle(
-                    fontSize: 11,
-                    color: Colors.amber.shade700,
-                  ),
+                  style: TextStyle(fontSize: 11, color: Colors.amber.shade700),
                 ),
               ],
             ),

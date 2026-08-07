@@ -132,21 +132,35 @@ class _BodyPainter extends CustomPainter {
     canvas.drawCircle(Offset(cx, 18 * sc), 14 * sc, _outlinePaint());
     // Cara — puntos mínimos
     canvas.drawCircle(
-        Offset(cx - 4 * sc, 16 * sc), 1.5 * sc, Paint()..color = _outlineColor);
+      Offset(cx - 4 * sc, 16 * sc),
+      1.5 * sc,
+      Paint()..color = _outlineColor,
+    );
     canvas.drawCircle(
-        Offset(cx + 4 * sc, 16 * sc), 1.5 * sc, Paint()..color = _outlineColor);
+      Offset(cx + 4 * sc, 16 * sc),
+      1.5 * sc,
+      Paint()..color = _outlineColor,
+    );
 
     // Cuello
     final neckR = Rect.fromCenter(
-        center: Offset(cx, 35 * sc), width: 10 * sc, height: 12 * sc);
+      center: Offset(cx, 35 * sc),
+      width: 10 * sc,
+      height: 12 * sc,
+    );
     canvas.drawOval(neckR, _bodyPaint());
 
     // Torso
     final torso = RRect.fromRectAndRadius(
-        Rect.fromCenter(
-            center: Offset(cx, 68 * sc), width: 46 * sc, height: 52 * sc),
-        const Radius.circular(8));
-    final torsoP = _isActive(MuscleGroup.pecho) ||
+      Rect.fromCenter(
+        center: Offset(cx, 68 * sc),
+        width: 46 * sc,
+        height: 52 * sc,
+      ),
+      const Radius.circular(8),
+    );
+    final torsoP =
+        _isActive(MuscleGroup.pecho) ||
             _isActive(MuscleGroup.espalda) ||
             _isActive(MuscleGroup.hombros)
         ? _activePaint()
@@ -156,70 +170,91 @@ class _BodyPainter extends CustomPainter {
 
     // Abdomen
     final abdo = RRect.fromRectAndRadius(
-        Rect.fromCenter(
-            center: Offset(cx, 106 * sc), width: 40 * sc, height: 28 * sc),
-        const Radius.circular(6));
-    final abdoP =
-        _isActive(MuscleGroup.abdomen) ? _activePaint() : _bodyPaint();
+      Rect.fromCenter(
+        center: Offset(cx, 106 * sc),
+        width: 40 * sc,
+        height: 28 * sc,
+      ),
+      const Radius.circular(6),
+    );
+    final abdoP = _isActive(MuscleGroup.abdomen)
+        ? _activePaint()
+        : _bodyPaint();
     canvas.drawRRect(abdo, abdoP);
     canvas.drawRRect(abdo, _outlinePaint());
 
     // Hombro izquierdo
-    canvas.drawCircle(Offset(cx - 27 * sc, 52 * sc), 9 * sc,
-        _isActive(MuscleGroup.hombros) ? _activePaint() : _bodyPaint());
+    canvas.drawCircle(
+      Offset(cx - 27 * sc, 52 * sc),
+      9 * sc,
+      _isActive(MuscleGroup.hombros) ? _activePaint() : _bodyPaint(),
+    );
     canvas.drawCircle(Offset(cx - 27 * sc, 52 * sc), 9 * sc, _outlinePaint());
 
     // Hombro derecho
-    canvas.drawCircle(Offset(cx + 27 * sc, 52 * sc), 9 * sc,
-        _isActive(MuscleGroup.hombros) ? _activePaint() : _bodyPaint());
+    canvas.drawCircle(
+      Offset(cx + 27 * sc, 52 * sc),
+      9 * sc,
+      _isActive(MuscleGroup.hombros) ? _activePaint() : _bodyPaint(),
+    );
     canvas.drawCircle(Offset(cx + 27 * sc, 52 * sc), 9 * sc, _outlinePaint());
 
     // Brazo izquierdo (biceps)
     final leftArm = RRect.fromRectAndRadius(
-        Rect.fromLTWH(cx - 42 * sc, 56 * sc, 14 * sc, 42 * sc),
-        const Radius.circular(6));
+      Rect.fromLTWH(cx - 42 * sc, 56 * sc, 14 * sc, 42 * sc),
+      const Radius.circular(6),
+    );
     final armLP =
         _isActive(MuscleGroup.biceps) || _isActive(MuscleGroup.triceps)
-            ? _activePaint()
-            : _bodyPaint();
+        ? _activePaint()
+        : _bodyPaint();
     canvas.drawRRect(leftArm, armLP);
     canvas.drawRRect(leftArm, _outlinePaint());
 
     // Brazo derecho
     final rightArm = RRect.fromRectAndRadius(
-        Rect.fromLTWH(cx + 28 * sc, 56 * sc, 14 * sc, 42 * sc),
-        const Radius.circular(6));
+      Rect.fromLTWH(cx + 28 * sc, 56 * sc, 14 * sc, 42 * sc),
+      const Radius.circular(6),
+    );
     canvas.drawRRect(rightArm, armLP);
     canvas.drawRRect(rightArm, _outlinePaint());
 
     // Antebrazo izquierdo
     final leftFore = RRect.fromRectAndRadius(
-        Rect.fromLTWH(cx - 41 * sc, 100 * sc, 12 * sc, 34 * sc),
-        const Radius.circular(5));
+      Rect.fromLTWH(cx - 41 * sc, 100 * sc, 12 * sc, 34 * sc),
+      const Radius.circular(5),
+    );
     canvas.drawRRect(leftFore, _bodyPaint());
     canvas.drawRRect(leftFore, _outlinePaint());
 
     // Antebrazo derecho
     final rightFore = RRect.fromRectAndRadius(
-        Rect.fromLTWH(cx + 29 * sc, 100 * sc, 12 * sc, 34 * sc),
-        const Radius.circular(5));
+      Rect.fromLTWH(cx + 29 * sc, 100 * sc, 12 * sc, 34 * sc),
+      const Radius.circular(5),
+    );
     canvas.drawRRect(rightFore, _bodyPaint());
     canvas.drawRRect(rightFore, _outlinePaint());
 
     // Glúteos / cadera
     final hip = RRect.fromRectAndRadius(
-        Rect.fromCenter(
-            center: Offset(cx, 132 * sc), width: 44 * sc, height: 20 * sc),
-        const Radius.circular(6));
+      Rect.fromCenter(
+        center: Offset(cx, 132 * sc),
+        width: 44 * sc,
+        height: 20 * sc,
+      ),
+      const Radius.circular(6),
+    );
     final hipP = _isActive(MuscleGroup.gluteos) ? _activePaint() : _bodyPaint();
     canvas.drawRRect(hip, hipP);
     canvas.drawRRect(hip, _outlinePaint());
 
     // Cuádriceps izquierdo
     final leftQuad = RRect.fromRectAndRadius(
-        Rect.fromLTWH(cx - 22 * sc, 142 * sc, 18 * sc, 44 * sc),
-        const Radius.circular(7));
-    final quadP = _isActive(MuscleGroup.cuadriceps) ||
+      Rect.fromLTWH(cx - 22 * sc, 142 * sc, 18 * sc, 44 * sc),
+      const Radius.circular(7),
+    );
+    final quadP =
+        _isActive(MuscleGroup.cuadriceps) ||
             _isActive(MuscleGroup.isquiotibiales)
         ? _activePaint()
         : _bodyPaint();
@@ -228,24 +263,28 @@ class _BodyPainter extends CustomPainter {
 
     // Cuádriceps derecho
     final rightQuad = RRect.fromRectAndRadius(
-        Rect.fromLTWH(cx + 4 * sc, 142 * sc, 18 * sc, 44 * sc),
-        const Radius.circular(7));
+      Rect.fromLTWH(cx + 4 * sc, 142 * sc, 18 * sc, 44 * sc),
+      const Radius.circular(7),
+    );
     canvas.drawRRect(rightQuad, quadP);
     canvas.drawRRect(rightQuad, _outlinePaint());
 
     // Pantorrilla izquierda
     final leftCalf = RRect.fromRectAndRadius(
-        Rect.fromLTWH(cx - 20 * sc, 188 * sc, 15 * sc, 26 * sc),
-        const Radius.circular(6));
-    final calfP =
-        _isActive(MuscleGroup.pantorrillas) ? _activePaint() : _bodyPaint();
+      Rect.fromLTWH(cx - 20 * sc, 188 * sc, 15 * sc, 26 * sc),
+      const Radius.circular(6),
+    );
+    final calfP = _isActive(MuscleGroup.pantorrillas)
+        ? _activePaint()
+        : _bodyPaint();
     canvas.drawRRect(leftCalf, calfP);
     canvas.drawRRect(leftCalf, _outlinePaint());
 
     // Pantorrilla derecha
     final rightCalf = RRect.fromRectAndRadius(
-        Rect.fromLTWH(cx + 5 * sc, 188 * sc, 15 * sc, 26 * sc),
-        const Radius.circular(6));
+      Rect.fromLTWH(cx + 5 * sc, 188 * sc, 15 * sc, 26 * sc),
+      const Radius.circular(6),
+    );
     canvas.drawRRect(rightCalf, calfP);
     canvas.drawRRect(rightCalf, _outlinePaint());
   }
@@ -262,54 +301,80 @@ class _BodyPainter extends CustomPainter {
     canvas.drawCircle(Offset(16, cy), 13, _outlinePaint());
 
     // Torso
-    final torsoP = _isActive(MuscleGroup.pecho) ||
+    final torsoP =
+        _isActive(MuscleGroup.pecho) ||
             _isActive(MuscleGroup.abdomen) ||
             _isActive(MuscleGroup.espalda)
         ? _activePaint()
         : p;
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromLTWH(30, cy - 14, 80, 28), const Radius.circular(8)),
-        torsoP);
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(30, cy - 14, 80, 28),
+        const Radius.circular(8),
+      ),
+      torsoP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromLTWH(30, cy - 14, 80, 28), const Radius.circular(8)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(30, cy - 14, 80, 28),
+        const Radius.circular(8),
+      ),
+      _outlinePaint(),
+    );
 
     // Glúteos
     final hipP = _isActive(MuscleGroup.gluteos) ? _activePaint() : p;
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromLTWH(110, cy - 14, 24, 28), const Radius.circular(6)),
-        hipP);
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(110, cy - 14, 24, 28),
+        const Radius.circular(6),
+      ),
+      hipP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromLTWH(110, cy - 14, 24, 28), const Radius.circular(6)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(110, cy - 14, 24, 28),
+        const Radius.circular(6),
+      ),
+      _outlinePaint(),
+    );
 
     // Muslos
-    final quadP = _isActive(MuscleGroup.cuadriceps) ||
+    final quadP =
+        _isActive(MuscleGroup.cuadriceps) ||
             _isActive(MuscleGroup.isquiotibiales)
         ? _activePaint()
         : p;
     // muslo arriba
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromLTWH(134, cy - 22, 50, 20), const Radius.circular(6)),
-        quadP);
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(134, cy - 22, 50, 20),
+        const Radius.circular(6),
+      ),
+      quadP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromLTWH(134, cy - 22, 50, 20), const Radius.circular(6)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(134, cy - 22, 50, 20),
+        const Radius.circular(6),
+      ),
+      _outlinePaint(),
+    );
     // muslo abajo
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromLTWH(134, cy + 2, 50, 20), const Radius.circular(6)),
-        quadP);
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(134, cy + 2, 50, 20),
+        const Radius.circular(6),
+      ),
+      quadP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromLTWH(134, cy + 2, 50, 20), const Radius.circular(6)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(134, cy + 2, 50, 20),
+        const Radius.circular(6),
+      ),
+      _outlinePaint(),
+    );
 
     // Rodillas
     canvas.drawCircle(Offset(187, cy - 12), 7, p);
@@ -320,21 +385,33 @@ class _BodyPainter extends CustomPainter {
     // Pantorrillas
     final calfP = _isActive(MuscleGroup.pantorrillas) ? _activePaint() : p;
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromLTWH(194, cy - 20, 36, 16), const Radius.circular(5)),
-        calfP);
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(194, cy - 20, 36, 16),
+        const Radius.circular(5),
+      ),
+      calfP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromLTWH(194, cy - 20, 36, 16), const Radius.circular(5)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(194, cy - 20, 36, 16),
+        const Radius.circular(5),
+      ),
+      _outlinePaint(),
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromLTWH(194, cy + 4, 36, 16), const Radius.circular(5)),
-        calfP);
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(194, cy + 4, 36, 16),
+        const Radius.circular(5),
+      ),
+      calfP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromLTWH(194, cy + 4, 36, 16), const Radius.circular(5)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(194, cy + 4, 36, 16),
+        const Radius.circular(5),
+      ),
+      _outlinePaint(),
+    );
   }
 
   // ── SITTING ──────────────────────────────────────────────────────────────
@@ -352,51 +429,83 @@ class _BodyPainter extends CustomPainter {
     // Torso
     final torsoP = _isActive(MuscleGroup.pecho) ? _activePaint() : p;
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromCenter(
-                center: Offset(cx, baseLine - 115), width: 50, height: 60),
-            const Radius.circular(8)),
-        torsoP);
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(
+          center: Offset(cx, baseLine - 115),
+          width: 50,
+          height: 60,
+        ),
+        const Radius.circular(8),
+      ),
+      torsoP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromCenter(
-                center: Offset(cx, baseLine - 115), width: 50, height: 60),
-            const Radius.circular(8)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(
+          center: Offset(cx, baseLine - 115),
+          width: 50,
+          height: 60,
+        ),
+        const Radius.circular(8),
+      ),
+      _outlinePaint(),
+    );
 
     // Cadera (horizontal)
     final hipP = _isActive(MuscleGroup.gluteos) ? _activePaint() : p;
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromCenter(
-                center: Offset(cx, baseLine - 72), width: 58, height: 22),
-            const Radius.circular(6)),
-        hipP);
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(
+          center: Offset(cx, baseLine - 72),
+          width: 58,
+          height: 22,
+        ),
+        const Radius.circular(6),
+      ),
+      hipP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromCenter(
-                center: Offset(cx, baseLine - 72), width: 58, height: 22),
-            const Radius.circular(6)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(
+          center: Offset(cx, baseLine - 72),
+          width: 58,
+          height: 22,
+        ),
+        const Radius.circular(6),
+      ),
+      _outlinePaint(),
+    );
 
     // Muslos (horizontales)
     final quadP = _isActive(MuscleGroup.cuadriceps) ? _activePaint() : p;
     canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(cx - 54, baseLine - 65, 46, 18),
-            const Radius.circular(6)),
-        quadP);
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(cx - 54, baseLine - 65, 46, 18),
+        const Radius.circular(6),
+      ),
+      quadP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(cx + 8, baseLine - 65, 46, 18),
-            const Radius.circular(6)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(cx + 8, baseLine - 65, 46, 18),
+        const Radius.circular(6),
+      ),
+      _outlinePaint(),
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(cx + 8, baseLine - 65, 46, 18),
-            const Radius.circular(6)),
-        quadP);
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(cx + 8, baseLine - 65, 46, 18),
+        const Radius.circular(6),
+      ),
+      quadP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(cx + 8, baseLine - 65, 46, 18),
-            const Radius.circular(6)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(cx + 8, baseLine - 65, 46, 18),
+        const Radius.circular(6),
+      ),
+      _outlinePaint(),
+    );
 
     // Rodillas
     canvas.drawCircle(Offset(cx - 8, baseLine - 46), 8, p);
@@ -407,21 +516,33 @@ class _BodyPainter extends CustomPainter {
     // Pantorrillas (verticales)
     final calfP = _isActive(MuscleGroup.pantorrillas) ? _activePaint() : p;
     canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(cx - 18, baseLine - 42, 16, 38),
-            const Radius.circular(5)),
-        calfP);
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(cx - 18, baseLine - 42, 16, 38),
+        const Radius.circular(5),
+      ),
+      calfP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(cx - 18, baseLine - 42, 16, 38),
-            const Radius.circular(5)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(cx - 18, baseLine - 42, 16, 38),
+        const Radius.circular(5),
+      ),
+      _outlinePaint(),
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(cx + 2, baseLine - 42, 16, 38),
-            const Radius.circular(5)),
-        calfP);
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(cx + 2, baseLine - 42, 16, 38),
+        const Radius.circular(5),
+      ),
+      calfP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(cx + 2, baseLine - 42, 16, 38),
-            const Radius.circular(5)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(cx + 2, baseLine - 42, 16, 38),
+        const Radius.circular(5),
+      ),
+      _outlinePaint(),
+    );
   }
 
   // ── KNEELING ─────────────────────────────────────────────────────────────
@@ -437,42 +558,64 @@ class _BodyPainter extends CustomPainter {
 
     final torsoP =
         _isActive(MuscleGroup.pecho) || _isActive(MuscleGroup.espalda)
-            ? _activePaint()
-            : p;
+        ? _activePaint()
+        : p;
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromCenter(
-                center: Offset(cx, baseLine - 110), width: 48, height: 56),
-            const Radius.circular(7)),
-        torsoP);
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(
+          center: Offset(cx, baseLine - 110),
+          width: 48,
+          height: 56,
+        ),
+        const Radius.circular(7),
+      ),
+      torsoP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromCenter(
-                center: Offset(cx, baseLine - 110), width: 48, height: 56),
-            const Radius.circular(7)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(
+          center: Offset(cx, baseLine - 110),
+          width: 48,
+          height: 56,
+        ),
+        const Radius.circular(7),
+      ),
+      _outlinePaint(),
+    );
 
     // Muslos (verticales, más cortos)
     final quadP =
         _isActive(MuscleGroup.cuadriceps) || _isActive(MuscleGroup.gluteos)
-            ? _activePaint()
-            : p;
+        ? _activePaint()
+        : p;
     canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(cx - 24, baseLine - 78, 18, 40),
-            const Radius.circular(5)),
-        quadP);
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(cx - 24, baseLine - 78, 18, 40),
+        const Radius.circular(5),
+      ),
+      quadP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(cx - 24, baseLine - 78, 18, 40),
-            const Radius.circular(5)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(cx - 24, baseLine - 78, 18, 40),
+        const Radius.circular(5),
+      ),
+      _outlinePaint(),
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(cx + 6, baseLine - 78, 18, 40),
-            const Radius.circular(5)),
-        quadP);
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(cx + 6, baseLine - 78, 18, 40),
+        const Radius.circular(5),
+      ),
+      quadP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(cx + 6, baseLine - 78, 18, 40),
-            const Radius.circular(5)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(cx + 6, baseLine - 78, 18, 40),
+        const Radius.circular(5),
+      ),
+      _outlinePaint(),
+    );
 
     // Rodillas en suelo
     canvas.drawCircle(Offset(cx - 15, baseLine - 40), 10, p);
@@ -493,7 +636,8 @@ class _BodyPainter extends CustomPainter {
     canvas.drawCircle(Offset(26, cy - 22), 14, _outlinePaint());
 
     // Cuerpo diagonal (plancha)
-    final bodyP = _isActive(MuscleGroup.abdomen) ||
+    final bodyP =
+        _isActive(MuscleGroup.abdomen) ||
             _isActive(MuscleGroup.pecho) ||
             _isActive(MuscleGroup.hombros)
         ? _activePaint()
@@ -502,40 +646,56 @@ class _BodyPainter extends CustomPainter {
     canvas.translate(s.width / 2 + 10, cy);
     canvas.rotate(-0.12); // Ligera inclinación
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromCenter(center: Offset.zero, width: 130, height: 26),
-            const Radius.circular(8)),
-        bodyP);
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(center: Offset.zero, width: 130, height: 26),
+        const Radius.circular(8),
+      ),
+      bodyP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromCenter(center: Offset.zero, width: 130, height: 26),
-            const Radius.circular(8)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(center: Offset.zero, width: 130, height: 26),
+        const Radius.circular(8),
+      ),
+      _outlinePaint(),
+    );
     canvas.restore();
 
     // Brazos (apoyando)
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromLTWH(20, cy - 12, 14, 26), const Radius.circular(5)),
-        p);
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(20, cy - 12, 14, 26),
+        const Radius.circular(5),
+      ),
+      p,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromLTWH(20, cy - 12, 14, 26), const Radius.circular(5)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(20, cy - 12, 14, 26),
+        const Radius.circular(5),
+      ),
+      _outlinePaint(),
+    );
 
     // Piernas
     final legP =
         _isActive(MuscleGroup.cuadriceps) || _isActive(MuscleGroup.gluteos)
-            ? _activePaint()
-            : p;
+        ? _activePaint()
+        : p;
     canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(s.width - 66, cy - 14, 40, 20),
-            const Radius.circular(5)),
-        legP);
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(s.width - 66, cy - 14, 40, 20),
+        const Radius.circular(5),
+      ),
+      legP,
+    );
     canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(s.width - 66, cy - 14, 40, 20),
-            const Radius.circular(5)),
-        _outlinePaint());
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(s.width - 66, cy - 14, 40, 20),
+        const Radius.circular(5),
+      ),
+      _outlinePaint(),
+    );
   }
 
   @override

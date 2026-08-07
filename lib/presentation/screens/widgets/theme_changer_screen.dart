@@ -19,9 +19,7 @@ class ThemeChangerScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Personalización',
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.w600,
-          ),
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -46,11 +44,7 @@ class ThemeChangerScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
-                    Icons.palette_outlined,
-                    color: Colors.white,
-                    size: 32,
-                  ),
+                  Icon(Icons.palette_outlined, color: Colors.white, size: 32),
                   const SizedBox(height: 12),
                   Text(
                     'Personaliza tu experiencia',
@@ -100,42 +94,47 @@ class ThemeChangerScreen extends StatelessWidget {
                 final isSelected = themeProvider.selectedColor == index;
                 final color = appTheme.colorThemes[index];
 
-                return GestureDetector(
-                  onTap: () {
-                    themeProvider.changeColorIndex(index);
-                    // Mostrar feedback háptico
-                    HapticFeedback.lightImpact();
-                  },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: AppTheme.gradientThemes[index],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+                return Semantics(
+                  button: true,
+                  selected: isSelected,
+                  label: 'Tema de color ${index + 1}',
+                  child: GestureDetector(
+                    onTap: () {
+                      themeProvider.changeColorIndex(index);
+                      // Mostrar feedback háptico
+                      HapticFeedback.lightImpact();
+                    },
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: AppTheme.gradientThemes[index],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: isSelected ? Colors.white : Colors.transparent,
+                          width: 3,
+                        ),
+                        boxShadow: isSelected
+                            ? [
+                                BoxShadow(
+                                  color: color.withValues(alpha: 0.3),
+                                  blurRadius: 12,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ]
+                            : [],
                       ),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: isSelected ? Colors.white : Colors.transparent,
-                        width: 3,
-                      ),
-                      boxShadow: isSelected
-                          ? [
-                              BoxShadow(
-                                color: color.withValues(alpha: 0.3),
-                                blurRadius: 12,
-                                offset: const Offset(0, 4),
-                              ),
-                            ]
-                          : [],
+                      child: isSelected
+                          ? const Icon(
+                              Icons.check,
+                              color: Colors.white,
+                              size: 24,
+                            )
+                          : null,
                     ),
-                    child: isSelected
-                        ? const Icon(
-                            Icons.check,
-                            color: Colors.white,
-                            size: 24,
-                          )
-                        : null,
                   ),
                 );
               },

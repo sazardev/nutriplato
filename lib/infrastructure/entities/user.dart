@@ -12,16 +12,16 @@ class User {
   });
 
   Map<dynamic, dynamic> toJson() => {
-        'username': username,
-        'postReadIt': postReadIt,
-        'exercisesDoIt': exercisesDoIt,
-        'viewedFood': viewedFood,
-      };
+    'username': username,
+    'postReadIt': postReadIt,
+    'exercisesDoIt': exercisesDoIt,
+    'viewedFood': viewedFood,
+  };
 
   factory User.fromJson(Map<dynamic, dynamic> json) => User(
-        username: json['username'],
-        postReadIt: json['postReadIt'],
-        exercisesDoIt: json['exercisesDoIt'],
-        viewedFood: json['viewedFood'],
-      );
+    username: json['username'],
+    postReadIt: json['postReadIt'],
+    exercisesDoIt: json['exercisesDoIt'],
+    viewedFood: json['viewedFood'],
+  );
 }

@@ -106,8 +106,8 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                           color: Colors.white.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(16),
                         ),
-                        child: const Icon(
-                          FontAwesomeIcons.graduationCap,
+                        child: Icon(
+                          FontAwesomeIcons.graduationCap.data,
                           color: Colors.white,
                           size: 24,
                         ),
@@ -158,17 +158,17 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
             fontWeight: FontWeight.w600,
             fontSize: 13,
           ),
-          tabs: const [
+          tabs: [
             Tab(
-              icon: Icon(FontAwesomeIcons.lightbulb, size: 18),
+              icon: Icon(FontAwesomeIcons.lightbulb.data, size: 18),
               text: 'Datos Curiosos',
             ),
             Tab(
-              icon: Icon(FontAwesomeIcons.heartPulse, size: 18),
+              icon: Icon(FontAwesomeIcons.heartPulse.data, size: 18),
               text: 'Tips',
             ),
             Tab(
-              icon: Icon(FontAwesomeIcons.layerGroup, size: 18),
+              icon: Icon(FontAwesomeIcons.layerGroup.data, size: 18),
               text: 'Categorías',
             ),
           ],
@@ -256,9 +256,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       elevation: 8,
       shadowColor: fact.color.withValues(alpha: 0.3),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -280,11 +278,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                     color: Colors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Icon(
-                    fact.icon,
-                    color: Colors.white,
-                    size: 24,
-                  ),
+                  child: Icon(fact.icon, color: Colors.white, size: 24),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -342,9 +336,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: ListTile(
         contentPadding: const EdgeInsets.all(16),
         leading: Container(
@@ -354,18 +346,11 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
             color: fact.color.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Icon(
-            fact.icon,
-            color: fact.color,
-            size: 24,
-          ),
+          child: Icon(fact.icon, color: fact.color, size: 24),
         ),
         title: Text(
           fact.title,
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.w600,
-            fontSize: 14,
-          ),
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14),
         ),
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 4),
@@ -423,11 +408,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                     color: fact.color.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  child: Icon(
-                    fact.icon,
-                    color: fact.color,
-                    size: 32,
-                  ),
+                  child: Icon(fact.icon, color: fact.color, size: 32),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -518,8 +499,8 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                   color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(
-                  FontAwesomeIcons.wandMagicSparkles,
+                child: Icon(
+                  FontAwesomeIcons.wandMagicSparkles.data,
                   color: Colors.white,
                   size: 28,
                 ),
@@ -581,9 +562,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
         onTap: () => _showTipDetail(tip),
         borderRadius: BorderRadius.circular(16),
@@ -598,11 +577,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                   color: tip.color.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(
-                  tip.icon,
-                  color: tip.color,
-                  size: 24,
-                ),
+                child: Icon(tip.icon, color: tip.color, size: 24),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -684,11 +659,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                     color: tip.color.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  child: Icon(
-                    tip.icon,
-                    color: tip.color,
-                    size: 32,
-                  ),
+                  child: Icon(tip.icon, color: tip.color, size: 32),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -766,35 +737,35 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
     final categories = [
       _CategoryItem(
         name: 'Frutas',
-        icon: FontAwesomeIcons.appleWhole,
+        icon: FontAwesomeIcons.appleWhole.data,
         color: Colors.red,
         description: 'Vitaminas, minerales y fibra natural',
         count: 150,
       ),
       _CategoryItem(
         name: 'Verduras',
-        icon: FontAwesomeIcons.carrot,
+        icon: FontAwesomeIcons.carrot.data,
         color: Colors.green,
         description: 'Nutrientes esenciales y antioxidantes',
         count: 120,
       ),
       _CategoryItem(
         name: 'Cereales',
-        icon: FontAwesomeIcons.wheatAwn,
+        icon: FontAwesomeIcons.wheatAwn.data,
         color: Colors.amber,
         description: 'Carbohidratos complejos y energía',
         count: 80,
       ),
       _CategoryItem(
         name: 'Proteína Animal',
-        icon: FontAwesomeIcons.drumstickBite,
+        icon: FontAwesomeIcons.drumstickBite.data,
         color: Colors.brown,
         description: 'Proteínas completas y hierro',
         count: 100,
       ),
       _CategoryItem(
         name: 'Leguminosas',
-        icon: FontAwesomeIcons.seedling,
+        icon: FontAwesomeIcons.seedling.data,
         color: Colors.teal,
         description: 'Proteína vegetal y fibra',
         count: 50,
@@ -816,9 +787,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 4,
       shadowColor: category.color.withValues(alpha: 0.2),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: InkWell(
         onTap: () {
           // Navegar a lista de alimentos por categoría
@@ -842,11 +811,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                   ),
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: Icon(
-                  category.icon,
-                  color: Colors.white,
-                  size: 32,
-                ),
+                child: Icon(category.icon, color: Colors.white, size: 32),
               ),
               const SizedBox(width: 20),
               Expanded(
@@ -872,7 +837,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                     Row(
                       children: [
                         Icon(
-                          FontAwesomeIcons.database,
+                          FontAwesomeIcons.database.data,
                           size: 12,
                           color: category.color,
                         ),
@@ -930,11 +895,11 @@ class _SliverTabBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: Colors.white,
-      child: tabBar,
-    );
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(color: Colors.white, child: tabBar);
   }
 
   @override

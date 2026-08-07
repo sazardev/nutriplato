@@ -47,6 +47,22 @@ enum IntensityLevel {
 /// Tipo de medición del ejercicio
 enum ExerciseMetric { reps, seconds, distance }
 
+/// Equipamiento requerido para el ejercicio
+enum Equipment {
+  none('Ninguno', Icons.person),
+  wall('Pared', Icons.account_balance),
+  chair('Silla', Icons.chair),
+  step('Escalón', Icons.stairs),
+  towel('Toalla', Icons.dry_cleaning),
+  rope('Cuerda', Icons.sports_handball),
+  resistanceBand('Banda elástica', Icons.horizontal_rule),
+  dumbbells('Mancuernas', Icons.fitness_center);
+
+  final String label;
+  final IconData icon;
+  const Equipment(this.label, this.icon);
+}
+
 /// Posición corporal para el SVG guide
 enum BodyPosition { standing, lying, sitting, kneeling, plank }
 
@@ -79,8 +95,7 @@ class SmartExercise {
   final List<String> contraindications; // cuándo NO hacerlo
   final double? maxBmiRecommended; // null = sin límite
   final double? minBmiRequired; // null = sin mínimo
-  final bool requiresEquipment;
-  final String? equipment;
+  final Equipment equipment; // equipamiento requerido
 
   const SmartExercise({
     required this.id,
@@ -97,9 +112,11 @@ class SmartExercise {
     this.contraindications = const [],
     this.maxBmiRecommended,
     this.minBmiRequired,
-    this.requiresEquipment = false,
-    this.equipment,
+    this.equipment = Equipment.none,
   });
+
+  /// Indica si el ejercicio requiere algún equipamiento.
+  bool get requiresEquipment => equipment != Equipment.none;
 
   /// Calcula calorías quemadas (kcal)
   double calculateCalories({
@@ -145,20 +162,20 @@ class WorkoutMood {
       (energia + esfuerzo + competencia + variedad + potencia) / 5.0;
 
   Map<String, dynamic> toJson() => {
-        'energia': energia,
-        'esfuerzo': esfuerzo,
-        'competencia': competencia,
-        'variedad': variedad,
-        'potencia': potencia,
-      };
+    'energia': energia,
+    'esfuerzo': esfuerzo,
+    'competencia': competencia,
+    'variedad': variedad,
+    'potencia': potencia,
+  };
 
   factory WorkoutMood.fromJson(Map<String, dynamic> json) => WorkoutMood(
-        energia: (json['energia'] as num? ?? 3).toInt(),
-        esfuerzo: (json['esfuerzo'] as num? ?? 3).toInt(),
-        competencia: (json['competencia'] as num? ?? 3).toInt(),
-        variedad: (json['variedad'] as num? ?? 3).toInt(),
-        potencia: (json['potencia'] as num? ?? 3).toInt(),
-      );
+    energia: (json['energia'] as num? ?? 3).toInt(),
+    esfuerzo: (json['esfuerzo'] as num? ?? 3).toInt(),
+    competencia: (json['competencia'] as num? ?? 3).toInt(),
+    variedad: (json['variedad'] as num? ?? 3).toInt(),
+    potencia: (json['potencia'] as num? ?? 3).toInt(),
+  );
 }
 
 /// Rutina completa generada por el sistema inteligente
@@ -207,14 +224,14 @@ class WorkoutHistoryEntry {
   });
 
   Map<String, dynamic> toJson() => {
-        'workoutId': workoutId,
-        'workoutName': workoutName,
-        'exerciseIds': exerciseIds,
-        'completedAt': completedAt.toIso8601String(),
-        'caloriesBurned': caloriesBurned,
-        'durationSeconds': durationSeconds,
-        if (mood != null) 'mood': mood!.toJson(),
-      };
+    'workoutId': workoutId,
+    'workoutName': workoutName,
+    'exerciseIds': exerciseIds,
+    'completedAt': completedAt.toIso8601String(),
+    'caloriesBurned': caloriesBurned,
+    'durationSeconds': durationSeconds,
+    if (mood != null) 'mood': mood!.toJson(),
+  };
 
   factory WorkoutHistoryEntry.fromJson(Map<String, dynamic> json) =>
       WorkoutHistoryEntry(

@@ -3,6 +3,8 @@ import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_entry.dart';
+import 'package:nutriplato/infrastructure/entities/food/micros_helper.dart';
+import 'package:nutriplato/infrastructure/entities/food/micronutrients.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const _tag = 'NutriPlato|FoodLogProvider';
@@ -18,10 +20,12 @@ class FoodLogProvider with ChangeNotifier {
   DailyFoodLog? getDailyLog(DateTime date) {
     final formattedDate = DateTime(date.year, date.month, date.day);
     try {
-      return _logs.firstWhere((log) =>
-          log.date.year == formattedDate.year &&
-          log.date.month == formattedDate.month &&
-          log.date.day == formattedDate.day);
+      return _logs.firstWhere(
+        (log) =>
+            log.date.year == formattedDate.year &&
+            log.date.month == formattedDate.month &&
+            log.date.day == formattedDate.day,
+      );
     } catch (e) {
       return null;
     }
@@ -42,7 +46,10 @@ class FoodLogProvider with ChangeNotifier {
     notifyListeners();
 
     final formattedDate = DateTime(
-        entry.timestamp.year, entry.timestamp.month, entry.timestamp.day);
+      entry.timestamp.year,
+      entry.timestamp.month,
+      entry.timestamp.day,
+    );
 
     // Buscar si ya existe un registro para este día
     DailyFoodLog? dailyLog = getDailyLog(formattedDate);
@@ -54,17 +61,16 @@ class FoodLogProvider with ChangeNotifier {
         ..add(entry);
       _logs[index] = DailyFoodLog(date: dailyLog.date, entries: updatedEntries);
       dev.log(
-          'addFoodEntry → día existente actualizado (${updatedEntries.length} entradas)',
-          name: _tag);
+        'addFoodEntry → día existente actualizado (${updatedEntries.length} entradas)',
+        name: _tag,
+      );
     } else {
       // Si no existe, crear un nuevo registro para este día
-      _logs.add(DailyFoodLog(
-        date: formattedDate,
-        entries: [entry],
-      ));
+      _logs.add(DailyFoodLog(date: formattedDate, entries: [entry]));
       dev.log(
-          'addFoodEntry → nuevo día de registro creado (total días: ${_logs.length})',
-          name: _tag);
+        'addFoodEntry → nuevo día de registro creado (total días: ${_logs.length})',
+        name: _tag,
+      );
     }
 
     await _saveLogs();
@@ -76,8 +82,9 @@ class FoodLogProvider with ChangeNotifier {
   // Eliminar un alimento del registro
   Future<void> removeFoodEntry(DateTime date, int entryIndex) async {
     dev.log(
-        'removeFoodEntry → fecha=${date.toIso8601String().substring(0, 10)} idx=$entryIndex',
-        name: _tag);
+      'removeFoodEntry → fecha=${date.toIso8601String().substring(0, 10)} idx=$entryIndex',
+      name: _tag,
+    );
     _isLoading = true;
     notifyListeners();
 
@@ -91,26 +98,32 @@ class FoodLogProvider with ChangeNotifier {
         final removed = updatedEntries[entryIndex];
         updatedEntries.removeAt(entryIndex);
         dev.log(
-            'removeFoodEntry → eliminado "${removed.food.name}" (${updatedEntries.length} entradas restantes)',
-            name: _tag);
+          'removeFoodEntry → eliminado "${removed.food.name}" (${updatedEntries.length} entradas restantes)',
+          name: _tag,
+        );
 
         if (updatedEntries.isEmpty) {
           _logs.removeAt(index);
           dev.log('removeFoodEntry → día vacío eliminado', name: _tag);
         } else {
-          _logs[index] =
-              DailyFoodLog(date: dailyLog.date, entries: updatedEntries);
+          _logs[index] = DailyFoodLog(
+            date: dailyLog.date,
+            entries: updatedEntries,
+          );
         }
 
         await _saveLogs();
       } else {
         dev.log(
-            'removeFoodEntry → índice $entryIndex inválido (max=${updatedEntries.length - 1})',
-            name: _tag);
+          'removeFoodEntry → índice $entryIndex inválido (max=${updatedEntries.length - 1})',
+          name: _tag,
+        );
       }
     } else {
-      dev.log('removeFoodEntry → no se encontró log para esa fecha',
-          name: _tag);
+      dev.log(
+        'removeFoodEntry → no se encontró log para esa fecha',
+        name: _tag,
+      );
     }
 
     _isLoading = false;
@@ -128,8 +141,10 @@ class FoodLogProvider with ChangeNotifier {
 
       // Obtener los datos guardados de los días
       final days = prefs.getStringList('food_log_days') ?? [];
-      dev.log('loadLogs → ${days.length} días encontrados en storage',
-          name: _tag);
+      dev.log(
+        'loadLogs → ${days.length} días encontrados en storage',
+        name: _tag,
+      );
 
       _logs = []; // Limpiar los logs actuales
 
@@ -152,8 +167,12 @@ class FoodLogProvider with ChangeNotifier {
             final food = Food(
               name: foodMap['name'],
               category: foodMap['category'],
-              icon: Icon(IconData(foodMap['iconCodePoint'],
-                  fontFamily: foodMap['iconFontFamily'])),
+              icon: Icon(
+                IconData(
+                  foodMap['iconCodePoint'],
+                  fontFamily: foodMap['iconFontFamily'],
+                ),
+              ),
               color: Color(foodMap['color']),
               cantidadSugerida: foodMap['cantidadSugerida'],
               unidad: foodMap['unidad'],
@@ -163,6 +182,11 @@ class FoodLogProvider with ChangeNotifier {
               proteina: foodMap['proteina'],
               lipidos: foodMap['lipidos'],
               hidratosDeCarbono: foodMap['hidratosDeCarbono'],
+              micros: foodMap['micros'] != null
+                  ? Micronutrients.fromJson(
+                      foodMap['micros'] as Map<String, dynamic>,
+                    )
+                  : null,
             );
 
             // Crear la entrada del registro
@@ -183,14 +207,18 @@ class FoodLogProvider with ChangeNotifier {
         // Agregar el registro diario si hay entradas
         if (entries.isNotEmpty) {
           _logs.add(DailyFoodLog(date: date, entries: entries));
-          dev.log('loadLogs → día $dayStr cargado (${entries.length} entradas)',
-              name: _tag);
+          dev.log(
+            'loadLogs → día $dayStr cargado (${entries.length} entradas)',
+            name: _tag,
+          );
         }
       }
 
       _isLoading = false;
-      final totalEntries =
-          _logs.fold(0, (sum, log) => sum + log.entries.length);
+      final totalEntries = _logs.fold(
+        0,
+        (sum, log) => sum + log.entries.length,
+      );
       dev.log(
         'loadLogs → completado. ${_logs.length} días, $totalEntries entradas en total',
         name: _tag,
@@ -236,6 +264,8 @@ class FoodLogProvider with ChangeNotifier {
             'proteina': entry.food.proteina,
             'lipidos': entry.food.lipidos,
             'hidratosDeCarbono': entry.food.hidratosDeCarbono,
+            if (microsOf(entry.food) != null)
+              'micros': microsOf(entry.food)!.toJson(),
           };
 
           // Convertir la entrada a un mapa

@@ -16,10 +16,7 @@ class LearnScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
           child: const Text(
             'Aprende de nutrición',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
         ),
 
@@ -66,9 +63,7 @@ class LearnScreen extends StatelessWidget {
       margin: const EdgeInsets.only(right: 12.0),
       child: Card(
         clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: InkWell(
           onTap: onTap,
           child: Column(
@@ -78,13 +73,7 @@ class LearnScreen extends StatelessWidget {
               Container(
                 color: color.withOpacity(0.2),
                 height: 85, // Reduced height
-                child: Center(
-                  child: Icon(
-                    icon,
-                    size: 50,
-                    color: color,
-                  ),
-                ),
+                child: Center(child: Icon(icon, size: 50, color: color)),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -103,10 +92,7 @@ class LearnScreen extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
-                      style: TextStyle(
-                        color: Colors.grey[600],
-                        fontSize: 12,
-                      ),
+                      style: TextStyle(color: Colors.grey[600], fontSize: 12),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

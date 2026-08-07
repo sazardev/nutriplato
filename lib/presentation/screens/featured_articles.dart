@@ -36,10 +36,7 @@ class FeaturedArticlesWidget extends StatelessWidget {
             children: [
               const Text(
                 'Artículos destacados',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               TextButton(
                 onPressed: () => Get.to(() => const ArticleListScreen()),

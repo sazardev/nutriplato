@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'micronutrients.dart';
+
 class Food {
   String name;
   String category;
@@ -17,6 +19,9 @@ class Food {
   Image? image;
   String? description;
 
+  /// Micronutrientes opcionales (fibra, sodio, vitaminas, IG, etc.).
+  Micronutrients? micros;
+
   Food({
     required this.name,
     required this.category,
@@ -32,5 +37,6 @@ class Food {
     required this.hidratosDeCarbono,
     this.image,
     this.description,
+    this.micros,
   });
 }

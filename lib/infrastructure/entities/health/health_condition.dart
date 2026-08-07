@@ -247,12 +247,7 @@ class MexicanHealthConditions {
       'Dulces',
       'Pan blanco excesivo',
     ],
-    limitFoods: [
-      'Frutas muy dulces',
-      'Pan blanco',
-      'Arroz blanco',
-      'Azúcar',
-    ],
+    limitFoods: ['Frutas muy dulces', 'Pan blanco', 'Arroz blanco', 'Azúcar'],
     recommendedFoods: [
       'Verduras',
       'Frutas con bajo índice glucémico',
@@ -261,9 +256,7 @@ class MexicanHealthConditions {
       'Nopales',
       'Chía',
     ],
-    nutrientLimits: {
-      'sugar': 35,
-    },
+    nutrientLimits: {'sugar': 35},
     alertOnHighGlycemicIndex: true,
     alertOnHighSugar: true,
   );
@@ -330,12 +323,7 @@ class MexicanHealthConditions {
       'Comida frita',
       'Mariscos con cáscara en exceso',
     ],
-    limitFoods: [
-      'Huevo entero',
-      'Carnes rojas',
-      'Queso',
-      'Leche entera',
-    ],
+    limitFoods: ['Huevo entero', 'Carnes rojas', 'Queso', 'Leche entera'],
     recommendedFoods: [
       'Avena',
       'Manzana',
@@ -414,12 +402,7 @@ class MexicanHealthConditions {
       'Chocolate',
       'Refrescos cola',
     ],
-    limitFoods: [
-      'Carnes rojas',
-      'Lácteos',
-      'Leguminosas',
-      'Granos integrales',
-    ],
+    limitFoods: ['Carnes rojas', 'Lácteos', 'Leguminosas', 'Granos integrales'],
     recommendedFoods: [
       'Clara de huevo',
       'Pescado blanco',
@@ -461,12 +444,7 @@ class MexicanHealthConditions {
       'Chocolate',
       'Menta',
     ],
-    limitFoods: [
-      'Cebolla cruda',
-      'Ajo crudo',
-      'Condimentos fuertes',
-      'Grasas',
-    ],
+    limitFoods: ['Cebolla cruda', 'Ajo crudo', 'Condimentos fuertes', 'Grasas'],
     recommendedFoods: [
       'Avena',
       'Manzana',
@@ -530,9 +508,7 @@ class MexicanHealthConditions {
       'Mantequilla',
       'Postres con leche',
     ],
-    limitFoods: [
-      'Quesos añejos (tienen menos lactosa)',
-    ],
+    limitFoods: ['Quesos añejos (tienen menos lactosa)'],
     recommendedFoods: [
       'Leche deslactosada',
       'Leche de almendra',
@@ -556,10 +532,7 @@ class MexicanHealthConditions {
       'Coliflor cruda',
       'Gluten (si hay sensibilidad)',
     ],
-    limitFoods: [
-      'Crucíferas crudas',
-      'Alimentos procesados',
-    ],
+    limitFoods: ['Crucíferas crudas', 'Alimentos procesados'],
     recommendedFoods: [
       'Mariscos',
       'Pescado',
@@ -583,9 +556,7 @@ class MexicanHealthConditions {
       'Té negro con las comidas',
       'Lácteos con comidas ricas en hierro',
     ],
-    limitFoods: [
-      'Alimentos con fitatos en exceso',
-    ],
+    limitFoods: ['Alimentos con fitatos en exceso'],
     recommendedFoods: [
       'Hígado',
       'Carne roja magra',
@@ -604,18 +575,18 @@ class MexicanHealthConditions {
 
   /// Lista de todas las condiciones predefinidas
   static List<HealthCondition> get all => [
-        diabetes,
-        prediabetes,
-        hipertension,
-        colesterolAlto,
-        obesidad,
-        enfRenalCronica,
-        gastritis,
-        celiaquia,
-        intoleranciaLactosa,
-        hipotiroidismo,
-        anemia,
-      ];
+    diabetes,
+    prediabetes,
+    hipertension,
+    colesterolAlto,
+    obesidad,
+    enfRenalCronica,
+    gastritis,
+    celiaquia,
+    intoleranciaLactosa,
+    hipotiroidismo,
+    anemia,
+  ];
 
   /// Busca una condición por ID
   static HealthCondition? getById(String id) {

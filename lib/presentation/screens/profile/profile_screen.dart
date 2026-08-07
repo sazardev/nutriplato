@@ -4,7 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
 import 'package:nutriplato/infrastructure/services/nutrition_calculator_service.dart';
+import 'package:nutriplato/infrastructure/services/backup_service.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
+import 'package:nutriplato/presentation/screens/profile/achievements.dart';
+import 'package:nutriplato/presentation/screens/profile/progress_screen.dart';
 
 /// Pantalla de perfil completo del usuario
 class ProfileScreen extends StatefulWidget {
@@ -146,8 +149,10 @@ class _ProfileScreenState extends State<ProfileScreen>
               ),
               const SizedBox(height: 4),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(20),
@@ -212,11 +217,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               'Edad',
               profile.age != null ? '${profile.age} años' : 'No especificado',
             ),
-            _buildInfoRow(
-              Icons.wc,
-              'Género',
-              profile.gender.label,
-            ),
+            _buildInfoRow(Icons.wc, 'Género', profile.gender.label),
           ]),
           const SizedBox(height: 24),
           _buildSectionTitle('Medidas Corporales'),
@@ -249,6 +250,29 @@ class _ProfileScreenState extends State<ProfileScreen>
                 '${profile.bmi!.toStringAsFixed(1)} (${profile.bmiCategory})',
               ),
           ]),
+          const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const ProgressScreen()),
+                );
+              },
+              icon: const Icon(Icons.trending_up),
+              label: const Text('Ver mi progreso y gráficas'),
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 24),
+          _buildSectionTitle('Tus datos'),
+          _buildDataCard(context),
           const SizedBox(height: 24),
           _buildSectionTitle('Estilo de Vida'),
           _buildInfoCard([
@@ -386,10 +410,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 Expanded(
                   child: Text(
                     'TMB: Tasa Metabólica Basal\nTDEE: Gasto Energético Total Diario',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey.shade600,
-                    ),
+                    style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
                   ),
                 ),
               ],
@@ -410,10 +431,7 @@ class _ProfileScreenState extends State<ProfileScreen>
       children: [
         Text(
           label,
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.grey.shade600,
-          ),
+          style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
         ),
         const SizedBox(height: 4),
         Text(
@@ -424,13 +442,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             color: color,
           ),
         ),
-        Text(
-          unit,
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.grey.shade600,
-          ),
-        ),
+        Text(unit, style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
       ],
     );
   }
@@ -487,10 +499,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         Container(
           width: 12,
           height: 12,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -501,9 +510,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         ),
         Text(
           '${grams.round()}g',
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.bold,
-          ),
+          style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
         ),
         if (showPercent) ...[
           const SizedBox(width: 8),
@@ -540,11 +547,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 color: Colors.blue.shade100,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
-                Icons.water_drop,
-                color: Colors.blue,
-                size: 32,
-              ),
+              child: const Icon(Icons.water_drop, color: Colors.blue, size: 32),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -561,9 +564,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   ),
                   Text(
                     '${water.glasses} vasos de 250ml',
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                    ),
+                    style: TextStyle(color: Colors.grey.shade600),
                   ),
                 ],
               ),
@@ -575,7 +576,9 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 
   Widget _buildIdealWeightCard(
-      IdealWeightResult idealWeight, UserProfile profile) {
+    IdealWeightResult idealWeight,
+    UserProfile profile,
+  ) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -634,8 +637,8 @@ class _ProfileScreenState extends State<ProfileScreen>
     final color = difference.abs() < 2
         ? Colors.green
         : isOver
-            ? Colors.orange
-            : Colors.blue;
+        ? Colors.orange
+        : Colors.blue;
 
     return Container(
       padding: const EdgeInsets.all(12),
@@ -649,8 +652,8 @@ class _ProfileScreenState extends State<ProfileScreen>
             difference.abs() < 2
                 ? Icons.check_circle
                 : isOver
-                    ? Icons.arrow_downward
-                    : Icons.arrow_upward,
+                ? Icons.arrow_downward
+                : Icons.arrow_upward,
             color: color,
           ),
           const SizedBox(width: 12),
@@ -658,12 +661,9 @@ class _ProfileScreenState extends State<ProfileScreen>
             difference.abs() < 2
                 ? '¡Estás en tu peso ideal!'
                 : isOver
-                    ? 'Te faltan ${difference.abs().toStringAsFixed(1)} kg para tu peso ideal'
-                    : 'Te faltan ${difference.abs().toStringAsFixed(1)} kg para tu peso ideal',
-            style: TextStyle(
-              color: color,
-              fontWeight: FontWeight.w500,
-            ),
+                ? 'Te faltan ${difference.abs().toStringAsFixed(1)} kg para tu peso ideal'
+                : 'Te faltan ${difference.abs().toStringAsFixed(1)} kg para tu peso ideal',
+            style: TextStyle(color: color, fontWeight: FontWeight.w500),
           ),
         ],
       ),
@@ -748,11 +748,13 @@ class _ProfileScreenState extends State<ProfileScreen>
               ),
             )
           else
-            ...conditions.map((condition) => _buildConditionCard(
-                  context,
-                  condition,
-                  () => provider.removeHealthCondition(condition.id),
-                )),
+            ...conditions.map(
+              (condition) => _buildConditionCard(
+                context,
+                condition,
+                () => provider.removeHealthCondition(condition.id),
+              ),
+            ),
           const SizedBox(height: 16),
           if (conditions.isNotEmpty)
             Center(
@@ -776,11 +778,13 @@ class _ProfileScreenState extends State<ProfileScreen>
               spacing: 8,
               runSpacing: 8,
               children: profile.allergies
-                  .map((allergy) => Chip(
-                        label: Text(allergy),
-                        backgroundColor: Colors.red.shade100,
-                        avatar: const Icon(Icons.warning, size: 18),
-                      ))
+                  .map(
+                    (allergy) => Chip(
+                      label: Text(allergy),
+                      backgroundColor: Colors.red.shade100,
+                      avatar: const Icon(Icons.warning, size: 18),
+                    ),
+                  )
                   .toList(),
             ),
           const SizedBox(height: 24),
@@ -797,11 +801,13 @@ class _ProfileScreenState extends State<ProfileScreen>
               spacing: 8,
               runSpacing: 8,
               children: profile.dietaryRestrictions
-                  .map((restriction) => Chip(
-                        label: Text(restriction),
-                        backgroundColor: Colors.green.shade100,
-                        avatar: const Icon(Icons.eco, size: 18),
-                      ))
+                  .map(
+                    (restriction) => Chip(
+                      label: Text(restriction),
+                      backgroundColor: Colors.green.shade100,
+                      avatar: const Icon(Icons.eco, size: 18),
+                    ),
+                  )
                   .toList(),
             ),
         ],
@@ -836,6 +842,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         ),
         trailing: IconButton(
           icon: const Icon(Icons.delete_outline, color: Colors.red),
+          tooltip: 'Quitar condición',
           onPressed: onRemove,
         ),
         children: [
@@ -863,12 +870,16 @@ class _ProfileScreenState extends State<ProfileScreen>
                     runSpacing: 4,
                     children: condition.avoidFoods
                         .take(5)
-                        .map((f) => Chip(
-                              label:
-                                  Text(f, style: const TextStyle(fontSize: 12)),
-                              backgroundColor: Colors.red.shade50,
-                              visualDensity: VisualDensity.compact,
-                            ))
+                        .map(
+                          (f) => Chip(
+                            label: Text(
+                              f,
+                              style: const TextStyle(fontSize: 12),
+                            ),
+                            backgroundColor: Colors.red.shade50,
+                            visualDensity: VisualDensity.compact,
+                          ),
+                        )
                         .toList(),
                   ),
                 ],
@@ -887,12 +898,16 @@ class _ProfileScreenState extends State<ProfileScreen>
                     runSpacing: 4,
                     children: condition.recommendedFoods
                         .take(5)
-                        .map((f) => Chip(
-                              label:
-                                  Text(f, style: const TextStyle(fontSize: 12)),
-                              backgroundColor: Colors.green.shade50,
-                              visualDensity: VisualDensity.compact,
-                            ))
+                        .map(
+                          (f) => Chip(
+                            label: Text(
+                              f,
+                              style: const TextStyle(fontSize: 12),
+                            ),
+                            backgroundColor: Colors.green.shade50,
+                            visualDensity: VisualDensity.compact,
+                          ),
+                        )
                         .toList(),
                   ),
                 ],
@@ -959,8 +974,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                 children: [
                   Column(
                     children: [
-                      const Icon(Icons.local_fire_department,
-                          color: Colors.orange, size: 40),
+                      const Icon(
+                        Icons.local_fire_department,
+                        color: Colors.orange,
+                        size: 40,
+                      ),
                       const SizedBox(height: 8),
                       Text(
                         '${profile.currentStreak}',
@@ -973,15 +991,14 @@ class _ProfileScreenState extends State<ProfileScreen>
                       const Text('Racha actual'),
                     ],
                   ),
-                  Container(
-                    width: 1,
-                    height: 80,
-                    color: Colors.grey.shade300,
-                  ),
+                  Container(width: 1, height: 80, color: Colors.grey.shade300),
                   Column(
                     children: [
-                      const Icon(Icons.emoji_events,
-                          color: Colors.amber, size: 40),
+                      const Icon(
+                        Icons.emoji_events,
+                        color: Colors.amber,
+                        size: 40,
+                      ),
                       const SizedBox(height: 8),
                       Text(
                         '${profile.longestStreak}',
@@ -997,6 +1014,15 @@ class _ProfileScreenState extends State<ProfileScreen>
                 ],
               ),
             ),
+          ),
+          const SizedBox(height: 24),
+          AchievementsGrid(
+            currentStreak: profile.currentStreak,
+            longestStreak: profile.longestStreak,
+            daysLogged: profile.daysLogged,
+            exercisesCompleted: profile.exercisesCompleted,
+            articlesRead: profile.articlesRead,
+            foodsViewed: profile.foodsViewed,
           ),
         ],
       ),
@@ -1028,10 +1054,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             Text(
               title,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey.shade600,
-              ),
+              style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
             ),
           ],
         ),
@@ -1044,11 +1067,124 @@ class _ProfileScreenState extends State<ProfileScreen>
       padding: const EdgeInsets.only(bottom: 12),
       child: Text(
         title,
-        style: GoogleFonts.poppins(
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
+        style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600),
+      ),
+    );
+  }
+
+  Widget _buildDataCard(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Tu información se guarda solo en este dispositivo.',
+              style: TextStyle(fontSize: 13, color: Colors.grey.shade600),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: _shareBackup,
+                    icon: const Icon(Icons.ios_share, size: 18),
+                    label: const Text('Exportar'),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: _copyBackup,
+                    icon: const Icon(Icons.copy, size: 18),
+                    label: const Text('Copiar'),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: _restoreBackup,
+                    icon: const Icon(Icons.settings_backup_restore, size: 18),
+                    label: const Text('Restaurar'),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
+    );
+  }
+
+  Future<void> _shareBackup() async {
+    await BackupService.shareBackup();
+    if (!mounted) return;
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Respaldo compartido')));
+  }
+
+  Future<void> _copyBackup() async {
+    await BackupService.copyToClipboard();
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Respaldo copiado al portapapeles')),
+    );
+  }
+
+  Future<void> _restoreBackup() async {
+    final controller = TextEditingController();
+    final result = await showDialog<String>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Restaurar datos'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Pega aquí el JSON de un respaldo anterior. Se reemplazará la información actual.',
+              style: TextStyle(fontSize: 13),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: controller,
+              maxLines: 6,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Pega el JSON aquí...',
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, controller.text),
+            child: const Text('Restaurar'),
+          ),
+        ],
+      ),
+    );
+
+    if (result == null || result.trim().isEmpty) return;
+
+    final restored = await BackupService.restoreFromJson(result);
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      restored > 0
+          ? SnackBar(
+              content: Text(
+                'Datos restaurados ($restored claves). Reinicia la app.',
+              ),
+            )
+          : const SnackBar(
+              content: Text('No se pudo restaurar: JSON inválido'),
+            ),
     );
   }
 
@@ -1068,15 +1204,9 @@ class _ProfileScreenState extends State<ProfileScreen>
         children: [
           Icon(icon, size: 20, color: Colors.grey.shade600),
           const SizedBox(width: 12),
-          Text(
-            label,
-            style: TextStyle(color: Colors.grey.shade600),
-          ),
+          Text(label, style: TextStyle(color: Colors.grey.shade600)),
           const Spacer(),
-          Text(
-            value,
-            style: const TextStyle(fontWeight: FontWeight.w500),
-          ),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.w500)),
         ],
       ),
     );
@@ -1141,8 +1271,9 @@ class _ProfileScreenState extends State<ProfileScreen>
 
                   return ListTile(
                     leading: CircleAvatar(
-                      backgroundColor:
-                          exists ? Colors.grey.shade200 : Colors.red.shade100,
+                      backgroundColor: exists
+                          ? Colors.grey.shade200
+                          : Colors.red.shade100,
                       child: Icon(
                         Icons.medical_services,
                         color: exists ? Colors.grey : Colors.red,

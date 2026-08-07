@@ -14,9 +14,6 @@ class Advertice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(title),
-      content: Text(content),
-    );
+    return AlertDialog(title: Text(title), content: Text(content));
   }
 }

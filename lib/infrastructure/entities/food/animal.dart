@@ -31,9 +31,9 @@ class Animal extends Food {
     required this.selenio,
     super.image,
   }) : super(
-          name: alimento,
-          category: 'animal',
-          icon: const Icon(FontAwesomeIcons.cow),
-          color: sectionColors[1],
-        );
+         name: alimento,
+         category: 'animal',
+         icon: Icon(FontAwesomeIcons.cow.data),
+         color: sectionColors[1],
+       );
 }

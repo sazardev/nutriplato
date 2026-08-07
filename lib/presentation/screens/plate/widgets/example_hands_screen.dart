@@ -17,14 +17,12 @@ class ExampleHandScreen extends StatelessWidget {
                 Center(
                   child: Image.asset('lib/data/img/porciones_mano/palma.png'),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 const Text(
                   'La palma de tu mano es el equivalente a una porcion de carne blanca o roja.',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 24),
-                )
+                ),
               ],
             ),
           ),
@@ -39,14 +37,12 @@ class ExampleHandScreen extends StatelessWidget {
                 Center(
                   child: Image.asset('lib/data/img/porciones_mano/taza.png'),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 const Text(
                   'Tu puño es igual a una taza, puede ser de cereales, verduras, frutas o cualquier alimento que quieras medir referente a una taza.',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 24),
-                )
+                ),
               ],
             ),
           ),
@@ -61,14 +57,12 @@ class ExampleHandScreen extends StatelessWidget {
                 Center(
                   child: Image.asset('lib/data/img/porciones_mano/cuchara.png'),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 const Text(
                   'Es el equivalente a una cuchara, ya sea una cuchara de semillas, quesos, etc.',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 24),
-                )
+                ),
               ],
             ),
           ),
@@ -82,16 +76,15 @@ class ExampleHandScreen extends StatelessWidget {
               children: [
                 Center(
                   child: Image.asset(
-                      'lib/data/img/porciones_mano/cucharadita.png'),
+                    'lib/data/img/porciones_mano/cucharadita.png',
+                  ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 const Text(
                   'La yema de tu dedo índice es igual a una cucharadita, puede ser de aceite, crema de cacahuate, etc.',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 24),
-                )
+                ),
               ],
             ),
           ),
@@ -104,17 +97,16 @@ class ExampleHandScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
-                  child:
-                      Image.asset('lib/data/img/porciones_mano/mediataza.png'),
+                  child: Image.asset(
+                    'lib/data/img/porciones_mano/mediataza.png',
+                  ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 const Text(
                   'El puño de tu mano equivale a media taza, el cual puede ser representado por cualquier cosa que sea a una media taza.',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 24),
-                )
+                ),
               ],
             ),
           ),
@@ -127,17 +119,16 @@ class ExampleHandScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
-                  child:
-                      Image.asset('lib/data/img/porciones_mano/2_palmas.png'),
+                  child: Image.asset(
+                    'lib/data/img/porciones_mano/2_palmas.png',
+                  ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 const Text(
                   'Para verduras, frutas o cereales, juntar tus dos palmas es el equivalente a dos tazas del alimento.',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 24),
-                )
+                ),
               ],
             ),
           ),

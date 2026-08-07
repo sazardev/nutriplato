@@ -34,24 +34,23 @@ class FinishedExerciseScreen extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(
-              height: 50,
-            ),
+            const SizedBox(height: 50),
             FilledButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.white.withAlpha(100),
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.white.withAlpha(100),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text(
+                'Completar',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
                 ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text(
-                  'Completar',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
-                )),
+              ),
+            ),
           ],
         ),
       ),

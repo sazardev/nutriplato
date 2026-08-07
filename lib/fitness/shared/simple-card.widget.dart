@@ -32,15 +32,13 @@ class SimpleCard extends StatelessWidget {
                 child: Icon(icon),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                  right: 16,
-                  top: 8,
-                ),
+                padding: const EdgeInsets.only(left: 16.0, right: 16, top: 8),
                 child: Text(
                   title,
                   style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Padding(
@@ -48,13 +46,11 @@ class SimpleCard extends StatelessWidget {
                 child: Row(
                   children: [
                     const Icon(Icons.timer),
-                    const SizedBox(
-                      width: 10,
-                    ),
+                    const SizedBox(width: 10),
                     Text(time ?? ''),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

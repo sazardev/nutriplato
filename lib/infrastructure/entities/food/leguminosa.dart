@@ -35,9 +35,9 @@ class Leguminosa extends Food {
     required this.cargaGlicemica,
     super.image,
   }) : super(
-          name: alimento,
-          category: 'leguminosa',
-          icon: const Icon(FontAwesomeIcons.seedling),
-          color: sectionColors[2],
-        );
+         name: alimento,
+         category: 'leguminosa',
+         icon: Icon(FontAwesomeIcons.seedling.data),
+         color: sectionColors[2],
+       );
 }

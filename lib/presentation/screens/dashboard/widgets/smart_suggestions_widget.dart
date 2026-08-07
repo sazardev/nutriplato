@@ -77,9 +77,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
         ],
 
         // Sugerencias rápidas
-        if (_suggestions.isNotEmpty) ...[
-          _buildSuggestionsSection(),
-        ],
+        if (_suggestions.isNotEmpty) ...[_buildSuggestionsSection()],
       ],
     );
   }
@@ -91,7 +89,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
           child: _buildActionCard(
             title: 'Plan de Hoy',
             subtitle: 'Alimentación personalizada',
-            icon: FontAwesomeIcons.bowlFood,
+            icon: FontAwesomeIcons.bowlFood.data,
             color: Colors.green,
             onTap: () => Navigator.push(
               context,
@@ -104,12 +102,13 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
           child: _buildActionCard(
             title: 'Aprende',
             subtitle: 'Datos y tips',
-            icon: FontAwesomeIcons.graduationCap,
+            icon: FontAwesomeIcons.graduationCap.data,
             color: Colors.purple,
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (_) => const NutritionEducationScreen()),
+                builder: (_) => const NutritionEducationScreen(),
+              ),
             ),
           ),
         ),
@@ -127,9 +126,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
     return Card(
       elevation: 4,
       shadowColor: color.withValues(alpha: 0.3),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
@@ -174,17 +171,12 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
     return Card(
       elevation: 3,
       shadowColor: _dailyFact!.color.withValues(alpha: 0.2),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              _dailyFact!.color.withValues(alpha: 0.1),
-              Colors.white,
-            ],
+            colors: [_dailyFact!.color.withValues(alpha: 0.1), Colors.white],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -198,11 +190,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
                 color: _dailyFact!.color.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(
-                _dailyFact!.icon,
-                color: _dailyFact!.color,
-                size: 24,
-              ),
+              child: Icon(_dailyFact!.icon, color: _dailyFact!.color, size: 24),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -212,7 +200,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
                   Row(
                     children: [
                       Icon(
-                        FontAwesomeIcons.lightbulb,
+                        FontAwesomeIcons.lightbulb.data,
                         color: Colors.amber.shade600,
                         size: 14,
                       ),
@@ -323,9 +311,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
       margin: const EdgeInsets.only(right: 12),
       elevation: 3,
       shadowColor: cardColor.withValues(alpha: 0.2),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Container(
         width: 140,
         padding: const EdgeInsets.all(12),
@@ -348,8 +334,10 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
                   ),
                 ),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.amber.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8),
@@ -398,11 +386,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
                   ),
                 ),
                 if (suggestion.benefits.isNotEmpty)
-                  Icon(
-                    Icons.check_circle_rounded,
-                    color: cardColor,
-                    size: 16,
-                  ),
+                  Icon(Icons.check_circle_rounded, color: cardColor, size: 16),
               ],
             ),
           ],
@@ -414,17 +398,17 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
   IconData _getCategoryIcon(String category) {
     switch (category.toLowerCase()) {
       case 'fruta':
-        return FontAwesomeIcons.appleWhole;
+        return FontAwesomeIcons.appleWhole.data;
       case 'verdura':
-        return FontAwesomeIcons.carrot;
+        return FontAwesomeIcons.carrot.data;
       case 'cereal':
-        return FontAwesomeIcons.wheatAwn;
+        return FontAwesomeIcons.wheatAwn.data;
       case 'animal':
-        return FontAwesomeIcons.drumstickBite;
+        return FontAwesomeIcons.drumstickBite.data;
       case 'leguminosa':
-        return FontAwesomeIcons.seedling;
+        return FontAwesomeIcons.seedling.data;
       default:
-        return FontAwesomeIcons.utensils;
+        return FontAwesomeIcons.utensils.data;
     }
   }
 }

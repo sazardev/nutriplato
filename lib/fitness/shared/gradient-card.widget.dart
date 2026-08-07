@@ -25,14 +25,8 @@ class GradientCard extends StatelessWidget {
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                Colors.purple,
-                Colors.pink,
-              ],
-              stops: [
-                0.0,
-                1.0,
-              ],
+              colors: [Colors.purple, Colors.pink],
+              stops: [0.0, 1.0],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -42,11 +36,7 @@ class GradientCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 30,
-                ),
+                Icon(icon, color: Colors.white, size: 30),
                 Text(
                   title,
                   style: const TextStyle(
@@ -57,14 +47,13 @@ class GradientCard extends StatelessWidget {
                 ),
                 Text(
                   description ?? '',
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
+                  style: const TextStyle(color: Colors.white),
                 ),
                 const Spacer(),
                 FilledButton(
                   style: FilledButton.styleFrom(
-                      backgroundColor: Colors.pink.shade900),
+                    backgroundColor: Colors.pink.shade900,
+                  ),
                   onPressed: onTap,
                   child: const Text('Ver ejercicio'),
                 ),

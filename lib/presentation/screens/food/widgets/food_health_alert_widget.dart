@@ -157,11 +157,7 @@ class FoodHealthAlertWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(
-            alert.icon,
-            color: alert.color,
-            size: 18,
-          ),
+          Icon(alert.icon, color: alert.color, size: 18),
           const SizedBox(width: 10),
           Expanded(
             child: Column(
@@ -178,10 +174,7 @@ class FoodHealthAlertWidget extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   alert.message,
-                  style: TextStyle(
-                    color: Colors.grey.shade700,
-                    fontSize: 12,
-                  ),
+                  style: TextStyle(color: Colors.grey.shade700, fontSize: 12),
                 ),
               ],
             ),

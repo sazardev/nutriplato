@@ -40,5 +40,5 @@ final List<IconData> sectionIcons = [
   Icons.local_drink,
   Icons.directions_run,
   Icons.local_hospital,
-  Icons.sentiment_satisfied_alt
+  Icons.sentiment_satisfied_alt,
 ];

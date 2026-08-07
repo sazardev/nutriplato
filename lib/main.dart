@@ -4,6 +4,8 @@ import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/fitness/fitness.controller.dart';
 import 'package:nutriplato/fitness/smart/smart_fitness.controller.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_provider.dart';
+import 'package:nutriplato/infrastructure/entities/food/custom_food_provider.dart';
+import 'package:nutriplato/infrastructure/entities/food/favorites_provider.dart';
 import 'package:nutriplato/presentation/home.screen.dart';
 import 'package:nutriplato/presentation/provider/article_provider.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
@@ -19,11 +21,7 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   bool presentation = prefs.getBool('presentation') ?? true;
 
-  runApp(
-    MyApp(
-      presentation: presentation,
-    ),
-  );
+  runApp(MyApp(presentation: presentation));
 }
 
 class MyApp extends StatelessWidget {
@@ -49,6 +47,22 @@ class MyApp extends StatelessWidget {
             final foodLogProvider = FoodLogProvider();
             foodLogProvider.loadLogs();
             return foodLogProvider;
+          },
+        ),
+        ChangeNotifierProvider(
+          lazy: false,
+          create: (_) {
+            final customFoodProvider = CustomFoodProvider();
+            customFoodProvider.loadFoods();
+            return customFoodProvider;
+          },
+        ),
+        ChangeNotifierProvider(
+          lazy: false,
+          create: (_) {
+            final favoritesProvider = FavoritesProvider();
+            favoritesProvider.loadFavorites();
+            return favoritesProvider;
           },
         ),
         ChangeNotifierProvider(

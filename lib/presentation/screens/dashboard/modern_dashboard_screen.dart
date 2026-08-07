@@ -11,6 +11,7 @@ import 'package:nutriplato/presentation/screens/widgets/modern_cards.dart';
 import 'package:nutriplato/presentation/screens/dashboard/widgets/modern_learn_screen.dart';
 import 'package:nutriplato/presentation/screens/dashboard/widgets/nutrition_summary_card.dart';
 import 'package:nutriplato/presentation/screens/dashboard/widgets/smart_suggestions_widget.dart';
+import 'package:nutriplato/presentation/screens/dashboard/widgets/calorie_balance_card.dart';
 import 'package:nutriplato/presentation/screens/featured_articles.dart';
 import 'package:nutriplato/presentation/screens/widgets/modern_sidebar.dart';
 import 'package:nutriplato/presentation/screens/profile/profile_screen.dart';
@@ -36,21 +37,17 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
       vsync: this,
     );
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
 
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.3),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeOutCubic,
-    ));
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.easeOutCubic,
+          ),
+        );
 
     _animationController.forward();
   }
@@ -83,16 +80,14 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
               leading: Builder(
                 builder: (context) => IconButton(
                   onPressed: () => Scaffold.of(context).openDrawer(),
+                  tooltip: 'Abrir menú',
                   icon: Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Icon(
-                      Icons.menu_rounded,
-                      color: Colors.white,
-                    ),
+                    child: const Icon(Icons.menu_rounded, color: Colors.white),
                   ),
                 ),
               ),
@@ -133,8 +128,9 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                                     style: GoogleFonts.poppins(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400,
-                                      color:
-                                          Colors.white.withValues(alpha: 0.9),
+                                      color: Colors.white.withValues(
+                                        alpha: 0.9,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -150,6 +146,7 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
               actions: [
                 IconButton(
                   onPressed: () {},
+                  tooltip: 'Notificaciones',
                   icon: Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
@@ -171,6 +168,7 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                       ),
                     );
                   },
+                  tooltip: 'Perfil',
                   icon: Consumer<UserProfileProvider>(
                     builder: (context, profileProvider, _) {
                       final profile = profileProvider.profile;
@@ -211,6 +209,8 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         NutritionSummaryCard(gradientColors: currentTheme),
+                        const SizedBox(height: 12),
+                        const CalorieBalanceCard(),
                         const SizedBox(height: 12),
                         const HealthAlertsCard(),
                         const SizedBox(height: 12),
@@ -258,7 +258,7 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                             StatCard(
                               title: 'Artículos leídos',
                               value: '${user.postReadIt}',
-                              icon: FontAwesomeIcons.bookOpen,
+                              icon: FontAwesomeIcons.bookOpen.data,
                               color: currentTheme[0],
                               progress:
                                   user.postReadIt / 50, // Ejemplo: meta de 50
@@ -266,15 +266,16 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                             StatCard(
                               title: 'Ejercicios hechos',
                               value: '${user.exercisesDoIt}',
-                              icon: FontAwesomeIcons.dumbbell,
+                              icon: FontAwesomeIcons.dumbbell.data,
                               color: Colors.orange.shade600,
-                              progress: user.exercisesDoIt /
+                              progress:
+                                  user.exercisesDoIt /
                                   30, // Ejemplo: meta de 30
                             ),
                             StatCard(
                               title: 'Alimentos vistos',
                               value: '${user.viewedFood}',
-                              icon: FontAwesomeIcons.apple,
+                              icon: FontAwesomeIcons.apple.data,
                               color: Colors.green.shade600,
                               progress:
                                   user.viewedFood / 100, // Ejemplo: meta de 100
@@ -282,7 +283,7 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                             StatCard(
                               title: 'Nivel actual',
                               value: _calculateUserLevel(user).toString(),
-                              icon: FontAwesomeIcons.trophy,
+                              icon: FontAwesomeIcons.trophy.data,
                               color: Colors.amber.shade600,
                               subtitle: 'Novato',
                             ),
@@ -313,10 +314,7 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                         ),
                       ),
                       const SizedBox(height: 16),
-                      const SizedBox(
-                        height: 200,
-                        child: ModernLearnScreen(),
-                      ),
+                      const SizedBox(height: 200, child: ModernLearnScreen()),
                     ],
                   ),
                 ),
@@ -369,9 +367,7 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
             ),
 
             // Padding inferior para el navigation bar
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 100),
-            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 100)),
           ],
         ),
       ),

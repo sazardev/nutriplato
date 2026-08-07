@@ -47,30 +47,30 @@ class CustomBottomNavigation extends StatelessWidget {
             fontSize: 11,
             fontWeight: FontWeight.w500,
           ),
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: _NavIcon(FontAwesomeIcons.house, false),
-              activeIcon: _NavIcon(FontAwesomeIcons.house, true),
+              icon: _NavIcon(FontAwesomeIcons.house.data, false),
+              activeIcon: _NavIcon(FontAwesomeIcons.house.data, true),
               label: 'Inicio',
             ),
             BottomNavigationBarItem(
-              icon: _NavIcon(FontAwesomeIcons.chartPie, false),
-              activeIcon: _NavIcon(FontAwesomeIcons.chartPie, true),
+              icon: _NavIcon(FontAwesomeIcons.chartPie.data, false),
+              activeIcon: _NavIcon(FontAwesomeIcons.chartPie.data, true),
               label: 'Nutrición',
             ),
             BottomNavigationBarItem(
-              icon: _NavIcon(FontAwesomeIcons.magnifyingGlass, false),
-              activeIcon: _NavIcon(FontAwesomeIcons.magnifyingGlass, true),
+              icon: _NavIcon(FontAwesomeIcons.magnifyingGlass.data, false),
+              activeIcon: _NavIcon(FontAwesomeIcons.magnifyingGlass.data, true),
               label: 'Buscar',
             ),
             BottomNavigationBarItem(
-              icon: _NavIcon(FontAwesomeIcons.utensils, false),
-              activeIcon: _NavIcon(FontAwesomeIcons.utensils, true),
+              icon: _NavIcon(FontAwesomeIcons.utensils.data, false),
+              activeIcon: _NavIcon(FontAwesomeIcons.utensils.data, true),
               label: 'Plato',
             ),
             BottomNavigationBarItem(
-              icon: _NavIcon(FontAwesomeIcons.dumbbell, false),
-              activeIcon: _NavIcon(FontAwesomeIcons.dumbbell, true),
+              icon: _NavIcon(FontAwesomeIcons.dumbbell.data, false),
+              activeIcon: _NavIcon(FontAwesomeIcons.dumbbell.data, true),
               label: 'Fitness',
             ),
           ],
@@ -99,7 +99,7 @@ class _NavIcon extends StatelessWidget {
             : Colors.transparent,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: FaIcon(
+      child: Icon(
         icon,
         size: isActive ? 20 : 18,
         color: isActive ? theme.primaryColor : Colors.grey.shade400,

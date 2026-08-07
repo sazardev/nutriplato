@@ -78,19 +78,14 @@ class AppTheme {
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-          side: BorderSide(
-            color: Colors.grey.shade200,
-            width: 1,
-          ),
+          side: BorderSide(color: Colors.grey.shade200, width: 1),
         ),
         margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       ),
       chipTheme: ChipThemeData(
         elevation: 0,
         pressElevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         side: BorderSide.none,
         selectedColor: primaryColor.withValues(alpha: 0.15),
         backgroundColor: Colors.grey.shade100,
@@ -114,10 +109,12 @@ class AppTheme {
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(color: primaryColor, width: 2),
         ),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 18,
+        ),
         hintStyle: GoogleFonts.poppins(
-          color: Colors.grey.shade500,
+          color: Colors.grey.shade600,
           fontWeight: FontWeight.w400,
         ),
         labelStyle: GoogleFonts.poppins(
@@ -129,9 +126,7 @@ class AppTheme {
         elevation: 0,
         highlightElevation: 0,
         backgroundColor: primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         elevation: 0,

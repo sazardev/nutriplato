@@ -35,9 +35,9 @@ class Verdura extends Food {
     required this.cargaGlicemica,
     super.image,
   }) : super(
-          name: alimento,
-          category: 'verdura',
-          icon: const Icon(FontAwesomeIcons.carrot),
-          color: sectionColors[3],
-        );
+         name: alimento,
+         category: 'verdura',
+         icon: Icon(FontAwesomeIcons.carrot.data),
+         color: sectionColors[3],
+       );
 }

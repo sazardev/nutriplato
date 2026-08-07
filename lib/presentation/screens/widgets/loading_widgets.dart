@@ -37,13 +37,9 @@ class _ModernLoadingScreenState extends State<ModernLoadingScreen>
       vsync: this,
     );
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.3,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _fadeController,
-      curve: Curves.easeInOut,
-    ));
+    _fadeAnimation = Tween<double>(begin: 0.3, end: 1.0).animate(
+      CurvedAnimation(parent: _fadeController, curve: Curves.easeInOut),
+    );
 
     _fadeController.repeat(reverse: true);
   }
@@ -199,10 +195,7 @@ class _ShimmerLoadingState extends State<ShimmerLoading>
     _animation = Tween<double>(
       begin: -2.0,
       end: 2.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
     if (widget.isLoading) {
       _controller.repeat();
@@ -242,16 +235,8 @@ class _ShimmerLoadingState extends State<ShimmerLoading>
             return LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [
-                baseColor,
-                highlightColor,
-                baseColor,
-              ],
-              stops: [
-                0.0,
-                0.5,
-                1.0,
-              ],
+              colors: [baseColor, highlightColor, baseColor],
+              stops: [0.0, 0.5, 1.0],
               transform: GradientRotation(_animation.value),
             ).createShader(bounds);
           },

@@ -148,8 +148,8 @@ class _MealPlanScreenState extends State<MealPlanScreen>
                           color: Colors.white.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(16),
                         ),
-                        child: const Icon(
-                          FontAwesomeIcons.bowlFood,
+                        child: Icon(
+                          FontAwesomeIcons.bowlFood.data,
                           color: Colors.white,
                           size: 24,
                         ),
@@ -183,7 +183,9 @@ class _MealPlanScreenState extends State<MealPlanScreen>
                     const SizedBox(height: 16),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 6),
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(20),
@@ -221,19 +223,23 @@ class _MealPlanScreenState extends State<MealPlanScreen>
             fontWeight: FontWeight.w600,
             fontSize: 12,
           ),
-          tabs: const [
+          tabs: [
             Tab(
-                icon: Icon(FontAwesomeIcons.mugSaucer, size: 18),
-                text: 'Desayuno'),
+              icon: Icon(FontAwesomeIcons.mugSaucer.data, size: 18),
+              text: 'Desayuno',
+            ),
             Tab(
-                icon: Icon(FontAwesomeIcons.bowlRice, size: 18),
-                text: 'Almuerzo'),
+              icon: Icon(FontAwesomeIcons.bowlRice.data, size: 18),
+              text: 'Almuerzo',
+            ),
             Tab(
-                icon: Icon(FontAwesomeIcons.plateWheat, size: 18),
-                text: 'Cena'),
+              icon: Icon(FontAwesomeIcons.plateWheat.data, size: 18),
+              text: 'Cena',
+            ),
             Tab(
-                icon: Icon(FontAwesomeIcons.appleWhole, size: 18),
-                text: 'Snacks'),
+              icon: Icon(FontAwesomeIcons.appleWhole.data, size: 18),
+              text: 'Snacks',
+            ),
           ],
         ),
       ),
@@ -261,19 +267,27 @@ class _MealPlanScreenState extends State<MealPlanScreen>
   }
 
   Widget _buildMealList(
-      List<MealSuggestion> meals, String mealName, Color color) {
+    List<MealSuggestion> meals,
+    String mealName,
+    Color color,
+  ) {
     if (meals.isEmpty) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.restaurant_menu_outlined,
-                size: 64, color: Colors.grey.shade300),
+            Icon(
+              Icons.restaurant_menu_outlined,
+              size: 64,
+              color: Colors.grey.shade300,
+            ),
             const SizedBox(height: 16),
             Text(
               'No hay sugerencias para $mealName',
               style: GoogleFonts.poppins(
-                  color: Colors.grey.shade600, fontSize: 16),
+                color: Colors.grey.shade600,
+                fontSize: 16,
+              ),
             ),
           ],
         ),
@@ -338,15 +352,18 @@ class _MealPlanScreenState extends State<MealPlanScreen>
                   gradient: LinearGradient(
                     colors: [
                       color.withValues(alpha: 0.2),
-                      color.withValues(alpha: 0.1)
+                      color.withValues(alpha: 0.1),
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(_getCategoryIcon(food.category),
-                    color: color, size: 28),
+                child: Icon(
+                  _getCategoryIcon(food.category),
+                  color: color,
+                  size: 28,
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -375,7 +392,9 @@ class _MealPlanScreenState extends State<MealPlanScreen>
                       const SizedBox(height: 6),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 2),
+                          horizontal: 8,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: color.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(8),
@@ -396,8 +415,10 @@ class _MealPlanScreenState extends State<MealPlanScreen>
                 ),
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: color.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20),
@@ -421,17 +442,17 @@ class _MealPlanScreenState extends State<MealPlanScreen>
   IconData _getCategoryIcon(String category) {
     switch (category.toLowerCase()) {
       case 'fruta':
-        return FontAwesomeIcons.appleWhole;
+        return FontAwesomeIcons.appleWhole.data;
       case 'verdura':
-        return FontAwesomeIcons.carrot;
+        return FontAwesomeIcons.carrot.data;
       case 'cereal':
-        return FontAwesomeIcons.wheatAwn;
+        return FontAwesomeIcons.wheatAwn.data;
       case 'animal':
-        return FontAwesomeIcons.drumstickBite;
+        return FontAwesomeIcons.drumstickBite.data;
       case 'leguminosa':
-        return FontAwesomeIcons.seedling;
+        return FontAwesomeIcons.seedling.data;
       default:
-        return FontAwesomeIcons.utensils;
+        return FontAwesomeIcons.utensils.data;
     }
   }
 
@@ -472,7 +493,10 @@ class _MealPlanScreenState extends State<MealPlanScreen>
             _buildNutrientRow('Energía', '${food.energia} kcal', Colors.orange),
             _buildNutrientRow('Proteína', '${food.proteina} g', Colors.red),
             _buildNutrientRow(
-                'Carbohidratos', '${food.hidratosDeCarbono} g', Colors.blue),
+              'Carbohidratos',
+              '${food.hidratosDeCarbono} g',
+              Colors.blue,
+            ),
             _buildNutrientRow('Lípidos', '${food.lipidos} g', Colors.amber),
             const SizedBox(height: 16),
             Text(
@@ -500,10 +524,7 @@ class _MealPlanScreenState extends State<MealPlanScreen>
               Container(
                 width: 8,
                 height: 8,
-                decoration: BoxDecoration(
-                  color: color,
-                  shape: BoxShape.circle,
-                ),
+                decoration: BoxDecoration(color: color, shape: BoxShape.circle),
               ),
               const SizedBox(width: 8),
               Text(
@@ -540,7 +561,10 @@ class _SliverTabBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     return Container(color: Colors.white, child: tabBar);
   }
 

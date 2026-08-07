@@ -17,6 +17,7 @@ class SmartFitnessController extends GetxController {
   final allExercises = <SmartExercise>[].obs;
   final workoutHistory = <WorkoutHistoryEntry>[].obs;
   final selectedCategory = Rxn<ExerciseCategory>();
+  final selectedEquipment = Rxn<Equipment>();
   final isLoading = false.obs;
   final todayCaloriesBurned = 0.0.obs;
 
@@ -41,24 +42,30 @@ class SmartFitnessController extends GetxController {
   void refreshWithProfile(UserProfile profile) {
     _profile = profile;
     _generateRecommendations();
-    dev.log('Perfil actualizado → recomendaciones regeneradas',
-        name: 'NutriPlato|SmartFitness');
+    dev.log(
+      'Perfil actualizado → recomendaciones regeneradas',
+      name: 'NutriPlato|SmartFitness',
+    );
   }
 
   /// Actualiza el nivel de energía y regenera recomendaciones.
   void updateEnergyLevel(int level) {
     energyLevel.value = level.clamp(1, 5);
     _generateRecommendations();
-    dev.log('Nivel de energía → ${energyLevel.value}',
-        name: 'NutriPlato|SmartFitness');
+    dev.log(
+      'Nivel de energía → ${energyLevel.value}',
+      name: 'NutriPlato|SmartFitness',
+    );
   }
 
   // ── Recomendaciones ───────────────────────────────────────────────────────
   void _generateRecommendations() {
     final profile = _profile;
     if (profile == null) {
-      dev.log('Sin perfil — usando recomendaciones genéricas',
-          name: 'NutriPlato|SmartFitness');
+      dev.log(
+        'Sin perfil — usando recomendaciones genéricas',
+        name: 'NutriPlato|SmartFitness',
+      );
       recommendedWorkouts.assignAll(_genericWorkouts());
       return;
     }
@@ -68,11 +75,14 @@ class SmartFitnessController extends GetxController {
     final level = profile.activityLevel;
 
     dev.log(
-        'Generando workouts: BMI=${bmi?.toStringAsFixed(1)}, goal=${goal.name}, level=${level.name}',
-        name: 'NutriPlato|SmartFitness');
+      'Generando workouts: BMI=${bmi?.toStringAsFixed(1)}, goal=${goal.name}, level=${level.name}',
+      name: 'NutriPlato|SmartFitness',
+    );
 
-    final lastFive =
-        workoutHistory.take(5).expand((e) => e.exerciseIds).toSet();
+    final lastFive = workoutHistory
+        .take(5)
+        .expand((e) => e.exerciseIds)
+        .toSet();
 
     final workouts = <SmartWorkout>[
       _buildWorkout(
@@ -160,19 +170,24 @@ class SmartFitnessController extends GetxController {
     }).toList();
 
     // Separar listas por tipo
-    final cardio =
-        pool.where((e) => e.category == ExerciseCategory.cardio).toList();
-    final fuerza =
-        pool.where((e) => e.category == ExerciseCategory.fuerza).toList();
+    final cardio = pool
+        .where((e) => e.category == ExerciseCategory.cardio)
+        .toList();
+    final fuerza = pool
+        .where((e) => e.category == ExerciseCategory.fuerza)
+        .toList();
     final hiit = pool
         .where((e) => e.category == ExerciseCategory.hiit && maxIntensity >= 4)
         .toList();
-    final core =
-        pool.where((e) => e.category == ExerciseCategory.core).toList();
+    final core = pool
+        .where((e) => e.category == ExerciseCategory.core)
+        .toList();
     final flex = pool
-        .where((e) =>
-            e.category == ExerciseCategory.flexibilidad ||
-            e.category == ExerciseCategory.movilidad)
+        .where(
+          (e) =>
+              e.category == ExerciseCategory.flexibilidad ||
+              e.category == ExerciseCategory.movilidad,
+        )
         .toList();
 
     List<SmartExercise> selected = [];
@@ -227,15 +242,19 @@ class SmartFitnessController extends GetxController {
     selected = selected.take(6).toList();
 
     final weightKg = _profile?.weightKg ?? 70;
-    final duration =
-        selected.fold<double>(0, (sum, e) => sum + _estimateDuration(e, bmi));
+    final duration = selected.fold<double>(
+      0,
+      (sum, e) => sum + _estimateDuration(e, bmi),
+    );
     final calories = selected.fold<double>(
-        0,
-        (sum, e) =>
-            sum +
-            e.calculateCalories(
-                weightKg: weightKg,
-                durationSeconds: _estimateDuration(e, bmi).toInt() * 60));
+      0,
+      (sum, e) =>
+          sum +
+          e.calculateCalories(
+            weightKg: weightKg,
+            durationSeconds: _estimateDuration(e, bmi).toInt() * 60,
+          ),
+    );
 
     return SmartWorkout(
       id: id,
@@ -316,7 +335,10 @@ class SmartFitnessController extends GetxController {
   }
 
   List<SmartExercise> _pickN(
-      List<SmartExercise> pool, int n, Set<String> recentIds) {
+    List<SmartExercise> pool,
+    int n,
+    Set<String> recentIds,
+  ) {
     final preferred = pool.where((e) => !recentIds.contains(e.id)).toList()
       ..shuffle();
     final fallback = pool.where((e) => recentIds.contains(e.id)).toList()
@@ -329,35 +351,37 @@ class SmartFitnessController extends GetxController {
     if (exercises.isEmpty) return IntensityLevel.baja;
     final avg =
         exercises.map((e) => e.intensity.value).reduce((a, b) => a + b) /
-            exercises.length;
-    return IntensityLevel.values.firstWhere((i) => i.value == avg.round(),
-        orElse: () => IntensityLevel.moderada);
+        exercises.length;
+    return IntensityLevel.values.firstWhere(
+      (i) => i.value == avg.round(),
+      orElse: () => IntensityLevel.moderada,
+    );
   }
 
   int _maxIntensityFor(double? bmi, ActivityLevel level) {
     final bmiCap = bmi == null
         ? 5
         : bmi >= 35
-            ? 2
-            : bmi >= 30
-                ? 3
-                : bmi >= 25
-                    ? 4
-                    : 5;
+        ? 2
+        : bmi >= 30
+        ? 3
+        : bmi >= 25
+        ? 4
+        : 5;
     final levelCap = level == ActivityLevel.sedentary
         ? 3
         : level == ActivityLevel.lightlyActive
-            ? 4
-            : 5;
+        ? 4
+        : 5;
     // Ajuste por nivel de energía pre-entrenamiento
     final el = energyLevel.value;
     final energyCap = el <= 1
         ? 2
         : el == 2
-            ? 3
-            : el >= 4
-                ? 5
-                : 4;
+        ? 3
+        : el >= 4
+        ? 5
+        : 4;
     final baseCap = bmiCap < levelCap ? bmiCap : levelCap;
     return baseCap < energyCap ? baseCap : energyCap;
   }
@@ -395,10 +419,9 @@ class SmartFitnessController extends GetxController {
   List<SmartWorkout> _genericWorkouts() {
     final all = _WorkoutVariant.values;
     return all.map((v) {
-      final pool = smartExercisesLibrary
-          .where((e) => e.intensity.value <= 3)
-          .toList()
-        ..shuffle();
+      final pool =
+          smartExercisesLibrary.where((e) => e.intensity.value <= 3).toList()
+            ..shuffle();
       return SmartWorkout(
         id: 'generic_${v.name}',
         name: v.label,
@@ -419,8 +442,10 @@ class SmartFitnessController extends GetxController {
     final variant = allVariants.first;
     final goal = _profile?.nutritionGoal ?? NutritionGoal.maintainWeight;
     final level = _profile?.activityLevel ?? ActivityLevel.lightlyActive;
-    final recentIds =
-        workoutHistory.take(5).expand((e) => e.exerciseIds).toSet();
+    final recentIds = workoutHistory
+        .take(5)
+        .expand((e) => e.exerciseIds)
+        .toSet();
     final w = _buildWorkout(
       id: 'random_${DateTime.now().millisecondsSinceEpoch}',
       bmi: bmi,
@@ -429,8 +454,10 @@ class SmartFitnessController extends GetxController {
       recentIds: recentIds,
       variant: variant,
     );
-    dev.log('Workout aleatorio generado: ${w.name}',
-        name: 'NutriPlato|SmartFitness');
+    dev.log(
+      'Workout aleatorio generado: ${w.name}',
+      name: 'NutriPlato|SmartFitness',
+    );
     return w;
   }
 
@@ -442,41 +469,51 @@ class SmartFitnessController extends GetxController {
     final bmi = _profile != null ? _calcBmi(_profile!) : null;
     final weightKg = _profile?.weightKg ?? 70;
     final maxIntensity = _maxIntensityFor(
-        bmi, _profile?.activityLevel ?? ActivityLevel.lightlyActive);
+      bmi,
+      _profile?.activityLevel ?? ActivityLevel.lightlyActive,
+    );
 
     var pool = smartExercisesLibrary.where((e) {
       if (bmi != null && !e.isSuitableForBmi(bmi)) return false;
       if (e.intensity.value > maxIntensity) return false;
       return true;
-    }).toList()
-      ..shuffle();
+    }).toList()..shuffle();
 
     // Si hay target de calorías, ordenar por densidad calórica
     if (targetCalories > 0) {
       pool.sort((a, b) {
-        final calA =
-            a.calculateCalories(weightKg: weightKg, durationSeconds: 120);
-        final calB =
-            b.calculateCalories(weightKg: weightKg, durationSeconds: 120);
+        final calA = a.calculateCalories(
+          weightKg: weightKg,
+          durationSeconds: 120,
+        );
+        final calB = b.calculateCalories(
+          weightKg: weightKg,
+          durationSeconds: 120,
+        );
         return calB.compareTo(calA);
       });
     }
 
     final selected = pool.take(exerciseCount).toList();
-    final duration =
-        selected.fold<double>(0, (s, e) => s + _estimateDuration(e, bmi));
+    final duration = selected.fold<double>(
+      0,
+      (s, e) => s + _estimateDuration(e, bmi),
+    );
     final calories = selected.fold<double>(
-        0,
-        (s, e) =>
-            s +
-            e.calculateCalories(
-                weightKg: weightKg,
-                durationSeconds: _estimateDuration(e, bmi).toInt() * 60));
+      0,
+      (s, e) =>
+          s +
+          e.calculateCalories(
+            weightKg: weightKg,
+            durationSeconds: _estimateDuration(e, bmi).toInt() * 60,
+          ),
+    );
 
     dev.log(
-        'Custom workout: ${exerciseCount} ejercicios, ${durationMinutes}min target, '
-        '${calories.toStringAsFixed(0)} kcal estimadas',
-        name: 'NutriPlato|SmartFitness');
+      'Custom workout: ${exerciseCount} ejercicios, ${durationMinutes}min target, '
+      '${calories.toStringAsFixed(0)} kcal estimadas',
+      name: 'NutriPlato|SmartFitness',
+    );
 
     return SmartWorkout(
       id: 'custom_${DateTime.now().millisecondsSinceEpoch}',
@@ -494,8 +531,24 @@ class SmartFitnessController extends GetxController {
   // ── Filtro por categoría ──────────────────────────────────────────────────
   List<SmartExercise> get filteredExercises {
     final cat = selectedCategory.value;
-    if (cat == null) return allExercises;
-    return allExercises.where((e) => e.category == cat).toList();
+    final eq = selectedEquipment.value;
+    List<SmartExercise> result = allExercises;
+    if (cat != null) {
+      result = result.where((e) => e.category == cat).toList();
+    }
+    if (eq != null) {
+      result = result.where((e) => e.equipment == eq).toList();
+    }
+    return result;
+  }
+
+  /// Filtra por equipamiento (null = todos).
+  void setEquipmentFilter(Equipment? equipment) {
+    selectedEquipment.value = equipment;
+    dev.log(
+      'Filtro de equipamiento → ${equipment?.label ?? "todos"}',
+      name: 'NutriPlato|SmartFitness',
+    );
   }
 
   List<SmartExercise> exercisesForBmi({double? bmi}) {
@@ -504,8 +557,11 @@ class SmartFitnessController extends GetxController {
   }
 
   // ── Historial ─────────────────────────────────────────────────────────────
-  Future<void> completeWorkout(SmartWorkout workout, int durationSeconds,
-      {WorkoutMood? mood}) async {
+  Future<void> completeWorkout(
+    SmartWorkout workout,
+    int durationSeconds, {
+    WorkoutMood? mood,
+  }) async {
     final entry = WorkoutHistoryEntry(
       workoutId: workout.id,
       workoutName: workout.name,
@@ -520,9 +576,10 @@ class SmartFitnessController extends GetxController {
     await _saveHistory();
     _generateRecommendations(); // Evitar repeticiones
     dev.log(
-        'Workout completado: ${workout.name} — ${entry.caloriesBurned.toStringAsFixed(0)} kcal'
-        '${mood != null ? " | mood avg=${mood.average.toStringAsFixed(1)}" : ""}',
-        name: 'NutriPlato|SmartFitness');
+      'Workout completado: ${workout.name} — ${entry.caloriesBurned.toStringAsFixed(0)} kcal'
+      '${mood != null ? " | mood avg=${mood.average.toStringAsFixed(1)}" : ""}',
+      name: 'NutriPlato|SmartFitness',
+    );
   }
 
   double get weeklyCaloriesBurned {
@@ -542,13 +599,18 @@ class SmartFitnessController extends GetxController {
       final prefs = await SharedPreferences.getInstance();
       final raw = prefs.getStringList(_kHistoryKey) ?? [];
       final entries = raw
-          .map((s) => WorkoutHistoryEntry.fromJson(
-              jsonDecode(s) as Map<String, dynamic>))
+          .map(
+            (s) => WorkoutHistoryEntry.fromJson(
+              jsonDecode(s) as Map<String, dynamic>,
+            ),
+          )
           .toList();
       workoutHistory.assignAll(entries);
       _recalcTodayCalories();
-      dev.log('Historial cargado: ${entries.length} entradas',
-          name: 'NutriPlato|SmartFitness');
+      dev.log(
+        'Historial cargado: ${entries.length} entradas',
+        name: 'NutriPlato|SmartFitness',
+      );
     } catch (e) {
       dev.log('Error cargando historial: $e', name: 'NutriPlato|SmartFitness');
     }
@@ -556,18 +618,22 @@ class SmartFitnessController extends GetxController {
 
   Future<void> _saveHistory() async {
     final prefs = await SharedPreferences.getInstance();
-    final raw =
-        workoutHistory.take(100).map((e) => jsonEncode(e.toJson())).toList();
+    final raw = workoutHistory
+        .take(100)
+        .map((e) => jsonEncode(e.toJson()))
+        .toList();
     await prefs.setStringList(_kHistoryKey, raw);
   }
 
   void _recalcTodayCalories() {
     final today = DateTime.now();
     todayCaloriesBurned.value = workoutHistory
-        .where((e) =>
-            e.completedAt.year == today.year &&
-            e.completedAt.month == today.month &&
-            e.completedAt.day == today.day)
+        .where(
+          (e) =>
+              e.completedAt.year == today.year &&
+              e.completedAt.month == today.month &&
+              e.completedAt.day == today.day,
+        )
         .fold(0.0, (sum, e) => sum + e.caloriesBurned);
   }
 
@@ -593,8 +659,10 @@ enum _WorkoutVariant {
   cardioFocus('Enfoque cardio', [Color(0xFFFF6B6B), Color(0xFFFF8C00)]),
   fuerzaFocus('Enfoque fuerza', [Color(0xFF4DABF7), Color(0xFF845EC2)]),
   coreFocus('Enfoque core & abdomen', [Color(0xFFFFA726), Color(0xFFFF6B6B)]),
-  flexibilidad(
-      'Relajación y movilidad', [Color(0xFF51CF66), Color(0xFF20C997)]),
+  flexibilidad('Relajación y movilidad', [
+    Color(0xFF51CF66),
+    Color(0xFF20C997),
+  ]),
   hiitBlast('HIIT explosivo', [Color(0xFFE03131), Color(0xFFFF8C00)]),
   matutino('Activación matutina', [Color(0xFFFFD43B), Color(0xFFFFA726)]),
   quemaGrasa('Quema grasa', [Color(0xFFFF8CC8), Color(0xFF845EC2)]);

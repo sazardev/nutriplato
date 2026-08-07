@@ -14,25 +14,43 @@ final exercisesData = [
     exercises: [
       Exercise(name: 'Sentadilla', description: '', quantity: 5, images: []),
       Exercise(
-          name: 'Desplazamientos', description: '', quantity: 10, images: []),
+        name: 'Desplazamientos',
+        description: '',
+        quantity: 10,
+        images: [],
+      ),
       Exercise(
-          name: 'Levantamiento de pantorrillas',
-          description: '',
-          quantity: 5,
-          images: []),
+        name: 'Levantamiento de pantorrillas',
+        description: '',
+        quantity: 5,
+        images: [],
+      ),
       Exercise(
-          name: 'Tijera de brazos', description: '', quantity: 10, images: []),
+        name: 'Tijera de brazos',
+        description: '',
+        quantity: 10,
+        images: [],
+      ),
       Exercise(
-          name: 'Tijera de hombros', description: '', quantity: 10, images: []),
+        name: 'Tijera de hombros',
+        description: '',
+        quantity: 10,
+        images: [],
+      ),
       Exercise(
-          name: 'Extension de biceps',
-          description: '',
-          quantity: 10,
-          images: []),
+        name: 'Extension de biceps',
+        description: '',
+        quantity: 10,
+        images: [],
+      ),
       Exercise(
-          name: 'Rodilla al codo', description: '', quantity: 10, images: []),
+        name: 'Rodilla al codo',
+        description: '',
+        quantity: 10,
+        images: [],
+      ),
     ],
-    icon: FontAwesomeIcons.dumbbell,
+    icon: FontAwesomeIcons.dumbbell.data,
   ),
   Fitness(
     name: 'HIIT principiante',
@@ -41,10 +59,7 @@ final exercisesData = [
     tags: ['HIIT', 'Accesible', 'Cuerpo Completo'],
     sets: 1,
     rest: 10,
-    gradients: [
-      Colors.indigo,
-      Colors.blue,
-    ],
+    gradients: [Colors.indigo, Colors.blue],
     exercises: [
       Exercise(
         name: 'Marcha en el lugar',
@@ -83,54 +98,40 @@ final exercisesData = [
         time: 15,
       ),
     ],
-    icon: FontAwesomeIcons.personRunning,
+    icon: FontAwesomeIcons.personRunning.data,
   ),
   Fitness(
-      name: 'Abdominales sencillas',
-      description: '',
-      difficulty: 'Facil',
-      tags: ['Core', 'Abdomen', 'Accesible'],
-      sets: 0,
-      rest: 10,
-      exercises: [
-        Exercise(
-          name: 'Crunches',
-          description: '',
-          quantity: 10,
-          images: [],
-        ),
-        Exercise(
-          name: 'Bicicletas',
-          description: '',
-          images: [],
-          quantity: 10,
-        ),
-        Exercise(
-          name: 'Giros sentado',
-          description: '',
-          images: [],
-          quantity: 10,
-        ),
-        Exercise(
-          name: 'Levantamiento de piernas',
-          description: '',
-          images: [],
-          quantity: 10,
-        ),
-        Exercise(
-          name: 'Plancha',
-          description: '',
-          images: [],
-          time: 10,
-        ),
-        Exercise(
-          name: 'Elevacion de piernas en plancha',
-          description: '',
-          images: [],
-          quantity: 10,
-        ),
-      ],
-      icon: FontAwesomeIcons.heartPulse),
+    name: 'Abdominales sencillas',
+    description: '',
+    difficulty: 'Facil',
+    tags: ['Core', 'Abdomen', 'Accesible'],
+    sets: 0,
+    rest: 10,
+    exercises: [
+      Exercise(name: 'Crunches', description: '', quantity: 10, images: []),
+      Exercise(name: 'Bicicletas', description: '', images: [], quantity: 10),
+      Exercise(
+        name: 'Giros sentado',
+        description: '',
+        images: [],
+        quantity: 10,
+      ),
+      Exercise(
+        name: 'Levantamiento de piernas',
+        description: '',
+        images: [],
+        quantity: 10,
+      ),
+      Exercise(name: 'Plancha', description: '', images: [], time: 10),
+      Exercise(
+        name: 'Elevacion de piernas en plancha',
+        description: '',
+        images: [],
+        quantity: 10,
+      ),
+    ],
+    icon: FontAwesomeIcons.heartPulse.data,
+  ),
   Fitness(
     name: 'Abdominales sencillas II',
     description: '',
@@ -139,18 +140,8 @@ final exercisesData = [
     sets: 0,
     rest: 5,
     exercises: [
-      Exercise(
-        name: 'Crunches',
-        description: '',
-        quantity: 12,
-        images: [],
-      ),
-      Exercise(
-        name: 'Bicicletas',
-        description: '',
-        images: [],
-        quantity: 12,
-      ),
+      Exercise(name: 'Crunches', description: '', quantity: 12, images: []),
+      Exercise(name: 'Bicicletas', description: '', images: [], quantity: 12),
       Exercise(
         name: 'Giros sentado',
         description: '',
@@ -163,12 +154,7 @@ final exercisesData = [
         images: [],
         quantity: 15,
       ),
-      Exercise(
-        name: 'Plancha',
-        description: '',
-        images: [],
-        time: 20,
-      ),
+      Exercise(name: 'Plancha', description: '', images: [], time: 20),
       Exercise(
         name: 'Elevacion de piernas en plancha',
         description: '',
@@ -176,7 +162,7 @@ final exercisesData = [
         quantity: 12,
       ),
     ],
-    icon: FontAwesomeIcons.heartPulse,
+    icon: FontAwesomeIcons.heartPulse.data,
   ),
   // NUEVAS RUTINAS DE EJERCICIO
   Fitness(
@@ -187,10 +173,7 @@ final exercisesData = [
     tags: ['Cardio', 'Quema grasa', 'Cuerpo Completo'],
     sets: 2,
     rest: 30,
-    gradients: [
-      Colors.orange,
-      Colors.red,
-    ],
+    gradients: [Colors.orange, Colors.red],
     exercises: [
       Exercise(
         name: 'Jumping Jacks',
@@ -229,7 +212,7 @@ final exercisesData = [
         time: 30,
       ),
     ],
-    icon: FontAwesomeIcons.fire,
+    icon: FontAwesomeIcons.fire.data,
   ),
   Fitness(
     name: 'Fuerza de Piernas',
@@ -238,10 +221,7 @@ final exercisesData = [
     tags: ['Piernas', 'Glúteos', 'Fuerza'],
     sets: 3,
     rest: 45,
-    gradients: [
-      Colors.green,
-      Colors.teal,
-    ],
+    gradients: [Colors.green, Colors.teal],
     exercises: [
       Exercise(
         name: 'Sentadillas',
@@ -286,7 +266,7 @@ final exercisesData = [
         quantity: 15,
       ),
     ],
-    icon: FontAwesomeIcons.personWalking,
+    icon: FontAwesomeIcons.personWalking.data,
   ),
   Fitness(
     name: 'Brazos y Hombros',
@@ -295,10 +275,7 @@ final exercisesData = [
     tags: ['Brazos', 'Hombros', 'Pecho'],
     sets: 3,
     rest: 40,
-    gradients: [
-      Colors.purple,
-      Colors.deepPurple,
-    ],
+    gradients: [Colors.purple, Colors.deepPurple],
     exercises: [
       Exercise(
         name: 'Lagartijas clásicas',
@@ -343,7 +320,7 @@ final exercisesData = [
         quantity: 12,
       ),
     ],
-    icon: FontAwesomeIcons.handFist,
+    icon: FontAwesomeIcons.handFist.data,
   ),
   Fitness(
     name: 'Core de Acero',
@@ -352,10 +329,7 @@ final exercisesData = [
     tags: ['Core', 'Abdomen', 'Espalda'],
     sets: 3,
     rest: 30,
-    gradients: [
-      Colors.amber,
-      Colors.orange,
-    ],
+    gradients: [Colors.amber, Colors.orange],
     exercises: [
       Exercise(
         name: 'Plancha frontal',
@@ -406,7 +380,7 @@ final exercisesData = [
         quantity: 10,
       ),
     ],
-    icon: FontAwesomeIcons.shieldHalved,
+    icon: FontAwesomeIcons.shieldHalved.data,
   ),
   Fitness(
     name: 'Yoga para Principiantes',
@@ -415,10 +389,7 @@ final exercisesData = [
     tags: ['Yoga', 'Flexibilidad', 'Relajación'],
     sets: 1,
     rest: 10,
-    gradients: [
-      Colors.cyan,
-      Colors.lightBlue,
-    ],
+    gradients: [Colors.cyan, Colors.lightBlue],
     exercises: [
       Exercise(
         name: 'Postura del niño',
@@ -469,7 +440,7 @@ final exercisesData = [
         time: 120,
       ),
     ],
-    icon: FontAwesomeIcons.spa,
+    icon: FontAwesomeIcons.spa.data,
   ),
   Fitness(
     name: 'Estiramiento Completo',
@@ -478,10 +449,7 @@ final exercisesData = [
     tags: ['Estiramiento', 'Recuperación', 'Flexibilidad'],
     sets: 1,
     rest: 5,
-    gradients: [
-      Colors.pink,
-      Colors.pinkAccent,
-    ],
+    gradients: [Colors.pink, Colors.pinkAccent],
     exercises: [
       Exercise(
         name: 'Estiramiento de cuello',
@@ -532,7 +500,7 @@ final exercisesData = [
         time: 30,
       ),
     ],
-    icon: FontAwesomeIcons.child,
+    icon: FontAwesomeIcons.child.data,
   ),
   Fitness(
     name: 'HIIT Avanzado',
@@ -541,10 +509,7 @@ final exercisesData = [
     tags: ['HIIT', 'Cardio', 'Avanzado'],
     sets: 4,
     rest: 20,
-    gradients: [
-      Colors.red,
-      Colors.deepOrange,
-    ],
+    gradients: [Colors.red, Colors.deepOrange],
     exercises: [
       Exercise(
         name: 'Burpees con salto',
@@ -583,7 +548,7 @@ final exercisesData = [
         time: 20,
       ),
     ],
-    icon: FontAwesomeIcons.bolt,
+    icon: FontAwesomeIcons.bolt.data,
   ),
   Fitness(
     name: 'Entrenamiento Funcional',
@@ -592,10 +557,7 @@ final exercisesData = [
     tags: ['Funcional', 'Cuerpo Completo', 'Equilibrio'],
     sets: 3,
     rest: 40,
-    gradients: [
-      Colors.blueGrey,
-      Colors.grey,
-    ],
+    gradients: [Colors.blueGrey, Colors.grey],
     exercises: [
       Exercise(
         name: 'Sentadilla con press',
@@ -640,7 +602,7 @@ final exercisesData = [
         quantity: 6,
       ),
     ],
-    icon: FontAwesomeIcons.personArrowUpFromLine,
+    icon: FontAwesomeIcons.personArrowUpFromLine.data,
   ),
   Fitness(
     name: 'Rutina para Oficina',
@@ -649,10 +611,7 @@ final exercisesData = [
     tags: ['Oficina', 'Escritorio', 'Postura'],
     sets: 1,
     rest: 10,
-    gradients: [
-      Colors.brown,
-      Colors.blueGrey,
-    ],
+    gradients: [Colors.brown, Colors.blueGrey],
     exercises: [
       Exercise(
         name: 'Rotación de cuello',
@@ -703,7 +662,7 @@ final exercisesData = [
         quantity: 5,
       ),
     ],
-    icon: FontAwesomeIcons.briefcase,
+    icon: FontAwesomeIcons.briefcase.data,
   ),
   Fitness(
     name: 'Entrenamiento para Corredores',
@@ -712,10 +671,7 @@ final exercisesData = [
     tags: ['Running', 'Piernas', 'Core'],
     sets: 2,
     rest: 30,
-    gradients: [
-      Colors.lightGreen,
-      Colors.green,
-    ],
+    gradients: [Colors.lightGreen, Colors.green],
     exercises: [
       Exercise(
         name: 'Skipping alto',
@@ -760,7 +716,7 @@ final exercisesData = [
         quantity: 20,
       ),
     ],
-    icon: FontAwesomeIcons.personRunning,
+    icon: FontAwesomeIcons.personRunning.data,
   ),
   Fitness(
     name: 'Rutina de Movilidad',
@@ -769,10 +725,7 @@ final exercisesData = [
     tags: ['Movilidad', 'Articulaciones', 'Calentamiento'],
     sets: 1,
     rest: 5,
-    gradients: [
-      Colors.teal,
-      Colors.cyan,
-    ],
+    gradients: [Colors.teal, Colors.cyan],
     exercises: [
       Exercise(
         name: 'Círculos de cadera',
@@ -817,7 +770,7 @@ final exercisesData = [
         quantity: 10,
       ),
     ],
-    icon: FontAwesomeIcons.person,
+    icon: FontAwesomeIcons.person.data,
   ),
   Fitness(
     name: 'Desafío 7 Minutos',
@@ -826,10 +779,7 @@ final exercisesData = [
     tags: ['Rápido', 'HIIT', 'Científico'],
     sets: 1,
     rest: 10,
-    gradients: [
-      Colors.deepPurple,
-      Colors.purple,
-    ],
+    gradients: [Colors.deepPurple, Colors.purple],
     exercises: [
       Exercise(
         name: 'Jumping Jacks',
@@ -904,7 +854,7 @@ final exercisesData = [
         time: 30,
       ),
     ],
-    icon: FontAwesomeIcons.stopwatch,
+    icon: FontAwesomeIcons.stopwatch.data,
   ),
 ];
 
@@ -912,37 +862,37 @@ final exercisesData = [
 final fitnessCategories = [
   {
     'name': 'Para Principiantes',
-    'icon': FontAwesomeIcons.seedling,
+    'icon': FontAwesomeIcons.seedling.data,
     'color': Colors.green,
     'description': 'Rutinas suaves para comenzar tu camino fitness',
   },
   {
     'name': 'Cardio',
-    'icon': FontAwesomeIcons.heartPulse,
+    'icon': FontAwesomeIcons.heartPulse.data,
     'color': Colors.red,
     'description': 'Ejercicios para fortalecer tu corazón',
   },
   {
     'name': 'Fuerza',
-    'icon': FontAwesomeIcons.dumbbell,
+    'icon': FontAwesomeIcons.dumbbell.data,
     'color': Colors.purple,
     'description': 'Desarrolla músculo y potencia',
   },
   {
     'name': 'Core',
-    'icon': FontAwesomeIcons.shieldHalved,
+    'icon': FontAwesomeIcons.shieldHalved.data,
     'color': Colors.amber,
     'description': 'Fortalece tu centro y mejora tu postura',
   },
   {
     'name': 'Flexibilidad',
-    'icon': FontAwesomeIcons.spa,
+    'icon': FontAwesomeIcons.spa.data,
     'color': Colors.cyan,
     'description': 'Mejora tu rango de movimiento',
   },
   {
     'name': 'HIIT',
-    'icon': FontAwesomeIcons.bolt,
+    'icon': FontAwesomeIcons.bolt.data,
     'color': Colors.orange,
     'description': 'Alta intensidad para máximos resultados',
   },
@@ -954,48 +904,48 @@ final fitnessTips = [
     'title': 'Hidratación',
     'tip':
         'Bebe agua antes, durante y después del ejercicio. Al menos 500ml antes de entrenar.',
-    'icon': FontAwesomeIcons.droplet,
+    'icon': FontAwesomeIcons.droplet.data,
   },
   {
     'title': 'Calentamiento',
     'tip':
         'Siempre calienta 5-10 minutos antes de ejercitarte para prevenir lesiones.',
-    'icon': FontAwesomeIcons.fire,
+    'icon': FontAwesomeIcons.fire.data,
   },
   {
     'title': 'Descanso',
     'tip':
         'Tus músculos crecen durante el descanso. Duerme 7-8 horas y descansa entre entrenamientos.',
-    'icon': FontAwesomeIcons.bed,
+    'icon': FontAwesomeIcons.bed.data,
   },
   {
     'title': 'Progresión',
     'tip':
         'Aumenta la intensidad gradualmente. Incrementos del 10% semanal son ideales.',
-    'icon': FontAwesomeIcons.chartLine,
+    'icon': FontAwesomeIcons.chartLine.data,
   },
   {
     'title': 'Respiración',
     'tip':
         'Exhala en el esfuerzo, inhala en el regreso. Nunca contengas la respiración.',
-    'icon': FontAwesomeIcons.wind,
+    'icon': FontAwesomeIcons.wind.data,
   },
   {
     'title': 'Postura',
     'tip':
         'Mantén el core activado y la espalda recta en todos los ejercicios.',
-    'icon': FontAwesomeIcons.personArrowUpFromLine,
+    'icon': FontAwesomeIcons.personArrowUpFromLine.data,
   },
   {
     'title': 'Consistencia',
     'tip':
         'Es mejor entrenar 3 veces por semana consistentemente que 7 días una semana y ninguno la siguiente.',
-    'icon': FontAwesomeIcons.calendarCheck,
+    'icon': FontAwesomeIcons.calendarCheck.data,
   },
   {
     'title': 'Alimentación',
     'tip':
         'Come proteína dentro de los 30 minutos después de entrenar para mejor recuperación.',
-    'icon': FontAwesomeIcons.utensils,
+    'icon': FontAwesomeIcons.utensils.data,
   },
 ];

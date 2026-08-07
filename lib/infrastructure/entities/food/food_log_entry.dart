@@ -1,4 +1,5 @@
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
+import 'package:nutriplato/infrastructure/entities/food/micros_helper.dart';
 
 class FoodLogEntry {
   final Food food;
@@ -18,16 +19,20 @@ class FoodLogEntry {
   double get protein => double.parse(food.proteina) * quantity;
   double get carbs => double.parse(food.hidratosDeCarbono) * quantity;
   double get fat => double.parse(food.lipidos) * quantity;
+
+  /// Fibra en gramos si está disponible (0 si no).
+  double get fiber {
+    final micros = microsOf(food);
+    final value = double.tryParse(micros?.fibra ?? '');
+    return (value ?? 0) * quantity;
+  }
 }
 
 class DailyFoodLog {
   final DateTime date;
   final List<FoodLogEntry> entries;
 
-  DailyFoodLog({
-    required this.date,
-    required this.entries,
-  });
+  DailyFoodLog({required this.date, required this.entries});
 
   // Cálculo de nutrientes totales del día
   double get totalCalories =>
@@ -36,4 +41,5 @@ class DailyFoodLog {
       entries.fold(0, (sum, entry) => sum + entry.protein);
   double get totalCarbs => entries.fold(0, (sum, entry) => sum + entry.carbs);
   double get totalFat => entries.fold(0, (sum, entry) => sum + entry.fat);
+  double get totalFiber => entries.fold(0, (sum, entry) => sum + entry.fiber);
 }

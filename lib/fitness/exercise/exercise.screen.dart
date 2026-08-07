@@ -5,10 +5,7 @@ import 'package:nutriplato/fitness/exercise/exercise.finish.dart';
 import 'package:nutriplato/fitness/fitness.model.dart';
 
 class ExerciseScreen extends StatefulWidget {
-  const ExerciseScreen({
-    super.key,
-    required this.selectedFitness,
-  });
+  const ExerciseScreen({super.key, required this.selectedFitness});
 
   final Fitness selectedFitness;
 
@@ -33,6 +30,7 @@ class _ExerciseState extends State<ExerciseScreen> {
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: const Icon(Icons.close),
+          tooltip: 'Salir',
           onPressed: () => Get.back(),
         ),
       ),
@@ -41,18 +39,23 @@ class _ExerciseState extends State<ExerciseScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           if (!_restTimerCompleted)
-            restTimer(widget.selectedFitness.rest, 'Descansa',
-                widget.selectedFitness),
+            restTimer(
+              widget.selectedFitness.rest,
+              'Descansa',
+              widget.selectedFitness,
+            ),
           if (_restTimerCompleted && !_timerCompleted)
             restTimer(10, '¿Listo?', widget.selectedFitness),
           if (_timerCompleted && _restTimerCompleted) ...[
             const Spacer(),
             Center(
-              child: Text(widget.selectedFitness.exercises[indexExercise].name,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w500,
-                  )),
+              child: Text(
+                widget.selectedFitness.exercises[indexExercise].name,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
             Center(
               child: Padding(
@@ -61,14 +64,20 @@ class _ExerciseState extends State<ExerciseScreen> {
                     ? Text(
                         'x${widget.selectedFitness.exercises[indexExercise].quantity}',
                         style: const TextStyle(
-                            fontSize: 48, fontWeight: FontWeight.bold))
+                          fontSize: 48,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
                     : Center(
                         child: SizedBox(
                           width: 100,
                           height: 100,
                           child: CircularCountDownTimer(
-                            duration: widget.selectedFitness
-                                    .exercises[indexExercise].time +
+                            duration:
+                                widget
+                                    .selectedFitness
+                                    .exercises[indexExercise]
+                                    .time +
                                 1,
                             initialDuration: 0,
                             width: MediaQuery.of(context).size.width / 2,
@@ -81,9 +90,10 @@ class _ExerciseState extends State<ExerciseScreen> {
                             strokeWidth: 20.0,
                             strokeCap: StrokeCap.round,
                             textStyle: const TextStyle(
-                                fontSize: 33.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
+                              fontSize: 33.0,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
                             textFormat: CountdownTextFormat.S,
                             isReverse: true,
                             isReverseAnimation: false,
@@ -95,9 +105,11 @@ class _ExerciseState extends State<ExerciseScreen> {
                                   widget.selectedFitness.exercises.length -
                                       1)) {
                                 Navigator.pop(context);
-                                Get.to(() => FinishedExerciseScreen(
-                                      selectedFitness: widget.selectedFitness,
-                                    ));
+                                Get.to(
+                                  () => FinishedExerciseScreen(
+                                    selectedFitness: widget.selectedFitness,
+                                  ),
+                                );
                               } else {
                                 setState(() {
                                   _restTimerCompleted = false;
@@ -111,35 +123,26 @@ class _ExerciseState extends State<ExerciseScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                left: 42,
-                right: 42,
-                bottom: 32,
-              ),
+              padding: const EdgeInsets.only(left: 42, right: 42, bottom: 32),
               child: indexExercise < widget.selectedFitness.exercises.length - 1
                   ? FilledButton(
-                      onPressed: () => setState(
-                        () {
-                          _restTimerCompleted = false;
-                          indexExercise += 1;
-                        },
-                      ),
+                      onPressed: () => setState(() {
+                        _restTimerCompleted = false;
+                        indexExercise += 1;
+                      }),
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
-                        child:
-                            Text('Siguiente', style: TextStyle(fontSize: 18)),
+                        child: Text(
+                          'Siguiente',
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
                     )
                   : FilledButton(
                       onPressed: () => Get.back(),
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'Terminar',
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
-                        ),
+                        child: Text('Terminar', style: TextStyle(fontSize: 18)),
                       ),
                     ),
             ),
@@ -176,9 +179,10 @@ class _ExerciseState extends State<ExerciseScreen> {
             strokeWidth: 20.0,
             strokeCap: StrokeCap.round,
             textStyle: TextStyle(
-                fontSize: 33.0,
-                color: _timerCompleted ? Colors.white : Colors.black,
-                fontWeight: FontWeight.bold),
+              fontSize: 33.0,
+              color: _timerCompleted ? Colors.white : Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
             textFormat: CountdownTextFormat.S,
             isReverse: true,
             isReverseAnimation: false,
@@ -198,35 +202,37 @@ class _ExerciseState extends State<ExerciseScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   FilledButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.white.withAlpha(100),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _controller.isPaused.value
-                              ? _controller.resume()
-                              : _controller.pause();
-                        });
-                      },
-                      child: Text(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.white.withAlpha(100),
+                    ),
+                    onPressed: () {
+                      setState(() {
                         _controller.isPaused.value
-                            ? '  Reanudar  '
-                            : '  Pausar  ',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )),
+                            ? _controller.resume()
+                            : _controller.pause();
+                      });
+                    },
+                    child: Text(
+                      _controller.isPaused.value
+                          ? '  Reanudar  '
+                          : '  Pausar  ',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
                   const SizedBox(width: 10),
                   FilledButton(
                     style: FilledButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: Colors.purple,
-                        textStyle: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        )),
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.purple,
+                      textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                     onPressed: () {
                       setState(() {
                         _timerCompleted = true;
@@ -242,8 +248,11 @@ class _ExerciseState extends State<ExerciseScreen> {
             ? Column(
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsets.only(top: 38, left: 32, right: 32),
+                    padding: const EdgeInsets.only(
+                      top: 38,
+                      left: 32,
+                      right: 32,
+                    ),
                     child: Row(
                       children: [
                         Text(
@@ -278,25 +287,46 @@ class _ExerciseState extends State<ExerciseScreen> {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.info_outline,
-                              color: Colors.white,
-                              size: 20,
-                            )),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (builder) => AlertDialog(
+                                title: Text(
+                                  fitness.exercises[indexExercise].name,
+                                ),
+                                content: Text(
+                                  fitness.exercises[indexExercise].description,
+                                ),
+                                actions: [
+                                  FilledButton(
+                                    onPressed: () => Get.back(),
+                                    child: const Text('Aceptar'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.info_outline,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                          tooltip: 'Instrucciones del ejercicio',
+                        ),
                         const Spacer(),
                         Text(
-                            fitness.exercises[indexExercise].quantity == 0
-                                ? '${fitness.exercises[indexExercise].time}s'
-                                : 'x${fitness.exercises[indexExercise].quantity}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            )),
+                          fitness.exercises[indexExercise].quantity == 0
+                              ? '${fitness.exercises[indexExercise].time}s'
+                              : 'x${fitness.exercises[indexExercise].quantity}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               )
             : Container(),

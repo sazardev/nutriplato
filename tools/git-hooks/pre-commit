@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+#
+# Hook de pre-commit para NutriPlato.
+#
+# Hace dos cosas:
+#   1. BLOQUEA commitear secretos (key.properties, *.jks, *.keystore, etc.).
+#   2. Exige que CHANGELOG.md se actualice cuando se modifica código de la app.
+#
+# Para saltar temporalmente (solo si sabes lo que haces):
+#   git commit --no-verify
+#
+set -u
+
+# ── 1. Bloqueo de secretos ────────────────────────────────────────────────
+SECRETS_REGEX='(^|/)(key\.properties|.*\.jks|.*\.keystore|.*\.p12|.*\.pem|.*\.p8|.*id_rsa.*|\.env|\.env\..*|secrets\.yaml)$'
+
+LEAKS=$(git diff --cached --name-only | grep -E "$SECRETS_REGEX" || true)
+if [ -n "$LEAKS" ]; then
+  echo "ERROR: Se intentó commitear archivos sensibles:" >&2
+  echo "$LEAKS" | sed 's/^/  - /' >&2
+  echo "Remuévelos del stage antes de continuar:" >&2
+  echo "  git restore --staged <archivo>" >&2
+  exit 1
+fi
+
+# ── 2. CHANGELOG obligatorio al cambiar código de la app ─────────────────
+# Se considera "código" lo que afecta la app: lib/, android/, ios/, web/,
+# windows/, linux/, macos/, test/, pubspec.yaml.
+# Documentos, tooling y el changelog mismo NO lo exigen.
+CODE_REGEX='^(lib/|android/|ios/|web/|windows/|linux/|macos/|test/|pubspec\.yaml)'
+
+STAGED=$(git diff --cached --name-only)
+CODE_CHANGES=$(echo "$STAGED" | grep -E "$CODE_REGEX" || true)
+
+if [ -n "$CODE_CHANGES" ] && ! echo "$STAGED" | grep -q 'CHANGELOG.md'; then
+  echo "ERROR: Cambiaste código de la app pero no actualizaste CHANGELOG.md" >&2
+  echo "Archivos de código afectados:" >&2
+  echo "$CODE_CHANGES" | sed 's/^/  - /' >&2
+  echo "" >&2
+  echo "Agrega tu cambio en la sección \"## [No publicado]\" de CHANGELOG.md" >&2
+  echo "y vuelve a hacerlo stage:" >&2
+  echo "  git add CHANGELOG.md" >&2
+  echo "(o fuerza con git commit --no-verify)" >&2
+  exit 1
+fi
+
+exit 0

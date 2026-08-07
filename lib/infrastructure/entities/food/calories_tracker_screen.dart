@@ -27,7 +27,8 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
     super.initState();
     _tabController = TabController(length: _mealTypes.length, vsync: this);
     Future.microtask(
-        () => Provider.of<FoodLogProvider>(context, listen: false).loadLogs());
+      () => Provider.of<FoodLogProvider>(context, listen: false).loadLogs(),
+    );
   }
 
   @override
@@ -76,8 +77,13 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
                 child: Column(
                   children: [
                     _buildDateSelector(),
-                    _buildNutritionCard(totalCalories, progressPercentage,
-                        totalProtein, totalCarbs, totalFat),
+                    _buildNutritionCard(
+                      totalCalories,
+                      progressPercentage,
+                      totalProtein,
+                      totalCarbs,
+                      totalFat,
+                    ),
                   ],
                 ),
               ),
@@ -90,10 +96,9 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
                     unselectedLabelColor: Colors.grey,
                     indicatorColor: primaryColor,
                     tabs: _mealTypes
-                        .map((type) => Tab(
-                              icon: _getMealIcon(type),
-                              text: type,
-                            ))
+                        .map(
+                          (type) => Tab(icon: _getMealIcon(type), text: type),
+                        )
                         .toList(),
                   ),
                 ),
@@ -135,18 +140,18 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
       expandedHeight: 100.0,
       stretch: true,
       flexibleSpace: FlexibleSpaceBar(
-        titlePadding:
-            const EdgeInsets.only(left: 16.0, bottom: 16.0, right: 16.0),
-        title: const Row(
+        titlePadding: const EdgeInsets.only(
+          left: 16.0,
+          bottom: 16.0,
+          right: 16.0,
+        ),
+        title: Row(
           children: [
-            Icon(FontAwesomeIcons.chartPie, size: 20),
+            Icon(FontAwesomeIcons.chartPie.data, size: 20),
             SizedBox(width: 8),
             Text(
               'Mi Nutrición Diaria',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -174,6 +179,7 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
         children: [
           IconButton(
             icon: const Icon(Icons.arrow_back_ios, size: 18),
+            tooltip: 'Día anterior',
             onPressed: () {
               setState(() {
                 _selectedDate = _selectedDate.subtract(const Duration(days: 1));
@@ -207,40 +213,46 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
                   });
                 }
               },
-              child: Column(
-                children: [
-                  Text(
-                    DateFormat.EEEE().format(_selectedDate),
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey.shade600,
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        DateFormat.yMMMd().format(_selectedDate),
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+              child: Semantics(
+                button: true,
+                label: 'Cambiar fecha',
+                child: Column(
+                  children: [
+                    Text(
+                      DateFormat.EEEE().format(_selectedDate),
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey.shade600,
                       ),
-                      const SizedBox(width: 4),
-                      const Icon(Icons.calendar_month, size: 16),
-                    ],
-                  ),
-                ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          DateFormat.yMMMd().format(_selectedDate),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        const Icon(Icons.calendar_month, size: 16),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
           IconButton(
             icon: const Icon(Icons.arrow_forward_ios, size: 18),
+            tooltip: 'Día siguiente',
             onPressed: _selectedDate.isBefore(DateTime.now())
                 ? () {
                     setState(() {
-                      _selectedDate =
-                          _selectedDate.add(const Duration(days: 1));
+                      _selectedDate = _selectedDate.add(
+                        const Duration(days: 1),
+                      );
                     });
                   }
                 : null,
@@ -255,8 +267,13 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
     );
   }
 
-  Widget _buildNutritionCard(double totalCalories, double progressPercentage,
-      double protein, double carbs, double fat) {
+  Widget _buildNutritionCard(
+    double totalCalories,
+    double progressPercentage,
+    double protein,
+    double carbs,
+    double fat,
+  ) {
     final Color progressColor = _getProgressColor(progressPercentage);
 
     return Container(
@@ -285,14 +302,14 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
             child: Column(
               children: [
                 _buildCalorieHeaderRow(
-                    totalCalories, progressPercentage, progressColor),
+                  totalCalories,
+                  progressPercentage,
+                  progressColor,
+                ),
                 const SizedBox(height: 4),
                 Text(
                   'Meta diaria: $_dailyCalorieGoal kcal',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey.shade600,
-                  ),
+                  style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
                 ),
                 const SizedBox(height: 16),
                 const Divider(),
@@ -308,32 +325,37 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
 
   // Widget separado para la fila de calorías para mejor organización
   Widget _buildCalorieHeaderRow(
-      double totalCalories, double progressPercentage, Color progressColor) {
-    return LayoutBuilder(builder: (context, constraints) {
-      // Determinar si estamos en un dispositivo pequeño
-      final isSmallDevice = constraints.maxWidth < 300;
+    double totalCalories,
+    double progressPercentage,
+    Color progressColor,
+  ) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Determinar si estamos en un dispositivo pequeño
+        final isSmallDevice = constraints.maxWidth < 300;
 
-      if (isSmallDevice) {
-        // Layout vertical para dispositivos pequeños
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _buildCalorieInfo(totalCalories),
-            const SizedBox(height: 16),
-            _buildProgressCircle(progressPercentage, progressColor),
-          ],
-        );
-      } else {
-        // Layout horizontal para dispositivos normales
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _buildCalorieInfo(totalCalories),
-            _buildProgressCircle(progressPercentage, progressColor),
-          ],
-        );
-      }
-    });
+        if (isSmallDevice) {
+          // Layout vertical para dispositivos pequeños
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildCalorieInfo(totalCalories),
+              const SizedBox(height: 16),
+              _buildProgressCircle(progressPercentage, progressColor),
+            ],
+          );
+        } else {
+          // Layout horizontal para dispositivos normales
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildCalorieInfo(totalCalories),
+              _buildProgressCircle(progressPercentage, progressColor),
+            ],
+          );
+        }
+      },
+    );
   }
 
   // Widget para la información de calorías
@@ -343,10 +365,7 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
       children: [
         const Text(
           'Calorías consumidas',
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-          ),
+          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 4),
         Row(
@@ -354,20 +373,14 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
           children: [
             Text(
               '${totalCalories.toInt()}',
-              style: const TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
             ),
             const SizedBox(width: 4),
             Padding(
               padding: const EdgeInsets.only(bottom: 6),
               child: Text(
                 'kcal',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey.shade600,
-                ),
+                style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
               ),
             ),
           ],
@@ -387,17 +400,11 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
         children: [
           Text(
             '${(progressPercentage * 100).toInt()}%',
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           Text(
             'Meta',
-            style: TextStyle(
-              fontSize: 10,
-              color: Colors.grey.shade600,
-            ),
+            style: TextStyle(fontSize: 10, color: Colors.grey.shade600),
           ),
         ],
       ),
@@ -415,87 +422,86 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
       children: [
         const Text(
           'Macronutrientes',
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
-        LayoutBuilder(builder: (context, constraints) {
-          // Determinar si estamos en un dispositivo pequeño
-          final isSmallDevice = constraints.maxWidth < 300;
+        LayoutBuilder(
+          builder: (context, constraints) {
+            // Determinar si estamos en un dispositivo pequeño
+            final isSmallDevice = constraints.maxWidth < 300;
 
-          if (isSmallDevice) {
-            // Layout vertical para dispositivos pequeños
-            return Column(
-              children: [
-                _buildNutrientColumn(
-                  label: 'Proteínas',
-                  value: protein.toStringAsFixed(1),
-                  unit: 'g',
-                  icon: FontAwesomeIcons.dna,
-                  color: Colors.green,
-                  percentage: protein / (protein + carbs + fat),
-                  isSmallDevice: true,
-                ),
-                const SizedBox(height: 16),
-                _buildNutrientColumn(
-                  label: 'Carbohidratos',
-                  value: carbs.toStringAsFixed(1),
-                  unit: 'g',
-                  icon: FontAwesomeIcons.breadSlice,
-                  color: Colors.amber.shade700,
-                  percentage: carbs / (protein + carbs + fat),
-                  isSmallDevice: true,
-                ),
-                const SizedBox(height: 16),
-                _buildNutrientColumn(
-                  label: 'Grasas',
-                  value: fat.toStringAsFixed(1),
-                  unit: 'g',
-                  icon: FontAwesomeIcons.oilWell,
-                  color: Colors.orange.shade700,
-                  percentage: fat / (protein + carbs + fat),
-                  isSmallDevice: true,
-                ),
-              ],
-            );
-          } else {
-            // Layout horizontal para dispositivos normales
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildNutrientColumn(
-                  label: 'Proteínas',
-                  value: protein.toStringAsFixed(1),
-                  unit: 'g',
-                  icon: FontAwesomeIcons.dna,
-                  color: Colors.green,
-                  percentage: protein / (protein + carbs + fat),
-                  isSmallDevice: false,
-                ),
-                _buildNutrientColumn(
-                  label: 'Carbohidratos',
-                  value: carbs.toStringAsFixed(1),
-                  unit: 'g',
-                  icon: FontAwesomeIcons.breadSlice,
-                  color: Colors.amber.shade700,
-                  percentage: carbs / (protein + carbs + fat),
-                  isSmallDevice: false,
-                ),
-                _buildNutrientColumn(
-                  label: 'Grasas',
-                  value: fat.toStringAsFixed(1),
-                  unit: 'g',
-                  icon: FontAwesomeIcons.oilWell,
-                  color: Colors.orange.shade700,
-                  percentage: fat / (protein + carbs + fat),
-                  isSmallDevice: false,
-                ),
-              ],
-            );
-          }
-        }),
+            if (isSmallDevice) {
+              // Layout vertical para dispositivos pequeños
+              return Column(
+                children: [
+                  _buildNutrientColumn(
+                    label: 'Proteínas',
+                    value: protein.toStringAsFixed(1),
+                    unit: 'g',
+                    icon: FontAwesomeIcons.dna.data,
+                    color: Colors.green,
+                    percentage: protein / (protein + carbs + fat),
+                    isSmallDevice: true,
+                  ),
+                  const SizedBox(height: 16),
+                  _buildNutrientColumn(
+                    label: 'Carbohidratos',
+                    value: carbs.toStringAsFixed(1),
+                    unit: 'g',
+                    icon: FontAwesomeIcons.breadSlice.data,
+                    color: Colors.amber.shade700,
+                    percentage: carbs / (protein + carbs + fat),
+                    isSmallDevice: true,
+                  ),
+                  const SizedBox(height: 16),
+                  _buildNutrientColumn(
+                    label: 'Grasas',
+                    value: fat.toStringAsFixed(1),
+                    unit: 'g',
+                    icon: FontAwesomeIcons.oilWell.data,
+                    color: Colors.orange.shade700,
+                    percentage: fat / (protein + carbs + fat),
+                    isSmallDevice: true,
+                  ),
+                ],
+              );
+            } else {
+              // Layout horizontal para dispositivos normales
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildNutrientColumn(
+                    label: 'Proteínas',
+                    value: protein.toStringAsFixed(1),
+                    unit: 'g',
+                    icon: FontAwesomeIcons.dna.data,
+                    color: Colors.green,
+                    percentage: protein / (protein + carbs + fat),
+                    isSmallDevice: false,
+                  ),
+                  _buildNutrientColumn(
+                    label: 'Carbohidratos',
+                    value: carbs.toStringAsFixed(1),
+                    unit: 'g',
+                    icon: FontAwesomeIcons.breadSlice.data,
+                    color: Colors.amber.shade700,
+                    percentage: carbs / (protein + carbs + fat),
+                    isSmallDevice: false,
+                  ),
+                  _buildNutrientColumn(
+                    label: 'Grasas',
+                    value: fat.toStringAsFixed(1),
+                    unit: 'g',
+                    icon: FontAwesomeIcons.oilWell.data,
+                    color: Colors.orange.shade700,
+                    percentage: fat / (protein + carbs + fat),
+                    isSmallDevice: false,
+                  ),
+                ],
+              );
+            }
+          },
+        ),
       ],
     );
   }
@@ -531,18 +537,12 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
         const SizedBox(height: 8),
         Text(
           '$value $unit',
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 2),
         Text(
           label,
-          style: TextStyle(
-            fontSize: 11,
-            color: Colors.grey.shade600,
-          ),
+          style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 4),
@@ -570,8 +570,10 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
     }
 
     // Calcular calorías totales para esta comida
-    double totalMealCalories =
-        entries.fold(0, (sum, entry) => sum + entry.calories);
+    double totalMealCalories = entries.fold(
+      0,
+      (sum, entry) => sum + entry.calories,
+    );
 
     return SafeArea(
       child: Column(
@@ -584,14 +586,14 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
               children: [
                 Text(
                   '$mealType Total:',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: const TextStyle(fontWeight: FontWeight.w500),
                   overflow: TextOverflow.ellipsis,
                 ),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: _getMealColor(mealType).withValues(alpha: .1),
                     borderRadius: BorderRadius.circular(12),
@@ -611,7 +613,8 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.only(
-                  bottom: 80), // Para evitar que el FAB tape el contenido
+                bottom: 80,
+              ), // Para evitar que el FAB tape el contenido
               itemCount: entries.length,
               itemBuilder: (context, index) {
                 final entry = entries[index];
@@ -654,9 +657,7 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
                           color: entry.food.color.withValues(alpha: .15),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Center(
-                          child: entry.food.icon,
-                        ),
+                        child: Center(child: entry.food.icon),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
@@ -718,11 +719,17 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.delete_outline,
-                            color: Colors.red.shade400, size: 20),
+                        icon: Icon(
+                          Icons.delete_outline,
+                          color: Colors.red.shade400,
+                          size: 20,
+                        ),
+                        tooltip: 'Eliminar registro',
                         onPressed: () => _showDeleteConfirmation(entry, index),
-                        constraints:
-                            const BoxConstraints(minHeight: 36, minWidth: 36),
+                        constraints: const BoxConstraints(
+                          minHeight: 36,
+                          minWidth: 36,
+                        ),
                         padding: EdgeInsets.zero,
                       ),
                     ],
@@ -740,9 +747,7 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
                       color: entry.food.color.withValues(alpha: .15),
                       borderRadius: BorderRadius.circular(14),
                     ),
-                    child: Center(
-                      child: entry.food.icon,
-                    ),
+                    child: Center(child: entry.food.icon),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
@@ -799,12 +804,16 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
                             Colors.orange.shade800,
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                   IconButton(
-                    icon: Icon(Icons.delete_outline,
-                        color: Colors.red.shade400, size: 20),
+                    icon: Icon(
+                      Icons.delete_outline,
+                      color: Colors.red.shade400,
+                      size: 20,
+                    ),
+                    tooltip: 'Eliminar registro',
                     onPressed: () => _showDeleteConfirmation(entry, index),
                   ),
                 ],
@@ -816,8 +825,12 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
     );
   }
 
-  Widget _buildMacroChip(String text, Color bgColor, Color textColor,
-      {bool isBold = false}) {
+  Widget _buildMacroChip(
+    String text,
+    Color bgColor,
+    Color textColor, {
+    bool isBold = false,
+  }) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
@@ -871,17 +884,13 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AddFoodEntryScreen(
-                      selectedDate: _selectedDate,
-                    ),
+                    builder: (context) =>
+                        AddFoodEntryScreen(selectedDate: _selectedDate),
                   ),
                 );
               },
               icon: const Icon(Icons.add, size: 16),
-              label: Text(
-                'Añadir a $mealType',
-                textAlign: TextAlign.center,
-              ),
+              label: Text('Añadir a $mealType', textAlign: TextAlign.center),
               style: OutlinedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -905,15 +914,15 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
   IconData _getMealIconData(String mealType) {
     switch (mealType) {
       case 'Desayuno':
-        return FontAwesomeIcons.mugSaucer;
+        return FontAwesomeIcons.mugSaucer.data;
       case 'Almuerzo':
-        return FontAwesomeIcons.bowlFood;
+        return FontAwesomeIcons.bowlFood.data;
       case 'Cena':
-        return FontAwesomeIcons.utensils;
+        return FontAwesomeIcons.utensils.data;
       case 'Snack':
-        return FontAwesomeIcons.apple;
+        return FontAwesomeIcons.apple.data;
       default:
-        return FontAwesomeIcons.solidCircle;
+        return FontAwesomeIcons.solidCircle.data;
     }
   }
 
@@ -949,10 +958,7 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
             Icon(Icons.delete_outline, color: Colors.red.shade400),
             const SizedBox(width: 8),
             const Flexible(
-              child: Text(
-                'Eliminar alimento',
-                overflow: TextOverflow.ellipsis,
-              ),
+              child: Text('Eliminar alimento', overflow: TextOverflow.ellipsis),
             ),
           ],
         ),
@@ -968,8 +974,10 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
           ),
           ElevatedButton(
             onPressed: () {
-              Provider.of<FoodLogProvider>(context, listen: false)
-                  .removeFoodEntry(_selectedDate, entryIndex);
+              Provider.of<FoodLogProvider>(
+                context,
+                listen: false,
+              ).removeFoodEntry(_selectedDate, entryIndex);
               Navigator.pop(context);
             },
             style: ElevatedButton.styleFrom(
@@ -996,11 +1004,11 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: Colors.white,
-      child: _tabBar,
-    );
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(color: Colors.white, child: _tabBar);
   }
 
   @override

@@ -53,10 +53,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                   ? Stack(
                       fit: StackFit.expand,
                       children: [
-                        Image.asset(
-                          article.imageUrl!,
-                          fit: BoxFit.cover,
-                        ),
+                        Image.asset(article.imageUrl!, fit: BoxFit.cover),
                         // Gradiente oscuro para legibilidad
                         Container(
                           decoration: BoxDecoration(
@@ -80,112 +77,103 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
           SliverPadding(
             padding: const EdgeInsets.all(16.0),
             sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  // Descripción
+              delegate: SliverChildListDelegate([
+                // Descripción
+                Text(
+                  article.description,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.grey[700],
+                    fontWeight: FontWeight.w500,
+                    height: 1.5,
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Etiquetas
+                Wrap(
+                  spacing: 8,
+                  children: article.tags
+                      .map(
+                        (tag) => Chip(
+                          label: Text(tag),
+                          backgroundColor: article.color.withValues(alpha: .1),
+                          labelStyle: TextStyle(color: article.color),
+                        ),
+                      )
+                      .toList(),
+                ),
+                const SizedBox(height: 24),
+
+                // Contenido principal o secciones
+                if (article.sections.isEmpty)
                   Text(
-                    article.description,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.grey[700],
-                      fontWeight: FontWeight.w500,
-                      height: 1.5,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Etiquetas
-                  Wrap(
-                    spacing: 8,
-                    children: article.tags
-                        .map((tag) => Chip(
-                              label: Text(tag),
-                              backgroundColor:
-                                  article.color.withValues(alpha: .1),
-                              labelStyle: TextStyle(color: article.color),
-                            ))
-                        .toList(),
-                  ),
-                  const SizedBox(height: 24),
-
-                  // Contenido principal o secciones
-                  if (article.sections.isEmpty)
-                    Text(
-                      article.content,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        height: 1.6,
-                      ),
-                    )
-                  else
-                    ...article.sections.map(
-                      (section) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Título de la sección
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 12.0),
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: article.color.withValues(alpha: .3),
-                                  width: 2.0,
-                                ),
-                              ),
-                            ),
-                            child: Text(
-                              section.title,
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: article.color,
+                    article.content,
+                    style: const TextStyle(fontSize: 16, height: 1.6),
+                  )
+                else
+                  ...article.sections.map(
+                    (section) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Título de la sección
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 12.0),
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: article.color.withValues(alpha: .3),
+                                width: 2.0,
                               ),
                             ),
                           ),
-
-                          // Contenido de la sección
-                          Text(
-                            section.content,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              height: 1.6,
+                          child: Text(
+                            section.title,
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: article.color,
                             ),
                           ),
+                        ),
 
-                          // Imágenes de la sección
-                          if (section.images != null &&
-                              section.images!.isNotEmpty)
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 16.0),
-                              child: SizedBox(
-                                height: 200,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: section.images!.length,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 8.0),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: Image.asset(
-                                          section.images![index],
-                                          fit: BoxFit.cover,
-                                        ),
+                        // Contenido de la sección
+                        Text(
+                          section.content,
+                          style: const TextStyle(fontSize: 16, height: 1.6),
+                        ),
+
+                        // Imágenes de la sección
+                        if (section.images != null &&
+                            section.images!.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
+                            child: SizedBox(
+                              height: 200,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: section.images!.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.asset(
+                                        section.images![index],
+                                        fit: BoxFit.cover,
                                       ),
-                                    );
-                                  },
-                                ),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
-                          const SizedBox(height: 24),
-                        ],
-                      ),
+                          ),
+                        const SizedBox(height: 24),
+                      ],
                     ),
-                ],
-              ),
+                  ),
+              ]),
             ),
           ),
         ],

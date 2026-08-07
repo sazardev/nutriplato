@@ -59,8 +59,8 @@ class FitnessScreen extends StatelessWidget {
                                 color: Colors.white.withValues(alpha: 0.2),
                                 borderRadius: BorderRadius.circular(14),
                               ),
-                              child: const Icon(
-                                FontAwesomeIcons.dumbbell,
+                              child: Icon(
+                                FontAwesomeIcons.dumbbell.data,
                                 color: Colors.white,
                                 size: 24,
                               ),
@@ -82,8 +82,9 @@ class FitnessScreen extends StatelessWidget {
                                     '${listedExercises.length} rutinas disponibles',
                                     style: GoogleFonts.poppins(
                                       fontSize: 14,
-                                      color:
-                                          Colors.white.withValues(alpha: 0.9),
+                                      color: Colors.white.withValues(
+                                        alpha: 0.9,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -114,10 +115,7 @@ class FitnessScreen extends StatelessWidget {
                   const SizedBox(height: NutriDesign.spacing24),
 
                   // Sección de categorías
-                  Text(
-                    'Categorías',
-                    style: NutriDesign.heading4,
-                  ),
+                  Text('Categorías', style: NutriDesign.heading4),
                   const SizedBox(height: NutriDesign.spacing12),
                   SizedBox(
                     height: 110,
@@ -131,8 +129,9 @@ class FitnessScreen extends StatelessWidget {
                           margin: const EdgeInsets.only(right: 12),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius:
-                                BorderRadius.circular(NutriDesign.radiusLarge),
+                            borderRadius: BorderRadius.circular(
+                              NutriDesign.radiusLarge,
+                            ),
                             boxShadow: NutriDesign.softShadow,
                           ),
                           child: Column(
@@ -172,10 +171,7 @@ class FitnessScreen extends StatelessWidget {
                   const SizedBox(height: NutriDesign.spacing24),
 
                   // Sección de rutinas para principiantes
-                  Text(
-                    'Para principiantes',
-                    style: NutriDesign.heading4,
-                  ),
+                  Text('Para principiantes', style: NutriDesign.heading4),
                   const SizedBox(height: NutriDesign.spacing12),
                   SizedBox(
                     height: 140,
@@ -203,61 +199,63 @@ class FitnessScreen extends StatelessWidget {
                   const SizedBox(height: NutriDesign.spacing24),
 
                   // Sección de tips de fitness
-                  Text(
-                    'Tips de Entrenamiento',
-                    style: NutriDesign.heading4,
-                  ),
+                  Text('Tips de Entrenamiento', style: NutriDesign.heading4),
                   const SizedBox(height: NutriDesign.spacing12),
-                  ...fitnessTips.take(4).map((tip) => Container(
-                        margin: const EdgeInsets.only(bottom: 12),
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius:
-                              BorderRadius.circular(NutriDesign.radiusLarge),
-                          boxShadow: NutriDesign.softShadow,
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: primaryColor.withValues(alpha: 0.1),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Icon(
-                                tip['icon'] as IconData,
-                                color: primaryColor,
-                                size: 20,
-                              ),
+                  ...fitnessTips
+                      .take(4)
+                      .map(
+                        (tip) => Container(
+                          margin: const EdgeInsets.only(bottom: 12),
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(
+                              NutriDesign.radiusLarge,
                             ),
-                            const SizedBox(width: 14),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    tip['title'] as String,
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Text(
-                                    tip['tip'] as String,
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: NutriDesign.grey600,
-                                    ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ],
+                            boxShadow: NutriDesign.softShadow,
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: primaryColor.withValues(alpha: 0.1),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Icon(
+                                  tip['icon'] as IconData,
+                                  color: primaryColor,
+                                  size: 20,
+                                ),
                               ),
-                            ),
-                          ],
+                              const SizedBox(width: 14),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      tip['title'] as String,
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Text(
+                                      tip['tip'] as String,
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        color: NutriDesign.grey600,
+                                      ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      )),
+                      ),
 
                   const SizedBox(height: 100), // Espacio para bottom nav
                 ],

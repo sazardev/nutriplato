@@ -55,11 +55,15 @@ class SmartFitnessScreen extends StatelessWidget {
     );
   }
 
-  SliverAppBar _buildSliverAppBar(BuildContext context, List<Color> gradients,
-      Color primaryColor, UserProfile profile) {
+  SliverAppBar _buildSliverAppBar(
+    BuildContext context,
+    List<Color> gradients,
+    Color primaryColor,
+    UserProfile profile,
+  ) {
     final bmi = (profile.weightKg != null && profile.heightCm != null)
         ? profile.weightKg! /
-            ((profile.heightCm! / 100) * (profile.heightCm! / 100))
+              ((profile.heightCm! / 100) * (profile.heightCm! / 100))
         : null;
     final bmiLabel = bmi != null ? _ctrl.bmiCategory(bmi) : null;
 
@@ -94,8 +98,11 @@ class SmartFitnessScreen extends StatelessWidget {
                           color: Colors.white.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(14),
                         ),
-                        child: const Icon(FontAwesomeIcons.personRunning,
-                            color: Colors.white, size: 22),
+                        child: Icon(
+                          FontAwesomeIcons.personRunning.data,
+                          color: Colors.white,
+                          size: 22,
+                        ),
                       ),
                       const SizedBox(width: 14),
                       Expanded(
@@ -127,22 +134,27 @@ class SmartFitnessScreen extends StatelessWidget {
                     Row(
                       children: [
                         _InfoChip(
-                            label: 'IMC: ${bmi.toStringAsFixed(1)}',
-                            icon: FontAwesomeIcons.weightScale),
+                          label: 'IMC: ${bmi.toStringAsFixed(1)}',
+                          icon: FontAwesomeIcons.weightScale.data,
+                        ),
                         const SizedBox(width: 8),
                         _InfoChip(
-                            label: bmiLabel ?? '',
-                            icon: FontAwesomeIcons.chartLine),
+                          label: bmiLabel ?? '',
+                          icon: FontAwesomeIcons.chartLine.data,
+                        ),
                         const SizedBox(width: 8),
                         _InfoChip(
-                            label: profile.nutritionGoal.label,
-                            icon: FontAwesomeIcons.bullseye),
+                          label: profile.nutritionGoal.label,
+                          icon: FontAwesomeIcons.bullseye.data,
+                        ),
                       ],
                     ),
                   ] else ...[
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 5),
+                        horizontal: 12,
+                        vertical: 5,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(20),
@@ -150,18 +162,23 @@ class SmartFitnessScreen extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.info_outline,
-                              color: Colors.white, size: 13),
+                          const Icon(
+                            Icons.info_outline,
+                            color: Colors.white,
+                            size: 13,
+                          ),
                           const SizedBox(width: 4),
                           Text(
                             'Completa tu perfil para recomendaciones personalizadas',
                             style: GoogleFonts.poppins(
-                                fontSize: 10, color: Colors.white),
+                              fontSize: 10,
+                              color: Colors.white,
+                            ),
                           ),
                         ],
                       ),
                     ),
-                  ]
+                  ],
                 ],
               ),
             ),
@@ -185,21 +202,21 @@ class SmartFitnessScreen extends StatelessWidget {
                 label: 'Hoy',
                 value:
                     '${ctrl.todayCaloriesBurned.value.toStringAsFixed(0)} kcal',
-                icon: FontAwesomeIcons.fire,
+                icon: FontAwesomeIcons.fire.data,
                 color: const Color(0xFFFF6B6B),
               ),
               _StatDivider(),
               _StatCard(
                 label: 'Esta semana',
                 value: '${ctrl.weeklyWorkoutCount} entrenos',
-                icon: FontAwesomeIcons.calendar,
+                icon: FontAwesomeIcons.calendar.data,
                 color: primaryColor,
               ),
               _StatDivider(),
               _StatCard(
                 label: 'Semana kcal',
                 value: '${ctrl.weeklyCaloriesBurned.toStringAsFixed(0)} kcal',
-                icon: FontAwesomeIcons.chartBar,
+                icon: FontAwesomeIcons.chartBar.data,
                 color: const Color(0xFF51CF66),
               ),
             ],
@@ -210,13 +227,17 @@ class SmartFitnessScreen extends StatelessWidget {
   }
 
   SliverPersistentHeader _buildTabBar(
-      BuildContext context, Color primaryColor) {
+    BuildContext context,
+    Color primaryColor,
+  ) {
     final tabBar = TabBar(
       labelColor: primaryColor,
-      unselectedLabelColor: Colors.grey.shade500,
+      unselectedLabelColor: Colors.grey.shade700,
       indicatorColor: primaryColor,
-      labelStyle:
-          GoogleFonts.poppins(fontSize: 12, fontWeight: FontWeight.w600),
+      labelStyle: GoogleFonts.poppins(
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+      ),
       tabs: const [
         Tab(text: 'Recomendado'),
         Tab(text: 'Ejercicios'),
@@ -248,7 +269,7 @@ class _RecommendationsTabState extends State<_RecommendationsTab> {
     'Normal',
     'Bien',
     'Energizado',
-    'Al máximo'
+    'Al máximo',
   ];
 
   @override
@@ -269,13 +290,18 @@ class _RecommendationsTabState extends State<_RecommendationsTab> {
                     elevation: 0,
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                   onPressed: _onRandomTap,
                   icon: const Icon(Icons.shuffle_rounded, size: 16),
-                  label: Text('Aleatorio',
-                      style: GoogleFonts.poppins(
-                          fontSize: 13, fontWeight: FontWeight.w600)),
+                  label: Text(
+                    'Aleatorio',
+                    style: GoogleFonts.poppins(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(width: 10),
@@ -286,13 +312,18 @@ class _RecommendationsTabState extends State<_RecommendationsTab> {
                     side: BorderSide(color: widget.primaryColor),
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                   onPressed: () => _showCustomSheet(context),
                   icon: const Icon(Icons.tune_rounded, size: 16),
-                  label: Text('Personalizar',
-                      style: GoogleFonts.poppins(
-                          fontSize: 13, fontWeight: FontWeight.w600)),
+                  label: Text(
+                    'Personalizar',
+                    style: GoogleFonts.poppins(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -305,11 +336,14 @@ class _RecommendationsTabState extends State<_RecommendationsTab> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('¿Cómo te sientes ahora?',
-                  style: GoogleFonts.poppins(
-                      fontSize: 11,
-                      color: NutriDesign.grey600,
-                      fontWeight: FontWeight.w500)),
+              Text(
+                '¿Cómo te sientes ahora?',
+                style: GoogleFonts.poppins(
+                  fontSize: 11,
+                  color: NutriDesign.grey600,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               const SizedBox(height: 6),
               Obx(() {
                 final current = _ctrl.energyLevel.value;
@@ -318,38 +352,53 @@ class _RecommendationsTabState extends State<_RecommendationsTab> {
                   children: List.generate(5, (i) {
                     final level = i + 1;
                     final selected = current == level;
-                    return GestureDetector(
-                      onTap: () => _ctrl.updateEnergyLevel(level),
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: selected
-                              ? widget.primaryColor
-                              : Colors.grey.shade100,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
+                    return Semantics(
+                      button: true,
+                      selected: selected,
+                      label: 'Nivel de energía: ${_energyLabels[i]}',
+                      excludeSemantics: true,
+                      child: GestureDetector(
+                        onTap: () => _ctrl.updateEnergyLevel(level),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
                             color: selected
                                 ? widget.primaryColor
-                                : Colors.transparent,
+                                : Colors.grey.shade100,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: selected
+                                  ? widget.primaryColor
+                                  : Colors.transparent,
+                            ),
                           ),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(_energyEmojis[i],
-                                style: const TextStyle(fontSize: 18)),
-                            Text(_energyLabels[i],
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ExcludeSemantics(
+                                child: Text(
+                                  _energyEmojis[i],
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                              ),
+                              Text(
+                                _energyLabels[i],
                                 style: GoogleFonts.poppins(
-                                    fontSize: 9,
-                                    color: selected
-                                        ? Colors.white
-                                        : NutriDesign.grey600,
-                                    fontWeight: selected
-                                        ? FontWeight.w600
-                                        : FontWeight.normal)),
-                          ],
+                                  fontSize: 9,
+                                  color: selected
+                                      ? Colors.white
+                                      : NutriDesign.grey600,
+                                  fontWeight: selected
+                                      ? FontWeight.w600
+                                      : FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -371,7 +420,9 @@ class _RecommendationsTabState extends State<_RecommendationsTab> {
               padding: const EdgeInsets.all(16),
               itemCount: workouts.length,
               itemBuilder: (ctx, i) => _WorkoutCard(
-                  workout: workouts[i], primaryColor: widget.primaryColor),
+                workout: workouts[i],
+                primaryColor: widget.primaryColor,
+              ),
             );
           }),
         ),
@@ -386,7 +437,9 @@ class _RecommendationsTabState extends State<_RecommendationsTab> {
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (_) => _WorkoutDetailSheet(
-          workout: workout, primaryColor: widget.primaryColor),
+        workout: workout,
+        primaryColor: widget.primaryColor,
+      ),
     );
   }
 
@@ -426,13 +479,43 @@ class _ExerciseLibraryTab extends StatelessWidget {
                   color: primaryColor,
                   onTap: () => _ctrl.selectedCategory.value = null,
                 ),
-                ...ExerciseCategory.values.map((cat) => _CategoryChip(
-                      label: cat.label,
-                      icon: cat.icon,
-                      isSelected: selected == cat,
-                      color: cat.color,
-                      onTap: () => _ctrl.selectedCategory.value = cat,
-                    )),
+                ...ExerciseCategory.values.map(
+                  (cat) => _CategoryChip(
+                    label: cat.label,
+                    icon: cat.icon,
+                    isSelected: selected == cat,
+                    color: cat.color,
+                    onTap: () => _ctrl.selectedCategory.value = cat,
+                  ),
+                ),
+              ],
+            ),
+          );
+        }),
+        // Chips de equipamiento
+        Obx(() {
+          final selected = _ctrl.selectedEquipment.value;
+          return SizedBox(
+            height: 44,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              children: [
+                _EquipmentChip(
+                  label: 'Sin filtro',
+                  isSelected: selected == null,
+                  color: primaryColor,
+                  onTap: () => _ctrl.setEquipmentFilter(null),
+                ),
+                ...Equipment.values.map(
+                  (eq) => _EquipmentChip(
+                    label: eq.label,
+                    icon: eq.icon,
+                    isSelected: selected == eq,
+                    color: primaryColor,
+                    onTap: () => _ctrl.setEquipmentFilter(eq),
+                  ),
+                ),
               ],
             ),
           );
@@ -471,21 +554,27 @@ class _HistoryTab extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(FontAwesomeIcons.clockRotateLeft,
-                  size: 48, color: Colors.grey.shade300),
+              Icon(
+                FontAwesomeIcons.clockRotateLeft.data,
+                size: 48,
+                color: Colors.grey.shade300,
+              ),
               const SizedBox(height: 12),
               Text(
                 'Sin historial aún',
                 style: GoogleFonts.poppins(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey.shade500),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: NutriDesign.grey700,
+                ),
               ),
               const SizedBox(height: 4),
               Text(
                 'Completa un entrenamiento para verlo aquí',
                 style: GoogleFonts.poppins(
-                    fontSize: 12, color: Colors.grey.shade400),
+                  fontSize: 12,
+                  color: NutriDesign.grey600,
+                ),
               ),
             ],
           ),
@@ -507,9 +596,10 @@ class _HistoryTab extends StatelessWidget {
               borderRadius: BorderRadius.circular(NutriDesign.radiusMedium),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.05),
-                    blurRadius: 6,
-                    offset: const Offset(0, 2))
+                  color: Colors.black.withValues(alpha: 0.05),
+                  blurRadius: 6,
+                  offset: const Offset(0, 2),
+                ),
               ],
             ),
             child: Row(
@@ -520,8 +610,11 @@ class _HistoryTab extends StatelessWidget {
                     color: primaryColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Icon(FontAwesomeIcons.fire,
-                      size: 18, color: primaryColor),
+                  child: Icon(
+                    FontAwesomeIcons.fire.data,
+                    size: 18,
+                    color: primaryColor,
+                  ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -539,14 +632,18 @@ class _HistoryTab extends StatelessWidget {
                       Text(
                         '${entry.caloriesBurned.toStringAsFixed(0)} kcal · ${(entry.durationSeconds ~/ 60)} min',
                         style: GoogleFonts.poppins(
-                            fontSize: 11, color: NutriDesign.grey600),
+                          fontSize: 11,
+                          color: NutriDesign.grey600,
+                        ),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFF51CF66).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(20),
@@ -554,9 +651,10 @@ class _HistoryTab extends StatelessWidget {
                   child: Text(
                     'Completado',
                     style: GoogleFonts.poppins(
-                        fontSize: 10,
-                        color: const Color(0xFF51CF66),
-                        fontWeight: FontWeight.w600),
+                      fontSize: 10,
+                      color: const Color(0xFF51CF66),
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ],
@@ -577,129 +675,147 @@ class _WorkoutCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _showWorkoutDetail(context),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(NutriDesign.radiusLarge),
-          gradient: LinearGradient(
-            colors: workout.gradients,
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+    return Semantics(
+      button: true,
+      label: workout.name,
+      child: GestureDetector(
+        onTap: () => _showWorkoutDetail(context),
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(NutriDesign.radiusLarge),
+            gradient: LinearGradient(
+              colors: workout.gradients,
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: workout.gradients.first.withValues(alpha: 0.4),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
-          boxShadow: [
-            BoxShadow(
-              color: workout.gradients.first.withValues(alpha: 0.4),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            )
-          ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(18),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        workout.name,
+                        style: GoogleFonts.poppins(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        workout.overallIntensity.label,
+                        style: GoogleFonts.poppins(
+                          fontSize: 10,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                if (workout.reasoning.isNotEmpty) ...[
+                  const SizedBox(height: 6),
+                  Text(
+                    workout.reasoning,
+                    style: GoogleFonts.poppins(
+                      fontSize: 11,
+                      color: Colors.white.withValues(alpha: 0.85),
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    _WorkoutStat(
+                      icon: FontAwesomeIcons.clock.data,
+                      label: '${workout.totalDurationMinutes} min',
+                    ),
+                    const SizedBox(width: 16),
+                    _WorkoutStat(
+                      icon: FontAwesomeIcons.fire.data,
+                      label:
+                          '~${workout.estimatedCalories.toStringAsFixed(0)} kcal',
+                    ),
+                    const SizedBox(width: 16),
+                    _WorkoutStat(
+                      icon: FontAwesomeIcons.layerGroup.data,
+                      label: '${workout.exercises.length} ejercicios',
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                // Preview de ejercicios
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 4,
+                  children: workout.exercises.take(3).map((e) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        e.name,
+                        style: GoogleFonts.poppins(
+                          fontSize: 10,
+                          color: Colors.white,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: workout.gradients.first,
+                      elevation: 0,
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    onPressed: () => _showWorkoutDetail(context),
                     child: Text(
-                      workout.name,
+                      'Ver rutina completa',
                       style: GoogleFonts.poppins(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 13,
                       ),
                     ),
                   ),
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.2),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      workout.overallIntensity.label,
-                      style: GoogleFonts.poppins(
-                          fontSize: 10,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ],
-              ),
-              if (workout.reasoning.isNotEmpty) ...[
-                const SizedBox(height: 6),
-                Text(
-                  workout.reasoning,
-                  style: GoogleFonts.poppins(
-                      fontSize: 11,
-                      color: Colors.white.withValues(alpha: 0.85)),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ],
-              const SizedBox(height: 12),
-              Row(
-                children: [
-                  _WorkoutStat(
-                      icon: FontAwesomeIcons.clock,
-                      label: '${workout.totalDurationMinutes} min'),
-                  const SizedBox(width: 16),
-                  _WorkoutStat(
-                      icon: FontAwesomeIcons.fire,
-                      label:
-                          '~${workout.estimatedCalories.toStringAsFixed(0)} kcal'),
-                  const SizedBox(width: 16),
-                  _WorkoutStat(
-                      icon: FontAwesomeIcons.layerGroup,
-                      label: '${workout.exercises.length} ejercicios'),
-                ],
-              ),
-              const SizedBox(height: 12),
-              // Preview de ejercicios
-              Wrap(
-                spacing: 6,
-                runSpacing: 4,
-                children: workout.exercises.take(3).map((e) {
-                  return Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.15),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      e.name,
-                      style: GoogleFonts.poppins(
-                          fontSize: 10, color: Colors.white),
-                    ),
-                  );
-                }).toList(),
-              ),
-              const SizedBox(height: 12),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: workout.gradients.first,
-                    elevation: 0,
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
-                  ),
-                  onPressed: () => _showWorkoutDetail(context),
-                  child: Text(
-                    'Ver rutina completa',
-                    style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w600, fontSize: 13),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -721,8 +837,10 @@ class _WorkoutCard extends StatelessWidget {
 class _WorkoutDetailSheet extends StatefulWidget {
   final SmartWorkout workout;
   final Color primaryColor;
-  const _WorkoutDetailSheet(
-      {required this.workout, required this.primaryColor});
+  const _WorkoutDetailSheet({
+    required this.workout,
+    required this.primaryColor,
+  });
 
   @override
   State<_WorkoutDetailSheet> createState() => _WorkoutDetailSheetState();
@@ -739,8 +857,11 @@ class _WorkoutDetailSheetState extends State<_WorkoutDetailSheet> {
       barrierDismissible: false,
       builder: (_) => _MoodTrackerDialog(),
     );
-    Get.find<SmartFitnessController>()
-        .completeWorkout(widget.workout, 1200, mood: mood);
+    Get.find<SmartFitnessController>().completeWorkout(
+      widget.workout,
+      1200,
+      mood: mood,
+    );
   }
 
   @override
@@ -776,7 +897,9 @@ class _WorkoutDetailSheetState extends State<_WorkoutDetailSheet> {
                     child: Text(
                       widget.workout.name,
                       style: GoogleFonts.poppins(
-                          fontSize: 18, fontWeight: FontWeight.w700),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                   if (!_started)
@@ -785,15 +908,22 @@ class _WorkoutDetailSheetState extends State<_WorkoutDetailSheet> {
                         backgroundColor: widget.primaryColor,
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 14, vertical: 8),
+                          horizontal: 14,
+                          vertical: 8,
+                        ),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                       onPressed: () => setState(() => _started = true),
                       icon: const Icon(Icons.play_arrow, size: 16),
-                      label: Text('Iniciar',
-                          style: GoogleFonts.poppins(
-                              fontSize: 12, fontWeight: FontWeight.w600)),
+                      label: Text(
+                        'Iniciar',
+                        style: GoogleFonts.poppins(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     )
                   else
                     TextButton(
@@ -801,8 +931,9 @@ class _WorkoutDetailSheetState extends State<_WorkoutDetailSheet> {
                       child: Text(
                         'Completar',
                         style: GoogleFonts.poppins(
-                            color: const Color(0xFF51CF66),
-                            fontWeight: FontWeight.w600),
+                          color: const Color(0xFF51CF66),
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                 ],
@@ -897,14 +1028,18 @@ class _ExerciseStepView extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             exercise.name,
-            style:
-                GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.w700),
+            style: GoogleFonts.poppins(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+            ),
           ),
           const SizedBox(height: 4),
           Text(
             exercise.description,
-            style:
-                GoogleFonts.poppins(fontSize: 12, color: NutriDesign.grey600),
+            style: GoogleFonts.poppins(
+              fontSize: 12,
+              color: NutriDesign.grey600,
+            ),
             textAlign: TextAlign.center,
           ),
           const Spacer(),
@@ -915,23 +1050,32 @@ class _ExerciseStepView extends StatelessWidget {
               OutlinedButton.icon(
                 onPressed: step > 0 ? onPrev : null,
                 icon: const Icon(Icons.chevron_left),
-                label:
-                    Text('Anterior', style: GoogleFonts.poppins(fontSize: 13)),
+                label: Text(
+                  'Anterior',
+                  style: GoogleFonts.poppins(fontSize: 13),
+                ),
               ),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 12),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12))),
+                  backgroundColor: primaryColor,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
                 onPressed: step < exercises.length - 1 ? onNext : null,
                 icon: const Icon(Icons.chevron_right),
                 label: Text(
-                    step < exercises.length - 1 ? 'Siguiente' : 'Terminar',
-                    style: GoogleFonts.poppins(
-                        fontSize: 13, fontWeight: FontWeight.w600)),
+                  step < exercises.length - 1 ? 'Siguiente' : 'Terminar',
+                  style: GoogleFonts.poppins(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ],
           ),
@@ -950,77 +1094,123 @@ class _ExerciseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _showDetail(context),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 10),
-        padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(NutriDesign.radiusMedium),
-          boxShadow: [
-            BoxShadow(
+    return Semantics(
+      button: true,
+      label: exercise.name,
+      child: GestureDetector(
+        onTap: () => _showDetail(context),
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(NutriDesign.radiusMedium),
+            boxShadow: [
+              BoxShadow(
                 color: Colors.black.withValues(alpha: 0.05),
                 blurRadius: 6,
-                offset: const Offset(0, 2))
-          ],
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(
-                color: exercise.category.color.withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(12),
+                offset: const Offset(0, 2),
               ),
-              child: Icon(exercise.category.icon,
-                  color: exercise.category.color, size: 22),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    exercise.name,
-                    style: GoogleFonts.poppins(
+            ],
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: exercise.category.color.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  exercise.category.icon,
+                  color: exercise.category.color,
+                  size: 22,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      exercise.name,
+                      style: GoogleFonts.poppins(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
-                        color: NutriDesign.grey900),
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(right: 4),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 6, vertical: 1),
-                        decoration: BoxDecoration(
-                          color:
-                              exercise.intensity.color.withValues(alpha: 0.12),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(
-                          exercise.intensity.label,
-                          style: TextStyle(
-                            fontSize: 9,
-                            color: exercise.intensity.color,
-                            fontWeight: FontWeight.w600,
+                        color: NutriDesign.grey900,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(right: 4),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 1,
+                          ),
+                          decoration: BoxDecoration(
+                            color: exercise.intensity.color.withValues(
+                              alpha: 0.12,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            exercise.intensity.label,
+                            style: TextStyle(
+                              fontSize: 9,
+                              color: exercise.intensity.color,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
-                      ),
-                      Text(
-                        '${exercise.baseQuantity} ${_metricLabel(exercise.metric)}',
-                        style: GoogleFonts.poppins(
-                            fontSize: 10, color: NutriDesign.grey600),
-                      ),
-                    ],
-                  ),
-                ],
+                        Text(
+                          '${exercise.baseQuantity} ${_metricLabel(exercise.metric)}',
+                          style: GoogleFonts.poppins(
+                            fontSize: 10,
+                            color: NutriDesign.grey600,
+                          ),
+                        ),
+                        if (exercise.requiresEquipment) ...[
+                          const SizedBox(width: 4),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 1,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.blueGrey.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  exercise.equipment.icon,
+                                  size: 9,
+                                  color: Colors.blueGrey,
+                                ),
+                                const SizedBox(width: 3),
+                                Text(
+                                  exercise.equipment.label,
+                                  style: TextStyle(
+                                    fontSize: 9,
+                                    color: Colors.blueGrey.shade700,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Icon(Icons.chevron_right, color: Colors.grey.shade400, size: 20),
-          ],
+              Icon(Icons.chevron_right, color: Colors.grey.shade400, size: 20),
+            ],
+          ),
         ),
       ),
     );
@@ -1052,8 +1242,10 @@ class _ExerciseCard extends StatelessWidget {
 class _ExerciseDetailSheet extends StatefulWidget {
   final SmartExercise exercise;
   final Color primaryColor;
-  const _ExerciseDetailSheet(
-      {required this.exercise, required this.primaryColor});
+  const _ExerciseDetailSheet({
+    required this.exercise,
+    required this.primaryColor,
+  });
 
   @override
   State<_ExerciseDetailSheet> createState() => _ExerciseDetailSheetState();
@@ -1102,8 +1294,11 @@ class _ExerciseDetailSheetState extends State<_ExerciseDetailSheet> {
                       color: e.category.color.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Icon(e.category.icon,
-                        color: e.category.color, size: 22),
+                    child: Icon(
+                      e.category.icon,
+                      color: e.category.color,
+                      size: 22,
+                    ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -1113,12 +1308,16 @@ class _ExerciseDetailSheetState extends State<_ExerciseDetailSheet> {
                         Text(
                           e.name,
                           style: GoogleFonts.poppins(
-                              fontSize: 18, fontWeight: FontWeight.w700),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                         Text(
                           e.category.label,
                           style: GoogleFonts.poppins(
-                              fontSize: 12, color: e.category.color),
+                            fontSize: 12,
+                            color: e.category.color,
+                          ),
                         ),
                       ],
                     ),
@@ -1143,26 +1342,32 @@ class _ExerciseDetailSheetState extends State<_ExerciseDetailSheet> {
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: steps.length,
-                    itemBuilder: (_, i) => GestureDetector(
-                      onTap: () => setState(() => _currentStep = i),
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 6),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: _currentStep == i
-                              ? widget.primaryColor
-                              : Colors.grey.shade100,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          'Paso ${i + 1}${steps[i].isStartPosition ? " (inicio)" : ""}',
-                          style: TextStyle(
-                            fontSize: 11,
+                    itemBuilder: (_, i) => Semantics(
+                      button: true,
+                      selected: _currentStep == i,
+                      child: GestureDetector(
+                        onTap: () => setState(() => _currentStep = i),
+                        child: Container(
+                          margin: const EdgeInsets.only(right: 6),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
                             color: _currentStep == i
-                                ? Colors.white
-                                : Colors.grey.shade600,
-                            fontWeight: FontWeight.w600,
+                                ? widget.primaryColor
+                                : Colors.grey.shade100,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            'Paso ${i + 1}${steps[i].isStartPosition ? " (inicio)" : ""}',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: _currentStep == i
+                                  ? Colors.white
+                                  : Colors.grey.shade600,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ),
@@ -1173,7 +1378,9 @@ class _ExerciseDetailSheetState extends State<_ExerciseDetailSheet> {
                 Text(
                   steps[_currentStep].instruction,
                   style: GoogleFonts.poppins(
-                      fontSize: 13, color: NutriDesign.grey900),
+                    fontSize: 13,
+                    color: NutriDesign.grey900,
+                  ),
                 ),
                 const SizedBox(height: 16),
               ],
@@ -1186,69 +1393,90 @@ class _ExerciseDetailSheetState extends State<_ExerciseDetailSheet> {
               Text(
                 'Descripción',
                 style: GoogleFonts.poppins(
-                    fontSize: 14, fontWeight: FontWeight.w600),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               const SizedBox(height: 4),
               Text(
                 e.description,
                 style: GoogleFonts.poppins(
-                    fontSize: 12, color: NutriDesign.grey600),
+                  fontSize: 12,
+                  color: NutriDesign.grey600,
+                ),
               ),
               if (e.tips.isNotEmpty) ...[
                 const SizedBox(height: 16),
                 Text(
                   'Consejos',
                   style: GoogleFonts.poppins(
-                      fontSize: 14, fontWeight: FontWeight.w600),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 8),
-                ...e.tips.map((t) => Padding(
-                      padding: const EdgeInsets.only(bottom: 4),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(Icons.check_circle_outline,
-                              size: 14, color: widget.primaryColor),
-                          const SizedBox(width: 6),
-                          Expanded(
-                            child: Text(
-                              t,
-                              style: GoogleFonts.poppins(
-                                  fontSize: 12, color: NutriDesign.grey600),
+                ...e.tips.map(
+                  (t) => Padding(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.check_circle_outline,
+                          size: 14,
+                          color: widget.primaryColor,
+                        ),
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: Text(
+                            t,
+                            style: GoogleFonts.poppins(
+                              fontSize: 12,
+                              color: NutriDesign.grey600,
                             ),
                           ),
-                        ],
-                      ),
-                    )),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
               if (e.contraindications.isNotEmpty) ...[
                 const SizedBox(height: 16),
                 Text(
                   'Precauciones',
                   style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: const Color(0xFFFF6B6B)),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFFFF6B6B),
+                  ),
                 ),
                 const SizedBox(height: 8),
-                ...e.contraindications.map((c) => Padding(
-                      padding: const EdgeInsets.only(bottom: 4),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Icon(Icons.warning_amber_outlined,
-                              size: 14, color: Color(0xFFFF6B6B)),
-                          const SizedBox(width: 6),
-                          Expanded(
-                            child: Text(
-                              c,
-                              style: GoogleFonts.poppins(
-                                  fontSize: 12, color: NutriDesign.grey600),
+                ...e.contraindications.map(
+                  (c) => Padding(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(
+                          Icons.warning_amber_outlined,
+                          size: 14,
+                          color: Color(0xFFFF6B6B),
+                        ),
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: Text(
+                            c,
+                            style: GoogleFonts.poppins(
+                              fontSize: 12,
+                              color: NutriDesign.grey600,
                             ),
                           ),
-                        ],
-                      ),
-                    )),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
               const SizedBox(height: 20),
             ],
@@ -1264,10 +1492,11 @@ class _ExerciseListTile extends StatelessWidget {
   final int index;
   final Color primaryColor;
 
-  const _ExerciseListTile(
-      {required this.exercise,
-      required this.index,
-      required this.primaryColor});
+  const _ExerciseListTile({
+    required this.exercise,
+    required this.index,
+    required this.primaryColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1291,9 +1520,10 @@ class _ExerciseListTile extends StatelessWidget {
             child: Text(
               '$index',
               style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                  color: primaryColor),
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+                color: primaryColor,
+              ),
             ),
           ),
           const SizedBox(width: 10),
@@ -1304,18 +1534,29 @@ class _ExerciseListTile extends StatelessWidget {
                 Text(
                   exercise.name,
                   style: GoogleFonts.poppins(
-                      fontSize: 13, fontWeight: FontWeight.w600),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 Text(
-                  '${exercise.baseQuantity} ${exercise.metric == ExerciseMetric.reps ? "reps" : exercise.metric == ExerciseMetric.seconds ? "seg" : "m"}',
+                  '${exercise.baseQuantity} ${exercise.metric == ExerciseMetric.reps
+                      ? "reps"
+                      : exercise.metric == ExerciseMetric.seconds
+                      ? "seg"
+                      : "m"}',
                   style: GoogleFonts.poppins(
-                      fontSize: 11, color: NutriDesign.grey600),
+                    fontSize: 11,
+                    color: NutriDesign.grey600,
+                  ),
                 ),
               ],
             ),
           ),
-          Icon(exercise.category.icon,
-              size: 16, color: exercise.category.color),
+          Icon(
+            exercise.category.icon,
+            size: 16,
+            color: exercise.category.color,
+          ),
         ],
       ),
     );
@@ -1339,10 +1580,12 @@ class _InfoChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          FaIcon(icon, size: 9, color: Colors.white),
+          Icon(icon, size: 9, color: Colors.white),
           const SizedBox(width: 4),
-          Text(label,
-              style: GoogleFonts.poppins(fontSize: 10, color: Colors.white)),
+          Text(
+            label,
+            style: GoogleFonts.poppins(fontSize: 10, color: Colors.white),
+          ),
         ],
       ),
     );
@@ -1354,26 +1597,31 @@ class _StatCard extends StatelessWidget {
   final String value;
   final IconData icon;
   final Color color;
-  const _StatCard(
-      {required this.label,
-      required this.value,
-      required this.icon,
-      required this.color});
+  const _StatCard({
+    required this.label,
+    required this.value,
+    required this.icon,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        FaIcon(icon, size: 16, color: color),
+        Icon(icon, size: 16, color: color),
         const SizedBox(height: 2),
         Text(
           value,
           style: GoogleFonts.poppins(
-              fontSize: 13, fontWeight: FontWeight.w700, color: color),
+            fontSize: 13,
+            fontWeight: FontWeight.w700,
+            color: color,
+          ),
         ),
-        Text(label,
-            style:
-                GoogleFonts.poppins(fontSize: 10, color: NutriDesign.grey600)),
+        Text(
+          label,
+          style: GoogleFonts.poppins(fontSize: 10, color: NutriDesign.grey600),
+        ),
       ],
     );
   }
@@ -1394,11 +1642,15 @@ class _WorkoutStat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        FaIcon(icon, size: 11, color: Colors.white.withValues(alpha: 0.85)),
+        Icon(icon, size: 11, color: Colors.white.withValues(alpha: 0.85)),
         const SizedBox(width: 4),
-        Text(label,
-            style: GoogleFonts.poppins(
-                fontSize: 11, color: Colors.white.withValues(alpha: 0.9))),
+        Text(
+          label,
+          style: GoogleFonts.poppins(
+            fontSize: 11,
+            color: Colors.white.withValues(alpha: 0.9),
+          ),
+        ),
       ],
     );
   }
@@ -1421,34 +1673,97 @@ class _CategoryChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        margin: const EdgeInsets.only(right: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-        decoration: BoxDecoration(
-          color: isSelected ? color : Colors.grey.shade100,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-              color: isSelected ? color : Colors.grey.shade300, width: 1),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (icon != null) ...[
-              Icon(icon, size: 12, color: isSelected ? Colors.white : color),
-              const SizedBox(width: 4),
-            ],
-            Text(
-              label,
-              style: GoogleFonts.poppins(
-                fontSize: 12,
-                color: isSelected ? Colors.white : NutriDesign.grey600,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-              ),
+    return Semantics(
+      button: true,
+      selected: isSelected,
+      child: GestureDetector(
+        onTap: onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          margin: const EdgeInsets.only(right: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+          decoration: BoxDecoration(
+            color: isSelected ? color : Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: isSelected ? color : Colors.grey.shade300,
+              width: 1,
             ),
-          ],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (icon != null) ...[
+                Icon(icon, size: 12, color: isSelected ? Colors.white : color),
+                const SizedBox(width: 4),
+              ],
+              Text(
+                label,
+                style: GoogleFonts.poppins(
+                  fontSize: 12,
+                  color: isSelected ? Colors.white : NutriDesign.grey600,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _EquipmentChip extends StatelessWidget {
+  final String label;
+  final IconData? icon;
+  final bool isSelected;
+  final Color color;
+  final VoidCallback onTap;
+
+  const _EquipmentChip({
+    required this.label,
+    required this.isSelected,
+    required this.color,
+    required this.onTap,
+    this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      selected: isSelected,
+      child: GestureDetector(
+        onTap: onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          margin: const EdgeInsets.only(right: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+          decoration: BoxDecoration(
+            color: isSelected ? color : Colors.grey.shade50,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: isSelected ? color : Colors.grey.shade300,
+              width: 1,
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (icon != null) ...[
+                Icon(icon, size: 11, color: isSelected ? Colors.white : color),
+                const SizedBox(width: 4),
+              ],
+              Text(
+                label,
+                style: GoogleFonts.poppins(
+                  fontSize: 11,
+                  color: isSelected ? Colors.white : NutriDesign.grey600,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -1467,19 +1782,26 @@ class _EmptyRecommendations extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(FontAwesomeIcons.personRunning,
-                size: 52, color: Colors.grey.shade300),
+            Icon(
+              FontAwesomeIcons.personRunning.data,
+              size: 52,
+              color: Colors.grey.shade300,
+            ),
             const SizedBox(height: 16),
             Text(
               'Generando tu plan...',
               style: GoogleFonts.poppins(
-                  fontSize: 16, fontWeight: FontWeight.w600),
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             const SizedBox(height: 8),
             Text(
               'Completa tu perfil (peso, talla, fecha de nacimiento) para recibir recomendaciones personalizadas.',
-              style:
-                  GoogleFonts.poppins(fontSize: 12, color: NutriDesign.grey600),
+              style: GoogleFonts.poppins(
+                fontSize: 12,
+                color: NutriDesign.grey600,
+              ),
               textAlign: TextAlign.center,
             ),
           ],
@@ -1496,8 +1818,10 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(
-          BuildContext context, double shrinkOffset, bool overlapsContent) =>
-      Container(color: Colors.white, child: tabBar);
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) => Container(color: Colors.white, child: tabBar);
 
   @override
   double get maxExtent => tabBar.preferredSize.height;
@@ -1556,15 +1880,18 @@ class _CustomWorkoutSheetState extends State<_CustomWorkoutSheet> {
               height: 4,
               margin: const EdgeInsets.symmetric(vertical: 10),
               decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(2)),
+                color: Colors.grey.shade300,
+                borderRadius: BorderRadius.circular(2),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 'Personalizar rutina',
                 style: GoogleFonts.poppins(
-                    fontSize: 18, fontWeight: FontWeight.w700),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
             const SizedBox(height: 6),
@@ -1618,13 +1945,16 @@ class _CustomWorkoutSheetState extends State<_CustomWorkoutSheet> {
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14)),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
                       ),
                       onPressed: _generate,
                       child: Text(
                         'Generar rutina',
                         style: GoogleFonts.poppins(
-                            fontSize: 15, fontWeight: FontWeight.w600),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
@@ -1652,7 +1982,9 @@ class _CustomWorkoutSheetState extends State<_CustomWorkoutSheet> {
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (_) => _WorkoutDetailSheet(
-          workout: workout, primaryColor: widget.primaryColor),
+        workout: workout,
+        primaryColor: widget.primaryColor,
+      ),
     );
   }
 }
@@ -1690,9 +2022,13 @@ class _SliderRow extends StatelessWidget {
           children: [
             Icon(icon, size: 18, color: color),
             const SizedBox(width: 6),
-            Text(label,
-                style: GoogleFonts.poppins(
-                    fontSize: 13, fontWeight: FontWeight.w600)),
+            Text(
+              label,
+              style: GoogleFonts.poppins(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             const Spacer(),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
@@ -1700,9 +2036,14 @@ class _SliderRow extends StatelessWidget {
                 color: color.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Text(value,
-                  style: GoogleFonts.poppins(
-                      fontSize: 12, color: color, fontWeight: FontWeight.w600)),
+              child: Text(
+                value,
+                style: GoogleFonts.poppins(
+                  fontSize: 12,
+                  color: color,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           ],
         ),
@@ -1777,7 +2118,9 @@ class _MoodTrackerDialogState extends State<_MoodTrackerDialog> {
             Text(
               '¿Cómo fue tu entrenamiento?',
               style: GoogleFonts.poppins(
-                  fontSize: 16, fontWeight: FontWeight.w700),
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
@@ -1820,7 +2163,8 @@ class _MoodTrackerDialogState extends State<_MoodTrackerDialog> {
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14)),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
                 ),
                 onPressed: () => Navigator.pop(
                   context,
@@ -1832,16 +2176,24 @@ class _MoodTrackerDialogState extends State<_MoodTrackerDialog> {
                     potencia: _potencia,
                   ),
                 ),
-                child: Text('Guardar',
-                    style: GoogleFonts.poppins(
-                        fontSize: 15, fontWeight: FontWeight.w600)),
+                child: Text(
+                  'Guardar',
+                  style: GoogleFonts.poppins(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context, null),
-              child: Text('Omitir',
-                  style: GoogleFonts.poppins(
-                      fontSize: 13, color: Colors.grey.shade500)),
+              child: Text(
+                'Omitir',
+                style: GoogleFonts.poppins(
+                  fontSize: 13,
+                  color: NutriDesign.grey700,
+                ),
+              ),
             ),
           ],
         ),
@@ -1871,31 +2223,46 @@ class _MoodRow extends StatelessWidget {
         children: [
           SizedBox(
             width: 86,
-            child: Text(label,
-                style: GoogleFonts.poppins(
-                    fontSize: 12, fontWeight: FontWeight.w600)),
+            child: Text(
+              label,
+              style: GoogleFonts.poppins(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
           ...List.generate(5, (i) {
             final level = i + 1;
             final selected = value == level;
-            return GestureDetector(
-              onTap: () => onChanged(level),
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 150),
-                margin: const EdgeInsets.only(right: 4),
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: selected
-                      ? const Color(0xFF51CF66).withValues(alpha: 0.15)
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color:
-                        selected ? const Color(0xFF51CF66) : Colors.transparent,
+            return Semantics(
+              button: true,
+              selected: selected,
+              label: '$label nivel $level',
+              excludeSemantics: true,
+              child: GestureDetector(
+                onTap: () => onChanged(level),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 150),
+                  margin: const EdgeInsets.only(right: 4),
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: selected
+                        ? const Color(0xFF51CF66).withValues(alpha: 0.15)
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: selected
+                          ? const Color(0xFF51CF66)
+                          : Colors.transparent,
+                    ),
+                  ),
+                  child: ExcludeSemantics(
+                    child: Text(
+                      emojis[i],
+                      style: TextStyle(fontSize: selected ? 22 : 18),
+                    ),
                   ),
                 ),
-                child: Text(emojis[i],
-                    style: TextStyle(fontSize: selected ? 22 : 18)),
               ),
             );
           }),

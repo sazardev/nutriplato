@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:nutriplato/data/food/animals.dart';
+import 'package:nutriplato/data/food/azucares.dart';
+import 'package:nutriplato/data/food/bebidas.dart';
+import 'package:nutriplato/data/food/botanas.dart';
 import 'package:nutriplato/data/food/cereales.dart';
+import 'package:nutriplato/data/food/condimentos.dart';
 import 'package:nutriplato/data/food/frutas.dart';
+import 'package:nutriplato/data/food/grasas.dart';
+import 'package:nutriplato/data/food/lacteos.dart';
 import 'package:nutriplato/data/food/leguminosas.dart';
 import 'package:nutriplato/data/food/verduras.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
+import 'package:nutriplato/infrastructure/entities/food/custom_food_provider.dart';
+import 'package:nutriplato/infrastructure/entities/food/favorites_provider.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import '../presentation/screens/food/food.view.dart';
+import 'online_food_search.dart';
 import '../data/data.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -38,16 +48,24 @@ class _SearchScreen extends State<SearchScreen> {
     "Calorías (mayor a menor)",
     "Proteínas (menor a mayor)",
     "Proteínas (mayor a menor)",
-    "Recientes primero"
+    "Recientes primero",
   ];
 
   final Map<String, IconData> _foodCategories = {
     "Todos": Icons.all_inclusive,
-    "Cereales": FontAwesomeIcons.wheatAwn,
-    "Leguminosas": FontAwesomeIcons.seedling,
-    "Animal": FontAwesomeIcons.cow,
-    "Verduras": FontAwesomeIcons.carrot,
-    "Frutas": FontAwesomeIcons.appleWhole,
+    "Cereales": FontAwesomeIcons.wheatAwn.data,
+    "Leguminosas": FontAwesomeIcons.seedling.data,
+    "Animal": FontAwesomeIcons.cow.data,
+    "Verduras": FontAwesomeIcons.carrot.data,
+    "Frutas": FontAwesomeIcons.appleWhole.data,
+    "Grasas": FontAwesomeIcons.droplet.data,
+    "Lácteos": FontAwesomeIcons.glassWater.data,
+    "Bebidas": FontAwesomeIcons.mugHot.data,
+    "Azúcares": FontAwesomeIcons.candyCane.data,
+    "Botanas": FontAwesomeIcons.bagShopping.data,
+    "Condimentos": FontAwesomeIcons.mortarPestle.data,
+    "Favoritos": Icons.favorite,
+    "Mis alimentos": Icons.add_box_outlined,
     "Recientes": Icons.history,
   };
 
@@ -60,6 +78,12 @@ class _SearchScreen extends State<SearchScreen> {
     allFoods.addAll(frutas);
     allFoods.addAll(leguminosas);
     allFoods.addAll(cereales);
+    allFoods.addAll(grasas);
+    allFoods.addAll(lacteos);
+    allFoods.addAll(bebidas);
+    allFoods.addAll(azucares);
+    allFoods.addAll(botanas);
+    allFoods.addAll(condimentos);
 
     _updateRanges();
     loadRecentFoods();
@@ -139,6 +163,18 @@ class _SearchScreen extends State<SearchScreen> {
               return food.category == 'verdura';
             case "Frutas":
               return food.category == 'fruta';
+            case "Grasas":
+              return food.category == 'grasa';
+            case "Lácteos":
+              return food.category == 'lacteo';
+            case "Bebidas":
+              return food.category == 'bebida';
+            case "Azúcares":
+              return food.category == 'azucar';
+            case "Botanas":
+              return food.category == 'botana';
+            case "Condimentos":
+              return food.category == 'condimento';
             default:
               return true;
           }
@@ -170,31 +206,48 @@ class _SearchScreen extends State<SearchScreen> {
   }
 
   void _applySorting() {
+    _sortList(filteredFoods);
+  }
+
+  /// Ordena una lista según el método de ordenamiento actual.
+  void _sortList(List<Food> list) {
     switch (_currentSortingMethod) {
       case "Alfabético (A-Z)":
-        filteredFoods.sort((a, b) => a.name.compareTo(b.name));
+        list.sort((a, b) => a.name.compareTo(b.name));
         break;
       case "Alfabético (Z-A)":
-        filteredFoods.sort((a, b) => b.name.compareTo(a.name));
+        list.sort((a, b) => b.name.compareTo(a.name));
         break;
       case "Calorías (menor a mayor)":
-        filteredFoods.sort((a, b) => (double.tryParse(a.energia) ?? 0)
-            .compareTo(double.tryParse(b.energia) ?? 0));
+        list.sort(
+          (a, b) => (double.tryParse(a.energia) ?? 0).compareTo(
+            double.tryParse(b.energia) ?? 0,
+          ),
+        );
         break;
       case "Calorías (mayor a menor)":
-        filteredFoods.sort((a, b) => (double.tryParse(b.energia) ?? 0)
-            .compareTo(double.tryParse(a.energia) ?? 0));
+        list.sort(
+          (a, b) => (double.tryParse(b.energia) ?? 0).compareTo(
+            double.tryParse(a.energia) ?? 0,
+          ),
+        );
         break;
       case "Proteínas (menor a mayor)":
-        filteredFoods.sort((a, b) => (double.tryParse(a.proteina) ?? 0)
-            .compareTo(double.tryParse(b.proteina) ?? 0));
+        list.sort(
+          (a, b) => (double.tryParse(a.proteina) ?? 0).compareTo(
+            double.tryParse(b.proteina) ?? 0,
+          ),
+        );
         break;
       case "Proteínas (mayor a menor)":
-        filteredFoods.sort((a, b) => (double.tryParse(b.proteina) ?? 0)
-            .compareTo(double.tryParse(a.proteina) ?? 0));
+        list.sort(
+          (a, b) => (double.tryParse(b.proteina) ?? 0).compareTo(
+            double.tryParse(a.proteina) ?? 0,
+          ),
+        );
         break;
       case "Recientes primero":
-        filteredFoods.sort((a, b) {
+        list.sort((a, b) {
           int aIndex = recentFoods.indexWhere((food) => food.name == a.name);
           int bIndex = recentFoods.indexWhere((food) => food.name == b.name);
           if (aIndex == -1) aIndex = 999;
@@ -203,6 +256,75 @@ class _SearchScreen extends State<SearchScreen> {
         });
         break;
     }
+  }
+
+  bool _categoryMatches(Food food) {
+    switch (_activeView) {
+      case "Cereales":
+        return food.category == 'cereal';
+      case "Leguminosas":
+        return food.category == 'leguminosa';
+      case "Animal":
+        return food.category == 'animal';
+      case "Verduras":
+        return food.category == 'verdura';
+      case "Frutas":
+        return food.category == 'fruta';
+      case "Grasas":
+        return food.category == 'grasa';
+      case "Lácteos":
+        return food.category == 'lacteo';
+      case "Bebidas":
+        return food.category == 'bebida';
+      case "Azúcares":
+        return food.category == 'azucar';
+      case "Botanas":
+        return food.category == 'botana';
+      case "Condimentos":
+        return food.category == 'condimento';
+      default:
+        return true;
+    }
+  }
+
+  /// Calcula la lista visible en build combinando datos base, alimentos
+  /// personalizados y favoritos, aplicando filtros y ordenamiento.
+  List<Food> _freshList() {
+    final customFoods = context.read<CustomFoodProvider>().foods;
+    final favorites = context.read<FavoritesProvider>();
+    final pool = [...allFoods, ...customFoods];
+
+    List<Food> list;
+    if (_activeView == 'Recientes') {
+      list = List.from(recentFoods);
+    } else if (_activeView == 'Favoritos') {
+      list = pool.where((f) => favorites.isFavorite(f.name)).toList();
+    } else if (_activeView == 'Mis alimentos') {
+      list = List.from(customFoods);
+    } else {
+      list = List.from(pool);
+      if (_activeView != "Todos") {
+        list = list.where(_categoryMatches).toList();
+      }
+    }
+
+    if (searchController.text.isNotEmpty) {
+      final query = searchController.text.toLowerCase();
+      list = list.where((f) => f.name.toLowerCase().contains(query)).toList();
+    }
+
+    list = list.where((food) {
+      final calories = double.tryParse(food.energia) ?? 0;
+      return calories >= _caloriesRange.start && calories <= _caloriesRange.end;
+    }).toList();
+
+    list = list.where((food) {
+      final protein = double.tryParse(food.proteina) ?? 0;
+      return protein >= _proteinRange.start && protein <= _proteinRange.end;
+    }).toList();
+
+    _sortList(list);
+    return list;
   }
 
   bool _hasActiveFilters() {
@@ -235,6 +357,19 @@ class _SearchScreen extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return Consumer<CustomFoodProvider>(
+      builder: (context, customFoodProvider, _) {
+        return Consumer<FavoritesProvider>(
+          builder: (context, favoritesProvider, _) {
+            final displayFoods = _freshList();
+            return _buildScaffold(context, displayFoods);
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildScaffold(BuildContext context, List<Food> displayFoods) {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: CustomScrollView(
@@ -247,9 +382,7 @@ class _SearchScreen extends State<SearchScreen> {
             elevation: 0,
             backgroundColor: Colors.transparent,
             flexibleSpace: Container(
-              decoration: BoxDecoration(
-                gradient: AppGradients.primary,
-              ),
+              decoration: BoxDecoration(gradient: AppGradients.primary),
               child: FlexibleSpaceBar(
                 centerTitle: false,
                 titlePadding: const EdgeInsets.only(left: 16, bottom: 16),
@@ -261,9 +394,7 @@ class _SearchScreen extends State<SearchScreen> {
                   ),
                 ),
                 background: Container(
-                  decoration: BoxDecoration(
-                    gradient: AppGradients.primary,
-                  ),
+                  decoration: BoxDecoration(gradient: AppGradients.primary),
                   child: SafeArea(
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(16, 16, 16, 50),
@@ -271,9 +402,11 @@ class _SearchScreen extends State<SearchScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.restaurant_menu,
-                              color: Colors.white.withValues(alpha: .3),
-                              size: 80),
+                          Icon(
+                            Icons.restaurant_menu,
+                            color: Colors.white.withValues(alpha: .3),
+                            size: 80,
+                          ),
                         ],
                       ),
                     ),
@@ -283,7 +416,18 @@ class _SearchScreen extends State<SearchScreen> {
             ),
             actions: [
               IconButton(
+                icon: const Icon(Icons.cloud_outlined, color: Colors.white),
+                tooltip: 'Buscar en OpenFoodFacts',
+                onPressed: () => _showOnlineSearch(context),
+              ),
+              IconButton(
+                icon: const Icon(Icons.add_box_outlined, color: Colors.white),
+                tooltip: 'Crear alimento',
+                onPressed: () => _showCreateFoodDialog(),
+              ),
+              IconButton(
                 icon: const Icon(Icons.sort, color: Colors.white),
+                tooltip: 'Ordenar',
                 onPressed: () => _showSortingDialog(),
               ),
               IconButton(
@@ -291,6 +435,7 @@ class _SearchScreen extends State<SearchScreen> {
                   _showFilterPanel ? Icons.filter_list_off : Icons.filter_list,
                   color: Colors.white,
                 ),
+                tooltip: 'Filtros',
                 onPressed: () {
                   setState(() {
                     _showFilterPanel = !_showFilterPanel;
@@ -321,12 +466,17 @@ class _SearchScreen extends State<SearchScreen> {
                         hintStyle: AppTypography.bodyMedium.copyWith(
                           color: AppColors.textSecondary,
                         ),
-                        prefixIcon:
-                            Icon(Icons.search, color: AppColors.textSecondary),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: AppColors.textSecondary,
+                        ),
                         suffixIcon: searchController.text.isNotEmpty
                             ? IconButton(
-                                icon: Icon(Icons.clear,
-                                    color: AppColors.textSecondary),
+                                icon: Icon(
+                                  Icons.clear,
+                                  color: AppColors.textSecondary,
+                                ),
+                                tooltip: 'Limpiar búsqueda',
                                 onPressed: () {
                                   searchController.clear();
                                   _applyFilters();
@@ -351,8 +501,9 @@ class _SearchScreen extends State<SearchScreen> {
                   height: 50,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.md,
+                    ),
                     children: _foodCategories.entries.map((entry) {
                       bool isActive = _activeView == entry.key;
                       return Padding(
@@ -373,8 +524,9 @@ class _SearchScreen extends State<SearchScreen> {
                             decoration: BoxDecoration(
                               gradient: isActive ? AppGradients.primary : null,
                               color: isActive ? null : AppColors.surface,
-                              borderRadius:
-                                  BorderRadius.circular(AppRadius.full),
+                              borderRadius: BorderRadius.circular(
+                                AppRadius.full,
+                              ),
                               boxShadow: [AppShadows.subtle],
                             ),
                             child: Row(
@@ -425,9 +577,9 @@ class _SearchScreen extends State<SearchScreen> {
                           vertical: AppSpacing.xs,
                         ),
                         decoration: BoxDecoration(
-                          color: Theme.of(context)
-                              .primaryColor
-                              .withValues(alpha: .1),
+                          color: Theme.of(
+                            context,
+                          ).primaryColor.withValues(alpha: .1),
                           borderRadius: BorderRadius.circular(AppRadius.full),
                         ),
                         child: Row(
@@ -439,7 +591,7 @@ class _SearchScreen extends State<SearchScreen> {
                             ),
                             const SizedBox(width: AppSpacing.xs),
                             Text(
-                              '${filteredFoods.length} resultados',
+                              '${displayFoods.length} resultados',
                               style: AppTypography.labelLarge.copyWith(
                                 color: Theme.of(context).primaryColor,
                               ),
@@ -487,25 +639,47 @@ class _SearchScreen extends State<SearchScreen> {
           ),
 
           // Grid de alimentos
-          filteredFoods.isEmpty
+          displayFoods.isEmpty
               ? SliverFillRemaining(
+                  hasScrollBody: false,
                   child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.search_off,
-                          size: 64,
-                          color: AppColors.textSecondary.withValues(alpha: .5),
-                        ),
-                        const SizedBox(height: AppSpacing.md),
-                        Text(
-                          'No se encontraron alimentos',
-                          style: AppTypography.bodyLarge.copyWith(
-                            color: AppColors.textSecondary,
+                    child: Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.search_off,
+                            size: 64,
+                            color: AppColors.textSecondary.withValues(
+                              alpha: .5,
+                            ),
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: AppSpacing.md),
+                          Text(
+                            'No se encontraron alimentos en la base local',
+                            textAlign: TextAlign.center,
+                            style: AppTypography.bodyLarge.copyWith(
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          OutlinedButton.icon(
+                            onPressed: () => _showOnlineSearch(context),
+                            icon: const Icon(Icons.cloud_queue),
+                            label: const Text('Buscar en OpenFoodFacts'),
+                            style: OutlinedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 12,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 )
@@ -514,20 +688,145 @@ class _SearchScreen extends State<SearchScreen> {
                   sliver: SliverGrid(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.75,
-                      crossAxisSpacing: AppSpacing.sm,
-                      mainAxisSpacing: AppSpacing.sm,
-                    ),
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.75,
+                          crossAxisSpacing: AppSpacing.sm,
+                          mainAxisSpacing: AppSpacing.sm,
+                        ),
                     delegate: SliverChildBuilderDelegate(
-                      (context, index) => _buildFoodCard(filteredFoods[index]),
-                      childCount: filteredFoods.length,
+                      (context, index) => _buildFoodCard(displayFoods[index]),
+                      childCount: displayFoods.length,
                     ),
                   ),
                 ),
         ],
       ),
     );
+  }
+
+  void _showOnlineSearch(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) =>
+          OnlineFoodSearchSheet(initialQuery: searchController.text),
+    );
+  }
+
+  Future<void> _showCreateFoodDialog() async {
+    final nameController = TextEditingController();
+    final caloriesController = TextEditingController();
+    final proteinController = TextEditingController();
+    final carbsController = TextEditingController();
+    final fatController = TextEditingController();
+    final portionController = TextEditingController();
+
+    final created = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Crear alimento'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Nombre *',
+                  hintText: 'Ej. Smoothie de fresa',
+                ),
+              ),
+              TextField(
+                controller: caloriesController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Calorías por porción *',
+                ),
+              ),
+              TextField(
+                controller: proteinController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(labelText: 'Proteínas (g)'),
+              ),
+              TextField(
+                controller: carbsController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Carbohidratos (g)',
+                ),
+              ),
+              TextField(
+                controller: fatController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(labelText: 'Grasas (g)'),
+              ),
+              TextField(
+                controller: portionController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Peso por porción (g)',
+                  hintText: '100',
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('Guardar'),
+          ),
+        ],
+      ),
+    );
+
+    if (created != true || !mounted) return;
+
+    final name = nameController.text.trim();
+    final calories = double.tryParse(caloriesController.text.trim());
+    if (name.isEmpty || calories == null) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Nombre y calorías son obligatorios')),
+      );
+      return;
+    }
+
+    final food = Food(
+      name: name,
+      category: 'custom',
+      icon: const Icon(Icons.restaurant, color: Colors.green),
+      color: Colors.green,
+      cantidadSugerida: '1',
+      unidad: 'porción',
+      pesoRedondeado: portionController.text.trim().isEmpty
+          ? '100'
+          : portionController.text.trim(),
+      pesoNeto: portionController.text.trim().isEmpty
+          ? '100'
+          : portionController.text.trim(),
+      energia: calories.toStringAsFixed(0),
+      proteina: (double.tryParse(proteinController.text.trim()) ?? 0)
+          .toStringAsFixed(1),
+      lipidos: (double.tryParse(fatController.text.trim()) ?? 0)
+          .toStringAsFixed(1),
+      hidratosDeCarbono: (double.tryParse(carbsController.text.trim()) ?? 0)
+          .toStringAsFixed(1),
+    );
+
+    await context.read<CustomFoodProvider>().addFood(food);
+    if (!mounted) return;
+    setState(() {
+      _activeView = 'Mis alimentos';
+    });
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('"$name" agregado a tus alimentos')));
   }
 
   Widget _buildActiveFiltersBar() {
@@ -564,7 +863,7 @@ class _SearchScreen extends State<SearchScreen> {
               _buildFilterChip(
                 label:
                     'Proteínas: ${_proteinRange.start.round()}-${_proteinRange.end.round()} g',
-                icon: FontAwesomeIcons.dna,
+                icon: FontAwesomeIcons.dna.data,
                 color: Colors.green,
                 onTap: () {
                   setState(() {
@@ -649,10 +948,7 @@ class _SearchScreen extends State<SearchScreen> {
             children: [
               Icon(Icons.tune, color: Theme.of(context).primaryColor),
               const SizedBox(width: AppSpacing.sm),
-              Text(
-                'Filtros Avanzados',
-                style: AppTypography.titleMedium,
-              ),
+              Text('Filtros Avanzados', style: AppTypography.titleMedium),
             ],
           ),
           const Divider(height: AppSpacing.lg),
@@ -673,7 +969,7 @@ class _SearchScreen extends State<SearchScreen> {
           const SizedBox(height: AppSpacing.md),
           _buildRangeFilterSection(
             title: 'Proteínas',
-            icon: FontAwesomeIcons.dna,
+            icon: FontAwesomeIcons.dna.data,
             iconColor: Colors.green,
             currentRange: _proteinRange,
             maxRange: 100,
@@ -713,9 +1009,12 @@ class _SearchScreen extends State<SearchScreen> {
                     });
                   },
                   icon: const Icon(Icons.check),
-                  label: Text('Aplicar',
-                      style: AppTypography.labelLarge
-                          .copyWith(color: Colors.white)),
+                  label: Text(
+                    'Aplicar',
+                    style: AppTypography.labelLarge.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Theme.of(context).primaryColor,
@@ -753,10 +1052,7 @@ class _SearchScreen extends State<SearchScreen> {
           children: [
             Icon(icon, size: 18, color: iconColor),
             const SizedBox(width: AppSpacing.sm),
-            Text(
-              title,
-              style: AppTypography.titleSmall,
-            ),
+            Text(title, style: AppTypography.titleSmall),
           ],
         ),
         const SizedBox(height: AppSpacing.xs),
@@ -833,8 +1129,10 @@ class _SearchScreen extends State<SearchScreen> {
               Text('0', style: AppTypography.bodySmall),
               Text('${(maxRange / 4).round()}', style: AppTypography.bodySmall),
               Text('${(maxRange / 2).round()}', style: AppTypography.bodySmall),
-              Text('${(maxRange * 3 / 4).round()}',
-                  style: AppTypography.bodySmall),
+              Text(
+                '${(maxRange * 3 / 4).round()}',
+                style: AppTypography.bodySmall,
+              ),
               Text('${maxRange.round()}', style: AppTypography.bodySmall),
             ],
           ),
@@ -847,10 +1145,10 @@ class _SearchScreen extends State<SearchScreen> {
     final Map<String, IconData> sortIcons = {
       "Alfabético (A-Z)": Icons.sort_by_alpha,
       "Alfabético (Z-A)": Icons.sort,
-      "Calorías (menor a mayor)": FontAwesomeIcons.fireFlameCurved,
-      "Calorías (mayor a menor)": FontAwesomeIcons.fireFlameCurved,
-      "Proteínas (menor a mayor)": FontAwesomeIcons.dna,
-      "Proteínas (mayor a menor)": FontAwesomeIcons.dna,
+      "Calorías (menor a mayor)": FontAwesomeIcons.fireFlameCurved.data,
+      "Calorías (mayor a menor)": FontAwesomeIcons.fireFlameCurved.data,
+      "Proteínas (menor a mayor)": FontAwesomeIcons.dna.data,
+      "Proteínas (mayor a menor)": FontAwesomeIcons.dna.data,
       "Recientes primero": Icons.history,
     };
 
@@ -861,8 +1159,11 @@ class _SearchScreen extends State<SearchScreen> {
       "Calorías (mayor a menor)": const Icon(Icons.arrow_downward, size: 16),
       "Proteínas (menor a mayor)": const Icon(Icons.arrow_upward, size: 16),
       "Proteínas (mayor a menor)": const Icon(Icons.arrow_downward, size: 16),
-      "Recientes primero":
-          const Icon(Icons.star, size: 16, color: Colors.amber),
+      "Recientes primero": const Icon(
+        Icons.star,
+        size: 16,
+        color: Colors.amber,
+      ),
     };
 
     showDialog(
@@ -909,9 +1210,9 @@ class _SearchScreen extends State<SearchScreen> {
 
                       return Material(
                         color: isSelected
-                            ? Theme.of(context)
-                                .primaryColor
-                                .withValues(alpha: .1)
+                            ? Theme.of(
+                                context,
+                              ).primaryColor.withValues(alpha: .1)
                             : Colors.transparent,
                         child: InkWell(
                           onTap: () {
@@ -933,12 +1234,13 @@ class _SearchScreen extends State<SearchScreen> {
                                   padding: const EdgeInsets.all(AppSpacing.sm),
                                   decoration: BoxDecoration(
                                     color: isSelected
-                                        ? Theme.of(context)
-                                            .primaryColor
-                                            .withValues(alpha: .2)
+                                        ? Theme.of(
+                                            context,
+                                          ).primaryColor.withValues(alpha: .2)
                                         : AppColors.background,
-                                    borderRadius:
-                                        BorderRadius.circular(AppRadius.sm),
+                                    borderRadius: BorderRadius.circular(
+                                      AppRadius.sm,
+                                    ),
                                   ),
                                   child: Icon(
                                     sortIcons[method],
@@ -1003,23 +1305,23 @@ class _SearchScreen extends State<SearchScreen> {
     switch (food.category) {
       case 'cereal':
         categoryColor = sectionColors[0];
-        categoryIcon = FontAwesomeIcons.wheatAwn;
+        categoryIcon = FontAwesomeIcons.wheatAwn.data;
         break;
       case 'leguminosa':
         categoryColor = sectionColors[1];
-        categoryIcon = FontAwesomeIcons.seedling;
+        categoryIcon = FontAwesomeIcons.seedling.data;
         break;
       case 'animal':
         categoryColor = sectionColors[2];
-        categoryIcon = FontAwesomeIcons.cow;
+        categoryIcon = FontAwesomeIcons.cow.data;
         break;
       case 'verdura':
         categoryColor = sectionColors[4];
-        categoryIcon = FontAwesomeIcons.carrot;
+        categoryIcon = FontAwesomeIcons.carrot.data;
         break;
       case 'fruta':
         categoryColor = sectionColors[4];
-        categoryIcon = FontAwesomeIcons.appleWhole;
+        categoryIcon = FontAwesomeIcons.appleWhole.data;
         break;
       default:
         categoryColor = AppColors.textSecondary;
@@ -1087,7 +1389,8 @@ class _SearchScreen extends State<SearchScreen> {
               child: Container(
                 color: categoryColor.withValues(alpha: .08),
                 width: double.infinity,
-                child: food.image ??
+                child:
+                    food.image ??
                     Icon(
                       categoryIcon,
                       size: 50,
@@ -1121,11 +1424,7 @@ class _SearchScreen extends State<SearchScreen> {
                           'kcal',
                         ),
                         const SizedBox(width: AppSpacing.sm),
-                        _buildNutrientBadge(
-                          'Proteína',
-                          food.proteina,
-                          'g',
-                        ),
+                        _buildNutrientBadge('Proteína', food.proteina, 'g'),
                       ],
                     ),
                   ],
@@ -1146,9 +1445,7 @@ class _SearchScreen extends State<SearchScreen> {
         children: [
           Text(
             label,
-            style: AppTypography.bodySmall.copyWith(
-              fontSize: 8,
-            ),
+            style: AppTypography.bodySmall.copyWith(fontSize: 8),
             overflow: TextOverflow.ellipsis,
           ),
           Text(

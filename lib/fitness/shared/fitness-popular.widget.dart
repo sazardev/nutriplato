@@ -5,9 +5,7 @@ import 'package:nutriplato/fitness/fitness.controller.dart';
 import 'package:nutriplato/fitness/shared/gradient-card.widget.dart';
 
 class PopularExercisesScreen extends StatelessWidget {
-  const PopularExercisesScreen({
-    super.key,
-  });
+  const PopularExercisesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +18,7 @@ class PopularExercisesScreen extends StatelessWidget {
           padding: EdgeInsets.all(8.0),
           child: Text(
             'Ejercicios destacados',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
         ),
         SingleChildScrollView(

@@ -5,6 +5,9 @@ import 'package:nutriplato/data/food/leguminosas.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_entry.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_provider.dart';
+import 'package:nutriplato/infrastructure/entities/food/favorites_provider.dart';
+import 'package:nutriplato/infrastructure/entities/food/micros_helper.dart';
+import 'package:nutriplato/infrastructure/entities/food/micronutrients.dart';
 import 'package:nutriplato/presentation/home.screen.dart';
 import 'package:nutriplato/presentation/screens/food/widgets/food_health_alert_widget.dart';
 import 'package:provider/provider.dart';
@@ -18,10 +21,7 @@ import '../../../data/food/verduras.dart';
 class FoodViewScreen extends StatefulWidget {
   final Food food;
 
-  const FoodViewScreen({
-    super.key,
-    required this.food,
-  });
+  const FoodViewScreen({super.key, required this.food});
 
   @override
   State<FoodViewScreen> createState() => _DisplayFoodScreen();
@@ -70,6 +70,9 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
       case "fruta":
         list = frutas;
         break;
+      default:
+        list = [];
+        break;
     }
 
     controller = TextEditingController(text: '1');
@@ -85,8 +88,9 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
   @override
   Widget build(BuildContext context) {
     final Color baseColor = widget.food.color;
-    final Color textColor =
-        _isColorDark(baseColor) ? Colors.white : Colors.black87;
+    final Color textColor = _isColorDark(baseColor)
+        ? Colors.white
+        : Colors.black87;
     final Color cardColor = _isColorDark(baseColor)
         ? Colors.white.withValues(alpha: .15)
         : Colors.black.withValues(alpha: .05);
@@ -96,10 +100,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [
-            baseColor,
-            baseColor.withValues(alpha: .85),
-          ],
+          colors: [baseColor, baseColor.withValues(alpha: .85)],
         ),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(24),
@@ -136,10 +137,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: IconTheme(
-                      data: IconThemeData(
-                        color: textColor,
-                        size: 32,
-                      ),
+                      data: IconThemeData(color: textColor, size: 32),
                       child: widget.food.icon,
                     ),
                   ),
@@ -169,6 +167,25 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                       ],
                     ),
                   ),
+                  Consumer<FavoritesProvider>(
+                    builder: (context, favorites, _) {
+                      final isFav = favorites.isFavorite(widget.food.name);
+                      return IconButton(
+                        onPressed: () async {
+                          await favorites.toggle(widget.food.name);
+                        },
+                        icon: Icon(
+                          isFav ? Icons.favorite : Icons.favorite_border,
+                          color: isFav
+                              ? Colors.redAccent
+                              : textColor.withValues(alpha: .8),
+                        ),
+                        tooltip: isFav
+                            ? 'Quitar de favoritos'
+                            : 'Agregar a favoritos',
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -195,6 +212,9 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                         // Nutrition Summary Card
                         _buildNutritionCard(),
 
+                        // Micro nutrientes (fibra, vitaminas, minerales, IG)
+                        _buildMicrosSection(),
+
                         // Food Details Section
                         Padding(
                           padding: const EdgeInsets.all(20),
@@ -211,8 +231,10 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                                     ? '${widget.food.cantidadSugerida} ${widget.food.unidad} (${widget.food.pesoNeto} g)'
                                     : '$multiplicador ${widget.food.unidad} (${(double.tryParse(widget.food.pesoNeto) ?? 0) * multiplicador} g)',
                                 icon: Icons.restaurant,
-                                onInfoPressed: () => _showInfoDialog('Porción',
-                                    'Cantidad recomendada por porción según el Sistema Mexicano de Equivalencias.'),
+                                onInfoPressed: () => _showInfoDialog(
+                                  'Porción',
+                                  'Cantidad recomendada por porción según el Sistema Mexicano de Equivalencias.',
+                                ),
                               ),
 
                               const SizedBox(height: 16),
@@ -223,8 +245,9 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                                 customValue: _buildQuantitySelector(),
                                 icon: Icons.add_chart,
                                 onInfoPressed: () => _showInfoDialog(
-                                    'Porciones',
-                                    'Cantidad recomendada por el Sistema Mexicano de Equivalencias.\n\nPuedes modificar la cantidad que es la equivalencia a una porcion del alimento.'),
+                                  'Porciones',
+                                  'Cantidad recomendada por el Sistema Mexicano de Equivalencias.\n\nPuedes modificar la cantidad que es la equivalencia a una porcion del alimento.',
+                                ),
                               ),
 
                               const SizedBox(height: 16),
@@ -235,8 +258,9 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                                 customValue: _buildMealTypeSelector(),
                                 icon: Icons.schedule,
                                 onInfoPressed: () => _showInfoDialog(
-                                    'Tipo de comida',
-                                    'Selecciona en qué momento del día consumiste este alimento.'),
+                                  'Tipo de comida',
+                                  'Selecciona en qué momento del día consumiste este alimento.',
+                                ),
                               ),
 
                               const SizedBox(height: 24),
@@ -255,13 +279,14 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                                     foregroundColor: Colors.white,
                                     backgroundColor: widget.food.color,
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 16),
+                                      vertical: 16,
+                                    ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(16),
                                     ),
                                     elevation: 4,
                                   ),
-                                  icon: const Icon(FontAwesomeIcons.plus),
+                                  icon: Icon(FontAwesomeIcons.plus.data),
                                   label: const Text(
                                     'Agregar al registro',
                                     style: TextStyle(
@@ -298,6 +323,18 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
         return "Verdura";
       case "fruta":
         return "Fruta";
+      case "grasa":
+        return "Grasa saludable";
+      case "lacteo":
+        return "Lácteo";
+      case "bebida":
+        return "Bebida";
+      case "azucar":
+        return "Azúcar / Dulce";
+      case "botana":
+        return "Botana";
+      case "condimento":
+        return "Condimento";
       default:
         return category;
     }
@@ -331,7 +368,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                 '${(int.parse(widget.food.energia) * multiplicador)}',
                 'kcal',
                 'Calorías',
-                FontAwesomeIcons.fire,
+                FontAwesomeIcons.fire.data,
                 Colors.red.shade400,
               ),
               _buildNutrientValue(
@@ -339,7 +376,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                     .toStringAsFixed(1),
                 'g',
                 'Proteínas',
-                FontAwesomeIcons.dna,
+                FontAwesomeIcons.dna.data,
                 Colors.green.shade500,
               ),
               _buildNutrientValue(
@@ -347,7 +384,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                     .toStringAsFixed(1),
                 'g',
                 'Carbohidratos',
-                FontAwesomeIcons.breadSlice,
+                FontAwesomeIcons.breadSlice.data,
                 Colors.amber.shade700,
               ),
               _buildNutrientValue(
@@ -355,7 +392,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                     .toStringAsFixed(1),
                 'g',
                 'Grasas',
-                FontAwesomeIcons.oilWell,
+                FontAwesomeIcons.oilWell.data,
                 Colors.orange.shade700,
               ),
             ],
@@ -366,7 +403,12 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
   }
 
   Widget _buildNutrientValue(
-      String value, String unit, String label, IconData icon, Color color) {
+    String value,
+    String unit,
+    String label,
+    IconData icon,
+    Color color,
+  ) {
     return Column(
       children: [
         Container(
@@ -375,25 +417,24 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
             color: color.withValues(alpha: .1),
             shape: BoxShape.circle,
           ),
-          child: Icon(
-            icon,
-            color: color,
-            size: 20,
-          ),
+          child: Icon(icon, color: color, size: 20),
         ),
         const SizedBox(height: 8),
         RichText(
           text: TextSpan(
             style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87),
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
             children: [
               TextSpan(text: value),
               TextSpan(
                 text: ' $unit',
                 style: const TextStyle(
-                    fontSize: 14, fontWeight: FontWeight.normal),
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             ],
           ),
@@ -402,12 +443,142 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
         const SizedBox(height: 4),
         Text(
           label,
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.grey.shade600,
-          ),
+          style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
         ),
       ],
+    );
+  }
+
+  Widget _buildMicrosSection() {
+    final Micronutrients? micros = microsOf(widget.food);
+    if (micros == null || micros.availableItems.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    final items = micros.availableItems;
+
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(top: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade50,
+        border: Border(
+          top: BorderSide(color: Colors.grey.shade200),
+          bottom: BorderSide(color: Colors.grey.shade200),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                FontAwesomeIcons.seedling.data,
+                size: 16,
+                color: widget.food.color,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'Micro nutrientes',
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: items.map((item) {
+              final scaled = _scaleMicroValue(item.value, multiplicador);
+              return _buildMicroChip(item.key, scaled, widget.food.color);
+            }).toList(),
+          ),
+          if (micros.indiceGlicemicoValue != null ||
+              micros.cargaGlicemicaValue != null) ...[
+            const SizedBox(height: 12),
+            const Divider(height: 1),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Icon(
+                  FontAwesomeIcons.heartPulse.data,
+                  size: 14,
+                  color: widget.food.color,
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Wrap(
+                    spacing: 8,
+                    runSpacing: 4,
+                    children: [
+                      if (micros.indiceGlicemicoValue != null)
+                        _buildMicroChip(
+                          'Índice glucémico',
+                          micros.indiceGlicemicoValue!,
+                          _igColor(
+                            double.tryParse(micros.indiceGlicemicoValue!),
+                          ),
+                        ),
+                      if (micros.cargaGlicemicaValue != null)
+                        _buildMicroChip(
+                          'Carga glucémica',
+                          micros.cargaGlicemicaValue!,
+                          Colors.indigo,
+                        ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  /// Escala un valor numérico por el multiplicador de porciones.
+  String _scaleMicroValue(String raw, int mult) {
+    final value = double.tryParse(raw);
+    if (value == null) return raw;
+    return (value * mult).toStringAsFixed(1);
+  }
+
+  Color _igColor(double? ig) {
+    if (ig == null) return Colors.indigo;
+    if (ig >= 70) return Colors.red.shade600;
+    if (ig >= 56) return Colors.orange.shade700;
+    return Colors.green.shade600;
+  }
+
+  Widget _buildMicroChip(String label, String value, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: .1),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: color.withValues(alpha: .3)),
+      ),
+      child: RichText(
+        text: TextSpan(
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: Colors.black87,
+          ),
+          children: [
+            TextSpan(text: '$label: '),
+            TextSpan(
+              text: value,
+              style: TextStyle(color: color, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -422,12 +593,13 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
     );
   }
 
-  Widget _buildInfoRow(
-      {required String title,
-      String? value,
-      Widget? customValue,
-      required IconData icon,
-      required VoidCallback onInfoPressed}) {
+  Widget _buildInfoRow({
+    required String title,
+    String? value,
+    Widget? customValue,
+    required IconData icon,
+    required VoidCallback onInfoPressed,
+  }) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -437,11 +609,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
             color: widget.food.color.withValues(alpha: .1),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(
-            icon,
-            color: widget.food.color,
-            size: 16,
-          ),
+          child: Icon(icon, color: widget.food.color, size: 16),
         ),
         const SizedBox(width: 12),
         Text(
@@ -454,10 +622,8 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
         ),
         IconButton(
           onPressed: onInfoPressed,
-          icon: const Icon(
-            Icons.info_outline,
-            size: 18,
-          ),
+          icon: const Icon(Icons.info_outline, size: 18),
+          tooltip: 'Más información',
           color: Colors.grey.shade600,
           padding: const EdgeInsets.symmetric(horizontal: 4),
           constraints: const BoxConstraints(),
@@ -473,14 +639,11 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
             ),
             child: Text(
               value,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             ),
           )
-        else if (customValue != null)
-          customValue,
+        else
+          ?customValue,
       ],
     );
   }
@@ -506,6 +669,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
               }
             },
             icon: Icon(Icons.remove, color: widget.food.color),
+            tooltip: 'Disminuir cantidad',
             iconSize: 18,
             constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
             padding: EdgeInsets.zero,
@@ -515,33 +679,38 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
             width: 40,
             height: 36,
             alignment: Alignment.center,
-            child: TextField(
-              controller: controller,
-              keyboardType: TextInputType.number,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: widget.food.color,
-                fontWeight: FontWeight.bold,
-              ),
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.zero,
-              ),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                FilteringTextInputFormatter.allow(
-                    RegExp(r'^[1-9]$|^1[0-9]$|^20$')),
-              ],
-              onChanged: (value) {
-                if (value.isNotEmpty) {
-                  final intValue = int.tryParse(value) ?? 1;
-                  if (intValue > 0 && intValue <= 20) {
-                    setState(() {
-                      multiplicador = intValue;
-                    });
+            child: Semantics(
+              textField: true,
+              label: 'Cantidad',
+              child: TextField(
+                controller: controller,
+                keyboardType: TextInputType.number,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: widget.food.color,
+                  fontWeight: FontWeight.bold,
+                ),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.zero,
+                ),
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  FilteringTextInputFormatter.allow(
+                    RegExp(r'^[1-9]$|^1[0-9]$|^20$'),
+                  ),
+                ],
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    final intValue = int.tryParse(value) ?? 1;
+                    if (intValue > 0 && intValue <= 20) {
+                      setState(() {
+                        multiplicador = intValue;
+                      });
+                    }
                   }
-                }
-              },
+                },
+              ),
             ),
           ),
           IconButton(
@@ -554,6 +723,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
               }
             },
             icon: Icon(Icons.add, color: widget.food.color),
+            tooltip: 'Aumentar cantidad',
             iconSize: 18,
             constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
             padding: EdgeInsets.zero,
@@ -613,15 +783,15 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
   IconData _getMealTypeIcon(String mealType) {
     switch (mealType) {
       case 'Desayuno':
-        return FontAwesomeIcons.mugSaucer;
+        return FontAwesomeIcons.mugSaucer.data;
       case 'Almuerzo':
-        return FontAwesomeIcons.bowlFood;
+        return FontAwesomeIcons.bowlFood.data;
       case 'Cena':
-        return FontAwesomeIcons.utensils;
+        return FontAwesomeIcons.utensils.data;
       case 'Snack':
-        return FontAwesomeIcons.apple;
+        return FontAwesomeIcons.apple.data;
       default:
-        return FontAwesomeIcons.circleQuestion;
+        return FontAwesomeIcons.circleQuestion.data;
     }
   }
 
@@ -634,7 +804,8 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
             100 >
         20) {
       tags.add(
-          _buildTag('Alto en proteínas', Colors.green.shade600, Icons.done));
+        _buildTag('Alto en proteínas', Colors.green.shade600, Icons.done),
+      );
     }
 
     // Check for high calories
@@ -643,24 +814,23 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
             100 >=
         275) {
       tags.add(
-          _buildTag('Alto en calorías', Colors.red.shade600, Icons.warning));
+        _buildTag('Alto en calorías', Colors.red.shade600, Icons.warning),
+      );
     }
 
     if (tags.isEmpty) {
       return const SizedBox.shrink();
     }
 
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: tags,
-    );
+    return Wrap(spacing: 8, runSpacing: 8, children: tags);
   }
 
   Widget _buildTag(String text, Color color, IconData icon) {
     return InkWell(
-      onTap: () => _showInfoDialog(text,
-          'Este alimento tiene características nutricionales especiales que debes tener en cuenta.'),
+      onTap: () => _showInfoDialog(
+        text,
+        'Este alimento tiene características nutricionales especiales que debes tener en cuenta.',
+      ),
       borderRadius: BorderRadius.circular(32),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -672,11 +842,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              icon,
-              size: 16,
-              color: color,
-            ),
+            Icon(icon, size: 16, color: color),
             const SizedBox(width: 6),
             Text(
               text,

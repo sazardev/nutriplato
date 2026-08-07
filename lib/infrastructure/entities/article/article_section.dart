@@ -3,11 +3,7 @@ class ArticleSection {
   final String content;
   final List<String>? images;
 
-  ArticleSection({
-    required this.title,
-    required this.content,
-    this.images,
-  });
+  ArticleSection({required this.title, required this.content, this.images});
 
   factory ArticleSection.fromJson(Map<dynamic, dynamic> json) {
     return ArticleSection(

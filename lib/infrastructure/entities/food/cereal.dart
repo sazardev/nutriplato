@@ -36,9 +36,9 @@ class Cereal extends Food {
     super.image,
     super.description,
   }) : super(
-          name: alimento,
-          category: 'cereal',
-          icon: const Icon(FontAwesomeIcons.wheatAwn),
-          color: sectionColors[0],
-        );
+         name: alimento,
+         category: 'cereal',
+         icon: Icon(FontAwesomeIcons.wheatAwn.data),
+         color: sectionColors[0],
+       );
 }

@@ -84,6 +84,28 @@ NutriPlato está desarrollado con Flutter, lo que permite una experiencia consis
 - presentation: Interfaces de usuario y componentes visuales
 - fitness: Módulos relacionados con ejercicio y actividad física
 
+### Versionado
+
+NutriPlato usa [Versionado Semántico](https://semver.org/lang/es/) con
+`MAJOR.MINOR.PATCH+BUILD` en `pubspec.yaml` como fuente única de verdad
+(`+BUILD` = versionCode Android, siempre creciente). Los cambios se documentan
+en [CHANGELOG.md](CHANGELOG.md) y la política completa está en
+[VERSIONING.md](VERSIONING.md).
+
+Bump de versión (actualiza pubspec, CHANGELOG y crea el tag `vX.Y.Z`):
+
+```bash
+dart run tool/bump_version.dart patch
+dart run tool/bump_version.dart minor
+dart run tool/bump_version.dart major
+```
+
+Instala los hooks de git (bloquean secretos y exigen CHANGELOG):
+
+```bash
+./tools/install-hooks.sh
+```
+
 ---
 
 *NutriPlato: Alimentación inteligente para una vida saludable, ¡al estilo mexicano!*

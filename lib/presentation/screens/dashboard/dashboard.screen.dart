@@ -22,7 +22,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: AppBar(
         title: const Text('NutriPlato'),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.notifications)),
+          IconButton(
+            onPressed: () {},
+            tooltip: 'Notificaciones',
+            icon: const Icon(Icons.notifications),
+          ),
         ],
       ),
       drawer: const DrawerProfile(),
@@ -42,20 +46,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 320,
-              child: FeaturedArticlesWidget(),
-            ),
+            const SizedBox(height: 320, child: FeaturedArticlesWidget()),
             const Divider(height: 32, thickness: 1),
-            SizedBox(
-              height: 230,
-              child: const LearnScreen(),
-            ),
+            SizedBox(height: 230, child: const LearnScreen()),
             const Divider(height: 32, thickness: 1),
-            SizedBox(
-              height: 350,
-              child: const PopularExercisesScreen(),
-            ),
+            SizedBox(height: 350, child: const PopularExercisesScreen()),
           ],
         ),
       ),

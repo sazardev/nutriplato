@@ -9,10 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class AddFoodEntryScreen extends StatefulWidget {
   final DateTime selectedDate;
 
-  const AddFoodEntryScreen({
-    super.key,
-    required this.selectedDate,
-  });
+  const AddFoodEntryScreen({super.key, required this.selectedDate});
 
   @override
   State<AddFoodEntryScreen> createState() => _AddFoodEntryScreenState();
@@ -27,9 +24,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Agregar alimento'),
-      ),
+      appBar: AppBar(title: const Text('Agregar alimento')),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -71,10 +66,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
         children: [
           const Text(
             'Tipo de comida',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 8),
           SingleChildScrollView(
@@ -121,15 +113,15 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
   IconData _getMealTypeIcon(String type) {
     switch (type) {
       case 'Desayuno':
-        return FontAwesomeIcons.mugSaucer;
+        return FontAwesomeIcons.mugSaucer.data;
       case 'Almuerzo':
-        return FontAwesomeIcons.bowlFood;
+        return FontAwesomeIcons.bowlFood.data;
       case 'Cena':
-        return FontAwesomeIcons.utensils;
+        return FontAwesomeIcons.utensils.data;
       case 'Snack':
-        return FontAwesomeIcons.apple;
+        return FontAwesomeIcons.apple.data;
       default:
-        return FontAwesomeIcons.circleQuestion;
+        return FontAwesomeIcons.circleQuestion.data;
     }
   }
 
@@ -153,19 +145,14 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
         children: [
           const Text(
             'Alimento',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 16),
           InkWell(
             onTap: () async {
               final result = await Navigator.push<Food>(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const SearchScreen(),
-                ),
+                MaterialPageRoute(builder: (context) => const SearchScreen()),
               );
 
               if (result != null) {
@@ -252,9 +239,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
                     ),
                     Text(
                       _selectedFood!.category,
-                      style: TextStyle(
-                        color: Colors.grey.shade600,
-                      ),
+                      style: TextStyle(color: Colors.grey.shade600),
                     ),
                   ],
                 ),
@@ -276,21 +261,21 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
                 label: 'Proteínas',
                 value: _selectedFood!.proteina,
                 unit: 'g',
-                icon: FontAwesomeIcons.dna,
+                icon: FontAwesomeIcons.dna.data,
                 color: Colors.green,
               ),
               _buildNutrientBox(
                 label: 'Carbohidratos',
                 value: _selectedFood!.hidratosDeCarbono,
                 unit: 'g',
-                icon: FontAwesomeIcons.breadSlice,
+                icon: FontAwesomeIcons.breadSlice.data,
                 color: Colors.amber,
               ),
               _buildNutrientBox(
                 label: 'Grasas',
                 value: _selectedFood!.lipidos,
                 unit: 'g',
-                icon: FontAwesomeIcons.oilWell,
+                icon: FontAwesomeIcons.oilWell.data,
                 color: Colors.orange,
               ),
             ],
@@ -324,26 +309,15 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
         children: [
           Icon(icon, color: color, size: 18),
           const SizedBox(height: 4),
-          Text(
-            value,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
           Text(
             unit,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey.shade600,
-            ),
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
           ),
           const SizedBox(height: 4),
           Text(
             label,
-            style: TextStyle(
-              fontSize: 10,
-              color: Colors.grey.shade600,
-            ),
+            style: TextStyle(fontSize: 10, color: Colors.grey.shade600),
           ),
         ],
       ),
@@ -372,10 +346,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
         children: [
           const Text(
             'Cantidad',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 16),
           Row(
@@ -389,6 +360,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
                   }
                 },
                 icon: const Icon(Icons.remove_circle_outline),
+                tooltip: 'Disminuir cantidad',
                 color: Theme.of(context).primaryColor,
               ),
               Expanded(
@@ -414,6 +386,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
                   }
                 },
                 icon: const Icon(Icons.add_circle_outline),
+                tooltip: 'Aumentar cantidad',
                 color: Theme.of(context).primaryColor,
               ),
             ],
@@ -421,10 +394,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
           Center(
             child: Text(
               '$_quantity ${_selectedFood!.unidad}',
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
           ),
         ],
@@ -461,10 +431,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
         children: [
           const Text(
             'Resumen nutricional',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 16),
           _buildNutrientRow(
@@ -479,7 +446,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
             label: 'Proteínas',
             value: protein.toStringAsFixed(1),
             unit: 'g',
-            icon: FontAwesomeIcons.dna,
+            icon: FontAwesomeIcons.dna.data,
             color: Colors.green,
           ),
           const SizedBox(height: 8),
@@ -487,7 +454,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
             label: 'Carbohidratos',
             value: carbs.toStringAsFixed(1),
             unit: 'g',
-            icon: FontAwesomeIcons.breadSlice,
+            icon: FontAwesomeIcons.breadSlice.data,
             color: Colors.amber,
           ),
           const SizedBox(height: 8),
@@ -495,7 +462,7 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
             label: 'Grasas',
             value: fat.toStringAsFixed(1),
             unit: 'g',
-            icon: FontAwesomeIcons.oilWell,
+            icon: FontAwesomeIcons.oilWell.data,
             color: Colors.orange,
           ),
         ],
@@ -514,19 +481,11 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
       children: [
         Icon(icon, color: color, size: 18),
         const SizedBox(width: 8),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 14,
-          ),
-        ),
+        Text(label, style: const TextStyle(fontSize: 14)),
         const Spacer(),
         Text(
           '$value $unit',
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
         ),
       ],
     );
@@ -537,18 +496,13 @@ class _AddFoodEntryScreenState extends State<AddFoodEntryScreen> {
       onPressed: _selectedFood == null ? null : () => _addFoodEntry(),
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         backgroundColor: Theme.of(context).primaryColor,
         disabledBackgroundColor: Colors.grey.shade300,
       ),
       child: const Text(
         'Agregar alimento',
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
     );
   }

@@ -34,8 +34,9 @@ class ThemeChangerProvider extends ChangeNotifier {
     _selectedColor = prefs.getInt('selectedColor') ?? 0;
     _isDarkMode = prefs.getBool('isDarkMode') ?? false;
     dev.log(
-        '_loadThemePreferences → color=$_selectedColor darkMode=$_isDarkMode',
-        name: _tag);
+      '_loadThemePreferences → color=$_selectedColor darkMode=$_isDarkMode',
+      name: _tag,
+    );
     notifyListeners();
   }
 
@@ -44,7 +45,8 @@ class ThemeChangerProvider extends ChangeNotifier {
     await prefs.setInt('selectedColor', _selectedColor);
     await prefs.setBool('isDarkMode', _isDarkMode);
     dev.log(
-        '_saveThemePreferences → color=$_selectedColor darkMode=$_isDarkMode guardado',
-        name: _tag);
+      '_saveThemePreferences → color=$_selectedColor darkMode=$_isDarkMode guardado',
+      name: _tag,
+    );
   }
 }

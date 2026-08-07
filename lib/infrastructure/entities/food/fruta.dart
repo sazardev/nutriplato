@@ -35,9 +35,9 @@ class Fruta extends Food {
     required this.cargaGlicemica,
     super.image,
   }) : super(
-          name: alimento,
-          category: 'fruta',
-          icon: const Icon(FontAwesomeIcons.appleWhole),
-          color: sectionColors[4],
-        );
+         name: alimento,
+         category: 'fruta',
+         icon: Icon(FontAwesomeIcons.appleWhole.data),
+         color: sectionColors[4],
+       );
 }

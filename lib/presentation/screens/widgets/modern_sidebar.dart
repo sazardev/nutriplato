@@ -43,192 +43,189 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
               padding: EdgeInsets.zero,
               children: [
                 const SizedBox(height: 8),
-                _buildMenuSection(
-                  context,
-                  'Nutrición Inteligente',
-                  [
-                    _buildMenuItem(
-                      context,
-                      'Plan Alimenticio',
-                      FontAwesomeIcons.bowlFood,
-                      Colors.green.shade600,
-                      () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const MealPlanScreen(),
-                          ),
+                _buildMenuSection(context, 'Nutrición Inteligente', [
+                  _buildMenuItem(
+                    context,
+                    'Plan Alimenticio',
+                    FontAwesomeIcons.bowlFood.data,
+                    Colors.green.shade600,
+                    () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const MealPlanScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  _buildMenuItem(
+                    context,
+                    'Aprende Nutrición',
+                    FontAwesomeIcons.graduationCap.data,
+                    Colors.purple.shade600,
+                    () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const NutritionEducationScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  _buildMenuItem(
+                    context,
+                    'Mi Perfil de Salud',
+                    FontAwesomeIcons.heartPulse.data,
+                    Colors.red.shade600,
+                    () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ProfileScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                ]),
+                _buildMenuSection(context, 'Personalización', [
+                  _buildMenuItem(
+                    context,
+                    'Cambiar tema',
+                    FontAwesomeIcons.palette.data,
+                    currentTheme[0],
+                    () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ThemeChangerScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  _buildMenuItem(
+                    context,
+                    'Configuración',
+                    FontAwesomeIcons.gear.data,
+                    Colors.grey.shade600,
+                    () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ThemeChangerScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                ]),
+                _buildMenuSection(context, 'Información', [
+                  _buildMenuItem(
+                    context,
+                    'Acerca de',
+                    FontAwesomeIcons.circleInfo.data,
+                    Colors.blue.shade600,
+                    () {
+                      Navigator.pop(context);
+                      showAboutDialog(
+                        context: context,
+                        applicationName: 'NutriPlato',
+                        applicationVersion: '3.0.0',
+                        applicationLegalese:
+                            'Creado con ❤️ para una mejor nutrición',
+                      );
+                    },
+                  ),
+                  _buildMenuItem(
+                    context,
+                    'Términos y Condiciones',
+                    FontAwesomeIcons.fileContract.data,
+                    Colors.purple.shade600,
+                    () {
+                      const url =
+                          'https://github.com/CerberusProgrammer/nutriplato/blob/master/Pol%C3%ADtica%20de%20Privacidad%20-%20NutriPlato.pdf';
+                      Navigator.pop(context);
+                      if (!kIsWeb && Platform.isAndroid) {
+                        const intent = AndroidIntent(
+                          action: 'action_view',
+                          data: url,
                         );
-                      },
-                    ),
-                    _buildMenuItem(
-                      context,
-                      'Aprende Nutrición',
-                      FontAwesomeIcons.graduationCap,
-                      Colors.purple.shade600,
-                      () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const NutritionEducationScreen(),
-                          ),
-                        );
-                      },
-                    ),
-                    _buildMenuItem(
-                      context,
-                      'Mi Perfil de Salud',
-                      FontAwesomeIcons.heartPulse,
-                      Colors.red.shade600,
-                      () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const ProfileScreen(),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                _buildMenuSection(
-                  context,
-                  'Personalización',
-                  [
-                    _buildMenuItem(
-                      context,
-                      'Cambiar tema',
-                      FontAwesomeIcons.palette,
-                      currentTheme[0],
-                      () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const ThemeChangerScreen(),
-                          ),
-                        );
-                      },
-                    ),
-                    _buildMenuItem(
-                      context,
-                      'Configuración',
-                      FontAwesomeIcons.gear,
-                      Colors.grey.shade600,
-                      () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const ThemeChangerScreen(),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                _buildMenuSection(
-                  context,
-                  'Información',
-                  [
-                    _buildMenuItem(
-                      context,
-                      'Acerca de',
-                      FontAwesomeIcons.circleInfo,
-                      Colors.blue.shade600,
-                      () {
-                        Navigator.pop(context);
-                        showAboutDialog(
-                          context: context,
-                          applicationName: 'NutriPlato',
-                          applicationVersion: '3.0.0',
-                          applicationLegalese:
-                              'Creado con ❤️ para una mejor nutrición',
-                        );
-                      },
-                    ),
-                    _buildMenuItem(
-                      context,
-                      'Términos y Condiciones',
-                      FontAwesomeIcons.fileContract,
-                      Colors.purple.shade600,
-                      () {
-                        const url =
-                            'https://github.com/CerberusProgrammer/nutriplato/blob/master/Pol%C3%ADtica%20de%20Privacidad%20-%20NutriPlato.pdf';
-                        Navigator.pop(context);
-                        if (!kIsWeb && Platform.isAndroid) {
-                          const intent = AndroidIntent(
-                            action: 'action_view',
-                            data: url,
-                          );
-                          intent.launch();
-                        } else {
-                          Get.dialog(
-                            AlertDialog(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16)),
-                              title: Text(
-                                'Términos y Condiciones',
-                                style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w700, fontSize: 16),
+                        intent.launch();
+                      } else {
+                        Get.dialog(
+                          AlertDialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            title: Text(
+                              'Términos y Condiciones',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
                               ),
-                              content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Consulta nuestra Política de Privacidad en el siguiente enlace:',
-                                    style: GoogleFonts.poppins(fontSize: 13),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Container(
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey.shade100,
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: SelectableText(
-                                      url,
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.blue.shade700),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              actions: [
-                                TextButton.icon(
-                                  onPressed: () {
-                                    Clipboard.setData(
-                                        const ClipboardData(text: url));
-                                    Get.back();
-                                    Get.snackbar(
-                                      'Copiado',
-                                      'Enlace copiado al portapapeles',
-                                      snackPosition: SnackPosition.BOTTOM,
-                                      duration: const Duration(seconds: 2),
-                                    );
-                                  },
-                                  icon: const Icon(Icons.copy, size: 14),
-                                  label: Text('Copiar',
-                                      style: GoogleFonts.poppins()),
+                            ),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Consulta nuestra Política de Privacidad en el siguiente enlace:',
+                                  style: GoogleFonts.poppins(fontSize: 13),
                                 ),
-                                TextButton(
-                                  onPressed: () => Get.back(),
-                                  child: Text('Cerrar',
-                                      style: GoogleFonts.poppins()),
+                                const SizedBox(height: 10),
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.shade100,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: SelectableText(
+                                    url,
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 10,
+                                      color: Colors.blue.shade700,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                ),
+                            actions: [
+                              TextButton.icon(
+                                onPressed: () {
+                                  Clipboard.setData(
+                                    const ClipboardData(text: url),
+                                  );
+                                  Get.back();
+                                  Get.snackbar(
+                                    'Copiado',
+                                    'Enlace copiado al portapapeles',
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    duration: const Duration(seconds: 2),
+                                  );
+                                },
+                                icon: const Icon(Icons.copy, size: 14),
+                                label: Text(
+                                  'Copiar',
+                                  style: GoogleFonts.poppins(),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () => Get.back(),
+                                child: Text(
+                                  'Cerrar',
+                                  style: GoogleFonts.poppins(),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ]),
               ],
             ),
           ),
@@ -237,14 +234,12 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(color: Colors.grey.shade200),
-              ),
+              border: Border(top: BorderSide(color: Colors.grey.shade200)),
             ),
             child: Row(
               children: [
                 Icon(
-                  FontAwesomeIcons.heart,
+                  FontAwesomeIcons.heart.data,
                   color: Colors.red.shade400,
                   size: 16,
                 ),
@@ -266,7 +261,10 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
   }
 
   Widget _buildMenuSection(
-      BuildContext context, String title, List<Widget> items) {
+    BuildContext context,
+    String title,
+    List<Widget> items,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -313,11 +311,7 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
                     color: iconColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: FaIcon(
-                    icon,
-                    size: 16,
-                    color: iconColor,
-                  ),
+                  child: Icon(icon, size: 16, color: iconColor),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -396,6 +390,7 @@ class _ModernUserCardState extends State<ModernUserCard> {
                 children: [
                   IconButton(
                     onPressed: () => Navigator.pop(context),
+                    tooltip: 'Cerrar menú',
                     icon: Container(
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
@@ -423,6 +418,7 @@ class _ModernUserCardState extends State<ModernUserCard> {
                         }
                       });
                     },
+                    tooltip: editMode ? 'Guardar nombre' : 'Editar nombre',
                     icon: Container(
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
@@ -475,8 +471,9 @@ class _ModernUserCardState extends State<ModernUserCard> {
                       children: [
                         editMode
                             ? Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                ),
                                 decoration: BoxDecoration(
                                   color: Colors.white.withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(10),
@@ -491,9 +488,7 @@ class _ModernUserCardState extends State<ModernUserCard> {
                                   decoration: const InputDecoration(
                                     border: InputBorder.none,
                                     hintText: 'Tu nombre',
-                                    hintStyle: TextStyle(
-                                      color: Colors.white70,
-                                    ),
+                                    hintStyle: TextStyle(color: Colors.white70),
                                   ),
                                 ),
                               )
@@ -513,7 +508,7 @@ class _ModernUserCardState extends State<ModernUserCard> {
                           'Miembro desde ${DateTime.now().year}',
                           style: GoogleFonts.poppins(
                             fontSize: 12,
-                            color: Colors.white.withValues(alpha: 0.8),
+                            color: Colors.white.withValues(alpha: 0.9),
                           ),
                         ),
                       ],
@@ -528,7 +523,8 @@ class _ModernUserCardState extends State<ModernUserCard> {
               Row(
                 children: [
                   Expanded(
-                      child: _buildStat('${user.postReadIt}', 'Artículos')),
+                    child: _buildStat('${user.postReadIt}', 'Artículos'),
+                  ),
                   Container(
                     width: 1,
                     height: 25,
@@ -536,7 +532,8 @@ class _ModernUserCardState extends State<ModernUserCard> {
                     margin: const EdgeInsets.symmetric(horizontal: 12),
                   ),
                   Expanded(
-                      child: _buildStat('${user.exercisesDoIt}', 'Ejercicios')),
+                    child: _buildStat('${user.exercisesDoIt}', 'Ejercicios'),
+                  ),
                   Container(
                     width: 1,
                     height: 25,
@@ -544,7 +541,8 @@ class _ModernUserCardState extends State<ModernUserCard> {
                     margin: const EdgeInsets.symmetric(horizontal: 12),
                   ),
                   Expanded(
-                      child: _buildStat('${user.viewedFood}', 'Alimentos')),
+                    child: _buildStat('${user.viewedFood}', 'Alimentos'),
+                  ),
                 ],
               ),
             ],

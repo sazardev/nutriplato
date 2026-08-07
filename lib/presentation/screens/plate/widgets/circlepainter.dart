@@ -56,10 +56,7 @@ class CirclePainter extends CustomPainter {
           startAngle: startAngle,
           endAngle: endAngle,
           tileMode: TileMode.clamp,
-        ).createShader(Rect.fromCircle(
-          center: center,
-          radius: radius,
-        ));
+        ).createShader(Rect.fromCircle(center: center, radius: radius));
 
       canvas.drawArc(
         Rect.fromCircle(center: center, radius: radius),
@@ -107,7 +104,8 @@ class CirclePainter extends CustomPainter {
       if (i < radii.length) {
         maxRadius = radii[i] * lineLength;
       } else if (i == angles.length - 1) {
-        maxRadius = radii[0] *
+        maxRadius =
+            radii[0] *
             lineLength; // La última línea usa el radio del primer sector
       } else {
         maxRadius = radii[i - 1] * lineLength; // Fallback
@@ -192,7 +190,7 @@ class CirclePainter extends CustomPainter {
                 offset: const Offset(0.5, 0.5),
                 blurRadius: 2.0,
                 color: Colors.white.withValues(alpha: .9),
-              )
+              ),
             ],
           ),
         ),
@@ -201,7 +199,9 @@ class CirclePainter extends CustomPainter {
 
       textPainter.layout();
       textPainter.paint(
-          canvas, Offset(-textPainter.width / 2, -textPainter.height / 2));
+        canvas,
+        Offset(-textPainter.width / 2, -textPainter.height / 2),
+      );
 
       canvas.restore();
     }
