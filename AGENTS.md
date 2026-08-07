@@ -9,11 +9,13 @@ flutter pub get        # install deps
 flutter run            # device/emulator
 flutter run -d chrome  # web
 flutter build apk --release
-flutter analyze        # lint. Baseline: 44 issues (3 warnings, 41 infos), ZERO errors
-flutter test           # NO tests exist — no test/ dir, only dev dep flutter_test
+flutter analyze        # lint. Baseline: 36 issues (infos), ZERO errors
+flutter test           # unit tests (test/plate_section_detection_test.dart)
+dart run tool/bump_version.dart <major|minor|patch>   # SemVer bump (pubspec + CHANGELOG + tag vX.Y.Z)
+./tools/install-hooks.sh  # pre-commit: bloquea secretos y exige CHANGELOG
 ```
 
-No CI workflows, no pre-commit hooks. `flutter analyze` already ships with pre-existing warnings/infos (mostly `withOpacity` deprecations); don't treat those as newly introduced failures.
+No CI workflows. A git `pre-commit` hook lives in `tools/git-hooks/` (installed via `./tools/install-hooks.sh`). `flutter analyze` ships with pre-existing warnings/infos (mostly `withOpacity` deprecations); don't treat those as newly introduced failures.
 
 ## State management (critical rule)
 

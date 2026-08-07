@@ -46,6 +46,10 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
 ### Corregido
 
+- Detección de la sección tocada en el plato interactivo: ahora usa
+  coordenadas locales del plato (`localPosition`) en vez de `globalToLocal`
+  del Scaffold, lo que eliminaba un desfase vertical; geometría polar pura,
+  probada con tests unitarios (`test/plate_section_detection_test.dart`).
 - Protección del lanzamiento de intents de Android en plataformas web.
 
 <!-- __VERSION_LINKS__ -->

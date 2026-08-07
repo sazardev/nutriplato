@@ -8,6 +8,40 @@ import '../../../data/data.dart';
 import '../food/foods.screen.dart';
 import 'widgets/circlepainter.dart';
 
+/// Detecta la sección del plato correspondiente a un toque (geometría polar).
+///
+/// [tapPosition] usa coordenadas locales del plato: (0,0) es la esquina
+/// superior izquierda del cuadrado que lo contiene y [size] su lado. La
+/// geometría sigue la misma convención que [Canvas.drawArc] (ángulo 0 en el
+/// eje +x "3 en punto", positivo en sentido horario), consistente con el
+/// pintado de [CirclePainter]. Devuelve el índice de la sección tocada o
+/// `null` si el toque cae fuera del círculo del plato.
+///
+/// Es una función pura para facilitar pruebas unitarias.
+int? detectPlateSection(Offset tapPosition, double size, List<double> angles) {
+  if (size <= 0 || angles.length < 2) return null;
+
+  final Offset center = Offset(size / 2, size / 2);
+  final Offset delta = tapPosition - center;
+
+  // Área de acierto: el círculo del plato, con tolerancia en el borde.
+  if (delta.distance > size / 2 * 1.05) return null;
+
+  // Normaliza el ángulo a [0, 2π). `atan2` comparte convención con drawArc.
+  double angle = atan2(delta.dy, delta.dx);
+  if (angle < 0) angle += 2 * pi;
+
+  // Búsqueda por rango angular exacto; las secciones pequeñas se tocan igual.
+  for (int i = 0; i < angles.length - 1; i++) {
+    if (angle >= angles[i] && angle < angles[i + 1]) {
+      return i;
+    }
+  }
+
+  // Fallback a la última sección (ángulo == 2π, imposible tras normalizar).
+  return angles.length - 2;
+}
+
 class PlateScreen extends StatefulWidget {
   const PlateScreen({super.key});
 
@@ -52,55 +86,6 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
     _highlightAnimationController.dispose();
     _sheetAnimationController.dispose();
     super.dispose();
-  }
-
-  // Determina qué sección del plato fue tocada con mayor precisión
-  int? getTappedSection(
-    Offset tapPosition,
-    double size,
-    BoxConstraints constraints,
-  ) {
-    final double centerX = constraints.maxWidth / 2;
-    final double centerY = constraints.maxHeight / 2;
-
-    // Calcula la distancia desde el centro
-    final double distance = sqrt(
-      pow(tapPosition.dx - centerX, 2) + pow(tapPosition.dy - centerY, 2),
-    );
-
-    // Verifica si el toque está dentro del círculo con un pequeño margen de tolerancia
-    if (distance > size / 2 * 1.05) {
-      return null;
-    }
-
-    // Calcula el ángulo del toque (ajustado para que 0° esté en la parte superior)
-    double angle = atan2(tapPosition.dy - centerY, tapPosition.dx - centerX);
-
-    // Normaliza el ángulo para que esté entre 0 y 2π
-    if (angle < 0) angle += 2 * pi;
-
-    // Ajuste para que el ángulo comience desde la derecha (0°) en lugar de arriba
-    // Este paso es crucial para alinear con la visualización de CirclePainter
-
-    // Determina la sección basada en el ángulo con alta precisión
-    for (int i = 0; i < angles.length - 1; i++) {
-      if (angle >= angles[i] && angle < angles[i + 1]) {
-        // Pequeño ajuste para secciones muy pequeñas (como grasas)
-        // que podrían ser difíciles de tocar con precisión
-        if (i == 3 && angles[i + 1] - angles[i] < 0.3) {
-          // Sección de grasas
-          // Si estamos cerca del borde de la sección pequeña, ampliamos un poco su área sensible
-          double sectionCenter = angles[i] + (angles[i + 1] - angles[i]) / 2;
-          if (angle > sectionCenter - 0.15 && angle < sectionCenter + 0.15) {
-            return i;
-          }
-        }
-        return i;
-      }
-    }
-
-    // En caso de que algo salga mal, devolvemos null
-    return null;
   }
 
   // Activa la animación de resaltado para la sección tocada
@@ -214,7 +199,7 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
           focusable: true,
           customSemanticsActions: sectionActions,
           child: GestureDetector(
-            onTapDown: (details) => _handleTapDown(details, size, constraints),
+            onTapDown: (details) => _handleTapDown(details, size),
             child: AnimatedBuilder(
               animation: _highlightAnimationController,
               builder: (context, child) {
@@ -245,15 +230,14 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
     );
   }
 
-  void _handleTapDown(
-    TapDownDetails details,
-    double size,
-    BoxConstraints constraints,
-  ) {
-    RenderBox box = context.findRenderObject() as RenderBox;
-    Offset localPosition = box.globalToLocal(details.globalPosition);
-
-    final tappedSection = getTappedSection(localPosition, size, constraints);
+  void _handleTapDown(TapDownDetails details, double size) {
+    // `localPosition` ya viene en coordenadas del plato: corrige el desfase
+    // que causaba usar `globalToLocal` del Scaffold (appbar/padding).
+    final tappedSection = detectPlateSection(
+      details.localPosition,
+      size,
+      angles,
+    );
 
     if (tappedSection != null) {
       _openSection(tappedSection);
