@@ -7,6 +7,9 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
 ## [No publicado]
 
+
+## [3.2.0] - 2026-10-08
+
 ### Añadido
 
 - Blog ampliado: 62 artículos nuevos en `lib/data/articles/` (fundamentos de
@@ -89,8 +92,9 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
   probada con tests unitarios (`test/plate_section_detection_test.dart`).
 - Protección del lanzamiento de intents de Android en plataformas web.
 
+
 <!-- __VERSION_LINKS__ -->
-[No publicado]: https://github.com/sazardev/nutriplato/compare/v3.1.0...HEAD
-[3.1.0]: https://github.com/sazardev/nutriplato/compare/v3.0.0...v3.1.0
+[No publicado]: https://github.com/sazardev/nutriplato/compare/v3.2.0...HEAD
+[3.2.0]: https://github.com/sazardev/nutriplato/compare/v3.0.0...v3.2.0
 [3.0.0]: https://github.com/sazardev/nutriplato/releases/tag/v3.0.0
 
