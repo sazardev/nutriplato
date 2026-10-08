@@ -7,9 +7,6 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
 ## [No publicado]
 
-
-## [3.1.0] - 2026-10-08
-
 ### Añadido
 
 - Blog ampliado: 62 artículos nuevos en `lib/data/articles/` (fundamentos de
