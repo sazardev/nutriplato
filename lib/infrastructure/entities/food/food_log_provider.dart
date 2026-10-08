@@ -9,6 +9,49 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const _tag = 'NutriPlato|FoodLogProvider';
 
+const String _faPackage = 'font_awesome_flutter';
+const String _faSolid = 'FontAwesomeSolid';
+const String _faRegular = 'FontAwesomeRegular';
+
+/// Iconos de alimentos reconstruidos desde JSON por codepoint.
+///
+/// Deben ser constantes: `IconData(...)` dinámico rompe el tree-shaking de
+/// iconos en los builds de release (AOT). El codepoint se conserva en los
+/// registros guardados; si no se reconoce, se usa un icono genérico.
+const Map<int, IconData> _foodIconByCodePoint = {
+  0xe2cd: IconData(0xe2cd, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xe4c6: IconData(0xe4c6, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xe4f4: IconData(0xe4f4, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xe516: IconData(0xe516, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf000: IconData(0xf000, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf043: IconData(0xf043, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf06c: IconData(0xf06c, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf094: IconData(0xf094, fontFamily: _faRegular, fontPackage: _faPackage),
+  0xf0c3: IconData(0xf0c3, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf0f4: IconData(0xf0f4, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf0fc: IconData(0xf0fc, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf1b2: IconData(0xf1b2, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf290: IconData(0xf290, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf4d8: IconData(0xf4d8, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf4e3: IconData(0xf4e3, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf517: IconData(0xf517, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf564: IconData(0xf564, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf576: IconData(0xf576, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf578: IconData(0xf578, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf5a7: IconData(0xf5a7, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf5ce: IconData(0xf5ce, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf5d1: IconData(0xf5d1, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf6c8: IconData(0xf6c8, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf6d7: IconData(0xf6d7, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf786: IconData(0xf786, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf787: IconData(0xf787, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf7b6: IconData(0xf7b6, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf7e4: IconData(0xf7e4, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf7e5: IconData(0xf7e5, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf810: IconData(0xf810, fontFamily: _faSolid, fontPackage: _faPackage),
+  0xf818: IconData(0xf818, fontFamily: _faSolid, fontPackage: _faPackage),
+};
+
 class FoodLogProvider with ChangeNotifier {
   List<DailyFoodLog> _logs = [];
   bool _isLoading = false;
@@ -163,16 +206,18 @@ class FoodLogProvider with ChangeNotifier {
             final entryMap = json.decode(entryJson);
             final foodMap = entryMap['food'];
 
+            // Resolver el icono guardado por codepoint (constantes) con
+            // respaldo genérico para entradas desconocidas.
+            final rawCodePoint = foodMap['iconCodePoint'];
+            final codePoint = rawCodePoint is int
+                ? rawCodePoint
+                : int.tryParse('$rawCodePoint');
+
             // Crear el objeto Food
             final food = Food(
               name: foodMap['name'],
               category: foodMap['category'],
-              icon: Icon(
-                IconData(
-                  foodMap['iconCodePoint'],
-                  fontFamily: foodMap['iconFontFamily'],
-                ),
-              ),
+              icon: Icon(_foodIconByCodePoint[codePoint] ?? Icons.restaurant),
               color: Color(foodMap['color']),
               cantidadSugerida: foodMap['cantidadSugerida'],
               unidad: foodMap['unidad'],

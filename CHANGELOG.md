@@ -55,6 +55,13 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
   (versiones mínimas soportadas por Flutter 3.47) para poder compilar el
   release bundle.
 
+### Corregido
+
+- Reconstrucción de los iconos del registro de alimentos mediante un mapa de
+  constantes en vez de `IconData` dinámico: permite compilar el release con
+  tree-shaking de iconos y restaura correctamente la fuente de los iconos
+  guardados.
+
 ## [3.0.0] - 2026-08-07
 
 ### Añadido
