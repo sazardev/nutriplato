@@ -51,6 +51,9 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
   Google Play.
 - `targetSdkVersion` actualizado a 36 (Android 16), requisito de Google Play
   para nuevas versiones de apps desde el 31 de agosto de 2026.
+- Toolchain de Android actualizado a Gradle 8.14, AGP 8.11.1 y Kotlin 2.2.20
+  (versiones mínimas soportadas por Flutter 3.47) para poder compilar el
+  release bundle.
 
 ## [3.0.0] - 2026-08-07
 
