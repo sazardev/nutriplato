@@ -7,6 +7,9 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
 ## [No publicado]
 
+
+## [3.1.0] - 2026-10-08
+
 ### Añadido
 
 - Blog ampliado: 62 artículos nuevos en `lib/data/articles/` (fundamentos de
@@ -46,6 +49,8 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 - Firma de las compilaciones de release activada (`signingConfig release`
   leyendo `android/key.properties`), requisito para publicar el AAB en
   Google Play.
+- `targetSdkVersion` actualizado a 36 (Android 16), requisito de Google Play
+  para nuevas versiones de apps desde el 31 de agosto de 2026.
 
 ## [3.0.0] - 2026-08-07
 
@@ -75,5 +80,7 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 - Protección del lanzamiento de intents de Android en plataformas web.
 
 <!-- __VERSION_LINKS__ -->
-[No publicado]: https://github.com/sazardev/nutriplato/compare/v3.0.0...HEAD
+[No publicado]: https://github.com/sazardev/nutriplato/compare/v3.1.0...HEAD
+[3.1.0]: https://github.com/sazardev/nutriplato/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/sazardev/nutriplato/releases/tag/v3.0.0
+
