@@ -41,6 +41,12 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
   banners y textos secundarios, acceso por teclado/switch al plato interactivo
   (`CustomSemanticsAction`) y soporte para "reducir movimiento".
 
+### Cambiado
+
+- Firma de las compilaciones de release activada (`signingConfig release`
+  leyendo `android/key.properties`), requisito para publicar el AAB en
+  Google Play.
+
 ## [3.0.0] - 2026-08-07
 
 ### Añadido
