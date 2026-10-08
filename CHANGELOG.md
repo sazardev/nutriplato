@@ -61,6 +61,9 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
   constantes en vez de `IconData` dinámico: permite compilar el release con
   tree-shaking de iconos y restaura correctamente la fuente de los iconos
   guardados.
+- Desbordamiento vertical (21 px) de la tarjeta de usuario del menú lateral en
+  pantallas con barra de estado alta: el encabezado ahora ajusta su altura al
+  contenido en lugar de limitarse a 260 px.
 
 ## [3.0.0] - 2026-08-07
 

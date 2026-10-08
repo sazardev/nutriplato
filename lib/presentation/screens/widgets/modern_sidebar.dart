@@ -370,7 +370,6 @@ class _ModernUserCardState extends State<ModernUserCard> {
     _nameController.text = user.username;
 
     return Container(
-      constraints: const BoxConstraints(maxHeight: 260),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: currentTheme,
