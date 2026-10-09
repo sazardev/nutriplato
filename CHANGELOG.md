@@ -22,6 +22,10 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
   archivo) se dividió en 12 archivos con una sola responsabilidad —
   orquestador, pasos (`steps/`), widgets compartidos (`widgets/`) y modelo
   (`models/plan_proposal.dart`) — sin cambios de comportamiento ni de UI.
+- Refactor de calidad (fase 2b): Smart Fitness (2,267 líneas) dividido en 10
+  archivos por responsabilidad — pantalla shell, tabs (`tabs/`) y widgets
+  (`widgets/`), rompiendo además el ciclo de imports con
+  `mood_tracker_dialog.dart`.
 
 ## [3.2.0] - 2026-10-08
 
