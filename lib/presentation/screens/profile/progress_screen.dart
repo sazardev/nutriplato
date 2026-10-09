@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
@@ -68,7 +67,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
           children: [
             Text(
               'Registrar medición',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
@@ -180,7 +179,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 const SizedBox(width: 8),
                 Text(
                   'Evolución de ${_selectedType.label.toLowerCase()}',
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),
@@ -211,7 +210,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
           children: [
             Text(
               'Historial',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/presentation/screens/onboarding/widgets/onboarding_shared.dart';
 
 /// Paso 1 del onboarding: bienvenida y caracteristicas de la app.
@@ -50,11 +50,11 @@ class WelcomeStep extends StatelessWidget {
           const SizedBox(height: 40),
           Text(
             'Bienvenido a',
-            style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
+            style: NutriDesign.font(fontSize: 20, color: Colors.white),
           ),
           Text(
             'NutriPlato',
-            style: GoogleFonts.poppins(
+            style: NutriDesign.font(
               fontSize: 42,
               fontWeight: FontWeight.bold,
               color: Colors.white,

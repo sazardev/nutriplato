@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/presentation/screens/profile/achievements.dart';
 
@@ -69,7 +69,7 @@ class AchievementsTab extends StatelessWidget {
                       const SizedBox(height: 8),
                       Text(
                         '${profile.currentStreak}',
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
                           color: Colors.orange,
@@ -89,7 +89,7 @@ class AchievementsTab extends StatelessWidget {
                       const SizedBox(height: 8),
                       Text(
                         '${profile.longestStreak}',
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
                           color: Colors.amber,
@@ -144,7 +144,7 @@ class ProfileStatCard extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               value,
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: color,
@@ -174,7 +174,7 @@ class ProfileSectionTitle extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 12),
       child: Text(
         title,
-        style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600),
+        style: NutriDesign.font(fontSize: 18, fontWeight: FontWeight.w600),
       ),
     );
   }

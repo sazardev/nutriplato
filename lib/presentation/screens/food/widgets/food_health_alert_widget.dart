@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/services/food_alert_service.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
@@ -101,7 +101,7 @@ class FoodHealthAlertWidget extends StatelessWidget {
                       foodAlert.shouldAvoid
                           ? 'Alimento NO Recomendado'
                           : 'Alertas de Salud',
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontWeight: FontWeight.w600,
                         color: _getAlertTextColor(foodAlert.maxSeverity),
                         fontSize: 14,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/presentation/screens/onboarding/widgets/onboarding_shared.dart';
 
@@ -48,7 +48,7 @@ class NameStep extends StatelessWidget {
               children: [
                 TextField(
                   onChanged: onNameChanged,
-                  style: GoogleFonts.poppins(fontSize: 18),
+                  style: NutriDesign.font(fontSize: 18),
                   decoration: InputDecoration(
                     labelText: 'Tu nombre',
                     hintText: 'Ej: Maria',
@@ -71,7 +71,7 @@ class NameStep extends StatelessWidget {
                 const SizedBox(height: 24),
                 Text(
                   'Selecciona tu genero',
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),

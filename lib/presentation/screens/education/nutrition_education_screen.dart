@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/services/smart_nutrition_service.dart';
 
@@ -117,7 +116,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                         children: [
                           Text(
                             'Aprende Nutrición',
-                            style: GoogleFonts.poppins(
+                            style: NutriDesign.font(
                               fontSize: 24,
                               fontWeight: FontWeight.w700,
                               color: Colors.white,
@@ -125,7 +124,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                           ),
                           Text(
                             'Datos curiosos y tips saludables',
-                            style: GoogleFonts.poppins(
+                            style: NutriDesign.font(
                               fontSize: 14,
                               color: Colors.white.withValues(alpha: 0.9),
                             ),
@@ -153,7 +152,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
           unselectedLabelColor: Colors.grey.shade600,
           indicatorColor: Colors.purple.shade600,
           indicatorWeight: 3,
-          labelStyle: GoogleFonts.poppins(
+          labelStyle: NutriDesign.font(
             fontWeight: FontWeight.w600,
             fontSize: 13,
           ),
@@ -283,7 +282,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                 Expanded(
                   child: Text(
                     '¿Sabías que...?',
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: Colors.white.withValues(alpha: 0.9),
@@ -295,7 +294,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
             const SizedBox(height: 16),
             Text(
               fact.title,
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
                 color: Colors.white,
@@ -305,7 +304,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
             Expanded(
               child: Text(
                 fact.fact,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 14,
                   color: Colors.white.withValues(alpha: 0.95),
                   height: 1.5,
@@ -318,7 +317,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
               const Spacer(),
               Text(
                 'Fuente: ${fact.source}',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 11,
                   color: Colors.white.withValues(alpha: 0.7),
                   fontStyle: FontStyle.italic,
@@ -349,16 +348,13 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
         ),
         title: Text(
           fact.title,
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14),
+          style: NutriDesign.font(fontWeight: FontWeight.w600, fontSize: 14),
         ),
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 4),
           child: Text(
             fact.fact,
-            style: GoogleFonts.poppins(
-              fontSize: 12,
-              color: Colors.grey.shade600,
-            ),
+            style: NutriDesign.font(fontSize: 12, color: Colors.grey.shade600),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
@@ -413,7 +409,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                 Expanded(
                   child: Text(
                     fact.title,
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                     ),
@@ -424,7 +420,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
             const SizedBox(height: 20),
             Text(
               fact.fact,
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 16,
                 color: Colors.grey.shade700,
                 height: 1.6,
@@ -448,7 +444,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                     const SizedBox(width: 8),
                     Text(
                       'Fuente: ${fact.source}',
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontSize: 12,
                         color: Colors.grey.shade600,
                         fontStyle: FontStyle.italic,
@@ -511,7 +507,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                   children: [
                     Text(
                       'Tips de Nutrición',
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
@@ -519,7 +515,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                     ),
                     Text(
                       '${_nutritionTips.length} consejos para mejorar tu alimentación',
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontSize: 13,
                         color: Colors.white.withValues(alpha: 0.9),
                       ),
@@ -541,7 +537,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Text(
                   entry.key,
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: Colors.grey.shade700,
@@ -585,7 +581,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                   children: [
                     Text(
                       tip.title,
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontWeight: FontWeight.w600,
                         fontSize: 14,
                       ),
@@ -593,7 +589,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                     const SizedBox(height: 4),
                     Text(
                       tip.description,
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontSize: 12,
                         color: Colors.grey.shade600,
                       ),
@@ -611,7 +607,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                 ),
                 child: Text(
                   tip.category,
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 10,
                     fontWeight: FontWeight.w500,
                     color: tip.color,
@@ -667,7 +663,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                     children: [
                       Text(
                         tip.title,
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
                         ),
@@ -684,7 +680,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                         ),
                         child: Text(
                           tip.category,
-                          style: GoogleFonts.poppins(
+                          style: NutriDesign.font(
                             fontSize: 11,
                             fontWeight: FontWeight.w500,
                             color: tip.color,
@@ -699,7 +695,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
             const SizedBox(height: 24),
             Text(
               tip.description,
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 16,
                 color: Colors.grey.shade700,
                 height: 1.6,
@@ -713,7 +709,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                 icon: const Icon(Icons.check_circle_outline),
                 label: Text(
                   '¡Entendido!',
-                  style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+                  style: NutriDesign.font(fontWeight: FontWeight.w600),
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: tip.color,
@@ -819,7 +815,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                   children: [
                     Text(
                       category.name,
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontWeight: FontWeight.w700,
                         fontSize: 18,
                       ),
@@ -827,7 +823,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                     const SizedBox(height: 4),
                     Text(
                       category.description,
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontSize: 13,
                         color: Colors.grey.shade600,
                       ),
@@ -843,7 +839,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                         const SizedBox(width: 6),
                         Text(
                           '${category.count}+ alimentos',
-                          style: GoogleFonts.poppins(
+                          style: NutriDesign.font(
                             fontSize: 12,
                             color: category.color,
                             fontWeight: FontWeight.w600,

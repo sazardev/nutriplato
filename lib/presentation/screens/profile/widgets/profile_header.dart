@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 
 /// Encabezado del perfil: avatar, nombre, nivel y progreso.
@@ -50,7 +50,7 @@ class ProfileHeader extends StatelessWidget {
                     profile.username.isNotEmpty
                         ? profile.username[0].toUpperCase()
                         : '?',
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 36,
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.primary,
@@ -61,7 +61,7 @@ class ProfileHeader extends StatelessWidget {
               const SizedBox(height: 12),
               Text(
                 profile.username,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,

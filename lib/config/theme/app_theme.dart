@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 
 class AppTheme {
   final List<Color> colorThemes = [
@@ -31,7 +31,7 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorSchemeSeed: primaryColor,
-      textTheme: GoogleFonts.poppinsTextTheme(),
+      textTheme: NutriDesign.poppinsTextTheme(),
       appBarTheme: AppBarTheme(
         centerTitle: false,
         elevation: 0,
@@ -39,7 +39,7 @@ class AppTheme {
         surfaceTintColor: Colors.transparent,
         scrolledUnderElevation: 0,
         iconTheme: IconThemeData(color: primaryColor),
-        titleTextStyle: GoogleFonts.poppins(
+        titleTextStyle: NutriDesign.font(
           fontSize: 22,
           fontWeight: FontWeight.w600,
           color: Colors.black87,
@@ -53,7 +53,7 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          textStyle: GoogleFonts.poppins(
+          textStyle: NutriDesign.font(
             fontWeight: FontWeight.w600,
             fontSize: 16,
           ),
@@ -66,7 +66,7 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          textStyle: GoogleFonts.poppins(
+          textStyle: NutriDesign.font(
             fontWeight: FontWeight.w600,
             fontSize: 16,
           ),
@@ -89,10 +89,7 @@ class AppTheme {
         side: BorderSide.none,
         selectedColor: primaryColor.withValues(alpha: 0.15),
         backgroundColor: Colors.grey.shade100,
-        labelStyle: GoogleFonts.poppins(
-          fontWeight: FontWeight.w500,
-          fontSize: 14,
-        ),
+        labelStyle: NutriDesign.font(fontWeight: FontWeight.w500, fontSize: 14),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -113,11 +110,11 @@ class AppTheme {
           horizontal: 20,
           vertical: 18,
         ),
-        hintStyle: GoogleFonts.poppins(
+        hintStyle: NutriDesign.font(
           color: Colors.grey.shade600,
           fontWeight: FontWeight.w400,
         ),
-        labelStyle: GoogleFonts.poppins(
+        labelStyle: NutriDesign.font(
           color: primaryColor,
           fontWeight: FontWeight.w500,
         ),
@@ -132,11 +129,11 @@ class AppTheme {
         elevation: 0,
         selectedItemColor: primaryColor,
         unselectedItemColor: Colors.grey.shade400,
-        selectedLabelStyle: GoogleFonts.poppins(
+        selectedLabelStyle: NutriDesign.font(
           fontWeight: FontWeight.w600,
           fontSize: 12,
         ),
-        unselectedLabelStyle: GoogleFonts.poppins(
+        unselectedLabelStyle: NutriDesign.font(
           fontWeight: FontWeight.w400,
           fontSize: 12,
         ),

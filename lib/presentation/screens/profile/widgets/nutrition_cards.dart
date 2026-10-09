@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/infrastructure/services/nutrition_calculator_service.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
@@ -88,7 +88,7 @@ class CalorieColumn extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           value,
-          style: GoogleFonts.poppins(
+          style: NutriDesign.font(
             fontSize: 24,
             fontWeight: FontWeight.bold,
             color: color,
@@ -183,7 +183,7 @@ class MacroRow extends StatelessWidget {
         ),
         Text(
           '${grams.round()}g',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+          style: NutriDesign.font(fontWeight: FontWeight.bold),
         ),
         if (showPercent) ...[
           const SizedBox(width: 8),
@@ -237,7 +237,7 @@ class WaterCard extends StatelessWidget {
                 children: [
                   Text(
                     '${water.liters.toStringAsFixed(1)} litros',
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.blue,
@@ -285,7 +285,7 @@ class IdealWeightCard extends StatelessWidget {
                     const Text('Rango saludable'),
                     Text(
                       '${idealWeight.minHealthyWeight.toStringAsFixed(1)} - ${idealWeight.maxHealthyWeight.toStringAsFixed(1)} kg',
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.green,
@@ -299,7 +299,7 @@ class IdealWeightCard extends StatelessWidget {
                     const Text('Peso ideal promedio'),
                     Text(
                       '${idealWeight.average.toStringAsFixed(1)} kg',
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.primary,
@@ -410,7 +410,7 @@ class ProjectionCard extends StatelessWidget {
               const SizedBox(height: 12),
               Text(
                 'Tiempo estimado: ${projection.weeksToGoal!.round()} semanas',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.primary,

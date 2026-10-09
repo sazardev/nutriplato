@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/smart/smart_fitness.controller.dart';
 
@@ -61,7 +60,7 @@ class _CustomWorkoutSheetState extends State<CustomWorkoutSheet> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 'Personalizar rutina',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
                 ),
@@ -124,7 +123,7 @@ class _CustomWorkoutSheetState extends State<CustomWorkoutSheet> {
                       onPressed: _generate,
                       child: Text(
                         'Generar rutina',
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
                         ),
@@ -198,7 +197,7 @@ class SliderRow extends StatelessWidget {
             const SizedBox(width: 6),
             Text(
               label,
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
               ),
@@ -212,7 +211,7 @@ class SliderRow extends StatelessWidget {
               ),
               child: Text(
                 value,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 12,
                   color: color,
                   fontWeight: FontWeight.w600,

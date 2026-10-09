@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/smart/exercise_svg_guide.dart';
 import 'package:nutriplato/fitness/smart/smart_exercise.model.dart';
@@ -72,7 +71,7 @@ class _WorkoutDetailSheetState extends State<WorkoutDetailSheet> {
                   Expanded(
                     child: Text(
                       widget.workout.name,
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
                       ),
@@ -95,7 +94,7 @@ class _WorkoutDetailSheetState extends State<WorkoutDetailSheet> {
                       icon: const Icon(Icons.play_arrow, size: 16),
                       label: Text(
                         'Iniciar',
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                         ),
@@ -106,7 +105,7 @@ class _WorkoutDetailSheetState extends State<WorkoutDetailSheet> {
                       onPressed: () => _onComplete(context),
                       child: Text(
                         'Completar',
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           color: NutriDesign.success,
                           fontWeight: FontWeight.w600,
                         ),
@@ -185,7 +184,7 @@ class ExerciseStepView extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             '${step + 1} / ${exercises.length}',
-            style: GoogleFonts.poppins(fontSize: 11, color: Colors.grey),
+            style: NutriDesign.font(fontSize: 11, color: Colors.grey),
           ),
           const SizedBox(height: 16),
           // SVG Guide
@@ -204,18 +203,12 @@ class ExerciseStepView extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             exercise.name,
-            style: GoogleFonts.poppins(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-            ),
+            style: NutriDesign.font(fontSize: 20, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 4),
           Text(
             exercise.description,
-            style: GoogleFonts.poppins(
-              fontSize: 12,
-              color: NutriDesign.grey600,
-            ),
+            style: NutriDesign.font(fontSize: 12, color: NutriDesign.grey600),
             textAlign: TextAlign.center,
           ),
           const Spacer(),
@@ -226,10 +219,7 @@ class ExerciseStepView extends StatelessWidget {
               OutlinedButton.icon(
                 onPressed: step > 0 ? onPrev : null,
                 icon: const Icon(Icons.chevron_left),
-                label: Text(
-                  'Anterior',
-                  style: GoogleFonts.poppins(fontSize: 13),
-                ),
+                label: Text('Anterior', style: NutriDesign.font(fontSize: 13)),
               ),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
@@ -247,7 +237,7 @@ class ExerciseStepView extends StatelessWidget {
                 icon: const Icon(Icons.chevron_right),
                 label: Text(
                   step < exercises.length - 1 ? 'Siguiente' : 'Terminar',
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                   ),
@@ -308,7 +298,7 @@ class ExerciseListTile extends StatelessWidget {
               children: [
                 Text(
                   exercise.name,
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                   ),
@@ -319,7 +309,7 @@ class ExerciseListTile extends StatelessWidget {
                       : exercise.metric == ExerciseMetric.seconds
                       ? "seg"
                       : "m"}',
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 11,
                     color: NutriDesign.grey600,
                   ),

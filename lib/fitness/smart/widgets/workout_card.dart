@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/smart/smart_exercise.model.dart';
 
@@ -51,7 +50,7 @@ class WorkoutCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         workout.name,
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 17,
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
@@ -69,7 +68,7 @@ class WorkoutCard extends StatelessWidget {
                       ),
                       child: Text(
                         workout.overallIntensity.label,
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 10,
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
@@ -82,7 +81,7 @@ class WorkoutCard extends StatelessWidget {
                   const SizedBox(height: 6),
                   Text(
                     workout.reasoning,
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 11,
                       color: Colors.white.withValues(alpha: 0.85),
                     ),
@@ -127,7 +126,7 @@ class WorkoutCard extends StatelessWidget {
                       ),
                       child: Text(
                         e.name,
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 10,
                           color: Colors.white,
                         ),
@@ -151,7 +150,7 @@ class WorkoutCard extends StatelessWidget {
                     onPressed: () => _showWorkoutDetail(context),
                     child: Text(
                       'Ver rutina completa',
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontWeight: FontWeight.w600,
                         fontSize: 13,
                       ),
@@ -190,7 +189,7 @@ class WorkoutStat extends StatelessWidget {
         const SizedBox(width: 4),
         Text(
           label,
-          style: GoogleFonts.poppins(
+          style: NutriDesign.font(
             fontSize: 11,
             color: Colors.white.withValues(alpha: 0.9),
           ),

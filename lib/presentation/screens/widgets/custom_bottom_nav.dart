@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 
 class CustomBottomNavigation extends StatelessWidget {
   final int currentIndex;
@@ -39,11 +39,11 @@ class CustomBottomNavigation extends StatelessWidget {
           elevation: 0,
           selectedItemColor: theme.primaryColor,
           unselectedItemColor: Colors.grey.shade400,
-          selectedLabelStyle: GoogleFonts.poppins(
+          selectedLabelStyle: NutriDesign.font(
             fontSize: 12,
             fontWeight: FontWeight.w600,
           ),
-          unselectedLabelStyle: GoogleFonts.poppins(
+          unselectedLabelStyle: NutriDesign.font(
             fontSize: 11,
             fontWeight: FontWeight.w500,
           ),

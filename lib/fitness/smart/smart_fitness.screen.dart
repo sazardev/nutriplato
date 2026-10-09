@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/smart/smart_fitness.controller.dart';
@@ -112,7 +111,7 @@ class SmartFitnessScreen extends StatelessWidget {
                           children: [
                             Text(
                               'Fitness Inteligente',
-                              style: GoogleFonts.poppins(
+                              style: NutriDesign.font(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w700,
                                 color: Colors.white,
@@ -120,7 +119,7 @@ class SmartFitnessScreen extends StatelessWidget {
                             ),
                             Text(
                               'Ejercicios adaptados a tu perfil',
-                              style: GoogleFonts.poppins(
+                              style: NutriDesign.font(
                                 fontSize: 12,
                                 color: Colors.white.withValues(alpha: 0.85),
                               ),
@@ -171,7 +170,7 @@ class SmartFitnessScreen extends StatelessWidget {
                           const SizedBox(width: 4),
                           Text(
                             'Completa tu perfil para recomendaciones personalizadas',
-                            style: GoogleFonts.poppins(
+                            style: NutriDesign.font(
                               fontSize: 10,
                               color: Colors.white,
                             ),
@@ -235,10 +234,7 @@ class SmartFitnessScreen extends StatelessWidget {
       labelColor: primaryColor,
       unselectedLabelColor: Colors.grey.shade700,
       indicatorColor: primaryColor,
-      labelStyle: GoogleFonts.poppins(
-        fontSize: 12,
-        fontWeight: FontWeight.w600,
-      ),
+      labelStyle: NutriDesign.font(fontSize: 12, fontWeight: FontWeight.w600),
       tabs: const [
         Tab(text: 'Recomendado'),
         Tab(text: 'Ejercicios'),

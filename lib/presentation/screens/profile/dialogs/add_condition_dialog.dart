@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
 
@@ -37,7 +37,7 @@ void showAddConditionDialog(
             padding: const EdgeInsets.all(16),
             child: Text(
               'Agregar Condición de Salud',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),

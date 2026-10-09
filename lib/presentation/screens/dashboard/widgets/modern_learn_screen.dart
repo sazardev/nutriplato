@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
 import 'package:nutriplato/presentation/screens/plate/widgets/example_hands_screen.dart';
 import 'package:nutriplato/presentation/screens/plate/widgets/plato_info_screen.dart';
@@ -97,7 +97,7 @@ class ModernLearnScreen extends StatelessWidget {
               Flexible(
                 child: Text(
                   title,
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
@@ -110,7 +110,7 @@ class ModernLearnScreen extends StatelessWidget {
               Flexible(
                 child: Text(
                   subtitle,
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
                     color: Colors.white.withValues(alpha: 0.9),
@@ -124,7 +124,7 @@ class ModernLearnScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Explorar',
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                       color: Colors.white,

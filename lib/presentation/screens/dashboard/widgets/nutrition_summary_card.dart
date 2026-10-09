@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
 import 'package:nutriplato/presentation/screens/profile/profile_screen.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -49,7 +49,7 @@ class NutritionSummaryCard extends StatelessWidget {
                     children: [
                       Text(
                         'Tu Plan Nutricional',
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                         ),
@@ -181,7 +181,7 @@ class NutritionSummaryCard extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               'Completa tu perfil',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
@@ -232,7 +232,7 @@ class NutritionSummaryCard extends StatelessWidget {
         children: [
           Text(
             '$calories',
-            style: GoogleFonts.poppins(
+            style: NutriDesign.font(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: color,
@@ -261,7 +261,7 @@ class NutritionSummaryCard extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           value,
-          style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.bold),
+          style: NutriDesign.font(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         Text(
           label,
@@ -324,7 +324,7 @@ class HydrationCard extends StatelessWidget {
                       ),
                       Text(
                         '${water.liters.toStringAsFixed(1)} litros',
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.blue,
@@ -389,7 +389,7 @@ class HealthAlertsCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       'Condiciones de salud activas',
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.amber.shade800,

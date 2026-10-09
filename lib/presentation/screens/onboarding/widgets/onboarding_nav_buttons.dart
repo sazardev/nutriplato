@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 
 /// Botones de navegacion (atras / siguiente) del onboarding.
 class OnboardingNavButtons extends StatelessWidget {
@@ -47,7 +47,7 @@ class OnboardingNavButtons extends StatelessWidget {
               children: [
                 Text(
                   currentPage == totalPages - 1 ? 'Comenzar' : 'Siguiente',
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                   ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -42,7 +42,7 @@ class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         title: Text(
           title,
-          style: GoogleFonts.poppins(
+          style: NutriDesign.font(
             fontSize: 20,
             fontWeight: FontWeight.w600,
             color: showGradient ? Colors.white : Colors.black87,
@@ -162,7 +162,7 @@ class SliverModernAppBar extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 28,
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
@@ -172,7 +172,7 @@ class SliverModernAppBar extends StatelessWidget {
                         const SizedBox(height: 8),
                         Text(
                           subtitle!,
-                          style: GoogleFonts.poppins(
+                          style: NutriDesign.font(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
                             color: Colors.white,

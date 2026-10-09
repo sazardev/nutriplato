@@ -104,6 +104,59 @@ class NutriDesign {
   static const double iconXLarge = 32.0;
 
   // ============ TIPOGRAFÍA ============
+
+  /// Fuente única de tipografía de la app (familia Poppins).
+  ///
+  /// Todo texto que necesite la familia Poppins debe pasar por aquí o por los
+  /// tokens tipográficos (`heading1`, `body2`, ...). Es el único punto que
+  /// conoce `google_fonts`: si algún día la fuente se empaqueta como asset o
+  /// se cambia de familia, solo se modifica esta implementación.
+  static TextStyle font({
+    TextStyle? textStyle,
+    Color? color,
+    Color? backgroundColor,
+    double? fontSize,
+    FontWeight? fontWeight,
+    FontStyle? fontStyle,
+    double? letterSpacing,
+    double? wordSpacing,
+    TextBaseline? textBaseline,
+    double? height,
+    Locale? locale,
+    Paint? foreground,
+    Paint? background,
+    List<Shadow>? shadows,
+    List<FontFeature>? fontFeatures,
+    TextDecoration? decoration,
+    Color? decorationColor,
+    TextDecorationStyle? decorationStyle,
+    double? decorationThickness,
+  }) => GoogleFonts.poppins(
+    textStyle: textStyle,
+    color: color,
+    backgroundColor: backgroundColor,
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+    fontStyle: fontStyle,
+    letterSpacing: letterSpacing,
+    wordSpacing: wordSpacing,
+    textBaseline: textBaseline,
+    height: height,
+    locale: locale,
+    foreground: foreground,
+    background: background,
+    shadows: shadows,
+    fontFeatures: fontFeatures,
+    decoration: decoration,
+    decorationColor: decorationColor,
+    decorationStyle: decorationStyle,
+    decorationThickness: decorationThickness,
+  );
+
+  /// `TextTheme` base con Poppins (para `ThemeData.textTheme`).
+  static TextTheme poppinsTextTheme([TextTheme? base]) =>
+      GoogleFonts.poppinsTextTheme(base);
+
   static TextStyle get heading1 => GoogleFonts.poppins(
     fontSize: 28,
     fontWeight: FontWeight.w700,

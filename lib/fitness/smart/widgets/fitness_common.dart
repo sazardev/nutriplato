@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 
 // ── Small widgets ─────────────────────────────────────────────────────────────
@@ -24,7 +23,7 @@ class InfoChip extends StatelessWidget {
           const SizedBox(width: 4),
           Text(
             label,
-            style: GoogleFonts.poppins(fontSize: 10, color: Colors.white),
+            style: NutriDesign.font(fontSize: 10, color: Colors.white),
           ),
         ],
       ),
@@ -53,7 +52,7 @@ class StatCard extends StatelessWidget {
         const SizedBox(height: 2),
         Text(
           value,
-          style: GoogleFonts.poppins(
+          style: NutriDesign.font(
             fontSize: 13,
             fontWeight: FontWeight.w700,
             color: color,
@@ -61,7 +60,7 @@ class StatCard extends StatelessWidget {
         ),
         Text(
           label,
-          style: GoogleFonts.poppins(fontSize: 10, color: NutriDesign.grey600),
+          style: NutriDesign.font(fontSize: 10, color: NutriDesign.grey600),
         ),
       ],
     );
@@ -119,7 +118,7 @@ class CategoryChip extends StatelessWidget {
               ],
               Text(
                 label,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 12,
                   color: isSelected ? Colors.white : NutriDesign.grey600,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
@@ -176,7 +175,7 @@ class EquipmentChip extends StatelessWidget {
               ],
               Text(
                 label,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 11,
                   color: isSelected ? Colors.white : NutriDesign.grey600,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
@@ -210,7 +209,7 @@ class EmptyRecommendations extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               'Generando tu plan...',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
@@ -218,10 +217,7 @@ class EmptyRecommendations extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               'Completa tu perfil (peso, talla, fecha de nacimiento) para recibir recomendaciones personalizadas.',
-              style: GoogleFonts.poppins(
-                fontSize: 12,
-                color: NutriDesign.grey600,
-              ),
+              style: NutriDesign.font(fontSize: 12, color: NutriDesign.grey600),
               textAlign: TextAlign.center,
             ),
           ],

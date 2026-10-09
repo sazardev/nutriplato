@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -113,7 +113,7 @@ class _ModernLoadingScreenState extends State<ModernLoadingScreen>
                 opacity: _fadeAnimation,
                 child: Text(
                   widget.message,
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                     color: Colors.black87,

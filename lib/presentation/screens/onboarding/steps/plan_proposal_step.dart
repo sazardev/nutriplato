@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/infrastructure/services/smart_nutrition_service.dart';
 import 'package:nutriplato/presentation/screens/onboarding/models/plan_proposal.dart';
@@ -71,7 +71,7 @@ class PlanProposalStep extends StatelessWidget {
                 planApplied
                     ? 'Plan aplicado a tu día'
                     : 'Aplicar plan a mi registro de hoy',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
                 ),
@@ -112,7 +112,7 @@ class PlanProposalStep extends StatelessWidget {
           children: [
             Text(
               'Calorías objetivo diarias',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 13,
                 color: Colors.white.withValues(alpha: 0.9),
               ),
@@ -123,7 +123,7 @@ class PlanProposalStep extends StatelessWidget {
               children: [
                 Text(
                   p.targetCalories.round().toString(),
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 44,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
@@ -135,7 +135,7 @@ class PlanProposalStep extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 6),
                   child: Text(
                     'kcal / día',
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 14,
                       color: Colors.white.withValues(alpha: 0.9),
                     ),
@@ -146,7 +146,7 @@ class PlanProposalStep extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               'Tu meta: ${goal.label} · ${goal.description}',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 12,
                 color: Colors.white.withValues(alpha: 0.85),
               ),
@@ -157,7 +157,7 @@ class PlanProposalStep extends StatelessWidget {
                 'Proyección: alcanzar tu peso meta en '
                 '~${p.projection!.weeksToGoal!.round()} semanas '
                 '(${p.projection!.message.replaceFirst('Perderás', 'perdiendo').replaceFirst('Ganarás', 'ganando')})',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 11,
                   color: Colors.white.withValues(alpha: 0.85),
                 ),
@@ -180,7 +180,7 @@ class PlanProposalStep extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               value,
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
                 color: Colors.green.shade900,
@@ -188,7 +188,7 @@ class PlanProposalStep extends StatelessWidget {
             ),
             Text(
               label,
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 11,
                 color: Colors.grey.shade700,
               ),
@@ -255,7 +255,7 @@ class PlanProposalStep extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
                   color: Colors.green.shade900,
@@ -264,7 +264,7 @@ class PlanProposalStep extends StatelessWidget {
               const Spacer(),
               Text(
                 '${grams.round()} g · ${percent.round()}%',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                   color: color,
@@ -324,10 +324,7 @@ class PlanProposalStep extends StatelessWidget {
           Text(
             'Fibra: ${p.macros.fiberGrams.round()} g · '
             'Proteína: ${p.macros.proteinPerKg.toStringAsFixed(1)} g/kg',
-            style: GoogleFonts.poppins(
-              fontSize: 11,
-              color: Colors.grey.shade700,
-            ),
+            style: NutriDesign.font(fontSize: 11, color: Colors.grey.shade700),
           ),
         ],
       ),
@@ -355,7 +352,7 @@ class PlanProposalStep extends StatelessWidget {
                     width: 78,
                     child: Text(
                       e.key,
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
                         color: Colors.green.shade900,
@@ -385,7 +382,7 @@ class PlanProposalStep extends StatelessWidget {
                     child: Text(
                       '${e.value.round()} kcal',
                       textAlign: TextAlign.right,
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
                         color: Colors.grey.shade700,
@@ -422,10 +419,7 @@ class PlanProposalStep extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             'Generado por el algoritmo con alimentos seguros para tu perfil.',
-            style: GoogleFonts.poppins(
-              fontSize: 11,
-              color: Colors.grey.shade700,
-            ),
+            style: NutriDesign.font(fontSize: 11, color: Colors.grey.shade700),
           ),
           const SizedBox(height: 14),
           ...meals.map((m) => _buildMealBlock(m.$1, m.$2, m.$3, m.$4)),
@@ -452,7 +446,7 @@ class PlanProposalStep extends StatelessWidget {
               const SizedBox(width: 6),
               Text(
                 title,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                   color: color,
@@ -461,7 +455,7 @@ class PlanProposalStep extends StatelessWidget {
               const Spacer(),
               Text(
                 '${totalKcal.round()} kcal',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
                   color: Colors.grey.shade700,
@@ -475,7 +469,7 @@ class PlanProposalStep extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 4),
               child: Text(
                 'Sin sugerencias para esta comida.',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 11,
                   color: Colors.grey.shade600,
                 ),
@@ -510,7 +504,7 @@ class PlanProposalStep extends StatelessWidget {
               children: [
                 Text(
                   s.food.name,
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                     color: Colors.green.shade900,
@@ -518,7 +512,7 @@ class PlanProposalStep extends StatelessWidget {
                 ),
                 Text(
                   '$portions porciones · ${s.calories.round()} kcal',
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 10,
                     color: Colors.grey.shade600,
                   ),
@@ -526,7 +520,7 @@ class PlanProposalStep extends StatelessWidget {
                 if (s.preparationTip.isNotEmpty)
                   Text(
                     'Tip: ${s.preparationTip}',
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 10,
                       color: Colors.grey.shade600,
                     ),
@@ -581,7 +575,7 @@ class PlanProposalStep extends StatelessWidget {
             const SizedBox(height: 12),
             Text(
               proj.message,
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 12,
                 color: proj.isRealistic
                     ? Colors.green.shade700
@@ -591,7 +585,7 @@ class PlanProposalStep extends StatelessWidget {
             if (!proj.isRealistic)
               Text(
                 'Considera ajustar tu meta para un ritmo más saludable.',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 11,
                   color: Colors.grey.shade700,
                 ),
@@ -602,7 +596,7 @@ class PlanProposalStep extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             'Estimaciones de peso ideal por fórmula',
-            style: GoogleFonts.poppins(
+            style: NutriDesign.font(
               fontSize: 11,
               fontWeight: FontWeight.w600,
               color: Colors.grey.shade700,
@@ -628,7 +622,7 @@ class PlanProposalStep extends StatelessWidget {
         children: [
           Text(
             '${value.toStringAsFixed(0)} kg',
-            style: GoogleFonts.poppins(
+            style: NutriDesign.font(
               fontSize: 13,
               fontWeight: FontWeight.w700,
               color: Colors.green.shade900,
@@ -636,10 +630,7 @@ class PlanProposalStep extends StatelessWidget {
           ),
           Text(
             label,
-            style: GoogleFonts.poppins(
-              fontSize: 10,
-              color: Colors.grey.shade600,
-            ),
+            style: NutriDesign.font(fontSize: 10, color: Colors.grey.shade600),
           ),
         ],
       ),
@@ -653,7 +644,7 @@ class PlanProposalStep extends StatelessWidget {
         children: [
           Text(
             value,
-            style: GoogleFonts.poppins(
+            style: NutriDesign.font(
               fontSize: 15,
               fontWeight: FontWeight.w700,
               color: Colors.green.shade900,
@@ -661,17 +652,11 @@ class PlanProposalStep extends StatelessWidget {
           ),
           Text(
             label,
-            style: GoogleFonts.poppins(
-              fontSize: 10,
-              color: Colors.grey.shade700,
-            ),
+            style: NutriDesign.font(fontSize: 10, color: Colors.grey.shade700),
           ),
           Text(
             sub,
-            style: GoogleFonts.poppins(
-              fontSize: 10,
-              color: Colors.grey.shade600,
-            ),
+            style: NutriDesign.font(fontSize: 10, color: Colors.grey.shade600),
           ),
         ],
       ),
@@ -704,7 +689,7 @@ class PlanProposalStep extends StatelessWidget {
                   Expanded(
                     child: Text(
                       adj,
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontSize: 12,
                         color: Colors.grey.shade800,
                       ),
@@ -769,7 +754,7 @@ class PlanProposalStep extends StatelessWidget {
                 ),
                 child: Text(
                   '${labelFor(e.key)}: máx ${e.value.toStringAsFixed(e.value == e.value.roundToDouble() ? 0 : 1)}',
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 11,
                     fontWeight: FontWeight.w600,
                     color: Colors.orange.shade900,
@@ -801,7 +786,7 @@ class PlanProposalStep extends StatelessWidget {
                 ),
                 child: Text(
                   name,
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                     color: text,
@@ -860,7 +845,7 @@ class PlanProposalStep extends StatelessWidget {
             child: Text(
               'Con tu perfil actual no hay restricciones alimentarias '
               'especiales. ¡Disfruta de una alimentación variada!',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 12,
                 color: Colors.grey.shade700,
               ),
@@ -889,7 +874,7 @@ class PlanProposalStep extends StatelessWidget {
             child: Text(
               'Esta propuesta es orientativa y no sustituye la consulta con '
               'un profesional de la salud.',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 11,
                 color: Colors.white.withValues(alpha: 0.9),
               ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
 import 'package:nutriplato/infrastructure/services/smart_nutrition_service.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
@@ -147,7 +147,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
               const SizedBox(height: 12),
               Text(
                 title,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
                   fontSize: 16,
@@ -155,7 +155,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
               ),
               Text(
                 subtitle,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   color: Colors.white.withValues(alpha: 0.9),
                   fontSize: 12,
                 ),
@@ -207,7 +207,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
                       const SizedBox(width: 6),
                       Text(
                         'Dato del Día',
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontWeight: FontWeight.w600,
                           fontSize: 12,
                           color: Colors.amber.shade700,
@@ -218,7 +218,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
                   const SizedBox(height: 4),
                   Text(
                     _dailyFact!.title,
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontWeight: FontWeight.w700,
                       fontSize: 14,
                     ),
@@ -226,7 +226,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
                   const SizedBox(height: 4),
                   Text(
                     _dailyFact!.fact,
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 12,
                       color: Colors.grey.shade600,
                     ),
@@ -251,7 +251,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
           children: [
             Text(
               '🍎 Recomendados para Ti',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontWeight: FontWeight.w700,
                 fontSize: 18,
               ),
@@ -263,7 +263,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
               ),
               child: Text(
                 'Ver más',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   color: Colors.green.shade600,
                   fontWeight: FontWeight.w600,
                 ),
@@ -353,7 +353,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
                       const SizedBox(width: 2),
                       Text(
                         suggestion.score.toStringAsFixed(0),
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 10,
                           fontWeight: FontWeight.w600,
                           color: Colors.amber.shade700,
@@ -367,7 +367,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
             const SizedBox(height: 10),
             Text(
               food.name,
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontWeight: FontWeight.w600,
                 fontSize: 12,
               ),
@@ -380,7 +380,7 @@ class _SmartSuggestionsWidgetState extends State<SmartSuggestionsWidget> {
               children: [
                 Text(
                   '${calorias.toStringAsFixed(0)} kcal',
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 11,
                     color: Colors.grey.shade600,
                   ),

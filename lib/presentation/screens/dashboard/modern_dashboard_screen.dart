@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/user.dart';
@@ -117,7 +116,7 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                                 children: [
                                   Text(
                                     '¡Hola, ${user.username}!',
-                                    style: GoogleFonts.poppins(
+                                    style: NutriDesign.font(
                                       fontSize: 28,
                                       fontWeight: FontWeight.w700,
                                       color: Colors.white,
@@ -126,7 +125,7 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                                   const SizedBox(height: 8),
                                   Text(
                                     'Bienvenido a tu journey nutricional',
-                                    style: GoogleFonts.poppins(
+                                    style: NutriDesign.font(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white.withValues(
@@ -182,7 +181,7 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                         child: profile.username.isNotEmpty
                             ? Text(
                                 profile.username[0].toUpperCase(),
-                                style: GoogleFonts.poppins(
+                                style: NutriDesign.font(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -241,7 +240,7 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                       children: [
                         Text(
                           'Tu progreso',
-                          style: GoogleFonts.poppins(
+                          style: NutriDesign.font(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
                             color: Colors.black87,
@@ -310,7 +309,7 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                     children: [
                       Text(
                         'Explora y aprende',
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
                           color: Colors.black87,
@@ -338,7 +337,7 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                         children: [
                           Text(
                             'Artículos destacados',
-                            style: GoogleFonts.poppins(
+                            style: NutriDesign.font(
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
                               color: Colors.black87,
@@ -350,7 +349,7 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
                             },
                             child: Text(
                               'Ver todos',
-                              style: GoogleFonts.poppins(
+                              style: NutriDesign.font(
                                 color: currentTheme[0],
                                 fontWeight: FontWeight.w600,
                               ),

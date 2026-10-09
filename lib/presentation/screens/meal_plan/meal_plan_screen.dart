@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
@@ -160,7 +159,7 @@ class _MealPlanScreenState extends State<MealPlanScreen>
                           children: [
                             Text(
                               'Plan Alimenticio',
-                              style: GoogleFonts.poppins(
+                              style: NutriDesign.font(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w700,
                                 color: Colors.white,
@@ -168,7 +167,7 @@ class _MealPlanScreenState extends State<MealPlanScreen>
                             ),
                             Text(
                               'Personalizado para ti',
-                              style: GoogleFonts.poppins(
+                              style: NutriDesign.font(
                                 fontSize: 14,
                                 color: Colors.white.withValues(alpha: 0.9),
                               ),
@@ -191,7 +190,7 @@ class _MealPlanScreenState extends State<MealPlanScreen>
                       ),
                       child: Text(
                         '${_mealPlan!.totalCalories.toStringAsFixed(0)} kcal estimadas',
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -218,7 +217,7 @@ class _MealPlanScreenState extends State<MealPlanScreen>
           unselectedLabelColor: Colors.grey.shade600,
           indicatorColor: Colors.green.shade600,
           indicatorWeight: 3,
-          labelStyle: GoogleFonts.poppins(
+          labelStyle: NutriDesign.font(
             fontWeight: FontWeight.w600,
             fontSize: 12,
           ),
@@ -283,7 +282,7 @@ class _MealPlanScreenState extends State<MealPlanScreen>
             const SizedBox(height: 16),
             Text(
               'No hay sugerencias para $mealName',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 color: Colors.grey.shade600,
                 fontSize: 16,
               ),
@@ -371,7 +370,7 @@ class _MealPlanScreenState extends State<MealPlanScreen>
                   children: [
                     Text(
                       food.name,
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
                         color: Colors.grey.shade800,
@@ -382,7 +381,7 @@ class _MealPlanScreenState extends State<MealPlanScreen>
                     const SizedBox(height: 4),
                     Text(
                       '${meal.portions.toStringAsFixed(1)} porción(es)',
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         color: Colors.grey.shade600,
                         fontSize: 13,
                       ),
@@ -400,7 +399,7 @@ class _MealPlanScreenState extends State<MealPlanScreen>
                         ),
                         child: Text(
                           meal.preparationTip,
-                          style: GoogleFonts.poppins(
+                          style: NutriDesign.font(
                             fontSize: 10,
                             color: color,
                             fontWeight: FontWeight.w500,
@@ -424,7 +423,7 @@ class _MealPlanScreenState extends State<MealPlanScreen>
                 ),
                 child: Text(
                   '${meal.calories.toStringAsFixed(0)} kcal',
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontWeight: FontWeight.w600,
                     fontSize: 12,
                     color: color,
@@ -483,7 +482,7 @@ class _MealPlanScreenState extends State<MealPlanScreen>
             const SizedBox(height: 24),
             Text(
               food.name,
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
               ),
@@ -500,7 +499,7 @@ class _MealPlanScreenState extends State<MealPlanScreen>
             const SizedBox(height: 16),
             Text(
               'Porción sugerida: ${food.cantidadSugerida} ${food.unidad}',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 14,
                 color: Colors.grey.shade600,
               ),
@@ -528,7 +527,7 @@ class _MealPlanScreenState extends State<MealPlanScreen>
               const SizedBox(width: 8),
               Text(
                 label,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 14,
                   color: Colors.grey.shade700,
                 ),
@@ -537,10 +536,7 @@ class _MealPlanScreenState extends State<MealPlanScreen>
           ),
           Text(
             value,
-            style: GoogleFonts.poppins(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-            ),
+            style: NutriDesign.font(fontSize: 14, fontWeight: FontWeight.w600),
           ),
         ],
       ),

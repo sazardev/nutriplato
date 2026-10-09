@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 
 class ModernCard extends StatelessWidget {
   final Widget child;
@@ -141,7 +141,7 @@ class InfoCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: Colors.black87,
@@ -151,7 +151,7 @@ class InfoCard extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     subtitle!,
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 12,
                       color: Colors.grey.shade600,
                     ),
@@ -169,7 +169,7 @@ class InfoCard extends StatelessWidget {
               ),
               child: Text(
                 value!,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: iconColor,
@@ -239,7 +239,7 @@ class StatCard extends StatelessWidget {
             Flexible(
               child: Text(
                 value,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 22,
                   fontWeight: FontWeight.w700,
                   color: Colors.black87,
@@ -251,7 +251,7 @@ class StatCard extends StatelessWidget {
             Flexible(
               child: Text(
                 title,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
                   color: Colors.grey.shade600,
@@ -264,7 +264,7 @@ class StatCard extends StatelessWidget {
               Flexible(
                 child: Text(
                   subtitle!,
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 11,
                     color: Colors.grey.shade700,
                   ),

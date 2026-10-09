@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +19,7 @@ class ThemeChangerScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Personalización',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+          style: NutriDesign.font(fontWeight: FontWeight.w600),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -52,7 +52,7 @@ class ThemeChangerScreen extends StatelessWidget {
                   const SizedBox(height: 12),
                   Text(
                     'Personaliza tu experiencia',
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       color: Colors.white,
                       fontSize: 22,
                       fontWeight: FontWeight.w600,
@@ -61,7 +61,7 @@ class ThemeChangerScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     'Elige el tema y colores que mejor se adapten a tu estilo',
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       color: Colors.white.withValues(alpha: 0.9),
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -76,7 +76,7 @@ class ThemeChangerScreen extends StatelessWidget {
             // Sección de colores
             Text(
               'Esquema de colores',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: Colors.black87,
@@ -175,7 +175,7 @@ class ThemeChangerScreen extends StatelessWidget {
                       children: [
                         Text(
                           'Modo oscuro',
-                          style: GoogleFonts.poppins(
+                          style: NutriDesign.font(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),
@@ -183,7 +183,7 @@ class ThemeChangerScreen extends StatelessWidget {
                         const SizedBox(height: 2),
                         Text(
                           'Próximamente disponible',
-                          style: GoogleFonts.poppins(
+                          style: NutriDesign.font(
                             fontSize: 12,
                             color: Colors.grey.shade600,
                           ),

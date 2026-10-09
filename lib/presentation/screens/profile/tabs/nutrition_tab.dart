@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
 import 'package:nutriplato/presentation/screens/profile/tabs/achievements_tab.dart';
@@ -34,7 +34,7 @@ class NutritionTab extends StatelessWidget {
               const SizedBox(height: 16),
               Text(
                 'Completa tu perfil',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),

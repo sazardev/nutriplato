@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/smart/smart_fitness.controller.dart';
@@ -90,7 +89,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
             const SizedBox(width: 8),
             Text(
               'Tu predicción de hoy',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
                 color: NutriDesign.predictionGreen,
@@ -101,12 +100,12 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
         const SizedBox(height: 4),
         Text(
           today[0].toUpperCase() + today.substring(1),
-          style: GoogleFonts.poppins(fontSize: 12, color: Colors.grey.shade700),
+          style: NutriDesign.font(fontSize: 12, color: Colors.grey.shade700),
         ),
         const SizedBox(height: 8),
         Text(
           prediction.motivation,
-          style: GoogleFonts.poppins(
+          style: NutriDesign.font(
             fontSize: 12,
             fontStyle: FontStyle.italic,
             color: Colors.grey.shade700,
@@ -123,7 +122,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
         const SizedBox(width: 6),
         Text(
           title,
-          style: GoogleFonts.poppins(
+          style: NutriDesign.font(
             fontSize: 13,
             fontWeight: FontWeight.w600,
             color: color,
@@ -157,7 +156,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
                   width: 80,
                   child: Text(
                     meal.type,
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
                       color: Colors.green.shade900,
@@ -168,7 +167,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
                   child: meal.foods.isEmpty
                       ? Text(
                           'Sin sugerencias',
-                          style: GoogleFonts.poppins(
+                          style: NutriDesign.font(
                             fontSize: 11,
                             color: Colors.grey.shade600,
                           ),
@@ -181,7 +180,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
                               .join(' · '),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.poppins(
+                          style: NutriDesign.font(
                             fontSize: 11,
                             color: Colors.grey.shade800,
                           ),
@@ -190,7 +189,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
                 const SizedBox(width: 8),
                 Text(
                   '${meal.calories.round()} kcal',
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 11,
                     fontWeight: FontWeight.w600,
                     color: Colors.green.shade800,
@@ -213,7 +212,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
               _applied
                   ? 'Comidas de hoy aplicadas'
                   : 'Aplicar comidas de hoy al registro',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
               ),
@@ -244,7 +243,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
             Expanded(
               child: Text(
                 p.workout.focus,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 15,
                   fontWeight: FontWeight.w700,
                   color: Colors.black87,
@@ -287,7 +286,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
                   ),
                   child: Text(
                     e,
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 11,
                       color: Colors.grey.shade800,
                     ),
@@ -299,7 +298,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
         const SizedBox(height: 6),
         Text(
           p.workout.reason,
-          style: GoogleFonts.poppins(
+          style: NutriDesign.font(
             fontSize: 11,
             fontStyle: FontStyle.italic,
             color: Colors.grey.shade600,
@@ -313,7 +312,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
             icon: const Icon(Icons.play_circle, size: 16),
             label: Text(
               'Empezar esta rutina',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
               ),
@@ -360,7 +359,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
               const SizedBox(height: 6),
               Text(
                 p.read.articleTitle,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
                   color: Colors.black87,
@@ -371,7 +370,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
                 p.read.articleDescription,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 11,
                   color: Colors.grey.shade700,
                 ),
@@ -391,7 +390,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
             children: [
               Text(
                 '✨ ${p.read.factTitle}',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
                   color: Colors.amber.shade900,
@@ -402,7 +401,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
                 p.read.factText,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 11,
                   color: Colors.grey.shade800,
                 ),
@@ -419,7 +418,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
               icon: const Icon(Icons.arrow_forward, size: 16),
               label: Text(
                 'Leer artículo completo',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),
@@ -444,7 +443,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
       ),
       child: Text(
         text,
-        style: GoogleFonts.poppins(
+        style: NutriDesign.font(
           fontSize: 10,
           fontWeight: FontWeight.w600,
           color: fg,
@@ -497,7 +496,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
           added > 0
               ? '$added alimentos de tu predicción agregados a tu día.'
               : 'No se pudieron aplicar los alimentos.',
-          style: GoogleFonts.poppins(),
+          style: NutriDesign.font(),
         ),
         backgroundColor: NutriDesign.predictionGreen,
       ),

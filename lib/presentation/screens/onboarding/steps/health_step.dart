@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
 import 'package:nutriplato/presentation/screens/onboarding/widgets/onboarding_shared.dart';
 
@@ -64,7 +64,7 @@ class HealthStep extends StatelessWidget {
             header: true,
             child: Text(
               'Condiciones medicas',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 color: Colors.white,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -95,7 +95,7 @@ class HealthStep extends StatelessWidget {
             header: true,
             child: Text(
               'Alergias alimentarias',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 color: Colors.white,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/smart/smart_fitness.controller.dart';
 
@@ -29,7 +28,7 @@ class HistoryTab extends StatelessWidget {
               const SizedBox(height: 12),
               Text(
                 'Sin historial aún',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
                   color: NutriDesign.grey700,
@@ -38,7 +37,7 @@ class HistoryTab extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 'Completa un entrenamiento para verlo aquí',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 12,
                   color: NutriDesign.grey600,
                 ),
@@ -90,7 +89,7 @@ class HistoryTab extends StatelessWidget {
                     children: [
                       Text(
                         dateStr,
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: NutriDesign.grey900,
@@ -98,7 +97,7 @@ class HistoryTab extends StatelessWidget {
                       ),
                       Text(
                         '${entry.caloriesBurned.toStringAsFixed(0)} kcal · ${(entry.durationSeconds ~/ 60)} min',
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 11,
                           color: NutriDesign.grey600,
                         ),
@@ -117,7 +116,7 @@ class HistoryTab extends StatelessWidget {
                   ),
                   child: Text(
                     'Completado',
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 10,
                       color: NutriDesign.success,
                       fontWeight: FontWeight.w600,

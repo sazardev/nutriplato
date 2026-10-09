@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/presentation/screens/onboarding/widgets/onboarding_shared.dart';
 
@@ -80,7 +80,7 @@ class GoalStep extends StatelessWidget {
                           children: [
                             Text(
                               option.label,
-                              style: GoogleFonts.poppins(
+                              style: NutriDesign.font(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
                                 color: isSelected

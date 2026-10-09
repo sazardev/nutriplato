@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/smart/smart_fitness.controller.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_provider.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +37,7 @@ class CalorieBalanceCard extends StatelessWidget {
                       const SizedBox(width: 8),
                       Text(
                         'Balance calórico del día',
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: Colors.black87,
@@ -132,7 +132,7 @@ class CalorieBalanceCard extends StatelessWidget {
         const SizedBox(height: 6),
         Text(
           value,
-          style: GoogleFonts.poppins(
+          style: NutriDesign.font(
             fontSize: 17,
             fontWeight: FontWeight.bold,
             color: color,

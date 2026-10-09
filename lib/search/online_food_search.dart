@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/food/nutri_food.dart';
 import 'package:nutriplato/infrastructure/services/food_api_service.dart';
+import 'package:nutriplato/infrastructure/services/food_search_api.dart';
 import 'package:nutriplato/presentation/screens/food/food.view.dart';
 
 /// Búsqueda de alimentos en OpenFoodFacts (en línea).
@@ -20,7 +20,7 @@ class OnlineFoodSearchSheet extends StatefulWidget {
 }
 
 class _OnlineFoodSearchSheetState extends State<OnlineFoodSearchSheet> {
-  final _api = FoodApiService();
+  final FoodSearchApi _api = FoodApiService();
   late final TextEditingController _nameController;
   final TextEditingController _barcodeController = TextEditingController();
 
@@ -122,7 +122,7 @@ class _OnlineFoodSearchSheetState extends State<OnlineFoodSearchSheet> {
                 const SizedBox(width: 8),
                 Text(
                   'Buscar en OpenFoodFacts',
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 17,
                     fontWeight: FontWeight.w600,
                   ),
@@ -294,7 +294,7 @@ class _OnlineFoodCard extends StatelessWidget {
                       food.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                       ),

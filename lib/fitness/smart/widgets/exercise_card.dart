@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/smart/exercise_svg_guide.dart';
 import 'package:nutriplato/fitness/smart/smart_exercise.model.dart';
@@ -58,7 +57,7 @@ class ExerciseCard extends StatelessWidget {
                   children: [
                     Text(
                       exercise.name,
-                      style: GoogleFonts.poppins(
+                      style: NutriDesign.font(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                         color: NutriDesign.grey900,
@@ -89,7 +88,7 @@ class ExerciseCard extends StatelessWidget {
                         ),
                         Text(
                           '${exercise.baseQuantity} ${_metricLabel(exercise.metric)}',
-                          style: GoogleFonts.poppins(
+                          style: NutriDesign.font(
                             fontSize: 10,
                             color: NutriDesign.grey600,
                           ),
@@ -231,14 +230,14 @@ class _ExerciseDetailSheetState extends State<ExerciseDetailSheet> {
                       children: [
                         Text(
                           e.name,
-                          style: GoogleFonts.poppins(
+                          style: NutriDesign.font(
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
                         Text(
                           e.category.label,
-                          style: GoogleFonts.poppins(
+                          style: NutriDesign.font(
                             fontSize: 12,
                             color: e.category.color,
                           ),
@@ -300,7 +299,7 @@ class _ExerciseDetailSheetState extends State<ExerciseDetailSheet> {
                 const SizedBox(height: 10),
                 Text(
                   steps[_currentStep].instruction,
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 13,
                     color: NutriDesign.grey900,
                   ),
@@ -315,7 +314,7 @@ class _ExerciseDetailSheetState extends State<ExerciseDetailSheet> {
               const SizedBox(height: 16),
               Text(
                 'Descripción',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -323,7 +322,7 @@ class _ExerciseDetailSheetState extends State<ExerciseDetailSheet> {
               const SizedBox(height: 4),
               Text(
                 e.description,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 12,
                   color: NutriDesign.grey600,
                 ),
@@ -332,7 +331,7 @@ class _ExerciseDetailSheetState extends State<ExerciseDetailSheet> {
                 const SizedBox(height: 16),
                 Text(
                   'Consejos',
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),
@@ -353,7 +352,7 @@ class _ExerciseDetailSheetState extends State<ExerciseDetailSheet> {
                         Expanded(
                           child: Text(
                             t,
-                            style: GoogleFonts.poppins(
+                            style: NutriDesign.font(
                               fontSize: 12,
                               color: NutriDesign.grey600,
                             ),
@@ -368,7 +367,7 @@ class _ExerciseDetailSheetState extends State<ExerciseDetailSheet> {
                 const SizedBox(height: 16),
                 Text(
                   'Precauciones',
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: NutriDesign.error,
@@ -390,7 +389,7 @@ class _ExerciseDetailSheetState extends State<ExerciseDetailSheet> {
                         Expanded(
                           child: Text(
                             c,
-                            style: GoogleFonts.poppins(
+                            style: NutriDesign.font(
                               fontSize: 12,
                               color: NutriDesign.grey600,
                             ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/smart/smart_exercise.model.dart';
 
@@ -51,7 +50,7 @@ class _MoodTrackerDialogState extends State<MoodTrackerDialog> {
           children: [
             Text(
               '¿Cómo fue tu entrenamiento?',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
               ),
@@ -112,7 +111,7 @@ class _MoodTrackerDialogState extends State<MoodTrackerDialog> {
                 ),
                 child: Text(
                   'Guardar',
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                   ),
@@ -123,7 +122,7 @@ class _MoodTrackerDialogState extends State<MoodTrackerDialog> {
               onPressed: () => Navigator.pop(context),
               child: Text(
                 'Omitir',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 13,
                   color: NutriDesign.grey700,
                 ),
@@ -160,7 +159,7 @@ class MoodRow extends StatelessWidget {
             width: 86,
             child: Text(
               label,
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
               ),

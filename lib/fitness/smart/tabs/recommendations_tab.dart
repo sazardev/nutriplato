@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/smart/smart_fitness.controller.dart';
 
@@ -55,7 +54,7 @@ class _RecommendationsTabState extends State<RecommendationsTab> {
                   icon: const Icon(Icons.shuffle_rounded, size: 16),
                   label: Text(
                     'Aleatorio',
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
                     ),
@@ -77,7 +76,7 @@ class _RecommendationsTabState extends State<RecommendationsTab> {
                   icon: const Icon(Icons.tune_rounded, size: 16),
                   label: Text(
                     'Personalizar',
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
                     ),
@@ -96,7 +95,7 @@ class _RecommendationsTabState extends State<RecommendationsTab> {
             children: [
               Text(
                 '¿Cómo te sientes ahora?',
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 11,
                   color: NutriDesign.grey600,
                   fontWeight: FontWeight.w500,
@@ -145,7 +144,7 @@ class _RecommendationsTabState extends State<RecommendationsTab> {
                               ),
                               Text(
                                 _energyLabels[i],
-                                style: GoogleFonts.poppins(
+                                style: NutriDesign.font(
                                   fontSize: 9,
                                   color: selected
                                       ? Colors.white

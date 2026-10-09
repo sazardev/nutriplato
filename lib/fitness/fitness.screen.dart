@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/fitness.controller.dart';
@@ -71,7 +70,7 @@ class FitnessScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     'Fitness',
-                                    style: GoogleFonts.poppins(
+                                    style: NutriDesign.font(
                                       fontSize: 26,
                                       fontWeight: FontWeight.w700,
                                       color: Colors.white,
@@ -79,7 +78,7 @@ class FitnessScreen extends StatelessWidget {
                                   ),
                                   Text(
                                     '${listedExercises.length} rutinas disponibles',
-                                    style: GoogleFonts.poppins(
+                                    style: NutriDesign.font(
                                       fontSize: 14,
                                       color: Colors.white.withValues(
                                         alpha: 0.9,
@@ -152,7 +151,7 @@ class FitnessScreen extends StatelessWidget {
                               const SizedBox(height: 8),
                               Text(
                                 category['name'] as String,
-                                style: GoogleFonts.poppins(
+                                style: NutriDesign.font(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -234,14 +233,14 @@ class FitnessScreen extends StatelessWidget {
                                   children: [
                                     Text(
                                       tip['title'] as String,
-                                      style: GoogleFonts.poppins(
+                                      style: NutriDesign.font(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                     Text(
                                       tip['tip'] as String,
-                                      style: GoogleFonts.poppins(
+                                      style: NutriDesign.font(
                                         fontSize: 12,
                                         color: NutriDesign.grey600,
                                       ),

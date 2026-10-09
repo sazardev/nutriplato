@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 
 /// Definición de un logro desbloqueable.
@@ -199,14 +198,14 @@ class AchievementsGrid extends StatelessWidget {
           children: [
             Text(
               'Logros',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
             ),
             Text(
               '$unlockedCount/${kAchievements.length}',
-              style: GoogleFonts.poppins(
+              style: NutriDesign.font(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
                 color: Colors.orange.shade700,
@@ -269,7 +268,7 @@ class _AchievementBadge extends StatelessWidget {
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.poppins(
+            style: NutriDesign.font(
               fontSize: 10,
               fontWeight: FontWeight.w600,
               color: unlocked ? Colors.black87 : Colors.grey.shade700,

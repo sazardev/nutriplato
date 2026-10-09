@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 
 /// Encabezado de pagina con icono, titulo y subtitulo.
 class OnboardingPageHeader extends StatelessWidget {
@@ -34,7 +34,7 @@ class OnboardingPageHeader extends StatelessWidget {
           header: true,
           child: Text(
             title,
-            style: GoogleFonts.poppins(
+            style: NutriDesign.font(
               fontSize: 28,
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -89,7 +89,7 @@ class OnboardingFeatureItem extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
@@ -228,7 +228,7 @@ class OnboardingBmiCard extends StatelessWidget {
             child: Center(
               child: Text(
                 bmi.toStringAsFixed(1),
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: color,
@@ -246,7 +246,7 @@ class OnboardingBmiCard extends StatelessWidget {
               ),
               Text(
                 category,
-                style: GoogleFonts.poppins(
+                style: NutriDesign.font(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: color,
@@ -313,7 +313,7 @@ class OnboardingCardTitle extends StatelessWidget {
         Expanded(
           child: Text(
             text,
-            style: GoogleFonts.poppins(
+            style: NutriDesign.font(
               fontSize: 14,
               fontWeight: FontWeight.w600,
               color: Colors.green.shade900,

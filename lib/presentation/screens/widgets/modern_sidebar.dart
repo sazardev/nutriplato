@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
@@ -164,7 +163,7 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
                             ),
                             title: Text(
                               'Términos y Condiciones',
-                              style: GoogleFonts.poppins(
+                              style: NutriDesign.font(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16,
                               ),
@@ -175,7 +174,7 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
                               children: [
                                 Text(
                                   'Consulta nuestra Política de Privacidad en el siguiente enlace:',
-                                  style: GoogleFonts.poppins(fontSize: 13),
+                                  style: NutriDesign.font(fontSize: 13),
                                 ),
                                 const SizedBox(height: 10),
                                 Container(
@@ -186,7 +185,7 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
                                   ),
                                   child: SelectableText(
                                     url,
-                                    style: GoogleFonts.poppins(
+                                    style: NutriDesign.font(
                                       fontSize: 10,
                                       color: Colors.blue.shade700,
                                     ),
@@ -211,14 +210,14 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
                                 icon: const Icon(Icons.copy, size: 14),
                                 label: Text(
                                   'Copiar',
-                                  style: GoogleFonts.poppins(),
+                                  style: NutriDesign.font(),
                                 ),
                               ),
                               TextButton(
                                 onPressed: () => Get.back(),
                                 child: Text(
                                   'Cerrar',
-                                  style: GoogleFonts.poppins(),
+                                  style: NutriDesign.font(),
                                 ),
                               ),
                             ],
@@ -248,7 +247,7 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
                 const SizedBox(width: 8),
                 Text(
                   'Hecho con amor para ti',
-                  style: GoogleFonts.poppins(
+                  style: NutriDesign.font(
                     fontSize: 12,
                     color: Colors.grey.shade600,
                     fontWeight: FontWeight.w500,
@@ -274,7 +273,7 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
             title,
-            style: GoogleFonts.poppins(
+            style: NutriDesign.font(
               fontSize: 14,
               fontWeight: FontWeight.w600,
               color: Colors.grey.shade600,
@@ -319,7 +318,7 @@ class _ModernDrawerProfileState extends State<ModernDrawerProfile> {
                 Expanded(
                   child: Text(
                     title,
-                    style: GoogleFonts.poppins(
+                    style: NutriDesign.font(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                       color: Colors.black87,
@@ -457,7 +456,7 @@ class _ModernUserCardState extends State<ModernUserCard> {
                         user.username.isNotEmpty
                             ? user.username[0].toUpperCase()
                             : 'U',
-                        style: GoogleFonts.poppins(
+                        style: NutriDesign.font(
                           fontSize: 28,
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
@@ -481,7 +480,7 @@ class _ModernUserCardState extends State<ModernUserCard> {
                                 ),
                                 child: TextField(
                                   controller: _nameController,
-                                  style: GoogleFonts.poppins(
+                                  style: NutriDesign.font(
                                     color: Colors.white,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
@@ -497,7 +496,7 @@ class _ModernUserCardState extends State<ModernUserCard> {
                                 user.username.isEmpty
                                     ? 'Usuario'
                                     : user.username,
-                                style: GoogleFonts.poppins(
+                                style: NutriDesign.font(
                                   fontSize: 19,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white,
@@ -507,7 +506,7 @@ class _ModernUserCardState extends State<ModernUserCard> {
                         const SizedBox(height: 2),
                         Text(
                           'Miembro desde ${DateTime.now().year}',
-                          style: GoogleFonts.poppins(
+                          style: NutriDesign.font(
                             fontSize: 12,
                             color: Colors.white.withValues(alpha: 0.9),
                           ),
@@ -558,7 +557,7 @@ class _ModernUserCardState extends State<ModernUserCard> {
       children: [
         Text(
           value,
-          style: GoogleFonts.poppins(
+          style: NutriDesign.font(
             fontSize: 16,
             fontWeight: FontWeight.w700,
             color: Colors.white,
@@ -567,7 +566,7 @@ class _ModernUserCardState extends State<ModernUserCard> {
         ),
         Text(
           label,
-          style: GoogleFonts.poppins(
+          style: NutriDesign.font(
             fontSize: 10,
             color: Colors.white.withValues(alpha: 0.8),
           ),
