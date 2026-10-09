@@ -1,20 +1,22 @@
 import 'dart:io';
+
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nutriplato/presentation/provider/user_provider.dart';
-import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
-import 'package:nutriplato/presentation/screens/widgets/theme_changer_screen.dart';
-import 'package:nutriplato/presentation/screens/meal_plan/meal_plan_screen.dart';
-import 'package:nutriplato/presentation/screens/education/nutrition_education_screen.dart';
-import 'package:nutriplato/presentation/screens/profile/profile_screen.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
+import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
+import 'package:nutriplato/presentation/provider/user_provider.dart';
+import 'package:nutriplato/presentation/screens/education/nutrition_education_screen.dart';
+import 'package:nutriplato/presentation/screens/meal_plan/meal_plan_screen.dart';
+import 'package:nutriplato/presentation/screens/profile/profile_screen.dart';
+import 'package:nutriplato/presentation/screens/widgets/theme_changer_screen.dart';
 import 'package:provider/provider.dart';
+
 import '../../../infrastructure/entities/user.dart';
 
 class ModernDrawerProfile extends StatefulWidget {

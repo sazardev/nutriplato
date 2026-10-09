@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
-import 'package:nutriplato/infrastructure/services/nutrition_calculator_service.dart';
+import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/infrastructure/services/backup_service.dart';
+import 'package:nutriplato/infrastructure/services/nutrition_calculator_service.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
 import 'package:nutriplato/presentation/screens/profile/achievements.dart';
 import 'package:nutriplato/presentation/screens/profile/progress_screen.dart';
+import 'package:provider/provider.dart';
 
 /// Pantalla de perfil completo del usuario
 class ProfileScreen extends StatefulWidget {

@@ -27,7 +27,6 @@ class Article {
       title: json['title'] ?? '',
       description: json['descripcion'] ?? '',
       content: json['contenido'] ?? '',
-      color: Colors.purple,
       imageUrl: json['imageUrl'],
       publishDate: json['publishDate'] != null
           ? DateTime.parse(json['publishDate'])

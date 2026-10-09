@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-
 import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
+import 'package:nutriplato/fitness/smart/exercise_svg_guide.dart';
 import 'package:nutriplato/fitness/smart/smart_exercise.model.dart';
 import 'package:nutriplato/fitness/smart/smart_fitness.controller.dart';
-import 'package:nutriplato/fitness/smart/exercise_svg_guide.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
+import 'package:provider/provider.dart';
 
 class SmartFitnessScreen extends StatelessWidget {
   const SmartFitnessScreen({super.key});
@@ -69,7 +68,6 @@ class SmartFitnessScreen extends StatelessWidget {
 
     return SliverAppBar(
       expandedHeight: 170,
-      floating: false,
       pinned: true,
       elevation: 0,
       backgroundColor: gradients.first,
@@ -855,7 +853,7 @@ class _WorkoutDetailSheetState extends State<_WorkoutDetailSheet> {
     final mood = await showDialog<WorkoutMood>(
       context: Get.context!,
       barrierDismissible: false,
-      builder: (_) => _MoodTrackerDialog(),
+      builder: (_) => const _MoodTrackerDialog(),
     );
     Get.find<SmartFitnessController>().completeWorkout(
       widget.workout,
@@ -997,7 +995,6 @@ class _ExerciseStepView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // Progress
           LinearProgressIndicator(
@@ -1332,7 +1329,6 @@ class _ExerciseDetailSheetState extends State<_ExerciseDetailSheet> {
                     position: steps[_currentStep].bodyPosition,
                     activeMuscles: e.muscleGroups,
                     primaryColor: widget.primaryColor,
-                    size: 200,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -1687,7 +1683,6 @@ class _CategoryChip extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
               color: isSelected ? color : Colors.grey.shade300,
-              width: 1,
             ),
           ),
           child: Row(
@@ -1744,7 +1739,6 @@ class _EquipmentChip extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: isSelected ? color : Colors.grey.shade300,
-              width: 1,
             ),
           ),
           child: Row(
@@ -2186,7 +2180,7 @@ class _MoodTrackerDialogState extends State<_MoodTrackerDialog> {
               ),
             ),
             TextButton(
-              onPressed: () => Navigator.pop(context, null),
+              onPressed: () => Navigator.pop(context),
               child: Text(
                 'Omitir',
                 style: GoogleFonts.poppins(

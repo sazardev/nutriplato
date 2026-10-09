@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/fitness/fitness.controller.dart';
 import 'package:nutriplato/fitness/smart/smart_fitness.controller.dart';
-import 'package:nutriplato/infrastructure/entities/food/food_log_provider.dart';
 import 'package:nutriplato/infrastructure/entities/food/custom_food_provider.dart';
 import 'package:nutriplato/infrastructure/entities/food/favorites_provider.dart';
+import 'package:nutriplato/infrastructure/entities/food/food_log_provider.dart';
 import 'package:nutriplato/presentation/home.screen.dart';
 import 'package:nutriplato/presentation/provider/article_provider.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
-import 'package:nutriplato/presentation/provider/user_provider.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
+import 'package:nutriplato/presentation/provider/user_provider.dart';
 import 'package:nutriplato/presentation/screens/onboarding/enhanced_onboarding_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,7 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final prefs = await SharedPreferences.getInstance();
-  bool presentation = prefs.getBool('presentation') ?? true;
+  final bool presentation = prefs.getBool('presentation') ?? true;
 
   runApp(MyApp(presentation: presentation));
 }

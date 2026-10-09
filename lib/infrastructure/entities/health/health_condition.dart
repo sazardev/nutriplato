@@ -181,7 +181,7 @@ class HealthCondition {
 
 /// Condiciones médicas predefinidas comunes en México
 class MexicanHealthConditions {
-  static final diabetes = HealthCondition(
+  static const diabetes = HealthCondition(
     id: 'diabetes_type_2',
     name: 'Diabetes Tipo 2',
     description:
@@ -235,7 +235,7 @@ class MexicanHealthConditions {
     alertOnHighSugar: true,
   );
 
-  static final prediabetes = HealthCondition(
+  static const prediabetes = HealthCondition(
     id: 'prediabetes',
     name: 'Prediabetes',
     description:
@@ -261,7 +261,7 @@ class MexicanHealthConditions {
     alertOnHighSugar: true,
   );
 
-  static final hipertension = HealthCondition(
+  static const hipertension = HealthCondition(
     id: 'hipertension',
     name: 'Hipertensión Arterial',
     description:
@@ -305,7 +305,7 @@ class MexicanHealthConditions {
     alertOnHighSodium: true,
   );
 
-  static final colesterolAlto = HealthCondition(
+  static const colesterolAlto = HealthCondition(
     id: 'colesterol_alto',
     name: 'Colesterol Alto',
     description:
@@ -347,7 +347,7 @@ class MexicanHealthConditions {
     alertOnHighFat: true,
   );
 
-  static final obesidad = HealthCondition(
+  static const obesidad = HealthCondition(
     id: 'obesidad',
     name: 'Obesidad',
     description:
@@ -384,7 +384,7 @@ class MexicanHealthConditions {
     alertOnHighFat: true,
   );
 
-  static final enfRenalCronica = HealthCondition(
+  static const enfRenalCronica = HealthCondition(
     id: 'enfermedad_renal_cronica',
     name: 'Enfermedad Renal Crónica',
     description:
@@ -424,7 +424,7 @@ class MexicanHealthConditions {
     alertOnHighSodium: true,
   );
 
-  static final gastritis = HealthCondition(
+  static const gastritis = HealthCondition(
     id: 'gastritis',
     name: 'Gastritis',
     description:
@@ -461,7 +461,7 @@ class MexicanHealthConditions {
     ],
   );
 
-  static final celiaquia = HealthCondition(
+  static const celiaquia = HealthCondition(
     id: 'celiaquia',
     name: 'Enfermedad Celíaca',
     description: 'Intolerancia al gluten que daña el intestino delgado.',
@@ -478,7 +478,6 @@ class MexicanHealthConditions {
       'Salsas con gluten',
       'Empanizados',
     ],
-    limitFoods: [],
     recommendedFoods: [
       'Maíz',
       'Tortilla de maíz',
@@ -494,7 +493,7 @@ class MexicanHealthConditions {
     ],
   );
 
-  static final intoleranciaLactosa = HealthCondition(
+  static const intoleranciaLactosa = HealthCondition(
     id: 'intolerancia_lactosa',
     name: 'Intolerancia a la Lactosa',
     description: 'Incapacidad para digerir el azúcar de la leche (lactosa).',
@@ -520,7 +519,7 @@ class MexicanHealthConditions {
     ],
   );
 
-  static final hipotiroidismo = HealthCondition(
+  static const hipotiroidismo = HealthCondition(
     id: 'hipotiroidismo',
     name: 'Hipotiroidismo',
     description: 'Tiroides poco activa que ralentiza el metabolismo.',
@@ -546,7 +545,7 @@ class MexicanHealthConditions {
     ],
   );
 
-  static final anemia = HealthCondition(
+  static const anemia = HealthCondition(
     id: 'anemia',
     name: 'Anemia',
     description: 'Deficiencia de glóbulos rojos o hemoglobina en la sangre.',

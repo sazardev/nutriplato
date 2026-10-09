@@ -1,17 +1,19 @@
+import 'dart:developer' as dev;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:nutriplato/data/food/leguminosas.dart';
+import 'package:nutriplato/infrastructure/entities/food/favorites_provider.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_entry.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_provider.dart';
-import 'package:nutriplato/infrastructure/entities/food/favorites_provider.dart';
-import 'package:nutriplato/infrastructure/entities/food/micros_helper.dart';
 import 'package:nutriplato/infrastructure/entities/food/micronutrients.dart';
+import 'package:nutriplato/infrastructure/entities/food/micros_helper.dart';
 import 'package:nutriplato/presentation/home.screen.dart';
 import 'package:nutriplato/presentation/screens/food/widgets/food_health_alert_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../data/food/animals.dart';
 import '../../../data/food/cereales.dart';
@@ -55,19 +57,19 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
     _animationController.forward();
 
     switch (widget.food.category) {
-      case "leguminosa":
+      case 'leguminosa':
         list = leguminosas;
         break;
-      case "animal":
+      case 'animal':
         list = animals;
         break;
-      case "cereal":
+      case 'cereal':
         list = cereales;
         break;
-      case "verdura":
+      case 'verdura':
         list = verduras;
         break;
-      case "fruta":
+      case 'fruta':
         list = frutas;
         break;
       default:
@@ -313,35 +315,35 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
 
   String _getCategoryName(String category) {
     switch (category) {
-      case "leguminosa":
-        return "Leguminosa";
-      case "animal":
-        return "Origen Animal";
-      case "cereal":
-        return "Cereal";
-      case "verdura":
-        return "Verdura";
-      case "fruta":
-        return "Fruta";
-      case "grasa":
-        return "Grasa saludable";
-      case "lacteo":
-        return "Lácteo";
-      case "bebida":
-        return "Bebida";
-      case "azucar":
-        return "Azúcar / Dulce";
-      case "botana":
-        return "Botana";
-      case "condimento":
-        return "Condimento";
+      case 'leguminosa':
+        return 'Leguminosa';
+      case 'animal':
+        return 'Origen Animal';
+      case 'cereal':
+        return 'Cereal';
+      case 'verdura':
+        return 'Verdura';
+      case 'fruta':
+        return 'Fruta';
+      case 'grasa':
+        return 'Grasa saludable';
+      case 'lacteo':
+        return 'Lácteo';
+      case 'bebida':
+        return 'Bebida';
+      case 'azucar':
+        return 'Azúcar / Dulce';
+      case 'botana':
+        return 'Botana';
+      case 'condimento':
+        return 'Condimento';
       default:
         return category;
     }
   }
 
   bool _isColorDark(Color color) {
-    double luminance =
+    final double luminance =
         (0.299 * color.r + 0.587 * color.g + 0.114 * color.b) / 255;
     return luminance < 0.5;
   }
@@ -422,7 +424,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
         const SizedBox(height: 8),
         RichText(
           text: TextSpan(
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.black87,
@@ -479,9 +481,9 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
                 color: widget.food.color,
               ),
               const SizedBox(width: 8),
-              Text(
+              const Text(
                 'Micro nutrientes',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
@@ -565,7 +567,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
       ),
       child: RichText(
         text: TextSpan(
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
             color: Colors.black87,
@@ -601,7 +603,6 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
     required VoidCallback onInfoPressed,
   }) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
           padding: const EdgeInsets.all(8),
@@ -736,7 +737,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
 
   Widget _buildMealTypeSelector() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         color: Colors.grey.shade100,
         borderRadius: BorderRadius.circular(8),
@@ -796,7 +797,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
   }
 
   Widget _buildFoodTags() {
-    List<Widget> tags = [];
+    final List<Widget> tags = [];
 
     // Check for high protein
     if ((double.parse(widget.food.proteina) * 4) /
@@ -908,7 +909,7 @@ class _DisplayFoodScreen extends State<FoodViewScreen>
       }
     } catch (e) {
       // Ignorar errores de navegación
-      print('Error al detectar pantalla: $e');
+      dev.log('Error al detectar pantalla: $e');
     }
 
     if (fromAddFoodEntryScreen) {

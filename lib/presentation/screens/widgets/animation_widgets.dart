@@ -25,7 +25,7 @@ class SlidePageRoute extends PageRouteBuilder {
           }
 
           const end = Offset.zero;
-          final curve = Curves.easeInOutCubic;
+          const curve = Curves.easeInOutCubic;
           final tween = Tween(
             begin: begin,
             end: end,

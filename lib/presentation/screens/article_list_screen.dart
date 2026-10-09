@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/article/article.dart';
 import 'package:nutriplato/presentation/provider/article_provider.dart';
 import 'package:nutriplato/presentation/screens/article_detail_screen.dart';
-import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:provider/provider.dart';
 
 class ArticleListScreen extends StatefulWidget {
@@ -14,17 +14,18 @@ class ArticleListScreen extends StatefulWidget {
 }
 
 class _ArticleListScreenState extends State<ArticleListScreen> {
-  String _activeFilter = "Todos";
-  final List<String> _allTags = ["Todos"];
+  String _activeFilter = 'Todos';
+  final List<String> _allTags = ['Todos'];
 
   @override
   void initState() {
     super.initState();
     // Extraer todas las etiquetas únicas de los artículos
+    final articleProvider = context.read<ArticleProvider>();
     Future.delayed(Duration.zero, () {
-      final allArticles = context.read<ArticleProvider>().articles;
+      if (!mounted) return;
       final tags = <String>{};
-      for (var article in allArticles) {
+      for (final article in articleProvider.articles) {
         tags.addAll(article.tags);
       }
       setState(() {
@@ -39,7 +40,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
     final allArticles = articleProvider.articles;
 
     // Filtrar artículos según la etiqueta seleccionada
-    final List<Article> filteredArticles = _activeFilter == "Todos"
+    final List<Article> filteredArticles = _activeFilter == 'Todos'
         ? allArticles
         : allArticles
               .where((article) => article.tags.contains(_activeFilter))
@@ -52,7 +53,6 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
           // Header con gradiente
           SliverAppBar(
             expandedHeight: 140,
-            floating: false,
             pinned: true,
             elevation: 0,
             backgroundColor: Colors.transparent,
@@ -156,7 +156,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
                         ),
                         const SizedBox(height: AppSpacing.md),
                         Text(
-                          "No hay artículos disponibles",
+                          'No hay artículos disponibles',
                           style: AppTypography.bodyLarge.copyWith(
                             color: AppColors.textSecondary,
                           ),

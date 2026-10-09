@@ -22,8 +22,6 @@ List<NutriFood> condimentos = [
     calcio: '0',
     hierro: '0',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Salsa roja casera',
@@ -43,8 +41,6 @@ List<NutriFood> condimentos = [
     calcio: '4.0',
     hierro: '0.2',
     azucarEquivalente: '0.2',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Salsa verde',
@@ -64,8 +60,6 @@ List<NutriFood> condimentos = [
     calcio: '6.0',
     hierro: '0.2',
     azucarEquivalente: '0.2',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Salsa picante embotellada',
@@ -85,8 +79,6 @@ List<NutriFood> condimentos = [
     calcio: '0',
     hierro: '0',
     azucarEquivalente: '0.1',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Catsup',
@@ -106,8 +98,6 @@ List<NutriFood> condimentos = [
     calcio: '3.0',
     hierro: '0.1',
     azucarEquivalente: '1.0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Mostaza',
@@ -127,8 +117,6 @@ List<NutriFood> condimentos = [
     calcio: '3.0',
     hierro: '0',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Mayonesa (1 cucharadita)',
@@ -148,8 +136,6 @@ List<NutriFood> condimentos = [
     calcio: '0',
     hierro: '0',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Vinagre',
@@ -169,8 +155,6 @@ List<NutriFood> condimentos = [
     calcio: '1.0',
     hierro: '0.1',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Limón',
@@ -211,8 +195,6 @@ List<NutriFood> condimentos = [
     calcio: '5.0',
     hierro: '0.1',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Cebolla',
@@ -253,8 +235,6 @@ List<NutriFood> condimentos = [
     calcio: '0',
     hierro: '0',
     azucarEquivalente: '0.1',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Chile en polvo',
@@ -274,8 +254,6 @@ List<NutriFood> condimentos = [
     calcio: '1.0',
     hierro: '0.1',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Adobo',
@@ -295,8 +273,6 @@ List<NutriFood> condimentos = [
     calcio: '8.0',
     hierro: '0.3',
     azucarEquivalente: '0.6',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Mole (2 cucharadas)',
@@ -316,8 +292,6 @@ List<NutriFood> condimentos = [
     calcio: '20.0',
     hierro: '0.8',
     azucarEquivalente: '0.8',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Soya',
@@ -337,7 +311,5 @@ List<NutriFood> condimentos = [
     calcio: '3.0',
     hierro: '0.3',
     azucarEquivalente: '0.3',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
 ];

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:nutriplato/presentation/provider/article_provider.dart';
 import 'package:nutriplato/presentation/provider/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class ArticleDetailScreen extends StatefulWidget {
   const ArticleDetailScreen({super.key});
@@ -38,7 +38,6 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
           // AppBar con imagen expandible
           SliverAppBar(
             expandedHeight: 250.0,
-            floating: false,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
@@ -46,7 +45,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  shadows: [Shadow(blurRadius: 5.0, color: Colors.black)],
+                  shadows: [Shadow(blurRadius: 5.0)],
                 ),
               ),
               background: article.imageUrl != null

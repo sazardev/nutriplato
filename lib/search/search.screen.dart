@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/data/food/animals.dart';
 import 'package:nutriplato/data/food/azucares.dart';
 import 'package:nutriplato/data/food/bebidas.dart';
@@ -10,16 +12,15 @@ import 'package:nutriplato/data/food/grasas.dart';
 import 'package:nutriplato/data/food/lacteos.dart';
 import 'package:nutriplato/data/food/leguminosas.dart';
 import 'package:nutriplato/data/food/verduras.dart';
-import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/entities/food/custom_food_provider.dart';
 import 'package:nutriplato/infrastructure/entities/food/favorites_provider.dart';
-import 'package:nutriplato/config/theme/design_system.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../data/data.dart';
 import '../presentation/screens/food/food.view.dart';
 import 'online_food_search.dart';
-import '../data/data.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -35,38 +36,38 @@ class _SearchScreen extends State<SearchScreen> {
   List<Food> recentFoods = [];
   bool showList = false;
 
-  String _currentSortingMethod = "Alfabético (A-Z)";
+  String _currentSortingMethod = 'Alfabético (A-Z)';
   RangeValues _caloriesRange = const RangeValues(0, 1000);
   RangeValues _proteinRange = const RangeValues(0, 100);
   bool _showFilterPanel = false;
-  String _activeView = "Todos";
+  String _activeView = 'Todos';
 
   final List<String> _sortingMethods = [
-    "Alfabético (A-Z)",
-    "Alfabético (Z-A)",
-    "Calorías (menor a mayor)",
-    "Calorías (mayor a menor)",
-    "Proteínas (menor a mayor)",
-    "Proteínas (mayor a menor)",
-    "Recientes primero",
+    'Alfabético (A-Z)',
+    'Alfabético (Z-A)',
+    'Calorías (menor a mayor)',
+    'Calorías (mayor a menor)',
+    'Proteínas (menor a mayor)',
+    'Proteínas (mayor a menor)',
+    'Recientes primero',
   ];
 
   final Map<String, IconData> _foodCategories = {
-    "Todos": Icons.all_inclusive,
-    "Cereales": FontAwesomeIcons.wheatAwn.data,
-    "Leguminosas": FontAwesomeIcons.seedling.data,
-    "Animal": FontAwesomeIcons.cow.data,
-    "Verduras": FontAwesomeIcons.carrot.data,
-    "Frutas": FontAwesomeIcons.appleWhole.data,
-    "Grasas": FontAwesomeIcons.droplet.data,
-    "Lácteos": FontAwesomeIcons.glassWater.data,
-    "Bebidas": FontAwesomeIcons.mugHot.data,
-    "Azúcares": FontAwesomeIcons.candyCane.data,
-    "Botanas": FontAwesomeIcons.bagShopping.data,
-    "Condimentos": FontAwesomeIcons.mortarPestle.data,
-    "Favoritos": Icons.favorite,
-    "Mis alimentos": Icons.add_box_outlined,
-    "Recientes": Icons.history,
+    'Todos': Icons.all_inclusive,
+    'Cereales': FontAwesomeIcons.wheatAwn.data,
+    'Leguminosas': FontAwesomeIcons.seedling.data,
+    'Animal': FontAwesomeIcons.cow.data,
+    'Verduras': FontAwesomeIcons.carrot.data,
+    'Frutas': FontAwesomeIcons.appleWhole.data,
+    'Grasas': FontAwesomeIcons.droplet.data,
+    'Lácteos': FontAwesomeIcons.glassWater.data,
+    'Bebidas': FontAwesomeIcons.mugHot.data,
+    'Azúcares': FontAwesomeIcons.candyCane.data,
+    'Botanas': FontAwesomeIcons.bagShopping.data,
+    'Condimentos': FontAwesomeIcons.mortarPestle.data,
+    'Favoritos': Icons.favorite,
+    'Mis alimentos': Icons.add_box_outlined,
+    'Recientes': Icons.history,
   };
 
   @override
@@ -97,8 +98,8 @@ class _SearchScreen extends State<SearchScreen> {
     double maxProtein = 0;
 
     for (var food in allFoods) {
-      double calories = double.tryParse(food.energia) ?? 0;
-      double protein = double.tryParse(food.proteina) ?? 0;
+      final double calories = double.tryParse(food.energia) ?? 0;
+      final double protein = double.tryParse(food.proteina) ?? 0;
 
       if (calories > maxCalories) maxCalories = calories;
       if (protein > maxProtein) maxProtein = protein;
@@ -115,18 +116,20 @@ class _SearchScreen extends State<SearchScreen> {
 
   Future<void> saveRecentFoods() async {
     final prefs = await SharedPreferences.getInstance();
-    List<String> foodNames = recentFoods.map((food) => food.name).toList();
+    final List<String> foodNames = recentFoods
+        .map((food) => food.name)
+        .toList();
     await prefs.setStringList('recentFoods', foodNames);
   }
 
   Future<void> loadRecentFoods() async {
     final prefs = await SharedPreferences.getInstance();
-    List<String>? foodNames = prefs.getStringList('recentFoods');
+    final List<String>? foodNames = prefs.getStringList('recentFoods');
     if (foodNames != null) {
       recentFoods = [];
       for (var name in foodNames) {
         try {
-          var found = allFoods.firstWhere((food) => food.name == name);
+          final found = allFoods.firstWhere((food) => food.name == name);
           recentFoods.add(found);
         } catch (e) {
           // Ignorar nombres que ya no existen
@@ -150,54 +153,54 @@ class _SearchScreen extends State<SearchScreen> {
     setState(() {
       filteredFoods = List.from(allFoods);
 
-      if (_activeView != "Todos" && _activeView != "Recientes") {
+      if (_activeView != 'Todos' && _activeView != 'Recientes') {
         filteredFoods = filteredFoods.where((food) {
           switch (_activeView) {
-            case "Cereales":
+            case 'Cereales':
               return food.category == 'cereal';
-            case "Leguminosas":
+            case 'Leguminosas':
               return food.category == 'leguminosa';
-            case "Animal":
+            case 'Animal':
               return food.category == 'animal';
-            case "Verduras":
+            case 'Verduras':
               return food.category == 'verdura';
-            case "Frutas":
+            case 'Frutas':
               return food.category == 'fruta';
-            case "Grasas":
+            case 'Grasas':
               return food.category == 'grasa';
-            case "Lácteos":
+            case 'Lácteos':
               return food.category == 'lacteo';
-            case "Bebidas":
+            case 'Bebidas':
               return food.category == 'bebida';
-            case "Azúcares":
+            case 'Azúcares':
               return food.category == 'azucar';
-            case "Botanas":
+            case 'Botanas':
               return food.category == 'botana';
-            case "Condimentos":
+            case 'Condimentos':
               return food.category == 'condimento';
             default:
               return true;
           }
         }).toList();
-      } else if (_activeView == "Recientes") {
+      } else if (_activeView == 'Recientes') {
         filteredFoods = List.from(recentFoods);
       }
 
       if (searchController.text.isNotEmpty) {
-        String query = searchController.text.toLowerCase();
+        final String query = searchController.text.toLowerCase();
         filteredFoods = filteredFoods
             .where((food) => food.name.toLowerCase().contains(query))
             .toList();
       }
 
       filteredFoods = filteredFoods.where((food) {
-        double calories = double.tryParse(food.energia) ?? 0;
+        final double calories = double.tryParse(food.energia) ?? 0;
         return calories >= _caloriesRange.start &&
             calories <= _caloriesRange.end;
       }).toList();
 
       filteredFoods = filteredFoods.where((food) {
-        double protein = double.tryParse(food.proteina) ?? 0;
+        final double protein = double.tryParse(food.proteina) ?? 0;
         return protein >= _proteinRange.start && protein <= _proteinRange.end;
       }).toList();
 
@@ -212,41 +215,41 @@ class _SearchScreen extends State<SearchScreen> {
   /// Ordena una lista según el método de ordenamiento actual.
   void _sortList(List<Food> list) {
     switch (_currentSortingMethod) {
-      case "Alfabético (A-Z)":
+      case 'Alfabético (A-Z)':
         list.sort((a, b) => a.name.compareTo(b.name));
         break;
-      case "Alfabético (Z-A)":
+      case 'Alfabético (Z-A)':
         list.sort((a, b) => b.name.compareTo(a.name));
         break;
-      case "Calorías (menor a mayor)":
+      case 'Calorías (menor a mayor)':
         list.sort(
           (a, b) => (double.tryParse(a.energia) ?? 0).compareTo(
             double.tryParse(b.energia) ?? 0,
           ),
         );
         break;
-      case "Calorías (mayor a menor)":
+      case 'Calorías (mayor a menor)':
         list.sort(
           (a, b) => (double.tryParse(b.energia) ?? 0).compareTo(
             double.tryParse(a.energia) ?? 0,
           ),
         );
         break;
-      case "Proteínas (menor a mayor)":
+      case 'Proteínas (menor a mayor)':
         list.sort(
           (a, b) => (double.tryParse(a.proteina) ?? 0).compareTo(
             double.tryParse(b.proteina) ?? 0,
           ),
         );
         break;
-      case "Proteínas (mayor a menor)":
+      case 'Proteínas (mayor a menor)':
         list.sort(
           (a, b) => (double.tryParse(b.proteina) ?? 0).compareTo(
             double.tryParse(a.proteina) ?? 0,
           ),
         );
         break;
-      case "Recientes primero":
+      case 'Recientes primero':
         list.sort((a, b) {
           int aIndex = recentFoods.indexWhere((food) => food.name == a.name);
           int bIndex = recentFoods.indexWhere((food) => food.name == b.name);
@@ -260,27 +263,27 @@ class _SearchScreen extends State<SearchScreen> {
 
   bool _categoryMatches(Food food) {
     switch (_activeView) {
-      case "Cereales":
+      case 'Cereales':
         return food.category == 'cereal';
-      case "Leguminosas":
+      case 'Leguminosas':
         return food.category == 'leguminosa';
-      case "Animal":
+      case 'Animal':
         return food.category == 'animal';
-      case "Verduras":
+      case 'Verduras':
         return food.category == 'verdura';
-      case "Frutas":
+      case 'Frutas':
         return food.category == 'fruta';
-      case "Grasas":
+      case 'Grasas':
         return food.category == 'grasa';
-      case "Lácteos":
+      case 'Lácteos':
         return food.category == 'lacteo';
-      case "Bebidas":
+      case 'Bebidas':
         return food.category == 'bebida';
-      case "Azúcares":
+      case 'Azúcares':
         return food.category == 'azucar';
-      case "Botanas":
+      case 'Botanas':
         return food.category == 'botana';
-      case "Condimentos":
+      case 'Condimentos':
         return food.category == 'condimento';
       default:
         return true;
@@ -303,7 +306,7 @@ class _SearchScreen extends State<SearchScreen> {
       list = List.from(customFoods);
     } else {
       list = List.from(pool);
-      if (_activeView != "Todos") {
+      if (_activeView != 'Todos') {
         list = list.where(_categoryMatches).toList();
       }
     }
@@ -336,20 +339,20 @@ class _SearchScreen extends State<SearchScreen> {
 
   String _getSortMethodShortName() {
     switch (_currentSortingMethod) {
-      case "Alfabético (A-Z)":
-        return "A→Z";
-      case "Alfabético (Z-A)":
-        return "Z→A";
-      case "Calorías (menor a mayor)":
-        return "Cal ↑";
-      case "Calorías (mayor a menor)":
-        return "Cal ↓";
-      case "Proteínas (menor a mayor)":
-        return "Prot ↑";
-      case "Proteínas (mayor a menor)":
-        return "Prot ↓";
-      case "Recientes primero":
-        return "Recientes";
+      case 'Alfabético (A-Z)':
+        return 'A→Z';
+      case 'Alfabético (Z-A)':
+        return 'Z→A';
+      case 'Calorías (menor a mayor)':
+        return 'Cal ↑';
+      case 'Calorías (mayor a menor)':
+        return 'Cal ↓';
+      case 'Proteínas (menor a mayor)':
+        return 'Prot ↑';
+      case 'Proteínas (mayor a menor)':
+        return 'Prot ↓';
+      case 'Recientes primero':
+        return 'Recientes';
       default:
         return _currentSortingMethod;
     }
@@ -377,7 +380,6 @@ class _SearchScreen extends State<SearchScreen> {
           // Header con gradiente unificado
           SliverAppBar(
             expandedHeight: 140,
-            floating: false,
             pinned: true,
             elevation: 0,
             backgroundColor: Colors.transparent,
@@ -505,7 +507,7 @@ class _SearchScreen extends State<SearchScreen> {
                       horizontal: AppSpacing.md,
                     ),
                     children: _foodCategories.entries.map((entry) {
-                      bool isActive = _activeView == entry.key;
+                      final bool isActive = _activeView == entry.key;
                       return Padding(
                         padding: const EdgeInsets.only(right: AppSpacing.sm),
                         child: InkWell(
@@ -989,8 +991,8 @@ class _SearchScreen extends State<SearchScreen> {
                 TextButton.icon(
                   onPressed: () {
                     setState(() {
-                      _caloriesRange = RangeValues(0, 1000);
-                      _proteinRange = RangeValues(0, 100);
+                      _caloriesRange = const RangeValues(0, 1000);
+                      _proteinRange = const RangeValues(0, 100);
                       _applyFilters();
                     });
                   },
@@ -1111,7 +1113,6 @@ class _SearchScreen extends State<SearchScreen> {
           ),
           child: RangeSlider(
             values: currentRange,
-            min: 0,
             max: maxRange,
             divisions: 20,
             labels: RangeLabels(
@@ -1143,23 +1144,23 @@ class _SearchScreen extends State<SearchScreen> {
 
   void _showSortingDialog() {
     final Map<String, IconData> sortIcons = {
-      "Alfabético (A-Z)": Icons.sort_by_alpha,
-      "Alfabético (Z-A)": Icons.sort,
-      "Calorías (menor a mayor)": FontAwesomeIcons.fireFlameCurved.data,
-      "Calorías (mayor a menor)": FontAwesomeIcons.fireFlameCurved.data,
-      "Proteínas (menor a mayor)": FontAwesomeIcons.dna.data,
-      "Proteínas (mayor a menor)": FontAwesomeIcons.dna.data,
-      "Recientes primero": Icons.history,
+      'Alfabético (A-Z)': Icons.sort_by_alpha,
+      'Alfabético (Z-A)': Icons.sort,
+      'Calorías (menor a mayor)': FontAwesomeIcons.fireFlameCurved.data,
+      'Calorías (mayor a menor)': FontAwesomeIcons.fireFlameCurved.data,
+      'Proteínas (menor a mayor)': FontAwesomeIcons.dna.data,
+      'Proteínas (mayor a menor)': FontAwesomeIcons.dna.data,
+      'Recientes primero': Icons.history,
     };
 
     final Map<String, Widget> sortDirections = {
-      "Alfabético (A-Z)": const Icon(Icons.arrow_upward, size: 16),
-      "Alfabético (Z-A)": const Icon(Icons.arrow_downward, size: 16),
-      "Calorías (menor a mayor)": const Icon(Icons.arrow_upward, size: 16),
-      "Calorías (mayor a menor)": const Icon(Icons.arrow_downward, size: 16),
-      "Proteínas (menor a mayor)": const Icon(Icons.arrow_upward, size: 16),
-      "Proteínas (mayor a menor)": const Icon(Icons.arrow_downward, size: 16),
-      "Recientes primero": const Icon(
+      'Alfabético (A-Z)': const Icon(Icons.arrow_upward, size: 16),
+      'Alfabético (Z-A)': const Icon(Icons.arrow_downward, size: 16),
+      'Calorías (menor a mayor)': const Icon(Icons.arrow_upward, size: 16),
+      'Calorías (mayor a menor)': const Icon(Icons.arrow_downward, size: 16),
+      'Proteínas (menor a mayor)': const Icon(Icons.arrow_upward, size: 16),
+      'Proteínas (mayor a menor)': const Icon(Icons.arrow_downward, size: 16),
+      'Recientes primero': const Icon(
         Icons.star,
         size: 16,
         color: Colors.amber,

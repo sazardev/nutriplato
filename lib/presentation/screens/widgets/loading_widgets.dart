@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
+import 'package:provider/provider.dart';
 
 class ModernLoadingScreen extends StatefulWidget {
   final String message;
@@ -233,10 +233,8 @@ class _ShimmerLoadingState extends State<ShimmerLoading>
         return ShaderMask(
           shaderCallback: (bounds) {
             return LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
               colors: [baseColor, highlightColor, baseColor],
-              stops: [0.0, 0.5, 1.0],
+              stops: const [0.0, 0.5, 1.0],
               transform: GradientRotation(_animation.value),
             ).createShader(bounds);
           },

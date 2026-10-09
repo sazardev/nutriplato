@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/services/food_alert_service.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
+import 'package:provider/provider.dart';
 
 /// Widget que muestra alertas de salud para un alimento
 class FoodHealthAlertWidget extends StatelessWidget {
@@ -114,7 +114,7 @@ class FoodHealthAlertWidget extends StatelessWidget {
                         vertical: 2,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.8),
+                        color: Colors.white.withValues(alpha: 0.8),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
@@ -151,7 +151,7 @@ class FoodHealthAlertWidget extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: alert.color.withOpacity(0.1),
+        color: alert.color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(

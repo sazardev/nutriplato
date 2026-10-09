@@ -32,11 +32,11 @@ enum MuscleGroup {
 
 /// Nivel de intensidad (mapea a rango de BMI y condición física)
 enum IntensityLevel {
-  muy_baja(1, 'Muy baja', Color(0xFF51CF66)),
+  muyBaja(1, 'Muy baja', Color(0xFF51CF66)),
   baja(2, 'Baja', Color(0xFF94D82D)),
   moderada(3, 'Moderada', Color(0xFFFFA726)),
   alta(4, 'Alta', Color(0xFFFF6B6B)),
-  muy_alta(5, 'Muy alta', Color(0xFFE03131));
+  muyAlta(5, 'Muy alta', Color(0xFFE03131));
 
   final int value;
   final String label;

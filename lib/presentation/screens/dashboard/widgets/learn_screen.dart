@@ -12,9 +12,9 @@ class LearnScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Title with reduced padding
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-          child: const Text(
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+          child: Text(
             'Aprende de nutrición',
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
@@ -71,7 +71,7 @@ class LearnScreen extends StatelessWidget {
             children: [
               // Icon area with reduced height
               Container(
-                color: color.withOpacity(0.2),
+                color: color.withValues(alpha: 0.2),
                 height: 85, // Reduced height
                 child: Center(child: Icon(icon, size: 50, color: color)),
               ),

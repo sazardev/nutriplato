@@ -43,8 +43,6 @@ List<NutriFood> bebidas = [
     calcio: '2.0',
     hierro: '0.3',
     azucarEquivalente: '0.1',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Agua de jamaica (con azúcar)',
@@ -148,8 +146,6 @@ List<NutriFood> bebidas = [
     calcio: '0',
     hierro: '0',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Refresco de naranja',
@@ -317,8 +313,6 @@ List<NutriFood> bebidas = [
     calcio: '5.0',
     hierro: '0',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Café con leche (con azúcar)',
@@ -359,8 +353,6 @@ List<NutriFood> bebidas = [
     calcio: '0',
     hierro: '0.1',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Licuado de plátano con leche',
@@ -422,8 +414,6 @@ List<NutriFood> bebidas = [
     calcio: '12.0',
     hierro: '0.6',
     azucarEquivalente: '0.1',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Agua con electrolitos (500 ml)',
@@ -443,8 +433,6 @@ List<NutriFood> bebidas = [
     calcio: '2.0',
     hierro: '0',
     azucarEquivalente: '1.5',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Bebida de soya (250 ml)',

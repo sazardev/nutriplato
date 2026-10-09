@@ -215,7 +215,7 @@ class FoodAlertService {
     if (condition.alertOnHighSugar) {
       if (_isHighSugarFood(food)) {
         alerts.add(
-          AlertItem(
+          const AlertItem(
             severity: AlertSeverity.warning,
             title: 'Puede tener azúcar alto',
             message: 'Este alimento puede elevar rápidamente la glucosa.',
@@ -229,7 +229,7 @@ class FoodAlertService {
     if (condition.alertOnHighSodium) {
       if (_isHighSodiumFood(food)) {
         alerts.add(
-          AlertItem(
+          const AlertItem(
             severity: AlertSeverity.warning,
             title: 'Posiblemente alto en sodio',
             message: 'Verifica el contenido de sodio antes de consumir.',
@@ -357,7 +357,7 @@ class FoodAlertService {
           'cebada',
           'centeno',
         ])) {
-          return AlertItem(
+          return const AlertItem(
             severity: AlertSeverity.danger,
             title: 'Contiene gluten',
             message: 'Este alimento puede contener gluten.',
@@ -388,7 +388,7 @@ class FoodAlertService {
 
       case 'kosher':
         if (_containsAny(name, ['cerdo', 'mariscos', 'tocino', 'jamon'])) {
-          return AlertItem(
+          return const AlertItem(
             severity: AlertSeverity.danger,
             title: 'No Kosher',
             message: 'Este alimento no cumple con las reglas Kosher.',
@@ -400,7 +400,7 @@ class FoodAlertService {
 
       case 'halal':
         if (_containsAny(name, ['cerdo', 'tocino', 'jamon', 'alcohol'])) {
-          return AlertItem(
+          return const AlertItem(
             severity: AlertSeverity.danger,
             title: 'No Halal',
             message: 'Este alimento no cumple con las reglas Halal.',

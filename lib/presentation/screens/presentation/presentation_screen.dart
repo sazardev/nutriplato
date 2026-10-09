@@ -7,7 +7,7 @@ import '../../home.screen.dart';
 class PresentationScreen extends StatelessWidget {
   const PresentationScreen({super.key});
 
-  static const appRouterName = "PresentationScreen";
+  static const appRouterName = 'PresentationScreen';
 
   PageViewModel buildPageViewModel(String title, String body) {
     return PageViewModel(
@@ -26,20 +26,20 @@ class PresentationScreen extends StatelessWidget {
     return IntroductionScreen(
       pages: [
         buildPageViewModel(
-          "Noticias sobre alimentos",
-          "Mantente informado sobre los últimos avances en nutrición y alimentación.",
+          'Noticias sobre alimentos',
+          'Mantente informado sobre los últimos avances en nutrición y alimentación.',
         ),
         buildPageViewModel(
-          "Plato del bien comer",
-          "Aprende cómo servir un plato adecuadamente siguiendo las recomendaciones del plato del bien comer de México.",
+          'Plato del bien comer',
+          'Aprende cómo servir un plato adecuadamente siguiendo las recomendaciones del plato del bien comer de México.',
         ),
         buildPageViewModel(
-          "Buscador inteligente",
-          "Encuentra información sobre más de 2000 alimentos con nuestro buscador inteligente.",
+          'Buscador inteligente',
+          'Encuentra información sobre más de 2000 alimentos con nuestro buscador inteligente.',
         ),
         buildPageViewModel(
-          "Ejercicios para todos",
-          "Encuentra ejercicios adaptados a tus necesidades y nivel de condición física.",
+          'Ejercicios para todos',
+          'Encuentra ejercicios adaptados a tus necesidades y nivel de condición física.',
         ),
       ],
       onDone: () async {
@@ -57,7 +57,6 @@ class PresentationScreen extends StatelessWidget {
       done: const Icon(Icons.done),
       skip: const Text('Skip'),
       showSkipButton: true,
-      showDoneButton: true,
       nextFlex: 0,
       dotsDecorator: DotsDecorator(
         size: const Size.square(10.0),

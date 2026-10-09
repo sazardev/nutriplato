@@ -43,8 +43,6 @@ List<NutriFood> botanas = [
     calcio: '120.0',
     hierro: '0.6',
     azucarEquivalente: '0.5',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Chicharrón de cerdo',
@@ -64,8 +62,6 @@ List<NutriFood> botanas = [
     calcio: '3.0',
     hierro: '0.1',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Chicharrón de harina',
@@ -85,8 +81,6 @@ List<NutriFood> botanas = [
     calcio: '25.0',
     hierro: '0.5',
     azucarEquivalente: '0.3',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Palomitas con mantequilla',
@@ -148,8 +142,6 @@ List<NutriFood> botanas = [
     calcio: '50.0',
     hierro: '0.5',
     azucarEquivalente: '0.1',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Tostadas de maíz',
@@ -169,8 +161,6 @@ List<NutriFood> botanas = [
     calcio: '20.0',
     hierro: '0.6',
     azucarEquivalente: '0.2',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Galletas saladas (crackers)',
@@ -253,8 +243,6 @@ List<NutriFood> botanas = [
     calcio: '20.0',
     hierro: '0.7',
     azucarEquivalente: '0.4',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Charales fritos',
@@ -274,8 +262,6 @@ List<NutriFood> botanas = [
     calcio: '240.0',
     hierro: '2.0',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Cacahuates japoneses',
@@ -295,7 +281,5 @@ List<NutriFood> botanas = [
     calcio: '26.0',
     hierro: '0.8',
     azucarEquivalente: '1.6',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
 ];

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
 import 'package:nutriplato/infrastructure/services/smart_nutrition_service.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
-import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
-import 'package:nutriplato/presentation/screens/meal_plan/meal_plan_screen.dart';
 import 'package:nutriplato/presentation/screens/education/nutrition_education_screen.dart';
+import 'package:nutriplato/presentation/screens/meal_plan/meal_plan_screen.dart';
+import 'package:provider/provider.dart';
 
 class SmartSuggestionsWidget extends StatefulWidget {
   const SmartSuggestionsWidget({super.key});

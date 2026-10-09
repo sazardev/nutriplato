@@ -7,6 +7,13 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
 ## [No publicado]
 
+### Cambiado
+
+- Refactor de calidad (fase 1): reglas de lint adicionales en
+  `analysis_options.yaml` (const-correctness, trailing commas, imports
+  ordenados, `use_build_context_synchronously`, etc.), 1,673 fixes automáticos
+  con `dart fix`, formato homologado con `dart format` y analyzer sin issues
+  (36 → 0).
 
 ## [3.2.0] - 2026-10-08
 

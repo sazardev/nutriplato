@@ -42,7 +42,6 @@ class ExerciseViewScreen extends StatelessWidget {
         ],
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             color: Colors.white,
@@ -50,7 +49,6 @@ class ExerciseViewScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8, bottom: 16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
                 children: [
                   Icon(FontAwesomeIcons.stopwatch.data, color: Colors.purple),
                   const SizedBox(width: 10),

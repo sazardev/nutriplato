@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:nutriplato/config/theme/app_theme.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/fitness.controller.dart';
 import 'package:nutriplato/fitness/fitness.data.dart';
 import 'package:nutriplato/fitness/shared/fitness-popular.widget.dart';
 import 'package:nutriplato/fitness/shared/simple-card.widget.dart';
-import 'package:nutriplato/presentation/screens/screens.dart';
-import 'package:nutriplato/config/theme/app_theme.dart';
-import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
+import 'package:nutriplato/presentation/screens/screens.dart';
+import 'package:provider/provider.dart';
 
 class FitnessScreen extends StatelessWidget {
   const FitnessScreen({super.key});
@@ -30,7 +30,6 @@ class FitnessScreen extends StatelessWidget {
           // AppBar con gradiente
           SliverAppBar(
             expandedHeight: 160,
-            floating: false,
             pinned: true,
             elevation: 0,
             backgroundColor: currentTheme.first,

@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
-import '../../../../data/data.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
+
+import '../../../../data/data.dart';
 
 class CirclePainter extends CustomPainter {
   final List<double> radii;
@@ -35,8 +37,8 @@ class CirclePainter extends CustomPainter {
 
   void _drawSectors(Canvas canvas, Size size, Offset center) {
     for (int i = 0; i < radii.length; i++) {
-      double startAngle = angles[i];
-      double endAngle = angles[i + 1];
+      final double startAngle = angles[i];
+      final double endAngle = angles[i + 1];
       double radius = radii[i];
 
       // Si esta sección está resaltada, aumentamos con animación suave
@@ -55,7 +57,6 @@ class CirclePainter extends CustomPainter {
           ],
           startAngle: startAngle,
           endAngle: endAngle,
-          tileMode: TileMode.clamp,
         ).createShader(Rect.fromCircle(center: center, radius: radius));
 
       canvas.drawArc(
@@ -97,7 +98,7 @@ class CirclePainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     for (int i = 0; i < angles.length; i++) {
-      double angle = angles[i];
+      final double angle = angles[i];
 
       // Ajuste para que las líneas sean proporcionales al radio de cada sección
       double maxRadius;
@@ -111,8 +112,8 @@ class CirclePainter extends CustomPainter {
         maxRadius = radii[i - 1] * lineLength; // Fallback
       }
 
-      double x = center.dx + math.cos(angle) * maxRadius;
-      double y = center.dy + math.sin(angle) * maxRadius;
+      final double x = center.dx + math.cos(angle) * maxRadius;
+      final double y = center.dy + math.sin(angle) * maxRadius;
 
       // Primero dibujamos el efecto de brillo
       canvas.drawLine(center, Offset(x, y), glowPaint);
@@ -124,15 +125,15 @@ class CirclePainter extends CustomPainter {
 
   void _drawCategoryLabels(Canvas canvas, Size size, Offset center) {
     for (int i = 0; i < radii.length; i++) {
-      double startAngle = angles[i];
-      double endAngle = angles[i + 1];
-      double radius = radii[i];
+      final double startAngle = angles[i];
+      final double endAngle = angles[i + 1];
+      final double radius = radii[i];
 
       // Calculamos ángulo medio para posicionar el texto
-      double textAngle = startAngle + (endAngle - startAngle) / 2;
+      final double textAngle = startAngle + (endAngle - startAngle) / 2;
 
       // Ajustamos la posición del texto según el tamaño de la sección
-      double sectionSize = endAngle - startAngle;
+      final double sectionSize = endAngle - startAngle;
       double labelOffset;
 
       // Para secciones pequeñas (grasas y animal), alejamos un poco más el texto
@@ -145,8 +146,10 @@ class CirclePainter extends CustomPainter {
         labelOffset = 0.14; // Distancia estándar
       }
 
-      double x = center.dx + math.cos(textAngle) * (radius * (1 + labelOffset));
-      double y = center.dy + math.sin(textAngle) * (radius * (1 + labelOffset));
+      final double x =
+          center.dx + math.cos(textAngle) * (radius * (1 + labelOffset));
+      final double y =
+          center.dy + math.sin(textAngle) * (radius * (1 + labelOffset));
 
       canvas.save();
       canvas.translate(x, y);
@@ -176,7 +179,7 @@ class CirclePainter extends CustomPainter {
         fontSize = 14.0; // Tamaño estándar
       }
 
-      TextPainter textPainter = TextPainter(
+      final TextPainter textPainter = TextPainter(
         text: TextSpan(
           text: categories[i],
           style: TextStyle(

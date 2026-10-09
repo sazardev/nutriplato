@@ -7,7 +7,7 @@ void main() {
   // Ángulos reales del plato (en radianes), mismos que pinta CirclePainter.
   final List<double> angles = [0, 0.44 * pi, 0.74 * pi, 0.9 * pi, pi, 2 * pi];
   const double size = 400;
-  final Offset center = const Offset(size / 2, size / 2);
+  const Offset center = Offset(size / 2, size / 2);
 
   /// Punto dentro del plato con el ángulo dado (a radio fijo).
   Offset pointAt(double angle, [double radius = 100]) {

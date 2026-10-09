@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nutriplato/infrastructure/services/smart_nutrition_service.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
+import 'package:nutriplato/infrastructure/services/smart_nutrition_service.dart';
 
 class NutritionEducationScreen extends StatefulWidget {
   const NutritionEducationScreen({super.key});
@@ -78,7 +78,6 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
   Widget _buildAppBar() {
     return SliverAppBar(
       expandedHeight: 160,
-      floating: false,
       pinned: true,
       elevation: 0,
       backgroundColor: Colors.purple.shade600,
@@ -203,7 +202,7 @@ class _NutritionEducationScreenState extends State<NutritionEducationScreen>
                 builder: (context, child) {
                   double scale = 1.0;
                   if (_factsPageController.position.haveDimensions) {
-                    double page = _factsPageController.page ?? 0;
+                    final double page = _factsPageController.page ?? 0;
                     scale = (1 - (page - index).abs() * 0.15).clamp(0.85, 1.0);
                   }
                   return Transform.scale(

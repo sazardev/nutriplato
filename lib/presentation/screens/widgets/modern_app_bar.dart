@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
+import 'package:provider/provider.dart';
 
 class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

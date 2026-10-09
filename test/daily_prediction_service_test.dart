@@ -8,7 +8,7 @@ UserProfile _profile() => UserProfile(
   username: 'Test',
   createdAt: DateTime(2026),
   updatedAt: DateTime(2026),
-  birthDate: DateTime(1990, 1, 1),
+  birthDate: DateTime(1990),
   gender: Gender.female,
   heightCm: 165,
   weightKg: 70,
@@ -17,7 +17,9 @@ UserProfile _profile() => UserProfile(
 );
 
 String _signature(DailyPrediction p) {
-  final meals = p.meals.map((m) => '${m.type}:${m.foods.map((f) => f.name).join(',')}').join('|');
+  final meals = p.meals
+      .map((m) => '${m.type}:${m.foods.map((f) => f.name).join(',')}')
+      .join('|');
   return '$meals :: ${p.workout.focus} :: ${p.read.articleTitle}';
 }
 

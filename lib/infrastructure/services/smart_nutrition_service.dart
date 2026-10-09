@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:nutriplato/data/food/animals.dart';
+import 'package:nutriplato/data/food/cereales.dart';
+import 'package:nutriplato/data/food/frutas.dart';
+import 'package:nutriplato/data/food/leguminosas.dart';
+import 'package:nutriplato/data/food/verduras.dart';
+import 'package:nutriplato/infrastructure/entities/food/cereal.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/entities/food/fruta.dart';
-import 'package:nutriplato/infrastructure/entities/food/verdura.dart';
-import 'package:nutriplato/infrastructure/entities/food/cereal.dart';
 import 'package:nutriplato/infrastructure/entities/food/leguminosa.dart';
-import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
+import 'package:nutriplato/infrastructure/entities/food/verdura.dart';
 import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
-import 'package:nutriplato/data/food/frutas.dart';
-import 'package:nutriplato/data/food/verduras.dart';
-import 'package:nutriplato/data/food/cereales.dart';
-import 'package:nutriplato/data/food/animals.dart';
-import 'package:nutriplato/data/food/leguminosas.dart';
+import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 
 /// Helper para obtener fibra de diferentes tipos de alimentos
 double getFibraFromFood(Food food) {

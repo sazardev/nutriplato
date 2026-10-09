@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nutriplato/config/theme/app_theme.dart';
+import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
 import 'package:nutriplato/presentation/screens/plate/widgets/example_hands_screen.dart';
 import 'package:nutriplato/presentation/screens/plate/widgets/plato_info_screen.dart';
 import 'package:nutriplato/presentation/screens/widgets/modern_cards.dart';
 import 'package:provider/provider.dart';
-import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
-import 'package:nutriplato/config/theme/app_theme.dart';
 
 class ModernLearnScreen extends StatelessWidget {
   const ModernLearnScreen({super.key});
@@ -36,7 +36,7 @@ class ModernLearnScreen extends StatelessWidget {
           context,
           'Porciones con las Manos',
           'Aprende a medir tus porciones',
-          FontAwesomeIcons.handPaper.data,
+          FontAwesomeIcons.hand.data,
           Colors.orange.shade600,
           () {
             Get.to(() => const ExampleHandScreen());

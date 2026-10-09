@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/smart/smart_fitness.screen.dart';
 import 'package:nutriplato/infrastructure/entities/food/calories_tracker_screen.dart';
-import 'package:nutriplato/presentation/screens/plate/plate_screen.dart';
-import 'package:nutriplato/search/search.screen.dart';
-import 'package:nutriplato/presentation/screens/widgets/custom_bottom_nav.dart';
 import 'package:nutriplato/presentation/screens/dashboard/modern_dashboard_screen.dart';
-import 'package:nutriplato/config/theme/design_system.dart';
+import 'package:nutriplato/presentation/screens/plate/plate_screen.dart';
+import 'package:nutriplato/presentation/screens/widgets/custom_bottom_nav.dart';
+import 'package:nutriplato/search/search.screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

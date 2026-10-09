@@ -36,7 +36,6 @@ class _ExerciseState extends State<ExerciseScreen> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           if (!_restTimerCompleted)
             restTimer(
@@ -79,14 +78,10 @@ class _ExerciseState extends State<ExerciseScreen> {
                                     .exercises[indexExercise]
                                     .time +
                                 1,
-                            initialDuration: 0,
                             width: MediaQuery.of(context).size.width / 2,
                             height: MediaQuery.of(context).size.height / 2,
                             ringColor: Colors.grey[300]!,
-                            ringGradient: null,
                             fillColor: Colors.purpleAccent[100]!,
-                            fillGradient: null,
-                            backgroundGradient: null,
                             strokeWidth: 20.0,
                             strokeCap: StrokeCap.round,
                             textStyle: const TextStyle(
@@ -96,9 +91,6 @@ class _ExerciseState extends State<ExerciseScreen> {
                             ),
                             textFormat: CountdownTextFormat.S,
                             isReverse: true,
-                            isReverseAnimation: false,
-                            isTimerTextShown: true,
-                            autoStart: true,
                             onStart: () {},
                             onComplete: () {
                               if (!(indexExercise <
@@ -167,15 +159,11 @@ class _ExerciseState extends State<ExerciseScreen> {
         Center(
           child: CircularCountDownTimer(
             duration: time,
-            initialDuration: 0,
             controller: _controller,
             width: MediaQuery.of(context).size.width / 2,
             height: MediaQuery.of(context).size.height / 2,
             ringColor: Colors.grey[300]!,
-            ringGradient: null,
             fillColor: Colors.purpleAccent[100]!,
-            fillGradient: null,
-            backgroundGradient: null,
             strokeWidth: 20.0,
             strokeCap: StrokeCap.round,
             textStyle: TextStyle(
@@ -185,9 +173,6 @@ class _ExerciseState extends State<ExerciseScreen> {
             ),
             textFormat: CountdownTextFormat.S,
             isReverse: true,
-            isReverseAnimation: false,
-            isTimerTextShown: true,
-            autoStart: true,
             onStart: () {},
             onComplete: () {
               setState(() {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
+import 'package:nutriplato/infrastructure/entities/food/food.dart';
+import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
+import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/infrastructure/services/smart_nutrition_service.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
-import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
-import 'package:nutriplato/infrastructure/entities/food/food.dart';
-import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
-import 'package:nutriplato/config/theme/design_system.dart';
+import 'package:provider/provider.dart';
 
 class MealPlanScreen extends StatefulWidget {
   const MealPlanScreen({super.key});
@@ -120,7 +120,6 @@ class _MealPlanScreenState extends State<MealPlanScreen>
   Widget _buildAppBar() {
     return SliverAppBar(
       expandedHeight: 180,
-      floating: false,
       pinned: true,
       elevation: 0,
       backgroundColor: Colors.green.shade600,

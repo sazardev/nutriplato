@@ -23,8 +23,6 @@ List<NutriFood> grasas = [
     hierro: '0.2',
     sodio: '2.0',
     azucarEquivalente: '0.1',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Aceite vegetal (cualquiera)',
@@ -44,8 +42,6 @@ List<NutriFood> grasas = [
     calcio: '0',
     hierro: '0',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Aceite de oliva',
@@ -65,8 +61,6 @@ List<NutriFood> grasas = [
     calcio: '0',
     hierro: '0',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Almendras',
@@ -191,8 +185,6 @@ List<NutriFood> grasas = [
     hierro: '0.4',
     sodio: '1.6',
     azucarEquivalente: '0.1',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Chía',
@@ -212,8 +204,6 @@ List<NutriFood> grasas = [
     hierro: '0.4',
     sodio: '0.8',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Linaza molida',
@@ -233,8 +223,6 @@ List<NutriFood> grasas = [
     hierro: '0.3',
     sodio: '1.5',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Mantequilla de vaca',
@@ -254,8 +242,6 @@ List<NutriFood> grasas = [
     calcio: '1.2',
     hierro: '0',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Margarina',
@@ -275,8 +261,6 @@ List<NutriFood> grasas = [
     calcio: '0',
     hierro: '0',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Crema ácida',
@@ -296,8 +280,6 @@ List<NutriFood> grasas = [
     calcio: '12.3',
     hierro: '0',
     azucarEquivalente: '0.5',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Mayonesa',
@@ -317,8 +299,6 @@ List<NutriFood> grasas = [
     calcio: '0',
     hierro: '0',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Aderezo ranch',
@@ -338,8 +318,6 @@ List<NutriFood> grasas = [
     calcio: '0',
     hierro: '0',
     azucarEquivalente: '0.3',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Pepitas (calabaza)',
@@ -359,8 +337,6 @@ List<NutriFood> grasas = [
     hierro: '0.7',
     sodio: '0.6',
     azucarEquivalente: '0.1',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Pistaches',
@@ -401,8 +377,6 @@ List<NutriFood> grasas = [
     calcio: '13.4',
     hierro: '0.4',
     azucarEquivalente: '0.8',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Tocino (opcional, alto en sodio)',
@@ -422,8 +396,6 @@ List<NutriFood> grasas = [
     calcio: '0.5',
     hierro: '0.1',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Chorizo (grasa animal)',
@@ -443,7 +415,5 @@ List<NutriFood> grasas = [
     calcio: '5.0',
     hierro: '0.3',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
 ];

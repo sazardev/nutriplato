@@ -145,7 +145,6 @@ class ExampleHandScreen extends StatelessWidget {
       done: const Icon(Icons.done),
       skip: const Text('Cerrar'),
       showSkipButton: true,
-      showDoneButton: true,
       nextFlex: 0,
       dotsDecorator: DotsDecorator(
         size: const Size.square(10.0),

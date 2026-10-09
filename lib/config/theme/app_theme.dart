@@ -78,7 +78,7 @@ class AppTheme {
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: Colors.grey.shade200, width: 1),
+          side: BorderSide(color: Colors.grey.shade200),
         ),
         margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       ),

@@ -102,7 +102,6 @@ class _BodyPainter extends CustomPainter {
   Color get _bodyColor => const Color(0xFFE8D5C4);
   Color get _activeColor => primaryColor;
   Color get _outlineColor => const Color(0xFF8B6F6F);
-  Color get _inactiveColor => const Color(0xFFD4B896);
 
   Paint _bodyPaint() => Paint()
     ..color = _bodyColor

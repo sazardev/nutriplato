@@ -3,11 +3,10 @@ import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:nutriplato/fitness/smart/smart_exercise.model.dart';
 import 'package:nutriplato/fitness/smart/smart_exercise.data.dart';
+import 'package:nutriplato/fitness/smart/smart_exercise.model.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const _kHistoryKey = 'smart_workout_history';
 
@@ -163,7 +162,7 @@ class SmartFitnessController extends GetxController {
     required _WorkoutVariant variant,
   }) {
     final maxIntensity = _maxIntensityFor(bmi, level);
-    var pool = smartExercisesLibrary.where((e) {
+    final pool = smartExercisesLibrary.where((e) {
       if (bmi != null && !e.isSuitableForBmi(bmi)) return false;
       if (e.intensity.value > maxIntensity) return false;
       return true;
@@ -417,7 +416,7 @@ class SmartFitnessController extends GetxController {
   }
 
   List<SmartWorkout> _genericWorkouts() {
-    final all = _WorkoutVariant.values;
+    const all = _WorkoutVariant.values;
     return all.map((v) {
       final pool =
           smartExercisesLibrary.where((e) => e.intensity.value <= 3).toList()
@@ -473,7 +472,7 @@ class SmartFitnessController extends GetxController {
       _profile?.activityLevel ?? ActivityLevel.lightlyActive,
     );
 
-    var pool = smartExercisesLibrary.where((e) {
+    final pool = smartExercisesLibrary.where((e) {
       if (bmi != null && !e.isSuitableForBmi(bmi)) return false;
       if (e.intensity.value > maxIntensity) return false;
       return true;
@@ -510,7 +509,7 @@ class SmartFitnessController extends GetxController {
     );
 
     dev.log(
-      'Custom workout: ${exerciseCount} ejercicios, ${durationMinutes}min target, '
+      'Custom workout: $exerciseCount ejercicios, ${durationMinutes}min target, '
       '${calories.toStringAsFixed(0)} kcal estimadas',
       name: 'NutriPlato|SmartFitness',
     );
@@ -524,7 +523,7 @@ class SmartFitnessController extends GetxController {
       overallIntensity: _calcOverall(selected),
       gradients: const [Color(0xFF6C63FF), Color(0xFF48CAE4)],
       reasoning:
-          '${exerciseCount} ejercicios · ~${durationMinutes} min · ~${targetCalories.toStringAsFixed(0)} kcal objetivo.',
+          '$exerciseCount ejercicios · ~$durationMinutes min · ~${targetCalories.toStringAsFixed(0)} kcal objetivo.',
     );
   }
 

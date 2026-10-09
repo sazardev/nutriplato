@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:nutriplato/fitness/smart/smart_fitness.controller.dart';
 import 'package:nutriplato/fitness/smart/smart_fitness.screen.dart';
 import 'package:nutriplato/infrastructure/entities/article/article.dart';
@@ -12,6 +11,7 @@ import 'package:nutriplato/infrastructure/services/daily_prediction_service.dart
 import 'package:nutriplato/presentation/provider/article_provider.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
 import 'package:nutriplato/presentation/screens/article_detail_screen.dart';
+import 'package:provider/provider.dart';
 
 /// Predicción del día: qué comer, qué entrenar y qué leer hoy.
 class TodayPredictionWidget extends StatefulWidget {

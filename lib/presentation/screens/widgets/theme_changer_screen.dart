@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ThemeChangerScreen extends StatelessWidget {
   const ThemeChangerScreen({super.key});
 
-  static const appRouterName = "Personalización";
+  static const appRouterName = 'Personalización';
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,11 @@ class ThemeChangerScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Icons.palette_outlined, color: Colors.white, size: 32),
+                  const Icon(
+                    Icons.palette_outlined,
+                    color: Colors.white,
+                    size: 32,
+                  ),
                   const SizedBox(height: 12),
                   Text(
                     'Personaliza tu experiencia',
@@ -87,7 +91,6 @@ class ThemeChangerScreen extends StatelessWidget {
                 crossAxisCount: 4,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
-                childAspectRatio: 1,
               ),
               itemCount: appTheme.colorThemes.length,
               itemBuilder: (context, index) {

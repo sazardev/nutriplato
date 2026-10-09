@@ -48,11 +48,7 @@ class BackupService {
     final json = _toJson(await exportData());
     try {
       await SharePlus.instance.share(
-        ShareParams(
-          text: json,
-          subject: 'Respaldo de mis datos NutriPlato',
-          downloadFallbackEnabled: true,
-        ),
+        ShareParams(text: json, subject: 'Respaldo de mis datos NutriPlato'),
       );
       dev.log('shareBackup → compartido', name: _tag);
     } on MissingPluginException {

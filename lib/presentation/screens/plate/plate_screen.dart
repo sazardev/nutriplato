@@ -1,8 +1,9 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:nutriplato/presentation/screens/plate/widgets/plato_info_screen.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
+import 'package:nutriplato/presentation/screens/plate/widgets/plato_info_screen.dart';
 
 import '../../../data/data.dart';
 import '../food/foods.screen.dart';
@@ -107,7 +108,6 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
         slivers: [
           SliverAppBar(
             expandedHeight: 140,
-            floating: false,
             pinned: true,
             automaticallyImplyLeading: false,
             elevation: 0,
@@ -246,7 +246,7 @@ class _PlateState extends State<PlateScreen> with TickerProviderStateMixin {
 
   void _openSection(int section) {
     _highlightSection(section);
-    Color color = sectionColors[section];
+    final Color color = sectionColors[section];
     displayDialog(color, section);
   }
 

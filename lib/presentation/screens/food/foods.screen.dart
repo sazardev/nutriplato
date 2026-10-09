@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:nutriplato/infrastructure/entities/food/food.dart';
-import 'package:nutriplato/presentation/screens/plate/widgets/category.dart';
 import 'package:nutriplato/data/food/cereales.dart';
 import 'package:nutriplato/data/food/frutas.dart';
 import 'package:nutriplato/data/food/grasas.dart';
 import 'package:nutriplato/data/food/leguminosas.dart';
 import 'package:nutriplato/data/food/verduras.dart';
+import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/presentation/screens/food/food.view.dart';
+import 'package:nutriplato/presentation/screens/plate/widgets/category.dart';
 
 import '../../../data/data.dart';
 import '../../../data/food/animals.dart';
@@ -255,7 +255,6 @@ class _DisplayListFoodsScreen extends State<FoodsScreen> {
                                 filteredFoods[index].image == null
                                     ? Container()
                                     : Expanded(
-                                        flex: 1,
                                         child: SizedBox(
                                           width: double.infinity,
                                           child: ClipRRect(
@@ -272,7 +271,6 @@ class _DisplayListFoodsScreen extends State<FoodsScreen> {
                                         ),
                                       ),
                                 Expanded(
-                                  flex: 1,
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(

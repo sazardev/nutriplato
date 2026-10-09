@@ -133,7 +133,7 @@ class NutriDesign {
   static BoxDecoration cardDecorationWithColor(Color color) => BoxDecoration(
     color: surfaceColor,
     borderRadius: BorderRadius.circular(radiusLarge),
-    border: Border.all(color: color.withValues(alpha: 0.2), width: 1),
+    border: Border.all(color: color.withValues(alpha: 0.2)),
     boxShadow: [
       BoxShadow(
         color: color.withValues(alpha: 0.1),
@@ -217,7 +217,6 @@ class NutriAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       expandedHeight: expandedHeight,
-      floating: false,
       pinned: true,
       elevation: 0,
       backgroundColor: gradientColors.first,
@@ -513,7 +512,7 @@ class NutriEmptyState extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(NutriDesign.spacing24),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: NutriDesign.grey100,
                 shape: BoxShape.circle,
               ),

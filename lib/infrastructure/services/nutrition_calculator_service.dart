@@ -47,7 +47,6 @@ class NutritionCalculatorService {
           heightCm: heightCm,
           age: age,
           gender: gender,
-          formula: BMRFormula.mifflinStJeor,
         );
     }
   }
@@ -236,7 +235,7 @@ class NutritionCalculatorService {
     const caloriesPerKg = 7700.0;
 
     if (dailyCalorieDeficit.abs() < 100) {
-      return WeightGoalProjection(
+      return const WeightGoalProjection(
         weeksToGoal: null,
         weeklyWeightChange: 0,
         isRealistic: false,
@@ -335,20 +334,20 @@ class NutritionCalculatorService {
     }
 
     if (waistCm < riskThreshold) {
-      return CardiovascularRisk(
+      return const CardiovascularRisk(
         level: RiskLevel.low,
         message: 'Tu circunferencia de cintura está en un rango saludable.',
         recommendation: 'Mantén tus hábitos actuales.',
       );
     } else if (waistCm < highRiskThreshold) {
-      return CardiovascularRisk(
+      return const CardiovascularRisk(
         level: RiskLevel.moderate,
         message: 'Tu circunferencia de cintura indica riesgo moderado.',
         recommendation:
             'Considera aumentar tu actividad física y reducir el consumo de azúcares.',
       );
     } else {
-      return CardiovascularRisk(
+      return const CardiovascularRisk(
         level: RiskLevel.high,
         message: 'Tu circunferencia de cintura indica riesgo elevado.',
         recommendation:

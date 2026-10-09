@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
-import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_entry.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_provider.dart';
+import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
+import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/infrastructure/services/nutrition_calculator_service.dart';
 import 'package:nutriplato/infrastructure/services/smart_nutrition_service.dart';
-import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
 import 'package:nutriplato/presentation/home.screen.dart';
+import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Pantalla de onboarding mejorada con animaciones fluidas
 class EnhancedOnboardingScreen extends StatefulWidget {
@@ -293,7 +293,9 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
               height: 4,
               margin: const EdgeInsets.symmetric(horizontal: 2),
               decoration: BoxDecoration(
-                color: isActive ? Colors.white : Colors.white.withOpacity(0.3),
+                color: isActive
+                    ? Colors.white
+                    : Colors.white.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -375,7 +377,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
+                        color: Colors.black.withValues(alpha: 0.2),
                         blurRadius: 20,
                         offset: const Offset(0, 10),
                       ),
@@ -409,7 +411,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.15),
+              color: Colors.white.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
@@ -445,7 +447,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
         Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.2),
+            color: Colors.white.withValues(alpha: 0.2),
             borderRadius: BorderRadius.circular(12),
           ),
           child: ExcludeSemantics(
@@ -468,7 +470,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
               Text(
                 subtitle,
                 style: TextStyle(
-                  color: Colors.white.withOpacity(0.92),
+                  color: Colors.white.withValues(alpha: 0.92),
                   fontSize: 13,
                 ),
               ),
@@ -497,7 +499,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: 20,
                   offset: const Offset(0, 10),
                 ),
@@ -626,7 +628,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: 20,
                   offset: const Offset(0, 10),
                 ),
@@ -743,7 +745,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
             activeTrackColor: Colors.green.shade400,
             inactiveTrackColor: Colors.green.shade100,
             thumbColor: Colors.green.shade600,
-            overlayColor: Colors.green.withOpacity(0.2),
+            overlayColor: Colors.green.withValues(alpha: 0.2),
           ),
           child: Slider(
             value: value,
@@ -779,9 +781,9 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.15),
+        color: color.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
@@ -789,7 +791,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
             width: 60,
             height: 60,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.2),
+              color: color.withValues(alpha: 0.2),
               shape: BoxShape.circle,
             ),
             child: Center(
@@ -807,7 +809,10 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Tu IMC', style: TextStyle(color: color.withOpacity(0.8))),
+              Text(
+                'Tu IMC',
+                style: TextStyle(color: color.withValues(alpha: 0.8)),
+              ),
               Text(
                 category,
                 style: GoogleFonts.poppins(
@@ -849,7 +854,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
                   decoration: BoxDecoration(
                     color: isSelected
                         ? Colors.white
-                        : Colors.white.withOpacity(0.9),
+                        : Colors.white.withValues(alpha: 0.9),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
                       color: isSelected
@@ -860,7 +865,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
                     boxShadow: isSelected
                         ? [
                             BoxShadow(
-                              color: Colors.green.withOpacity(0.3),
+                              color: Colors.green.withValues(alpha: 0.3),
                               blurRadius: 10,
                               offset: const Offset(0, 4),
                             ),
@@ -964,7 +969,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
                   decoration: BoxDecoration(
                     color: isSelected
                         ? Colors.white
-                        : Colors.white.withOpacity(0.9),
+                        : Colors.white.withValues(alpha: 0.9),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
                       color: isSelected
@@ -975,7 +980,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
                     boxShadow: isSelected
                         ? [
                             BoxShadow(
-                              color: Colors.green.withOpacity(0.3),
+                              color: Colors.green.withValues(alpha: 0.3),
                               blurRadius: 10,
                               offset: const Offset(0, 4),
                             ),
@@ -1167,7 +1172,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
                 ),
                 checkmarkColor: Colors.white,
                 avatar: isSelected
-                    ? Icon(Icons.warning, size: 16, color: Colors.white)
+                    ? const Icon(Icons.warning, size: 16, color: Colors.white)
                     : null,
               );
             }).toList(),
@@ -2273,7 +2278,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ExcludeSemantics(
+          const ExcludeSemantics(
             child: Icon(Icons.info_outline, color: Colors.white, size: 18),
           ),
           const SizedBox(width: 10),
@@ -2325,7 +2330,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
         const SizedBox(height: 8),
         Text(
           subtitle,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
             color: Colors.white,

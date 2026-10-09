@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:developer' as dev;
+
 import 'package:flutter/material.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_entry.dart';
-import 'package:nutriplato/infrastructure/entities/food/micros_helper.dart';
 import 'package:nutriplato/infrastructure/entities/food/micronutrients.dart';
+import 'package:nutriplato/infrastructure/entities/food/micros_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const _tag = 'NutriPlato|FoodLogProvider';
@@ -95,7 +96,7 @@ class FoodLogProvider with ChangeNotifier {
     );
 
     // Buscar si ya existe un registro para este día
-    DailyFoodLog? dailyLog = getDailyLog(formattedDate);
+    final DailyFoodLog? dailyLog = getDailyLog(formattedDate);
 
     if (dailyLog != null) {
       // Si existe, agregar la entrada al día existente
@@ -131,7 +132,7 @@ class FoodLogProvider with ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    DailyFoodLog? dailyLog = getDailyLog(date);
+    final DailyFoodLog? dailyLog = getDailyLog(date);
 
     if (dailyLog != null) {
       final index = _logs.indexOf(dailyLog);
@@ -198,7 +199,7 @@ class FoodLogProvider with ChangeNotifier {
 
         // Obtener las entradas guardadas para ese día
         final entriesJson = prefs.getStringList('food_log_$dayStr') ?? [];
-        List<FoodLogEntry> entries = [];
+        final List<FoodLogEntry> entries = [];
 
         // Convertir cada entrada JSON a un objeto FoodLogEntry
         for (var entryJson in entriesJson) {
@@ -283,7 +284,7 @@ class FoodLogProvider with ChangeNotifier {
       final prefs = await SharedPreferences.getInstance();
 
       // Guardar lista de fechas
-      List<String> days = [];
+      final List<String> days = [];
 
       for (var dailyLog in _logs) {
         // Formato de fecha para usar como clave
@@ -291,7 +292,7 @@ class FoodLogProvider with ChangeNotifier {
         days.add(dayStr);
 
         // Convertir las entradas a JSON
-        List<String> entriesJson = [];
+        final List<String> entriesJson = [];
 
         for (var entry in dailyLog.entries) {
           // Convertir el objeto Food a un mapa

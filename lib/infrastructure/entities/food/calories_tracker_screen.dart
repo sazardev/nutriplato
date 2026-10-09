@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/food/add_food_entry_screen.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_entry.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_provider.dart';
-import 'package:nutriplato/config/theme/design_system.dart';
-import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 class CaloriesTrackerScreen extends StatefulWidget {
   const CaloriesTrackerScreen({super.key});
@@ -26,9 +26,11 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: _mealTypes.length, vsync: this);
-    Future.microtask(
-      () => Provider.of<FoodLogProvider>(context, listen: false).loadLogs(),
+    final foodLogProvider = Provider.of<FoodLogProvider>(
+      context,
+      listen: false,
     );
+    Future.microtask(foodLogProvider.loadLogs);
   }
 
   @override
@@ -60,7 +62,7 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
           if (progressPercentage > 1) progressPercentage = 1;
 
           // Organizar los registros por tipo de comida
-          Map<String, List<FoodLogEntry>> mealGroups = {};
+          final Map<String, List<FoodLogEntry>> mealGroups = {};
           if (dailyLog != null) {
             for (var entry in dailyLog.entries) {
               if (!mealGroups.containsKey(entry.mealType)) {
@@ -105,7 +107,6 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
                 pinned: true,
               ),
               SliverFillRemaining(
-                hasScrollBody: true,
                 child: TabBarView(
                   controller: _tabController,
                   children: _mealTypes.map((mealType) {
@@ -148,8 +149,8 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
         title: Row(
           children: [
             Icon(FontAwesomeIcons.chartPie.data, size: 20),
-            SizedBox(width: 8),
-            Text(
+            const SizedBox(width: 8),
+            const Text(
               'Mi Nutrición Diaria',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
@@ -570,7 +571,7 @@ class _CaloriesTrackerScreenState extends State<CaloriesTrackerScreen>
     }
 
     // Calcular calorías totales para esta comida
-    double totalMealCalories = entries.fold(
+    final double totalMealCalories = entries.fold(
       0,
       (sum, entry) => sum + entry.calories,
     );

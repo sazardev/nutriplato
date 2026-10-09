@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:developer' as dev;
+
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
+import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/infrastructure/services/nutrition_calculator_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const _tag = 'NutriPlato|UserProfileProvider';
 
@@ -362,7 +363,7 @@ class UserProfileProvider extends ChangeNotifier {
           longestStreak: longestStreak,
         );
         dev.log(
-          '_updateStreak → día consecutivo, streak=$newStreak (record=${longestStreak})',
+          '_updateStreak → día consecutivo, streak=$newStreak (record=$longestStreak)',
           name: _tag,
         );
       } else {

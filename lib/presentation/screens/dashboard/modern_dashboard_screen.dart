@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nutriplato/config/theme/app_theme.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
+import 'package:nutriplato/infrastructure/entities/user.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
-import 'package:nutriplato/presentation/provider/user_provider.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
-import 'package:nutriplato/presentation/screens/widgets/modern_cards.dart';
+import 'package:nutriplato/presentation/provider/user_provider.dart';
+import 'package:nutriplato/presentation/screens/dashboard/widgets/calorie_balance_card.dart';
 import 'package:nutriplato/presentation/screens/dashboard/widgets/modern_learn_screen.dart';
 import 'package:nutriplato/presentation/screens/dashboard/widgets/nutrition_summary_card.dart';
 import 'package:nutriplato/presentation/screens/dashboard/widgets/smart_suggestions_widget.dart';
-import 'package:nutriplato/presentation/screens/dashboard/widgets/calorie_balance_card.dart';
 import 'package:nutriplato/presentation/screens/dashboard/widgets/today_prediction_widget.dart';
 import 'package:nutriplato/presentation/screens/featured_articles.dart';
-import 'package:nutriplato/presentation/screens/widgets/modern_sidebar.dart';
 import 'package:nutriplato/presentation/screens/profile/profile_screen.dart';
+import 'package:nutriplato/presentation/screens/widgets/modern_cards.dart';
+import 'package:nutriplato/presentation/screens/widgets/modern_sidebar.dart';
+import 'package:provider/provider.dart';
 
 class ModernDashboardScreen extends StatefulWidget {
   const ModernDashboardScreen({super.key});
@@ -74,7 +75,6 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
             // Modern App Bar
             SliverAppBar(
               expandedHeight: 200,
-              floating: false,
               pinned: true,
               elevation: 0,
               backgroundColor: Colors.transparent,
@@ -378,9 +378,10 @@ class _ModernDashboardScreenState extends State<ModernDashboardScreen>
     );
   }
 
-  int _calculateUserLevel(user) {
+  int _calculateUserLevel(User user) {
     // Algoritmo simple para calcular nivel basado en actividad
-    int totalActivity = user.postReadIt + user.exercisesDoIt + user.viewedFood;
+    final int totalActivity =
+        user.postReadIt + user.exercisesDoIt + user.viewedFood;
     return (totalActivity / 10).floor() + 1;
   }
 }

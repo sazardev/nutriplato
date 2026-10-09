@@ -5,7 +5,7 @@ class User {
   int viewedFood;
 
   User({
-    this.username = "usuario",
+    this.username = 'usuario',
     this.postReadIt = 0,
     this.exercisesDoIt = 0,
     this.viewedFood = 0,

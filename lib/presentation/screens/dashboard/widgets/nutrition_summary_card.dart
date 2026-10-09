@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:provider/provider.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
 import 'package:nutriplato/presentation/screens/profile/profile_screen.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 /// Tarjeta de resumen nutricional para el dashboard
 class NutritionSummaryCard extends StatelessWidget {
@@ -31,7 +31,10 @@ class NutritionSummaryCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               gradient: LinearGradient(
-                colors: [gradientColors[0].withOpacity(0.1), Colors.white],
+                colors: [
+                  gradientColors[0].withValues(alpha: 0.1),
+                  Colors.white,
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -57,7 +60,7 @@ class NutritionSummaryCard extends StatelessWidget {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: gradientColors[0].withOpacity(0.2),
+                          color: gradientColors[0].withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
@@ -242,7 +245,7 @@ class NutritionSummaryCard extends StatelessWidget {
         ],
       ),
       progressColor: color,
-      backgroundColor: color.withOpacity(0.2),
+      backgroundColor: color.withValues(alpha: 0.2),
       circularStrokeCap: CircularStrokeCap.round,
     );
   }

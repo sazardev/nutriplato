@@ -148,8 +148,6 @@ List<NutriFood> lacteos = [
     calcio: '205.0',
     hierro: '0',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Queso fresco',
@@ -169,8 +167,6 @@ List<NutriFood> lacteos = [
     calcio: '195.0',
     hierro: '0',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Queso manchego',
@@ -190,8 +186,6 @@ List<NutriFood> lacteos = [
     calcio: '227.0',
     hierro: '0.1',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Queso oaxaca',
@@ -211,8 +205,6 @@ List<NutriFood> lacteos = [
     calcio: '210.0',
     hierro: '0',
     azucarEquivalente: '0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Queso cottage (requesón)',
@@ -232,8 +224,6 @@ List<NutriFood> lacteos = [
     calcio: '83.0',
     hierro: '0.1',
     azucarEquivalente: '0.3',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Jocoque',
@@ -253,8 +243,6 @@ List<NutriFood> lacteos = [
     calcio: '200.0',
     hierro: '0.1',
     azucarEquivalente: '3.0',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Crema para batir',
@@ -274,8 +262,6 @@ List<NutriFood> lacteos = [
     calcio: '12.0',
     hierro: '0',
     azucarEquivalente: '0.1',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Leche evaporada',
@@ -295,8 +281,6 @@ List<NutriFood> lacteos = [
     calcio: '330.0',
     hierro: '0.2',
     azucarEquivalente: '3.1',
-    indiceGlicemico: 'ND',
-    cargaGlicemica: 'ND',
   ),
   NutriFood(
     alimento: 'Leche condensada',

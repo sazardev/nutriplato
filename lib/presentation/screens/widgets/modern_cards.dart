@@ -30,7 +30,6 @@ class ModernCard extends StatelessWidget {
       child: Material(
         color: backgroundColor ?? Colors.white,
         borderRadius: borderRadius ?? BorderRadius.circular(20),
-        elevation: 0,
         child: InkWell(
           onTap: onTap,
           borderRadius: borderRadius ?? BorderRadius.circular(20),
@@ -38,8 +37,7 @@ class ModernCard extends StatelessWidget {
             padding: padding ?? const EdgeInsets.all(16),
             decoration: BoxDecoration(
               borderRadius: borderRadius ?? BorderRadius.circular(20),
-              border:
-                  border ?? Border.all(color: Colors.grey.shade200, width: 1),
+              border: border ?? Border.all(color: Colors.grey.shade200),
               boxShadow: boxShadow,
             ),
             child: child,

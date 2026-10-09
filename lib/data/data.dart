@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-const String name = "Jacqueline Juarez";
-const String developer = "Omar Flores";
+const String name = 'Jacqueline Juarez';
+const String developer = 'Omar Flores';
 
 final List<Color> sectionColors = [
   Colors.amber, // Cereales (22%)
   Colors.orange, // Leguminosas (15%)
   Colors.red, // Animal (8%)
   Colors.purple, // Grasas (5%)
-  Color.fromARGB(255, 50, 147, 54), // Verduras & Frutas (50%)
+  const Color.fromARGB(255, 50, 147, 54), // Verduras & Frutas (50%)
 ];
 
 List<String> shortCategories = [
