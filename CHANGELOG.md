@@ -18,6 +18,10 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
   `NutriDesign` (predicción, intensidades de ejercicio, logros, acentos) y
   eliminación de los ~55 colores hardcodeados que quedaban en la UI; las
   pantallas y widgets usan ahora tokens del design system o `Theme.of`.
+- Refactor de calidad (fase 2): el onboarding (2,381 líneas en un solo
+  archivo) se dividió en 12 archivos con una sola responsabilidad —
+  orquestador, pasos (`steps/`), widgets compartidos (`widgets/`) y modelo
+  (`models/plan_proposal.dart`) — sin cambios de comportamiento ni de UI.
 
 ## [3.2.0] - 2026-10-08
 
