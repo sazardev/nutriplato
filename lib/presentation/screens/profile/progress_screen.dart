@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
@@ -35,7 +36,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF7F8FA),
+      backgroundColor: NutriDesign.surfaceMuted,
       appBar: AppBar(title: const Text('Mi progreso'), centerTitle: false),
       body: Consumer<UserProfileProvider>(
         builder: (context, provider, _) {

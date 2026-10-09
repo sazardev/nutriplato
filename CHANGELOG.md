@@ -14,6 +14,10 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
   ordenados, `use_build_context_synchronously`, etc.), 1,673 fixes automáticos
   con `dart fix`, formato homologado con `dart format` y analyzer sin issues
   (36 → 0).
+- Homologación del sistema de diseño: nueva capa de colores semánticos en
+  `NutriDesign` (predicción, intensidades de ejercicio, logros, acentos) y
+  eliminación de los ~55 colores hardcodeados que quedaban en la UI; las
+  pantallas y widgets usan ahora tokens del design system o `Theme.of`.
 
 ## [3.2.0] - 2026-10-08
 

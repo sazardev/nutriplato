@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/food/nutri_food.dart';
 import 'package:nutriplato/infrastructure/services/food_api_service.dart';
 import 'package:nutriplato/presentation/screens/food/food.view.dart';
@@ -113,7 +114,11 @@ class _OnlineFoodSearchSheetState extends State<OnlineFoodSearchSheet> {
             const SizedBox(height: 16),
             Row(
               children: [
-                const Icon(Icons.cloud, color: Color(0xFF00838F), size: 22),
+                const Icon(
+                  Icons.cloud,
+                  color: NutriDesign.accentTeal,
+                  size: 22,
+                ),
                 const SizedBox(width: 8),
                 Text(
                   'Buscar en OpenFoodFacts',

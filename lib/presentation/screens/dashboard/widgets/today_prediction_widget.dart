@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/smart/smart_fitness.controller.dart';
 import 'package:nutriplato/fitness/smart/smart_fitness.screen.dart';
 import 'package:nutriplato/infrastructure/entities/article/article.dart';
@@ -81,14 +82,18 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
       children: [
         Row(
           children: [
-            const Icon(Icons.auto_awesome, color: Color(0xFF1B5E20), size: 20),
+            const Icon(
+              Icons.auto_awesome,
+              color: NutriDesign.predictionGreen,
+              size: 20,
+            ),
             const SizedBox(width: 8),
             Text(
               'Tu predicción de hoy',
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF1B5E20),
+                color: NutriDesign.predictionGreen,
               ),
             ),
           ],
@@ -494,7 +499,7 @@ class _TodayPredictionWidgetState extends State<TodayPredictionWidget> {
               : 'No se pudieron aplicar los alimentos.',
           style: GoogleFonts.poppins(),
         ),
-        backgroundColor: const Color(0xFF1B5E20),
+        backgroundColor: NutriDesign.predictionGreen,
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
+
 import 'smart_exercise.model.dart';
 
 /// Widget SVG flat que representa al cuerpo humano en distintas posiciones
@@ -15,7 +17,7 @@ class ExerciseSvgGuide extends StatelessWidget {
     required this.position,
     required this.activeMuscles,
     this.size = 200,
-    this.primaryColor = const Color(0xFF6C63FF),
+    this.primaryColor = NutriDesign.primaryFallback,
     this.showLabel = true,
   });
 
@@ -99,9 +101,9 @@ class _BodyPainter extends CustomPainter {
   }
 
   // ── Colores ─────────────────────────────────────────────────────────────
-  Color get _bodyColor => const Color(0xFFE8D5C4);
+  Color get _bodyColor => NutriDesign.exerciseBody;
   Color get _activeColor => primaryColor;
-  Color get _outlineColor => const Color(0xFF8B6F6F);
+  Color get _outlineColor => NutriDesign.exerciseOutline;
 
   Paint _bodyPaint() => Paint()
     ..color = _bodyColor

@@ -3,6 +3,7 @@ import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/smart/smart_exercise.data.dart';
 import 'package:nutriplato/fitness/smart/smart_exercise.model.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
@@ -521,7 +522,7 @@ class SmartFitnessController extends GetxController {
       totalDurationMinutes: duration.round(),
       estimatedCalories: calories,
       overallIntensity: _calcOverall(selected),
-      gradients: const [Color(0xFF6C63FF), Color(0xFF48CAE4)],
+      gradients: const [NutriDesign.primaryFallback, NutriDesign.accentSky],
       reasoning:
           '$exerciseCount ejercicios · ~$durationMinutes min · ~${targetCalories.toStringAsFixed(0)} kcal objetivo.',
     );
@@ -654,17 +655,26 @@ class SmartFitnessController extends GetxController {
 }
 
 enum _WorkoutVariant {
-  principal('Rutina recomendada', [Color(0xFF6C63FF), Color(0xFF48CAE4)]),
-  cardioFocus('Enfoque cardio', [Color(0xFFFF6B6B), Color(0xFFFF8C00)]),
-  fuerzaFocus('Enfoque fuerza', [Color(0xFF4DABF7), Color(0xFF845EC2)]),
-  coreFocus('Enfoque core & abdomen', [Color(0xFFFFA726), Color(0xFFFF6B6B)]),
-  flexibilidad('Relajación y movilidad', [
-    Color(0xFF51CF66),
-    Color(0xFF20C997),
+  principal('Rutina recomendada', [
+    NutriDesign.primaryFallback,
+    NutriDesign.accentSky,
   ]),
-  hiitBlast('HIIT explosivo', [Color(0xFFE03131), Color(0xFFFF8C00)]),
-  matutino('Activación matutina', [Color(0xFFFFD43B), Color(0xFFFFA726)]),
-  quemaGrasa('Quema grasa', [Color(0xFFFF8CC8), Color(0xFF845EC2)]);
+  cardioFocus('Enfoque cardio', [NutriDesign.error, NutriDesign.accentOrange]),
+  fuerzaFocus('Enfoque fuerza', [NutriDesign.info, NutriDesign.accentPurple]),
+  coreFocus('Enfoque core & abdomen', [NutriDesign.warning, NutriDesign.error]),
+  flexibilidad('Relajación y movilidad', [
+    NutriDesign.success,
+    NutriDesign.accentMint,
+  ]),
+  hiitBlast('HIIT explosivo', [
+    NutriDesign.intensityVeryHigh,
+    NutriDesign.accentOrange,
+  ]),
+  matutino('Activación matutina', [
+    NutriDesign.accentAmber,
+    NutriDesign.warning,
+  ]),
+  quemaGrasa('Quema grasa', [NutriDesign.accentPink, NutriDesign.accentPurple]);
 
   final String label;
   final List<Color> gradients;

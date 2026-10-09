@@ -17,6 +17,50 @@ class NutriDesign {
   static const Color error = Color(0xFFFF6B6B);
   static const Color info = Color(0xFF4DABF7);
 
+  // Colores semánticos de dominio
+  static const Color predictionGreen = Color(0xFF1B5E20);
+  static const Color accentTeal = Color(0xFF00838F);
+  static const Color surfaceMuted = Color(0xFFF7F8FA);
+
+  // Intensidad de ejercicio (muy baja → muy alta)
+  static const Color intensityVeryLow = success;
+  static const Color intensityLow = Color(0xFF94D82D);
+  static const Color intensityModerate = warning;
+  static const Color intensityHigh = error;
+  static const Color intensityVeryHigh = Color(0xFFE03131);
+
+  // Figura de la guía de ejercicio
+  static const Color exerciseBody = Color(0xFFE8D5C4);
+  static const Color exerciseOutline = Color(0xFF8B6F6F);
+  static const Color primaryFallback = Color(0xFF6C63FF);
+
+  // Paleta extendida (acentos por feature)
+  static const Color accentOrange = Color(0xFFFF8C00);
+  static const Color accentAmber = Color(0xFFFFD43B);
+  static const Color accentMint = Color(0xFF20C997);
+  static const Color accentSky = Color(0xFF48CAE4);
+  static const Color accentPurple = Color(0xFF845EC2);
+  static const Color accentPink = Color(0xFFFF8CC8);
+
+  // Logros: rachas
+  static const Color achievementStreak1 = Color(0xFFFF9800);
+  static const Color achievementStreak2 = Color(0xFFFF5722);
+  static const Color achievementStreak3 = Color(0xFFE64A19);
+  // Logros: días de registro
+  static const Color achievementDays1 = Color(0xFF2196F3);
+  static const Color achievementDays2 = Color(0xFF1976D2);
+  static const Color achievementDays3 = Color(0xFF0D47A1);
+  // Logros: ejercicio
+  static const Color achievementExercise1 = Color(0xFF4CAF50);
+  static const Color achievementExercise2 = Color(0xFF388E3C);
+  static const Color achievementExercise3 = predictionGreen;
+  // Logros: artículos
+  static const Color achievementArticles1 = Color(0xFF9C27B0);
+  static const Color achievementArticles2 = Color(0xFF7B1FA2);
+  // Logros: alimentos
+  static const Color achievementFoods1 = Color(0xFFEF6C00);
+  static const Color achievementFoods2 = Color(0xFFE65100);
+
   // Grises
   static const Color grey50 = Color(0xFFF8F9FA);
   static const Color grey100 = Color(0xFFF1F3F4);

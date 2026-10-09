@@ -3,6 +3,7 @@ import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/food/nutri_food.dart';
 
 const _tag = 'NutriPlato|FoodApiService';
@@ -113,7 +114,7 @@ class FoodApiService {
       alimento: name,
       category: 'online',
       categoryIcon: Icons.cloud_queue,
-      categoryColor: const Color(0xFF00838F),
+      categoryColor: NutriDesign.accentTeal,
       cantidadSugerida: '100',
       unidad: 'g',
       pesoRedondeado: '100',

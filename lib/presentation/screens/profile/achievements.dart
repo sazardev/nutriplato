@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 
 /// Definición de un logro desbloqueable.
 class Achievement {
@@ -47,7 +48,7 @@ List<Achievement> kAchievements = [
     title: 'Primeros pasos',
     description: 'Usa la app 3 días seguidos',
     icon: Icons.local_fire_department,
-    color: const Color(0xFFFF9800),
+    color: NutriDesign.achievementStreak1,
     isUnlocked: _stats((s) => s.longestStreak >= 3 || s.currentStreak >= 3),
   ),
   Achievement(
@@ -55,7 +56,7 @@ List<Achievement> kAchievements = [
     title: 'Semana completa',
     description: 'Mantén una racha de 7 días',
     icon: Icons.whatshot,
-    color: const Color(0xFFFF5722),
+    color: NutriDesign.achievementStreak2,
     isUnlocked: _stats((s) => s.longestStreak >= 7 || s.currentStreak >= 7),
   ),
   Achievement(
@@ -63,7 +64,7 @@ List<Achievement> kAchievements = [
     title: 'Un mes imparable',
     description: 'Mantén una racha de 30 días',
     icon: Icons.auto_awesome,
-    color: const Color(0xFFE64A19),
+    color: NutriDesign.achievementStreak3,
     isUnlocked: _stats((s) => s.longestStreak >= 30 || s.currentStreak >= 30),
   ),
   // Días registrados
@@ -72,7 +73,7 @@ List<Achievement> kAchievements = [
     title: 'Constancia',
     description: 'Registra 7 días de uso',
     icon: Icons.calendar_month,
-    color: const Color(0xFF2196F3),
+    color: NutriDesign.achievementDays1,
     isUnlocked: _stats((s) => s.daysLogged >= 7),
   ),
   Achievement(
@@ -80,7 +81,7 @@ List<Achievement> kAchievements = [
     title: 'Hábito formado',
     description: 'Registra 30 días de uso',
     icon: Icons.calendar_view_month,
-    color: const Color(0xFF1976D2),
+    color: NutriDesign.achievementDays2,
     isUnlocked: _stats((s) => s.daysLogged >= 30),
   ),
   Achievement(
@@ -88,7 +89,7 @@ List<Achievement> kAchievements = [
     title: 'Veterano',
     description: 'Registra 100 días de uso',
     icon: Icons.event_available,
-    color: const Color(0xFF0D47A1),
+    color: NutriDesign.achievementDays3,
     isUnlocked: _stats((s) => s.daysLogged >= 100),
   ),
   // Ejercicios
@@ -97,7 +98,7 @@ List<Achievement> kAchievements = [
     title: 'En movimiento',
     description: 'Completa 10 ejercicios',
     icon: Icons.directions_run,
-    color: const Color(0xFF4CAF50),
+    color: NutriDesign.achievementExercise1,
     isUnlocked: _stats((s) => s.exercisesCompleted >= 10),
   ),
   Achievement(
@@ -105,7 +106,7 @@ List<Achievement> kAchievements = [
     title: 'Atleta en formación',
     description: 'Completa 50 ejercicios',
     icon: Icons.fitness_center,
-    color: const Color(0xFF388E3C),
+    color: NutriDesign.achievementExercise2,
     isUnlocked: _stats((s) => s.exercisesCompleted >= 50),
   ),
   Achievement(
@@ -113,7 +114,7 @@ List<Achievement> kAchievements = [
     title: 'Máquina',
     description: 'Completa 500 ejercicios',
     icon: Icons.military_tech,
-    color: const Color(0xFF1B5E20),
+    color: NutriDesign.achievementExercise3,
     isUnlocked: _stats((s) => s.exercisesCompleted >= 500),
   ),
   // Artículos
@@ -122,7 +123,7 @@ List<Achievement> kAchievements = [
     title: 'Curioso',
     description: 'Lee 10 artículos',
     icon: Icons.menu_book,
-    color: const Color(0xFF9C27B0),
+    color: NutriDesign.achievementArticles1,
     isUnlocked: _stats((s) => s.articlesRead >= 10),
   ),
   Achievement(
@@ -130,7 +131,7 @@ List<Achievement> kAchievements = [
     title: 'Buscador de conocimiento',
     description: 'Lee 50 artículos',
     icon: Icons.auto_stories,
-    color: const Color(0xFF7B1FA2),
+    color: NutriDesign.achievementArticles2,
     isUnlocked: _stats((s) => s.articlesRead >= 50),
   ),
   // Alimentos
@@ -139,7 +140,7 @@ List<Achievement> kAchievements = [
     title: 'Explorador',
     description: 'Explora 100 alimentos',
     icon: Icons.restaurant,
-    color: const Color(0xFFEF6C00),
+    color: NutriDesign.achievementFoods1,
     isUnlocked: _stats((s) => s.foodsViewed >= 100),
   ),
   Achievement(
@@ -147,7 +148,7 @@ List<Achievement> kAchievements = [
     title: 'Conocedor nutricional',
     description: 'Explora 500 alimentos',
     icon: Icons.ramen_dining,
-    color: const Color(0xFFE65100),
+    color: NutriDesign.achievementFoods2,
     isUnlocked: _stats((s) => s.foodsViewed >= 500),
   ),
 ];

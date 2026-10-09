@@ -201,7 +201,7 @@ class SmartFitnessScreen extends StatelessWidget {
                 value:
                     '${ctrl.todayCaloriesBurned.value.toStringAsFixed(0)} kcal',
                 icon: FontAwesomeIcons.fire.data,
-                color: const Color(0xFFFF6B6B),
+                color: NutriDesign.error,
               ),
               _StatDivider(),
               _StatCard(
@@ -215,7 +215,7 @@ class SmartFitnessScreen extends StatelessWidget {
                 label: 'Semana kcal',
                 value: '${ctrl.weeklyCaloriesBurned.toStringAsFixed(0)} kcal',
                 icon: FontAwesomeIcons.chartBar.data,
-                color: const Color(0xFF51CF66),
+                color: NutriDesign.success,
               ),
             ],
           ),
@@ -643,14 +643,14 @@ class _HistoryTab extends StatelessWidget {
                     vertical: 2,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF51CF66).withValues(alpha: 0.1),
+                    color: NutriDesign.success.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
                     'Completado',
                     style: GoogleFonts.poppins(
                       fontSize: 10,
-                      color: const Color(0xFF51CF66),
+                      color: NutriDesign.success,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -929,7 +929,7 @@ class _WorkoutDetailSheetState extends State<_WorkoutDetailSheet> {
                       child: Text(
                         'Completar',
                         style: GoogleFonts.poppins(
-                          color: const Color(0xFF51CF66),
+                          color: NutriDesign.success,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -1444,7 +1444,7 @@ class _ExerciseDetailSheetState extends State<_ExerciseDetailSheet> {
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: const Color(0xFFFF6B6B),
+                    color: NutriDesign.error,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -1457,7 +1457,7 @@ class _ExerciseDetailSheetState extends State<_ExerciseDetailSheet> {
                         const Icon(
                           Icons.warning_amber_outlined,
                           size: 14,
-                          color: Color(0xFFFF6B6B),
+                          color: NutriDesign.error,
                         ),
                         const SizedBox(width: 6),
                         Expanded(
@@ -1926,7 +1926,7 @@ class _CustomWorkoutSheetState extends State<_CustomWorkoutSheet> {
                     min: 50,
                     max: 600,
                     divisions: 11,
-                    color: const Color(0xFFFF6B6B),
+                    color: NutriDesign.error,
                     onChanged: (v) =>
                         setState(() => _calories = (v ~/ 50 * 50).toDouble()),
                   ),
@@ -2153,7 +2153,7 @@ class _MoodTrackerDialogState extends State<_MoodTrackerDialog> {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF51CF66),
+                  backgroundColor: NutriDesign.success,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   shape: RoundedRectangleBorder(
@@ -2241,12 +2241,12 @@ class _MoodRow extends StatelessWidget {
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
                     color: selected
-                        ? const Color(0xFF51CF66).withValues(alpha: 0.15)
+                        ? NutriDesign.success.withValues(alpha: 0.15)
                         : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: selected
-                          ? const Color(0xFF51CF66)
+                          ? NutriDesign.success
                           : Colors.transparent,
                     ),
                   ),

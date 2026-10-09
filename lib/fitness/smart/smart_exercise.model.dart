@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 
 /// Categoría principal del ejercicio
 enum ExerciseCategory {
-  cardio('Cardio', Icons.favorite, Color(0xFFFF6B6B)),
-  fuerza('Fuerza', Icons.fitness_center, Color(0xFF4DABF7)),
-  flexibilidad('Flexibilidad', Icons.self_improvement, Color(0xFF51CF66)),
-  hiit('HIIT', Icons.bolt, Color(0xFFFF8C00)),
-  core('Core', Icons.circle, Color(0xFFFFA726)),
-  movilidad('Movilidad', Icons.accessibility_new, Color(0xFF845EC2));
+  cardio('Cardio', Icons.favorite, NutriDesign.error),
+  fuerza('Fuerza', Icons.fitness_center, NutriDesign.info),
+  flexibilidad('Flexibilidad', Icons.self_improvement, NutriDesign.success),
+  hiit('HIIT', Icons.bolt, NutriDesign.accentOrange),
+  core('Core', Icons.circle, NutriDesign.warning),
+  movilidad('Movilidad', Icons.accessibility_new, NutriDesign.accentPurple);
 
   final String label;
   final IconData icon;
@@ -32,11 +33,11 @@ enum MuscleGroup {
 
 /// Nivel de intensidad (mapea a rango de BMI y condición física)
 enum IntensityLevel {
-  muyBaja(1, 'Muy baja', Color(0xFF51CF66)),
-  baja(2, 'Baja', Color(0xFF94D82D)),
-  moderada(3, 'Moderada', Color(0xFFFFA726)),
-  alta(4, 'Alta', Color(0xFFFF6B6B)),
-  muyAlta(5, 'Muy alta', Color(0xFFE03131));
+  muyBaja(1, 'Muy baja', NutriDesign.success),
+  baja(2, 'Baja', NutriDesign.intensityLow),
+  moderada(3, 'Moderada', NutriDesign.warning),
+  alta(4, 'Alta', NutriDesign.error),
+  muyAlta(5, 'Muy alta', NutriDesign.intensityVeryHigh);
 
   final int value;
   final String label;
