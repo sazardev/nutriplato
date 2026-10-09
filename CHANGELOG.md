@@ -32,6 +32,9 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 - Refactor de calidad (fase 2d): la pantalla de perfil (1,332 líneas) dividida
   en 11 archivos — pantalla, header, tabs (`tabs/`), tarjetas (`widgets/`) y
   diálogos (`dialogs/`) — sin cambios de lógica ni de UI.
+- Refactor de calidad (fase 2e): `SmartNutritionService` (1,108 líneas)
+  separado en lógica (557), modelos (90) y datos (`facts`/`tips`), con
+  re-export de modelos para preservar la API pública.
 
 ## [3.2.0] - 2026-10-08
 
