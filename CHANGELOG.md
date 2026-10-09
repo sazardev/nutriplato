@@ -26,6 +26,9 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
   archivos por responsabilidad — pantalla shell, tabs (`tabs/`) y widgets
   (`widgets/`), rompiendo además el ciclo de imports con
   `mood_tracker_dialog.dart`.
+- Refactor de calidad (fase 2c): el buscador (1,464 líneas) dividido en 9
+  archivos — pantalla, widgets presentacionales (`widgets/`) y diálogos
+  (`dialogs/`) — sin cambios de lógica de filtrado ni de UI.
 
 ## [3.2.0] - 2026-10-08
 
