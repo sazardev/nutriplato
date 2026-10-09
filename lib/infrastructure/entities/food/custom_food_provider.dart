@@ -3,21 +3,23 @@ import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/entities/food/micronutrients.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:nutriplato/infrastructure/repositories/preferences_repository.dart';
 
 const _tag = 'NutriPlato|CustomFoodProvider';
-const _kCustomFoodsKey = 'custom_foods';
 
 /// Proveedor de alimentos creados por el usuario.
 class CustomFoodProvider with ChangeNotifier {
+  CustomFoodProvider(this._preferences);
+
+  final PreferencesRepository _preferences;
+
   List<Food> _foods = [];
   List<Food> get foods => _foods;
 
   /// Carga los alimentos personalizados desde almacenamiento.
   Future<void> loadFoods() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final raw = prefs.getStringList(_kCustomFoodsKey) ?? [];
+      final raw = _preferences.customFoodsJson;
       _foods = raw
           .map((s) {
             try {
@@ -57,9 +59,8 @@ class CustomFoodProvider with ChangeNotifier {
 
   Future<void> _save() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
       final raw = _foods.map((f) => jsonEncode(_foodToJson(f))).toList();
-      await prefs.setStringList(_kCustomFoodsKey, raw);
+      await _preferences.setCustomFoodsJson(raw);
       notifyListeners();
     } catch (e, st) {
       dev.log('_save → ERROR: $e', name: _tag, error: e, stackTrace: st);

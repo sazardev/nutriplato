@@ -1,13 +1,16 @@
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:nutriplato/infrastructure/repositories/preferences_repository.dart';
 
 const _tag = 'NutriPlato|FavoritesProvider';
-const _kFavoritesKey = 'favorite_foods';
 
 /// Proveedor de alimentos favoritos (guardados por nombre).
 class FavoritesProvider with ChangeNotifier {
+  FavoritesProvider(this._preferences);
+
+  final PreferencesRepository _preferences;
+
   final Set<String> _names = {};
 
   Set<String> get names => Set.unmodifiable(_names);
@@ -17,8 +20,7 @@ class FavoritesProvider with ChangeNotifier {
   /// Carga los favoritos desde almacenamiento.
   Future<void> loadFavorites() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final saved = prefs.getStringList(_kFavoritesKey) ?? [];
+      final saved = _preferences.favoriteFoodNames;
       _names
         ..clear()
         ..addAll(saved);
@@ -49,8 +51,7 @@ class FavoritesProvider with ChangeNotifier {
 
   Future<void> _save() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setStringList(_kFavoritesKey, _names.toList());
+      await _preferences.setFavoriteFoodNames(_names.toList());
       notifyListeners();
     } catch (e, st) {
       dev.log('_save → ERROR: $e', name: _tag, error: e, stackTrace: st);

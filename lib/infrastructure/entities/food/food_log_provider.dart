@@ -6,7 +6,7 @@ import 'package:nutriplato/infrastructure/entities/food/food.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_entry.dart';
 import 'package:nutriplato/infrastructure/entities/food/micronutrients.dart';
 import 'package:nutriplato/infrastructure/entities/food/micros_helper.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:nutriplato/infrastructure/repositories/preferences_repository.dart';
 
 const _tag = 'NutriPlato|FoodLogProvider';
 
@@ -54,6 +54,10 @@ const Map<int, IconData> _foodIconByCodePoint = {
 };
 
 class FoodLogProvider with ChangeNotifier {
+  FoodLogProvider(this._preferences);
+
+  final PreferencesRepository _preferences;
+
   List<DailyFoodLog> _logs = [];
   bool _isLoading = false;
 
@@ -181,10 +185,8 @@ class FoodLogProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      final prefs = await SharedPreferences.getInstance();
-
       // Obtener los datos guardados de los días
-      final days = prefs.getStringList('food_log_days') ?? [];
+      final days = _preferences.foodLogDays;
       dev.log(
         'loadLogs → ${days.length} días encontrados en storage',
         name: _tag,
@@ -198,7 +200,7 @@ class FoodLogProvider with ChangeNotifier {
         final date = DateTime.parse(dayStr);
 
         // Obtener las entradas guardadas para ese día
-        final entriesJson = prefs.getStringList('food_log_$dayStr') ?? [];
+        final entriesJson = _preferences.getFoodLogEntries(dayStr);
         final List<FoodLogEntry> entries = [];
 
         // Convertir cada entrada JSON a un objeto FoodLogEntry
@@ -281,8 +283,6 @@ class FoodLogProvider with ChangeNotifier {
   Future<void> _saveLogs() async {
     dev.log('_saveLogs → guardando ${_logs.length} días', name: _tag);
     try {
-      final prefs = await SharedPreferences.getInstance();
-
       // Guardar lista de fechas
       final List<String> days = [];
 
@@ -327,11 +327,11 @@ class FoodLogProvider with ChangeNotifier {
         }
 
         // Guardar las entradas de este día
-        await prefs.setStringList('food_log_$dayStr', entriesJson);
+        await _preferences.setFoodLogEntries(dayStr, entriesJson);
       }
 
       // Guardar la lista de días
-      await prefs.setStringList('food_log_days', days);
+      await _preferences.setFoodLogDays(days);
       dev.log('_saveLogs → guardado OK (${days.length} días)', name: _tag);
     } catch (e, st) {
       dev.log('_saveLogs → ERROR: $e', name: _tag, error: e, stackTrace: st);

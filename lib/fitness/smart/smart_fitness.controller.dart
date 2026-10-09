@@ -7,11 +7,13 @@ import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/fitness/smart/smart_exercise.data.dart';
 import 'package:nutriplato/fitness/smart/smart_exercise.model.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-const _kHistoryKey = 'smart_workout_history';
+import 'package:nutriplato/infrastructure/repositories/preferences_repository.dart';
 
 class SmartFitnessController extends GetxController {
+  SmartFitnessController(this._preferences);
+
+  final PreferencesRepository _preferences;
+
   // ── Estado reactivo ──────────────────────────────────────────────────────
   final recommendedWorkouts = <SmartWorkout>[].obs;
   final allExercises = <SmartExercise>[].obs;
@@ -596,8 +598,7 @@ class SmartFitnessController extends GetxController {
 
   Future<void> _loadHistory() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final raw = prefs.getStringList(_kHistoryKey) ?? [];
+      final raw = _preferences.workoutHistoryJson;
       final entries = raw
           .map(
             (s) => WorkoutHistoryEntry.fromJson(
@@ -617,12 +618,11 @@ class SmartFitnessController extends GetxController {
   }
 
   Future<void> _saveHistory() async {
-    final prefs = await SharedPreferences.getInstance();
     final raw = workoutHistory
         .take(100)
         .map((e) => jsonEncode(e.toJson()))
         .toList();
-    await prefs.setStringList(_kHistoryKey, raw);
+    await _preferences.setWorkoutHistoryJson(raw);
   }
 
   void _recalcTodayCalories() {

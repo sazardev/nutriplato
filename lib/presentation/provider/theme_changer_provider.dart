@@ -1,19 +1,21 @@
 import 'dart:developer' as dev;
 import 'package:flutter/widgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:nutriplato/infrastructure/repositories/preferences_repository.dart';
 
 const _tag = 'NutriPlato|ThemeChangerProvider';
 
 class ThemeChangerProvider extends ChangeNotifier {
+  ThemeChangerProvider(this._preferences) {
+    _loadThemePreferences();
+  }
+
+  final PreferencesRepository _preferences;
+
   int _selectedColor = 0;
   bool _isDarkMode = false;
 
   int get selectedColor => _selectedColor;
   bool get isDarkMode => _isDarkMode;
-
-  ThemeChangerProvider() {
-    _loadThemePreferences();
-  }
 
   void changeColorIndex(int index) {
     dev.log('changeColorIndex → $index (antes: $_selectedColor)', name: _tag);
@@ -30,9 +32,8 @@ class ThemeChangerProvider extends ChangeNotifier {
   }
 
   void _loadThemePreferences() async {
-    final prefs = await SharedPreferences.getInstance();
-    _selectedColor = prefs.getInt('selectedColor') ?? 0;
-    _isDarkMode = prefs.getBool('isDarkMode') ?? false;
+    _selectedColor = _preferences.selectedColor;
+    _isDarkMode = _preferences.isDarkMode;
     dev.log(
       '_loadThemePreferences → color=$_selectedColor darkMode=$_isDarkMode',
       name: _tag,
@@ -41,9 +42,8 @@ class ThemeChangerProvider extends ChangeNotifier {
   }
 
   void _saveThemePreferences() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('selectedColor', _selectedColor);
-    await prefs.setBool('isDarkMode', _isDarkMode);
+    await _preferences.setSelectedColor(_selectedColor);
+    await _preferences.setDarkMode(_isDarkMode);
     dev.log(
       '_saveThemePreferences → color=$_selectedColor darkMode=$_isDarkMode guardado',
       name: _tag,

@@ -2,19 +2,22 @@ import 'dart:convert';
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:nutriplato/infrastructure/repositories/preferences_repository.dart';
 
 import '../../infrastructure/entities/user.dart';
 
 const _tag = 'NutriPlato|UserProvider';
 
 class UserProvider extends ChangeNotifier {
+  UserProvider(this._preferences);
+
+  final PreferencesRepository _preferences;
+
   User user = User();
 
   void loadUser() async {
     dev.log('loadUser → cargando usuario legacy', name: _tag);
-    final prefs = await SharedPreferences.getInstance();
-    final userString = prefs.getString('username');
+    final userString = _preferences.usernameJson;
 
     if (userString != null) {
       final userMap = jsonDecode(userString);
@@ -38,9 +41,8 @@ class UserProvider extends ChangeNotifier {
     );
     user = username;
 
-    final prefs = await SharedPreferences.getInstance();
     final userJson = jsonEncode(user.toJson());
-    await prefs.setString('username', userJson);
+    await _preferences.setUsernameJson(userJson);
     dev.log('saveUser → guardado OK', name: _tag);
 
     notifyListeners();

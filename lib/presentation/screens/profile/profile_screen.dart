@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:nutriplato/infrastructure/repositories/preferences_repository.dart';
 import 'package:nutriplato/infrastructure/services/backup_service.dart';
 import 'package:nutriplato/presentation/provider/user_profile_provider.dart';
 import 'package:nutriplato/presentation/screens/profile/dialogs/add_condition_dialog.dart';
@@ -117,7 +119,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 
   Future<void> _shareBackup() async {
-    await BackupService.shareBackup();
+    await BackupService.shareBackup(Get.find<PreferencesRepository>());
     if (!mounted) return;
     ScaffoldMessenger.of(
       context,
@@ -125,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 
   Future<void> _copyBackup() async {
-    await BackupService.copyToClipboard();
+    await BackupService.copyToClipboard(Get.find<PreferencesRepository>());
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Respaldo copiado al portapapeles')),
@@ -171,7 +173,10 @@ class _ProfileScreenState extends State<ProfileScreen>
 
     if (result == null || result.trim().isEmpty) return;
 
-    final restored = await BackupService.restoreFromJson(result);
+    final restored = await BackupService.restoreFromJson(
+      Get.find<PreferencesRepository>(),
+      result,
+    );
     if (!mounted) return;
 
     ScaffoldMessenger.of(context).showSnackBar(

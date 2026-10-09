@@ -6,6 +6,7 @@ import 'package:nutriplato/fitness/smart/smart_fitness.controller.dart';
 import 'package:nutriplato/infrastructure/entities/food/custom_food_provider.dart';
 import 'package:nutriplato/infrastructure/entities/food/favorites_provider.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_provider.dart';
+import 'package:nutriplato/infrastructure/repositories/preferences_repository.dart';
 import 'package:nutriplato/presentation/home.screen.dart';
 import 'package:nutriplato/presentation/provider/article_provider.dart';
 import 'package:nutriplato/presentation/provider/theme_changer_provider.dart';
@@ -19,20 +20,31 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final prefs = await SharedPreferences.getInstance();
-  final bool presentation = prefs.getBool('presentation') ?? true;
+  final preferencesRepository = PreferencesRepository(prefs);
 
-  runApp(MyApp(presentation: presentation));
+  runApp(
+    MyApp(
+      presentation: preferencesRepository.presentation,
+      preferencesRepository: preferencesRepository,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   final bool presentation;
+  final PreferencesRepository preferencesRepository;
 
-  const MyApp({super.key, required this.presentation});
+  const MyApp({
+    super.key,
+    required this.presentation,
+    required this.preferencesRepository,
+  });
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        Provider<PreferencesRepository>.value(value: preferencesRepository),
         ChangeNotifierProvider(
           lazy: false,
           create: (_) {
@@ -43,47 +55,59 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           lazy: false,
-          create: (_) {
-            final foodLogProvider = FoodLogProvider();
+          create: (context) {
+            final foodLogProvider = FoodLogProvider(
+              context.read<PreferencesRepository>(),
+            );
             foodLogProvider.loadLogs();
             return foodLogProvider;
           },
         ),
         ChangeNotifierProvider(
           lazy: false,
-          create: (_) {
-            final customFoodProvider = CustomFoodProvider();
+          create: (context) {
+            final customFoodProvider = CustomFoodProvider(
+              context.read<PreferencesRepository>(),
+            );
             customFoodProvider.loadFoods();
             return customFoodProvider;
           },
         ),
         ChangeNotifierProvider(
           lazy: false,
-          create: (_) {
-            final favoritesProvider = FavoritesProvider();
+          create: (context) {
+            final favoritesProvider = FavoritesProvider(
+              context.read<PreferencesRepository>(),
+            );
             favoritesProvider.loadFavorites();
             return favoritesProvider;
           },
         ),
         ChangeNotifierProvider(
           lazy: false,
-          create: (_) {
-            final userProvider = UserProvider();
+          create: (context) {
+            final userProvider = UserProvider(
+              context.read<PreferencesRepository>(),
+            );
             userProvider.loadUser();
             return userProvider;
           },
         ),
         ChangeNotifierProvider(
           lazy: false,
-          create: (_) {
-            final themeChangerProvider = ThemeChangerProvider();
+          create: (context) {
+            final themeChangerProvider = ThemeChangerProvider(
+              context.read<PreferencesRepository>(),
+            );
             return themeChangerProvider;
           },
         ),
         ChangeNotifierProvider(
           lazy: false,
-          create: (_) {
-            final userProfileProvider = UserProfileProvider();
+          create: (context) {
+            final userProfileProvider = UserProfileProvider(
+              context.read<PreferencesRepository>(),
+            );
             userProfileProvider.loadProfile();
             return userProfileProvider;
           },
@@ -99,8 +123,9 @@ class MyApp extends StatelessWidget {
                 ? const EnhancedOnboardingScreen()
                 : const HomeScreen(),
             initialBinding: BindingsBuilder(() {
+              Get.put(preferencesRepository);
               Get.put(FitnessController());
-              Get.put(SmartFitnessController());
+              Get.put(SmartFitnessController(preferencesRepository));
             }),
           );
         },

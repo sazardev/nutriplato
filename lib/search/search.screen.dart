@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/data/food/animals.dart';
 import 'package:nutriplato/data/food/azucares.dart';
@@ -15,8 +16,8 @@ import 'package:nutriplato/data/food/verduras.dart';
 import 'package:nutriplato/infrastructure/entities/food/custom_food_provider.dart';
 import 'package:nutriplato/infrastructure/entities/food/favorites_provider.dart';
 import 'package:nutriplato/infrastructure/entities/food/food.dart';
+import 'package:nutriplato/infrastructure/repositories/preferences_repository.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../presentation/screens/food/food.view.dart';
 import 'dialogs/create_food_dialog.dart';
@@ -110,17 +111,16 @@ class _SearchScreen extends State<SearchScreen> {
   }
 
   Future<void> saveRecentFoods() async {
-    final prefs = await SharedPreferences.getInstance();
     final List<String> foodNames = recentFoods
         .map((food) => food.name)
         .toList();
-    await prefs.setStringList('recentFoods', foodNames);
+    await Get.find<PreferencesRepository>().setRecentFoods(foodNames);
   }
 
   Future<void> loadRecentFoods() async {
-    final prefs = await SharedPreferences.getInstance();
-    final List<String>? foodNames = prefs.getStringList('recentFoods');
-    if (foodNames != null) {
+    final List<String> foodNames =
+        Get.find<PreferencesRepository>().recentFoods;
+    if (foodNames.isNotEmpty) {
       recentFoods = [];
       for (var name in foodNames) {
         try {

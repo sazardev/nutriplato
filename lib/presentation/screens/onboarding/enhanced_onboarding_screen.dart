@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
+import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_entry.dart';
 import 'package:nutriplato/infrastructure/entities/food/food_log_provider.dart';
 import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
+import 'package:nutriplato/infrastructure/repositories/preferences_repository.dart';
 import 'package:nutriplato/infrastructure/services/nutrition_calculator_service.dart';
 import 'package:nutriplato/infrastructure/services/smart_nutrition_service.dart';
 import 'package:nutriplato/presentation/home.screen.dart';
@@ -19,7 +21,6 @@ import 'package:nutriplato/presentation/screens/onboarding/steps/welcome_step.da
 import 'package:nutriplato/presentation/screens/onboarding/widgets/onboarding_nav_buttons.dart';
 import 'package:nutriplato/presentation/screens/onboarding/widgets/onboarding_progress.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 /// Pantalla de onboarding mejorada con animaciones fluidas
 class EnhancedOnboardingScreen extends StatefulWidget {
@@ -208,8 +209,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
     }
 
     // Marcar presentacion como completada
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('presentation', false);
+    await Get.find<PreferencesRepository>().setPresentation(false);
 
     if (mounted) {
       Navigator.of(
@@ -502,7 +502,7 @@ class _EnhancedOnboardingScreenState extends State<EnhancedOnboardingScreen>
             added > 0
                 ? '$added alimentos del plan agregados a tu día. ¡Buen provecho!'
                 : 'No se encontraron alimentos para tu plan de hoy.',
-            style: GoogleFonts.poppins(),
+            style: NutriDesign.font(),
           ),
           backgroundColor: Colors.green.shade900,
         ),

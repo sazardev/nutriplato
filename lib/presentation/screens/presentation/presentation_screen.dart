@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:nutriplato/infrastructure/repositories/preferences_repository.dart';
 
 import '../../home.screen.dart';
 
@@ -43,8 +44,7 @@ class PresentationScreen extends StatelessWidget {
         ),
       ],
       onDone: () async {
-        final prefs = await SharedPreferences.getInstance();
-        prefs.setBool('presentation', false);
+        await Get.find<PreferencesRepository>().setPresentation(false);
 
         // TODO: context.pushReplacementNamed('home');
       },

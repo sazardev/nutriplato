@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:nutriplato/config/theme/design_system.dart';
 import 'package:nutriplato/infrastructure/entities/food/nutri_food.dart';
+import 'package:nutriplato/infrastructure/services/food_search_api.dart';
 
 const _tag = 'NutriPlato|FoodApiService';
 const _timeout = Duration(seconds: 6);
@@ -19,12 +20,13 @@ const Map<String, String> _headers = {
 ///
 /// Devuelve alimentos normalizados a porción de 100 g. Si la red falla,
 /// los llamadores deben usar la base local como fallback.
-class FoodApiService {
+class FoodApiService implements FoodSearchApi {
   final http.Client _client;
 
   FoodApiService({http.Client? client}) : _client = client ?? http.Client();
 
   /// Busca alimentos por nombre en OpenFoodFacts.
+  @override
   Future<List<NutriFood>> searchFoods(String query, {int pageSize = 25}) async {
     if (query.trim().isEmpty) return const [];
 
@@ -59,6 +61,7 @@ class FoodApiService {
   }
 
   /// Busca un producto por código de barras.
+  @override
   Future<NutriFood?> getByBarcode(String barcode) async {
     final cleaned = barcode.replaceAll(RegExp(r'[^0-9]'), '');
     if (cleaned.length < 8) return null;
@@ -141,6 +144,7 @@ class FoodApiService {
     return d;
   }
 
+  @override
   void dispose() {
     _client.close();
   }

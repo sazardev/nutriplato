@@ -4,13 +4,17 @@ import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:nutriplato/infrastructure/entities/health/health_condition.dart';
 import 'package:nutriplato/infrastructure/entities/user/user_profile.dart';
+import 'package:nutriplato/infrastructure/repositories/preferences_repository.dart';
 import 'package:nutriplato/infrastructure/services/nutrition_calculator_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 const _tag = 'NutriPlato|UserProfileProvider';
 
 /// Provider mejorado para el perfil completo del usuario
 class UserProfileProvider extends ChangeNotifier {
+  UserProfileProvider(this._preferences);
+
+  final PreferencesRepository _preferences;
+
   UserProfile _profile = UserProfile.create();
   List<HealthCondition> _healthConditions = [];
   List<HealthMetric> _healthMetrics = [];
@@ -34,10 +38,8 @@ class UserProfileProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final prefs = await SharedPreferences.getInstance();
-
       // Cargar perfil
-      final profileJson = prefs.getString('user_profile');
+      final profileJson = _preferences.userProfileJson;
       if (profileJson != null) {
         final profileMap = jsonDecode(profileJson);
         _profile = UserProfile.fromJson(profileMap);
@@ -62,8 +64,8 @@ class UserProfileProvider extends ChangeNotifier {
       }
 
       // Cargar condiciones de salud del usuario
-      final conditionsJson = prefs.getStringList('user_health_conditions');
-      if (conditionsJson != null) {
+      final conditionsJson = _preferences.healthConditionsJson;
+      if (conditionsJson.isNotEmpty) {
         _healthConditions = conditionsJson.map((json) {
           final map = jsonDecode(json);
           return HealthCondition.fromJson(map);
@@ -78,8 +80,8 @@ class UserProfileProvider extends ChangeNotifier {
       }
 
       // Cargar métricas de salud
-      final metricsJson = prefs.getStringList('user_health_metrics');
-      if (metricsJson != null) {
+      final metricsJson = _preferences.healthMetricsJson;
+      if (metricsJson.isNotEmpty) {
         _healthMetrics = metricsJson.map((json) {
           final map = jsonDecode(json);
           return HealthMetric.fromJson(map);
@@ -120,26 +122,24 @@ class UserProfileProvider extends ChangeNotifier {
       name: _tag,
     );
     try {
-      final prefs = await SharedPreferences.getInstance();
-
       // Actualizar fecha de modificación
       _profile = _profile.copyWith(updatedAt: DateTime.now());
 
       // Guardar perfil
       final profileJson = jsonEncode(_profile.toJson());
-      await prefs.setString('user_profile', profileJson);
+      await _preferences.setUserProfileJson(profileJson);
 
       // Guardar condiciones de salud
       final conditionsJson = _healthConditions
           .map((c) => jsonEncode(c.toJson()))
           .toList();
-      await prefs.setStringList('user_health_conditions', conditionsJson);
+      await _preferences.setHealthConditionsJson(conditionsJson);
 
       // Guardar métricas
       final metricsJson = _healthMetrics
           .map((m) => jsonEncode(m.toJson()))
           .toList();
-      await prefs.setStringList('user_health_metrics', metricsJson);
+      await _preferences.setHealthMetricsJson(metricsJson);
 
       dev.log(
         'saveProfile → guardado OK. '
@@ -327,15 +327,14 @@ class UserProfileProvider extends ChangeNotifier {
 
   /// Actualiza el streak de días consecutivos
   Future<void> _updateStreak() async {
-    final prefs = await SharedPreferences.getInstance();
-    final lastUseDateStr = prefs.getString('last_use_date');
+    final lastUseDateStr = _preferences.lastUseDate;
     final today = DateTime.now();
     final todayStr = '${today.year}-${today.month}-${today.day}';
 
     if (lastUseDateStr == null) {
       // Primera vez
       _profile = _profile.copyWith(currentStreak: 1, longestStreak: 1);
-      await prefs.setString('last_use_date', todayStr);
+      await _preferences.setLastUseDate(todayStr);
       dev.log('_updateStreak → primera vez, streak=1', name: _tag);
     } else {
       final parts = lastUseDateStr.split('-');
@@ -375,7 +374,7 @@ class UserProfileProvider extends ChangeNotifier {
         _profile = _profile.copyWith(currentStreak: 1);
       }
 
-      await prefs.setString('last_use_date', todayStr);
+      await _preferences.setLastUseDate(todayStr);
     }
   }
 
@@ -525,11 +524,10 @@ class UserProfileProvider extends ChangeNotifier {
   /// Limpia todos los datos del usuario
   Future<void> clearAllData() async {
     dev.log('clearAllData → limpiando todos los datos del usuario', name: _tag);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('user_profile');
-    await prefs.remove('user_health_conditions');
-    await prefs.remove('user_health_metrics');
-    await prefs.remove('last_use_date');
+    await _preferences.removeUserProfile();
+    await _preferences.removeHealthConditions();
+    await _preferences.removeHealthMetrics();
+    await _preferences.removeLastUseDate();
 
     _profile = UserProfile.create();
     _healthConditions = [];
